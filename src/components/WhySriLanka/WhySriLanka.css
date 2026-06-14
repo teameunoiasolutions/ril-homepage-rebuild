@@ -1,0 +1,135 @@
+.why-sri-lanka {
+  --color-bg: #f9f8f3;
+  --color-dark: #1a1a1a;
+  --color-gold: #c5a059;
+  --color-muted: rgba(26, 26, 26, 0.55);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Karla', Helvetica, sans-serif;
+
+  padding: 80px;
+  background: var(--color-bg);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+}
+
+.island-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.island-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.island-eyebrow {
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.island-headline {
+  color: var(--color-dark);
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 4.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  max-width: 420px;
+}
+
+.island-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: 48px;
+}
+
+.island-pin {
+  width: 72px;
+  height: 96px;
+}
+
+.island-visual-caption {
+  color: var(--color-dark);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.island-right {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.island-intro {
+  max-width: 320px;
+  margin-left: auto;
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.75;
+  text-align: right;
+}
+
+.island-moment {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.island-moment-title {
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.island-moment-body {
+  max-width: 520px;
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.85;
+  opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+  .why-sri-lanka {
+    padding: 56px 40px;
+  }
+
+  .island-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .island-intro {
+    margin-left: 0;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .island-visual {
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-sri-lanka {
+    padding: 48px 20px;
+  }
+}
