@@ -1,10 +1,10 @@
 .personal-invitation {
-  --color-bg: #0f2419;
-  --color-gold: #a68e60;
-  --color-text: rgba(255, 255, 255, 0.88);
+  --color-bg: var(--color-surface-atmospheric);
+  --color-gold: var(--color-accent);
+  --color-text: var(--color-text-inverse);
   --color-muted: rgba(166, 142, 96, 0.85);
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Karla', Helvetica, sans-serif;
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   padding: 96px 80px;
   background-color: var(--color-bg);
@@ -42,13 +42,13 @@
 
 .invitation-ornament-icon {
   color: var(--color-gold);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   line-height: 1;
 }
 
 .invitation-eyebrow {
   color: var(--color-gold);
-  font-size: 10px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -65,7 +65,7 @@
 .invitation-body {
   color: var(--color-text);
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: var(--font-size-body);
   font-weight: 400;
   line-height: 1.75;
   opacity: 0.85;
@@ -87,7 +87,7 @@
   background: transparent;
   color: #fff;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--font-size-label);
 }
 
 .invitation-input::placeholder {
@@ -100,7 +100,7 @@
   background: transparent;
   color: var(--color-gold);
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -115,7 +115,7 @@
 
 .invitation-footnote {
   color: var(--color-muted);
-  font-size: 11px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1.5;
 }

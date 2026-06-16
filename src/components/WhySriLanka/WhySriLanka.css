@@ -1,10 +1,10 @@
 .why-sri-lanka {
-  --color-bg: #f9f8f3;
-  --color-dark: #1a1a1a;
-  --color-gold: #c5a059;
-  --color-muted: rgba(26, 26, 26, 0.55);
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Karla', Helvetica, sans-serif;
+  --color-bg: var(--color-surface);
+  --color-dark: var(--color-text);
+  --color-gold: var(--color-accent);
+  --color-muted: var(--color-text-muted);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   padding: 80px;
   background: var(--color-bg);
@@ -28,7 +28,7 @@
 .island-eyebrow {
   color: var(--color-muted);
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -59,7 +59,7 @@
 .island-visual-caption {
   color: var(--color-dark);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--font-size-body-large);
   font-style: italic;
   font-weight: 400;
   line-height: 1.3;
@@ -77,7 +77,7 @@
   margin-left: auto;
   color: var(--color-muted);
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: var(--font-size-caption);;
   font-weight: 400;
   line-height: 1.75;
   text-align: right;
@@ -92,7 +92,7 @@
 .island-moment-title {
   color: var(--color-gold);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.4;
 }
@@ -101,7 +101,7 @@
   max-width: 520px;
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.85;
   opacity: 0.75;

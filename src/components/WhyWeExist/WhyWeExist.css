@@ -1,13 +1,13 @@
 .why-we-exist {
-  --color-bg: #fbf9f5;
-  --color-dark: #222;
-  --color-gold: #c5a059;
-  --color-green: #1a432e;
-  --color-muted: rgba(34, 34, 34, 0.55);
-  --color-faint: rgba(34, 34, 34, 0.08);
-  --color-watermark: rgba(34, 34, 34, 0.04);
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Karla', Helvetica, sans-serif;
+  --color-bg: var(--color-surface);
+  --color-dark: var(--color-text);
+  --color-gold: var(--color-accent);
+  --color-green: var(--color-primary);
+  --color-muted: var(--color-text-muted);
+  --color-faint: rgba(26, 26, 26, 0.08);
+  --color-watermark: rgba(26, 26, 26, 0.04);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   position: relative;
   padding: 80px 80px 96px;
@@ -34,7 +34,7 @@
 .philosophy-eyebrow {
   color: var(--color-gold);
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 4.2px;
@@ -54,7 +54,7 @@
   max-width: 287px;
   color: var(--color-muted);
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 32px;
   letter-spacing: 0.42px;
@@ -96,7 +96,7 @@
   padding-top: 8px;
   color: var(--color-faint);
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.08em;
@@ -137,7 +137,7 @@
   margin-bottom: 20px;
   color: var(--color-dark);
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.28em;
@@ -148,7 +148,7 @@
   max-width: 620px;
   color: var(--color-dark);
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 32px;
   letter-spacing: 0.42px;
@@ -175,7 +175,7 @@
   max-width: 640px;
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 32px;
   letter-spacing: 0.42px;
@@ -216,7 +216,7 @@
 .founder-name {
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.22em;
@@ -226,7 +226,7 @@
 .founder-role {
   color: var(--color-muted);
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0.04em;
@@ -237,7 +237,7 @@
   margin: 0;
   color: var(--color-gold);
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: var(--font-size-body);
   font-style: italic;
   font-weight: 400;
   line-height: 1.65;

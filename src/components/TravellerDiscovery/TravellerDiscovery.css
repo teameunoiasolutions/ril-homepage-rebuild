@@ -1,13 +1,13 @@
 .traveller-discovery {
-  --color-bg: #ffffff;
-  --color-ink: #1a1714;
-  --color-ink-muted: #6b5f52;
-  --color-label: #8b7b67;
-  --color-divider: #d5c9b5;
-  --color-badge-bg: #1a1714;
-  --color-badge-dot: #c9a86c;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-bg: var(--color-surface);
+  --color-ink: var(--color-text);
+  --color-ink-muted: var(--color-text-muted);
+  --color-label: var(--color-text-muted);
+  --color-divider: var(--color-border);
+  --color-badge-bg: var(--color-text);
+  --color-badge-dot: var(--color-accent);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   font-family: var(--font-sans);
   background: var(--color-bg);
@@ -23,7 +23,7 @@
 }
 
 .step-label {
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -50,7 +50,7 @@
 }
 
 .hero-tagline p {
-  font-size: 13px;
+  font-size: var(--font-size-body);
   font-weight: 300;
   line-height: 1.75;
   color: var(--color-ink-muted);
@@ -120,7 +120,7 @@
   gap: 6px;
   background: var(--color-badge-bg);
   color: #fff;
-  font-size: 8px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -152,7 +152,7 @@
 
 .persona-name {
   font-family: var(--font-serif);
-  font-size: 23px;
+  font-size: var(--font-size-h2);
   font-weight: 400;
   font-style: italic;
   line-height: 1.2;
@@ -161,7 +161,7 @@
 }
 
 .persona-description {
-  font-size: 12px;
+  font-size: var(--font-size-body);
   font-weight: 300;
   line-height: 1.8;
   color: var(--color-ink-muted);
@@ -171,7 +171,7 @@
 
 .persona-quote {
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: var(--font-size-caption);
   font-style: italic;
   line-height: 1.65;
   color: var(--color-ink-muted);
@@ -182,7 +182,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -200,7 +200,7 @@
   grid-template-columns: 1fr 1fr;
   padding: 72px 80px 88px;
   gap: 80px;
-  border-top: 1px solid var(--color-divider);
+  /* border-top: 1px solid var(--color-divider); */
   margin-top: 0;
 }
 
@@ -219,7 +219,7 @@
 }
 
 .tag-text {
-  font-size: 9px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -236,7 +236,7 @@
 }
 
 .discovery-body {
-  font-size: 12px;
+  font-size: var(--font-size-body);
   font-weight: 300;
   line-height: 1.85;
   color: var(--color-ink-muted);
@@ -251,7 +251,7 @@
 }
 
 .begin-discovery-link {
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -265,7 +265,7 @@
 }
 
 .time-estimate {
-  font-size: 11px;
+  font-size: var(--font-size-caption);
   font-weight: 300;
   font-style: italic;
   color: var(--color-ink-muted);
@@ -285,7 +285,7 @@
 }
 
 .intro-note-text {
-  font-size: 9px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -303,7 +303,7 @@
 }
 
 .own-words-lead {
-  font-size: 12px;
+  font-size: var(--font-size-body);
   font-weight: 400;
   line-height: 2;
   color: var(--color-ink);
@@ -315,7 +315,7 @@
 }
 
 .own-words-body {
-  font-size: 12px;
+  font-size: var(--font-size-body);
   font-weight: 300;
   line-height: 1.85;
   color: var(--color-ink-muted);
@@ -324,7 +324,7 @@
 
 .tell-us-link {
   display: inline-block;
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -346,7 +346,7 @@
 }
 
 .quote-preface {
-  font-size: 11px;
+  font-size: var(--font-size-caption);
   font-weight: 300;
   color: var(--color-ink-muted);
   margin-bottom: 10px;
@@ -354,7 +354,7 @@
 
 .quote-body {
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-style: italic;
   line-height: 1.65;
   color: var(--color-ink);
@@ -362,7 +362,7 @@
 }
 
 .quote-attribution-label {
-  font-size: 11px;
+  font-size: var(--font-size-caption);
   font-weight: 300;
   color: var(--color-ink-muted);
   margin-bottom: 4px;
@@ -370,7 +370,7 @@
 
 .quote-persona-name {
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   color: var(--color-ink);
 }
 

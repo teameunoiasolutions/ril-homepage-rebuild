@@ -1,10 +1,10 @@
 .common-questions {
-  --color-bg: #f0e9dd;
-  --color-dark: #1a1a1a;
-  --color-gold: #c5a073;
-  --color-muted: rgba(26, 26, 26, 0.6);
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Karla', Helvetica, sans-serif;
+  --color-bg: var(--color-surface-secondary);
+  --color-dark: var(--color-text);
+  --color-gold: var(--color-accent);
+  --color-muted: var(--color-text-muted);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   padding: 80px;
   background: var(--color-bg);
@@ -28,7 +28,7 @@
 
 .faq-eyebrow {
   color: var(--color-gold);
-  font-size: 10px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -44,7 +44,7 @@
 
 .faq-description {
   color: var(--color-muted);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.75;
 }
@@ -57,7 +57,7 @@
   padding: 14px 24px;
   border: 1px solid var(--color-gold);
   color: var(--color-gold);
-  font-size: 10px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
 .faq-question {
   color: var(--color-dark);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--font-size-body-large);
   font-weight: 400;
   line-height: 1.45;
 }
@@ -117,7 +117,7 @@
 .faq-answer {
   margin-top: 16px;
   color: var(--color-muted);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.75;
 }
@@ -143,6 +143,6 @@
   }
 
   .faq-question {
-    font-size: 16px;
+    font-size: var(--font-size-body);
   }
 }

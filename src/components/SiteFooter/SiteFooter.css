@@ -1,10 +1,10 @@
 .site-footer {
-  --color-bg: #05110b;
-  --color-gold: #c2a978;
-  --color-muted: #5c6b61;
-  --color-logo: #d4d4d4;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Karla', Helvetica, sans-serif;
+  --color-bg: var(--color-surface-atmospheric);
+  --color-gold: var(--color-accent);
+  --color-muted: var(--color-surface);
+  --color-logo: var(--color-text-inverse);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   padding: 72px 80px 40px;
   background: var(--color-bg);
@@ -38,14 +38,14 @@
 
 .footer-subbrand {
   color: var(--color-gold);
-  font-size: 11px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
 }
 
 .footer-tagline {
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1.75;
 }
@@ -55,7 +55,7 @@
   align-items: center;
   gap: 12px;
   color: var(--color-gold);
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -76,7 +76,7 @@
 
 .footer-column-title {
   color: var(--color-gold);
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -92,7 +92,7 @@
 
 .footer-link {
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -111,7 +111,7 @@
   gap: 24px;
   padding-top: 28px;
   border-top: 1px solid rgba(92, 107, 97, 0.35);
-  font-size: 10px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1.5;
 }

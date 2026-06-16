@@ -1,11 +1,11 @@
 .encounters-section {
-  --color-bg: #fbf9f5;
-  --color-dark: #222;
-  --color-gold: #c5a059;
+  --color-bg: var(--color-surface);
+  --color-dark: var(--color-text);
+  --color-gold: var(--color-accent);
   --color-divider: rgba(232, 225, 213, 0.12);
   --color-divider-soft: rgba(232, 225, 213, 0.2);
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Karla', Helvetica, sans-serif;
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
   padding: 20px 80px 80px;
   background: var(--color-bg);
@@ -29,7 +29,7 @@
 .eyebrow-label {
   color: var(--color-gold);
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 4.2px;
@@ -50,7 +50,7 @@
   max-width: 287px;
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 32px;
   letter-spacing: 0.42px;
@@ -151,7 +151,7 @@
 .category-label {
   color: var(--color-gold);
   font-family: var(--font-sans);
-  font-size: 10.4px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 3.328px;
@@ -179,7 +179,7 @@
 .experience-description {
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 32px;
   letter-spacing: 0.42px;
@@ -204,7 +204,7 @@
 .experience-cta-text {
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 2.64px;
@@ -267,7 +267,7 @@
 .footer-link-text {
   color: var(--color-dark);
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 2.64px;

@@ -6,9 +6,52 @@
   padding: 0;
 }
 
+:root {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-primary: #004225;
+  --color-primary-hover: #1A5C3A;
+  --color-surface: #FBF9F5;
+  --color-surface-secondary: #E8E1D5;
+  --color-surface-atmospheric: #0D1F17;
+  --color-text: #1A1A1A;
+  --color-text-muted: rgba(26, 26, 26, 0.6);
+  --color-text-inverse: #FFFFFF;
+  --color-text-secondary-on-dark: rgba(255, 255, 255, 0.8);
+  --color-accent: #C5A059;
+  --color-border: #E8E1D5;
+  --color-scrim: rgba(13, 31, 23, 0.4);
+
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
+
+  --font-size-display-xl: 40px;
+  --font-size-h1: 32px;
+  --font-size-h2: 26px;
+  --font-size-h3: 22px;
+  --font-size-h4: 22px;
+  --font-size-body-large: 18px;
+  --font-size-body: 16px;
+  --font-size-body-journal: 16px;
+  --font-size-caption: 14px;
+  --font-size-label: 12px;
+  --font-size-nav: 14px;
+  --font-size-pullquote: 24px;
+  --font-size-button: 14px;
+
+  --breakpoint-mobile-max: 767px;
+  --breakpoint-tablet-min: 768px;
+  --breakpoint-desktop-min: 1200px;
+  --breakpoint-large-desktop-min: 1440px;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-surface);
 }
 
 #root {
