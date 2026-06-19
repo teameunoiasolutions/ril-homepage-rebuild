@@ -1,7 +1,7 @@
-import { AboutPage } from './components/AboutPage/AboutPage'
+import { ExperiencesPage } from './components/ExperiencesPage/ExperiencesPage'
 
 function App() {
-  return <AboutPage />
+  return <ExperiencesPage />
 }
 
 export default App
