@@ -239,9 +239,17 @@ function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boole
   )
 }
 
-function TextLink({ children, inverse = false }: { children: ReactNode; inverse?: boolean }) {
+function TextLink({
+  children,
+  href = '#begin',
+  inverse = false,
+}: {
+  children: ReactNode
+  href?: string
+  inverse?: boolean
+}) {
   return (
-    <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href="#begin">
+    <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href={href}>
       {children}
       <span aria-hidden="true">-&gt;</span>
     </a>
@@ -250,6 +258,10 @@ function TextLink({ children, inverse = false }: { children: ReactNode; inverse?
 
 function EncounterCard({ encounter, index }: { encounter: Encounter; index: number }) {
   const imageFirst = index % 2 === 0
+  const enquiryHref =
+    encounter.title === 'The Sigiriya Dawn Ascent'
+      ? '/experiences/the-sigiriya-dawn-ascent'
+      : '#begin'
 
   return (
     <article className={`encounter-row${imageFirst ? '' : ' encounter-row--reverse'}`}>
@@ -277,7 +289,7 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
             <span>- {encounter.curator}</span>
           </div>
         </div>
-        <TextLink>Enquire About This Encounter</TextLink>
+        <TextLink href={enquiryHref}>Enquire About This Encounter</TextLink>
       </div>
 
       <dl className="encounter-details">
