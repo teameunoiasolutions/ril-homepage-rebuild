@@ -303,7 +303,7 @@ export function Homepage() {
 
       <section className="figma-destination">
         <div className="figma-container figma-destination-grid">
-          <div className="figma-copy-stack figma-copy-stack-dark">
+          <div className="figma-copy-stack">
             <p className="figma-overline">The Destination</p>
             <h2>An Island That Changes With You</h2>
             <p className="figma-destination-intro">

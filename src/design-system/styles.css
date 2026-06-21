@@ -76,7 +76,7 @@
   --font-size-body-journal: 16px;
   --font-size-caption: 14px;
   --font-size-label: 12px;
-  --font-size-nav: 14px;
+  --font-size-nav: 12px;
   --font-size-pullquote: 24px;
   --font-size-button: 14px;
 
@@ -107,8 +107,8 @@
   --container-inset-tablet: 80px;
   --container-inset-desktop: 160px;
 
-  --section-padding: 120px;
-  --section-padding-compact: 80px;
+  --section-padding: 80px;
+  --section-padding-compact: 60px;
 
   --shadow-forest: rgba(13, 31, 23, 0.28);
   --shadow-forest-strong: rgba(13, 31, 23, 0.34);

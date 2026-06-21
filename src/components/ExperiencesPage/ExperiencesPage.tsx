@@ -1,5 +1,5 @@
 import './ExperiencesPage.css'
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { experienceImages } from './images'
 
 type Detail = {
@@ -7,7 +7,20 @@ type Detail = {
   value: string
 }
 
+const regions = [
+  'All Encounters',
+  'Tea Country',
+  'Southern Coast',
+  'Wildlife',
+  'Heritage',
+  'Marine',
+  'Cultural',
+] as const
+
+type Region = (typeof regions)[number]
+
 type Encounter = {
+  region: Exclude<Region, 'All Encounters'>
   category: string
   title: string
   note: string
@@ -27,18 +40,9 @@ const stats = [
   { value: '1', label: 'Channel Only' },
 ] as const
 
-const regions = [
-  'All Encounters',
-  'Tea Country',
-  'Southern Coast',
-  'Wildlife',
-  'Heritage',
-  'Marine',
-  'Cultural',
-] as const
-
 const encounters: Encounter[] = [
   {
+    region: 'Heritage',
     category: 'Heritage - Singular Access',
     title: 'The Sigiriya Dawn Ascent',
     note:
@@ -58,6 +62,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    region: 'Tea Country',
     category: 'Tea Country - Immersive',
     title: 'A Private Tea Estate, Locked Before Dawn',
     note:
@@ -76,6 +81,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    region: 'Wildlife',
     category: 'Wildlife - Expert-Led',
     title: 'The Leopard Research Circuit',
     note:
@@ -95,6 +101,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    region: 'Southern Coast',
     category: 'Southern Coast - Immersive',
     title: "The Mirissa Fishermen's Dawn",
     note:
@@ -113,6 +120,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    region: 'Cultural',
     category: 'Cultural - Intimate Access',
     title: 'A Private Kandyan Dance Rehearsal',
     note:
@@ -305,6 +313,12 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
 }
 
 export function ExperiencesPage() {
+  const [selectedRegion, setSelectedRegion] = useState<Region>('All Encounters')
+  const filteredEncounters =
+    selectedRegion === 'All Encounters'
+      ? encounters
+      : encounters.filter((encounter) => encounter.region === selectedRegion)
+
   return (
     <main className="experiences-page">
       <section className="experiences-hero">
@@ -356,20 +370,38 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <nav className="region-nav" aria-label="Experience regions">
-        <span>Filter By Region</span>
-        {regions.map((region, index) => (
-          <a key={region} className={index === 0 ? 'active' : ''} href="#encounters">
-            {region}
-          </a>
-        ))}
-      </nav>
+      <section className="region-filter" aria-label="Experience filters">
+        <label htmlFor="experience-region">Filter By Region</label>
+        <div className="region-filter-select-wrap">
+          <select
+            id="experience-region"
+            value={selectedRegion}
+            onChange={(event) => setSelectedRegion(event.target.value as Region)}
+          >
+            {regions.map((region) => (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            ))}
+          </select>
+        </div>
+        <p>
+          {filteredEncounters.length} {filteredEncounters.length === 1 ? 'Encounter' : 'Encounters'} Shown
+        </p>
+      </section>
 
       <section className="encounters-collection" id="encounters">
         <div className="experiences-container">
-          {encounters.map((encounter, index) => (
-            <EncounterCard key={encounter.title} encounter={encounter} index={index} />
-          ))}
+          {filteredEncounters.length > 0 ? (
+            filteredEncounters.map((encounter, index) => (
+              <EncounterCard key={encounter.title} encounter={encounter} index={index} />
+            ))
+          ) : (
+            <div className="encounters-empty">
+              <p>No encounters currently match this region.</p>
+              <span>Our curators can still shape marine access by arrangement.</span>
+            </div>
+          )}
         </div>
       </section>
 
