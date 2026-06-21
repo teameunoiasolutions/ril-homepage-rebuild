@@ -6,8 +6,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 32px;
-  min-height: 76px;
-  background: rgba(251, 249, 245, 0.96);
+  min-height: 66px;
+  background: var(--color-surface-glass-strong);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -31,7 +31,7 @@
 .site-header-nav a,
 .site-header-cta {
   font-size: var(--font-size-nav);
-  line-height: 1.4;
+  line-height: var(--line-height-ui);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-text);

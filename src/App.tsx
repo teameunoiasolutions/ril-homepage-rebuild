@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { AboutPage } from './components/AboutPage/AboutPage'
+import { ConciergeDesk } from './components/ConciergeDesk/ConciergeDesk'
 import { ExperienceDetailPage } from './components/ExperienceDetailPage/ExperienceDetailPage'
 import { ExperiencesPage } from './components/ExperiencesPage/ExperiencesPage'
 import { Homepage } from './components/Homepage/Homepage'
@@ -15,6 +16,10 @@ function App() {
 
   if (path === '/') {
     return renderPage(<Homepage />)
+  }
+
+  if (path === '/concierge') {
+    return <ConciergeDesk />
   }
 
   if (path === '/experiences') {

@@ -155,13 +155,32 @@ export function Homepage() {
 
       <section className="figma-discovery" id="about" data-node-id="103:12717">
         <div className="figma-container">
+          <div className="figma-identities">
+            <p className="figma-overline">The Process of Being Understood</p>
+            <header>
+              <h3>Curated Identities</h3>
+              <div className="figma-carousel-buttons" aria-hidden="true">
+                <span>‹</span>
+                <span>›</span>
+              </div>
+            </header>
+            <div className="figma-card-row">
+              {identityCards.map((card) => (
+                <article className="figma-identity-card" key={card.title}>
+                  <img src={card.image} alt="" />
+                  <p>{card.label}</p>
+                  <h4>{card.title}</h4>
+                  <span>{card.copy}</span>
+                </article>
+              ))}
+            </div>
+          </div>
           <div className="figma-discovery-grid">
             <div className="figma-copy-stack">
-              <p className="figma-overline">The Process of Being Understood</p>
-              <h2 className="figma-display-heading">
+              <h3 className="traveller-discovery-guide">
                 Masterpieces of
                 <em>Personal Discovery</em>
-              </h2>
+              </h3>
               <p>
                 We do not begin with itineraries. We begin with you. In quiet, unhurried
                 conversations within our private lounges, our concierges seek to understand the
@@ -188,26 +207,6 @@ export function Homepage() {
                 </span>
               </figcaption>
             </figure>
-          </div>
-
-          <div className="figma-identities">
-            <header>
-              <h3>Curated Identities</h3>
-              <div className="figma-carousel-buttons" aria-hidden="true">
-                <span>‹</span>
-                <span>›</span>
-              </div>
-            </header>
-            <div className="figma-card-row">
-              {identityCards.map((card) => (
-                <article className="figma-identity-card" key={card.title}>
-                  <img src={card.image} alt="" />
-                  <p>{card.label}</p>
-                  <h4>{card.title}</h4>
-                  <span>{card.copy}</span>
-                </article>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -477,46 +476,6 @@ export function Homepage() {
           </div>
         </div>
       </section>
-
-      <footer className="figma-footer" data-node-id="103:13276">
-        <div className="figma-container">
-          <div className="figma-footer-top">
-            <div className="figma-footer-brand">
-              <strong>Royale Isles</strong>
-              <span>Lanka</span>
-              <p>
-                A private discovery companion for those who travel not to see the world, but to
-                understand it.
-              </p>
-              <small>Est. 2020</small>
-            </div>
-            <div className="figma-footer-columns">
-              <div>
-                <h3>Explore</h3>
-                <a href="#destinations">Discover Sri Lanka</a>
-                <a href="#experiences">Experiences</a>
-                <a href="#journal">Journal</a>
-                <a href="#about">About</a>
-              </div>
-              <div>
-                <h3>Connect</h3>
-                <a href="#begin">Begin a Conversation</a>
-                <a href="#begin">Discovery Guide</a>
-                <a href="#begin">Contact</a>
-              </div>
-              <div>
-                <h3>Legal</h3>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#accessibility">Accessibility</a>
-              </div>
-            </div>
-          </div>
-          <div className="figma-footer-bottom">
-            <span>© 2025 Royale Isles Lanka. All rights reserved.</span>
-            <span>Crafted for those who travel thoughtfully.</span>
-          </div>
-        </div>
-      </footer>
     </main>
   )
 }

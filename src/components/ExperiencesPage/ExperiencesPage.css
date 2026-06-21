@@ -1,11 +1,11 @@
 .experiences-page {
-  --experience-gold: #c9a84c;
+  --experience-gold: var(--color-accent);
   --experience-ivory: var(--color-surface);
   --experience-forest: var(--color-surface-atmospheric);
   --experience-green: var(--color-primary);
   --experience-border: var(--color-border);
-  --experience-muted: rgba(26, 26, 26, 0.6);
-  --experience-faint: rgba(26, 26, 26, 0.35);
+  --experience-muted: var(--color-text-muted);
+  --experience-faint: var(--color-text-faint);
 
   width: 100%;
   overflow: hidden;
@@ -29,7 +29,7 @@
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 4px;
-  line-height: 1.5;
+  line-height: var(--line-height-caption);
   text-transform: uppercase;
 }
 
@@ -50,11 +50,11 @@
   gap: 12px;
   width: fit-content;
   padding-top: 16px;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.3);
+  border-bottom: 1px solid var(--color-text-faint);
   color: var(--color-text);
   font-size: 11px;
   letter-spacing: 3.3px;
-  line-height: 1.5;
+  line-height: var(--line-height-caption);
   text-decoration: none;
   text-transform: uppercase;
   transition: opacity 0.2s ease;
@@ -91,7 +91,7 @@
   font-family: var(--font-display);
   font-size: clamp(48px, 6vw, 72px);
   font-weight: 400;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 .experiences-hero h1 em {
@@ -104,14 +104,14 @@
   color: var(--experience-muted);
   font-size: 16px;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: var(--line-height-caption);
 }
 
 .opening-note {
   width: min(100%, 320px);
   padding: 28px 21px 21px;
   border: 1px solid var(--experience-border);
-  background: rgba(232, 225, 213, 0.3);
+  background: var(--color-surface-secondary-soft);
 }
 
 .opening-note > p,
@@ -119,17 +119,17 @@
   color: var(--experience-gold);
   font-size: 10px;
   letter-spacing: 3px;
-  line-height: 1.5;
+  line-height: var(--line-height-caption);
   text-transform: uppercase;
 }
 
 .opening-note blockquote {
   margin-top: 7px;
-  color: rgba(26, 26, 26, 0.7);
+  color: var(--color-text-muted);
   font-family: var(--font-display);
   font-size: 14px;
   font-style: italic;
-  line-height: 1.6;
+  line-height: var(--line-height-copy);
 }
 
 .opening-note div {
@@ -158,7 +158,7 @@
 
 .opening-note small {
   display: block;
-  color: rgba(26, 26, 26, 0.4);
+  color: var(--color-text-faint);
   letter-spacing: 0.45px;
 }
 
@@ -169,7 +169,7 @@
 .hero-image-frame,
 .encounter-image-frame {
   padding: 8px;
-  border: 1px solid rgba(232, 225, 213, 0.9);
+  border: 1px solid var(--color-border);
 }
 
 .hero-image-frame img {
@@ -187,7 +187,7 @@
   z-index: 2;
   font-size: 9px;
   letter-spacing: 2.7px;
-  line-height: 1.5;
+  line-height: var(--line-height-caption);
   text-transform: uppercase;
 }
 
@@ -197,8 +197,8 @@
   padding: 13px 17px;
   border: 1px solid var(--experience-border);
   background: var(--experience-ivory);
-  color: rgba(26, 26, 26, 0.5);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  color: var(--color-text-subtle);
+  box-shadow: 0 1px 1px var(--shadow-card-soft);
 }
 
 .hero-choice,
@@ -238,11 +238,11 @@
   font-family: var(--font-display);
   font-size: 30px;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: var(--line-height-heading);
 }
 
 .experiences-stat-strip span {
-  color: rgba(26, 26, 26, 0.4);
+  color: var(--color-text-faint);
   font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -269,7 +269,7 @@
   margin-right: 32px;
   padding: 21px 32px 21px 0;
   border-right: 1px solid var(--experience-border);
-  color: rgba(26, 26, 26, 0.3);
+  color: var(--color-text-faint);
   font-size: 10px;
   letter-spacing: 4px;
 }
@@ -277,7 +277,7 @@
 .region-nav a {
   padding: 20px 24px 22px;
   border-bottom: 2px solid transparent;
-  color: rgba(26, 26, 26, 0.45);
+  color: var(--color-text-subtle);
   font-size: 11px;
   letter-spacing: 2.2px;
   text-decoration: none;
@@ -332,10 +332,10 @@
 }
 
 .encounter-index span {
-  color: rgba(26, 26, 26, 0.2);
+  color: var(--color-text-whisper);
   font-family: var(--font-display);
   font-size: 36px;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 .encounter-index i {
@@ -369,8 +369,8 @@
   padding: 9px 17px;
   border: 1px solid var(--experience-border);
   background: var(--experience-ivory);
-  color: rgba(26, 26, 26, 0.45);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  color: var(--color-text-subtle);
+  box-shadow: 0 1px 1px var(--shadow-card-soft);
 }
 
 .encounter-copy {
@@ -384,17 +384,17 @@
   font-family: var(--font-display);
   font-size: clamp(30px, 3vw, 36px);
   font-weight: 400;
-  line-height: 1.12;
+  line-height: var(--line-height-display);
 }
 
 .curator-note {
   max-width: 440px;
   padding: 8px 0 0 22px;
-  border-left: 2px solid rgba(201, 168, 76, 0.5);
+  border-left: 2px solid var(--color-accent-mid);
 }
 
 .curator-note-label {
-  color: rgba(26, 26, 26, 0.4);
+  color: var(--color-text-faint);
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -402,11 +402,11 @@
 
 .curator-note blockquote {
   margin-top: 8px;
-  color: rgba(26, 26, 26, 0.72);
+  color: var(--color-text-muted);
   font-family: var(--font-display);
   font-size: 16px;
   font-style: italic;
-  line-height: 1.65;
+  line-height: var(--line-height-body);
 }
 
 .curator-byline {
@@ -414,7 +414,7 @@
   align-items: center;
   gap: 12px;
   margin-top: 16px;
-  color: rgba(26, 26, 26, 0.45);
+  color: var(--color-text-subtle);
   font-size: 10px;
   letter-spacing: 0.5px;
 }
@@ -439,10 +439,10 @@
 }
 
 .encounter-details dt {
-  color: rgba(26, 26, 26, 0.3);
+  color: var(--color-text-faint);
   font-size: 9px;
   letter-spacing: 2.7px;
-  line-height: 1.5;
+  line-height: var(--line-height-caption);
   text-transform: uppercase;
 }
 
@@ -451,7 +451,7 @@
   color: var(--color-text);
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: var(--line-height-ui);
 }
 
 .encounter-details div:last-child dd {
@@ -480,11 +480,11 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: rgba(26, 26, 26, 0.35);
+  color: var(--color-text-faint);
   font-family: var(--font-display);
   font-size: 12px;
   letter-spacing: 3.6px;
-  line-height: 1.3;
+  line-height: var(--line-height-snug);
   text-transform: uppercase;
 }
 
@@ -497,7 +497,7 @@
   font-family: var(--font-display);
   font-size: 36px;
   font-weight: 300;
-  line-height: 1.1;
+  line-height: var(--line-height-display);
 }
 
 .chapters-header em,
@@ -531,7 +531,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 24px 0 25px;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  border-bottom: 1px solid var(--color-text-whisper);
 }
 
 .chapter-card p:first-child,
@@ -540,11 +540,11 @@
 .ocean-caption,
 .ceremony-quote figcaption,
 .ocean-grid figcaption {
-  color: rgba(26, 26, 26, 0.35);
+  color: var(--color-text-faint);
   font-family: var(--font-display);
   font-size: 12px;
   letter-spacing: 3.6px;
-  line-height: 1.3;
+  line-height: var(--line-height-snug);
   text-transform: uppercase;
 }
 
@@ -553,14 +553,14 @@
   font-size: 24px;
   font-style: italic;
   font-weight: 300;
-  line-height: 1.3;
+  line-height: var(--line-height-snug);
 }
 
 .chapter-card p:nth-child(3) {
-  color: rgba(26, 26, 26, 0.55);
+  color: var(--color-text-subtle);
   font-size: 12px;
   font-weight: 300;
-  line-height: 2.3;
+  line-height: var(--line-height-expanded);
 }
 
 .chapter-card span {
@@ -604,7 +604,7 @@
   font-family: var(--font-display);
   font-size: 12px;
   letter-spacing: 6px;
-  line-height: 1.3;
+  line-height: var(--line-height-snug);
   text-transform: uppercase;
 }
 
@@ -613,7 +613,7 @@
   font-family: var(--font-display);
   font-size: clamp(36px, 4vw, 48px);
   font-weight: 400;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 .wilderness-copy h2 em {
@@ -625,14 +625,14 @@
   width: 32px;
   height: 1px;
   margin: 32px 0;
-  background: rgba(197, 160, 89, 0.5);
+  background: var(--color-accent-mid);
 }
 
 .wilderness-copy > p:nth-of-type(2) {
-  color: rgba(251, 249, 245, 0.62);
+  color: var(--color-text-muted-on-dark);
   font-size: 14px;
   font-weight: 300;
-  line-height: 2.3;
+  line-height: var(--line-height-expanded);
 }
 
 .wilderness-copy small,
@@ -687,15 +687,15 @@
   font-family: var(--font-display);
   font-size: clamp(36px, 4.2vw, 48px);
   font-weight: 300;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 .ceremony-quote cite {
   display: block;
   margin-top: 32px;
   padding-top: 20px;
-  border-top: 1px solid rgba(26, 26, 26, 0.2);
-  color: rgba(26, 26, 26, 0.35);
+  border-top: 1px solid var(--color-text-whisper);
+  color: var(--color-text-faint);
   font-family: var(--font-display);
   font-size: 12px;
   font-style: normal;
@@ -704,7 +704,7 @@
 }
 
 .ocean-feature {
-  border-top: 1px solid rgba(26, 26, 26, 0.1);
+  border-top: 1px solid var(--color-text-whisper);
 }
 
 .ocean-main-image {
@@ -736,7 +736,7 @@
   font-family: var(--font-display);
   font-size: 36px;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: var(--line-height-display);
 }
 
 .ocean-grid > div > span {
@@ -748,10 +748,10 @@
 }
 
 .ocean-grid > div > p {
-  color: rgba(26, 26, 26, 0.6);
+  color: var(--color-text-muted);
   font-size: 14px;
   font-weight: 300;
-  line-height: 2.3;
+  line-height: var(--line-height-expanded);
 }
 
 .ocean-grid small {
@@ -779,7 +779,7 @@
   font-family: var(--font-display);
   font-size: clamp(44px, 5vw, 60px);
   font-weight: 400;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 .curation-process h2 em {
@@ -791,7 +791,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 96px;
-  border: 1px solid rgba(232, 225, 213, 0.2);
+  border: 1px solid var(--color-border-faint);
 }
 
 .curation-column {
@@ -799,7 +799,7 @@
 }
 
 .curation-column + .curation-column {
-  border-left: 1px solid rgba(232, 225, 213, 0.2);
+  border-left: 1px solid var(--color-border-faint);
 }
 
 .curation-column > p {
@@ -810,12 +810,12 @@
 }
 
 .curation-column--muted > p {
-  color: rgba(232, 225, 213, 0.45);
+  color: var(--color-border-subtle);
 }
 
 .curation-column article {
   padding: 40px 0;
-  border-bottom: 1px solid rgba(232, 225, 213, 0.1);
+  border-bottom: 1px solid var(--color-border-on-dark);
 }
 
 .curation-column article:last-child {
@@ -828,24 +828,24 @@
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: var(--line-height-ui);
 }
 
 .curation-column--muted h3 {
-  color: rgba(251, 249, 245, 0.6);
+  color: var(--color-text-muted-on-dark);
 }
 
 .curation-column article p {
   margin-top: 11px;
-  color: rgba(251, 249, 245, 0.4);
+  color: var(--color-text-faint-on-dark);
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.35px;
-  line-height: 1.65;
+  line-height: var(--line-height-body);
 }
 
 .curation-column--muted article p {
-  color: rgba(251, 249, 245, 0.3);
+  color: var(--color-text-faint-on-dark);
 }
 
 .process-quote {
@@ -853,7 +853,7 @@
   color: var(--experience-ivory);
   font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 36px);
-  line-height: 1.15;
+  line-height: var(--line-height-display);
   text-align: center;
 }
 
@@ -867,7 +867,7 @@
   justify-content: center;
   gap: 16px;
   margin-top: 32px;
-  color: rgba(251, 249, 245, 0.2);
+  color: var(--color-text-whisper-on-dark);
   font-family: var(--font-body);
   font-size: 10px;
   font-style: normal;
@@ -880,7 +880,7 @@
   content: '';
   width: 48px;
   height: 1px;
-  background: rgba(201, 168, 76, 0.3);
+  background: var(--color-accent-subtle);
 }
 
 .photo-strip {
@@ -921,7 +921,7 @@
   font-family: var(--font-display);
   font-size: 36px;
   font-weight: 300;
-  line-height: 1.12;
+  line-height: var(--line-height-display);
 }
 
 .experiences-final-cta h2 em {
@@ -933,7 +933,7 @@
   max-width: 496px;
   font-size: 14px;
   font-weight: 300;
-  line-height: 1.65;
+  line-height: var(--line-height-body);
 }
 
 .experiences-final-cta > div {
@@ -954,7 +954,7 @@
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 3.3px;
-  line-height: 1.2;
+  line-height: var(--line-height-heading);
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -1109,7 +1109,7 @@
 
   .curation-column + .curation-column {
     border-left: 0;
-    border-top: 1px solid rgba(232, 225, 213, 0.2);
+    border-top: 1px solid var(--color-border-faint);
   }
 
   .ocean-caption,

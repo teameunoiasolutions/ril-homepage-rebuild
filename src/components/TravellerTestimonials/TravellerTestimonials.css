@@ -38,7 +38,7 @@
   font-family: var(--font-serif);
   font-size: clamp(36px, 4vw, 48px);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: var(--line-height-display);
 }
 
 .testimonials-rule {
@@ -54,11 +54,11 @@
   font-size: var(--font-size-body);
   font-style: italic;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: var(--line-height-body);
 }
 
 .testimonial-featured {
-  background: #fff;
+  background: var(--color-text-inverse);
   padding: 48px 40px;
   min-height: 420px;
   display: flex;
@@ -79,7 +79,7 @@
   font-size: var(--font-size-body);
   font-style: italic;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: var(--line-height-body);
   text-align: right;
 }
 
@@ -116,7 +116,7 @@
   color: var(--color-muted);
   font-size: var(--font-size-label);
   font-weight: 400;
-  line-height: 1.4;
+  line-height: var(--line-height-ui);
 }
 
 .testimonial-featured .testimonial-attribution {
