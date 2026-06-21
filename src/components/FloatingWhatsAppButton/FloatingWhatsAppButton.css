@@ -1,13 +1,24 @@
-.floating-whatsapp-button {
+.floating-action-group {
   position: fixed;
   right: 28px;
   bottom: 28px;
   z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.floating-action-button {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 0;
+  width: 58px;
   min-height: 56px;
-  padding: 12px 18px 12px 14px;
+  max-width: 58px;
+  overflow: hidden;
+  padding: 12px;
   border: 1px solid var(--color-accent);
   border-radius: 999px;
   background: var(--color-primary);
@@ -20,24 +31,48 @@
   text-decoration: none;
   text-transform: uppercase;
   transition:
+    width 220ms ease,
+    max-width 220ms ease,
+    gap 220ms ease,
+    padding 220ms ease,
     transform 180ms ease,
     box-shadow 180ms ease,
     background-color 180ms ease;
 }
 
-.floating-whatsapp-button:hover,
-.floating-whatsapp-button:focus-visible {
-  background: var(--color-primary-hover);
-  box-shadow: 0 22px 54px var(--shadow-forest-strong);
-  transform: translateY(-2px);
+.floating-action-button--whatsapp {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
 }
 
-.floating-whatsapp-button:focus-visible {
+.floating-action-button--concierge {
+  background: var(--color-surface-atmospheric);
+  color: var(--color-accent);
+}
+
+.floating-action-button:hover,
+.floating-action-button:focus-visible {
+  width: auto;
+  max-width: 220px;
+  gap: 10px;
+  padding: 12px 18px 12px 14px;
+  background: var(--color-primary-hover);
+  box-shadow: 0 22px 54px var(--shadow-forest-strong);
+  transform: translateX(-2px);
+}
+
+.floating-action-button--concierge:hover,
+.floating-action-button--concierge:focus-visible {
+  background: #102a1f;
+}
+
+.floating-action-button:focus-visible {
   outline: 3px solid var(--focus-ring-accent);
   outline-offset: 4px;
 }
 
-.floating-whatsapp-button__icon {
+.floating-action-button__icon {
+  flex: 0 0 auto;
   display: grid;
   width: 32px;
   height: 32px;
@@ -46,26 +81,49 @@
   background: var(--color-icon-surface-on-dark);
 }
 
-.floating-whatsapp-button__icon svg {
+.floating-action-button--concierge .floating-action-button__icon {
+  background: rgba(197, 160, 89, 0.14);
+}
+
+.floating-action-button__icon svg {
   width: 25px;
   height: 25px;
   fill: currentColor;
 }
 
+.floating-action-button__text {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    max-width 220ms ease,
+    opacity 160ms ease;
+}
+
+.floating-action-button:hover .floating-action-button__text,
+.floating-action-button:focus-visible .floating-action-button__text {
+  max-width: 150px;
+  opacity: 1;
+}
+
 @media (max-width: 680px) {
-  .floating-whatsapp-button {
+  .floating-action-group {
     right: 18px;
     bottom: 18px;
-    min-height: 54px;
-    padding: 11px 14px;
+    gap: 10px;
   }
 
-  .floating-whatsapp-button__text {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
+  .floating-action-button {
+    width: 54px;
+    max-width: 54px;
+    min-height: 54px;
+    padding: 11px;
+  }
+
+  .floating-action-button:hover,
+  .floating-action-button:focus-visible {
+    max-width: 210px;
+    padding: 11px 14px;
   }
 }
