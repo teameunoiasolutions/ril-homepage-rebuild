@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { ArrowIcon } from '../ArrowIcon'
 import './TravellerDiscovery.css'
 
 interface PersonaCardProps {
@@ -31,7 +32,7 @@ function PersonaCard({ imageSrc, imageAlt, name, description, quote }: PersonaCa
         <p className="persona-description">{description}</p>
         <p className="persona-quote">{quote}</p>
         <a className="select-persona-link" href="#">
-          This Is Me&nbsp;→
+          This Is Me <ArrowIcon />
         </a>
       </div>
     </article>

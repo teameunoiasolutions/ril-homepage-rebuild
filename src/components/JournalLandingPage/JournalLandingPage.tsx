@@ -1,5 +1,6 @@
 import './JournalLandingPage.css'
 import type { CSSProperties } from 'react'
+import { ArrowIcon } from '../ArrowIcon'
 
 type Texture = {
   label: string
@@ -212,7 +213,7 @@ function StoryTags({ tags }: { tags: string[] }) {
 function ReadLink() {
   return (
     <a className="journal-read-link" href="/journal/the-sigiriya-dawn-ascent">
-      Read Full Entry <span aria-hidden="true">→</span>
+      Read Full Entry <ArrowIcon />
     </a>
   )
 }

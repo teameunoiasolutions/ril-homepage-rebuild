@@ -167,13 +167,13 @@
 }
 
 .detail-intro {
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .detail-intro-grid {
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 96px;
+  /* gap: 96px; */
 }
 
 .detail-intro-aside {
@@ -350,7 +350,7 @@
 }
 
 .detail-movements {
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .detail-movement-grid {
@@ -401,7 +401,7 @@
 }
 
 .detail-feature {
-  padding-bottom: 128px;
+  padding-bottom: 80px;
 }
 
 .detail-feature-grid {
@@ -503,14 +503,13 @@
 }
 
 .detail-triptych {
-  padding-bottom: 128px;
+  padding-bottom: 80px;
 }
 
 .detail-triptych-grid {
   display: grid;
   grid-template-columns: minmax(0, 783px) minmax(320px, 489px);
   gap: 8px;
-  height: 660px;
 }
 
 .detail-triptych-grid > div {
@@ -520,7 +519,7 @@
 }
 
 .detail-reflection {
-  padding: 128px 80px;
+  padding: 80px 60px;
   background: var(--detail-stone);
 }
 
@@ -596,7 +595,7 @@
 }
 
 .detail-related {
-  padding: 0 0 128px;
+  padding: 0 0 80px;
 }
 
 .detail-related header {
@@ -681,8 +680,8 @@
   align-items: center;
   justify-content: center;
   min-height: 617px;
-  padding: 128px 80px;
-  background: var(--detail-forest);
+  padding: 80px 60px;
+  background: var(--detail-green);
   color: var(--detail-ivory);
   text-align: center;
 }

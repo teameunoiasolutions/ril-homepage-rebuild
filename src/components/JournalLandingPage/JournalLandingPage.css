@@ -572,6 +572,7 @@
 
 .journal-read-link {
   display: inline-flex;
+  align-items: center;
   gap: 8px;
   color: var(--journal-sepia);
   font-size: 10px;

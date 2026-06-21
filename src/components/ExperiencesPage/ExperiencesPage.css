@@ -16,8 +16,7 @@
 
 .experiences-container {
   width: min(100%, 1440px);
-  /* margin: 0 auto; */
-  margin-top: 64px;
+  margin: 0 auto;
   padding: 0 80px;
 }
 
@@ -61,8 +60,16 @@
   transition: opacity 0.2s ease;
 }
 
+.experiences-text-link .arrow-icon {
+  transition: transform 0.2s ease;
+}
+
 .experiences-text-link:hover {
   opacity: 0.65;
+}
+
+.experiences-text-link:hover .arrow-icon {
+  transform: translateX(3px);
 }
 
 .experiences-text-link--inverse {
@@ -71,7 +78,7 @@
 }
 
 .experiences-hero {
-  padding: 128px 0 128px;
+  padding: 80px 0 80px;
 }
 
 .experiences-hero-grid {
@@ -256,6 +263,7 @@
   gap: 24px;
   width: 100%;
   padding: 16px 80px;
+  margin-bottom: 32px;
   border-top: 1px solid var(--experience-border);
   border-bottom: 1px solid var(--experience-border);
 }
@@ -518,11 +526,11 @@
 
 .further-chapters,
 .ocean-feature {
-  padding: 128px 0;
+  padding: 60px 0;
 }
 
 .ceremony-quote {
-  padding-top: 128px;
+  padding-top: 80px;
 }
 
 .chapters-header {
@@ -940,11 +948,27 @@
 }
 
 .photo-strip {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 0;
+  background: var(--experience-ivory);
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.photo-strip-track {
+  display: flex;
+  width: max-content;
+  animation: photo-strip-carousel 38s linear infinite;
+}
+
+.photo-strip:hover .photo-strip-track {
+  animation-play-state: paused;
+}
+
+.photo-strip-set {
   display: flex;
   gap: 8px;
-  overflow-x: auto;
-  padding: 32px 80px;
-  background: var(--experience-ivory);
+  padding-right: 8px;
 }
 
 .photo-strip img {
@@ -961,14 +985,34 @@
   width: 384px;
 }
 
+@keyframes photo-strip-carousel {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-strip-track {
+    animation: none;
+  }
+
+  .photo-strip-set[aria-hidden='true'] {
+    display: none;
+  }
+}
+
 .experiences-final-cta {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  padding: 160px 64px;
+  padding: 80px 60px;
   border-top: 1px solid var(--experience-border);
-  background: var(--experience-forest);
+  background: var(--experience-green);
   color: var(--experience-ivory);
   text-align: center;
 }
@@ -1187,7 +1231,18 @@
   }
 
   .photo-strip {
-    padding: 24px;
+    padding: 24px 0;
+  }
+
+  .photo-strip img {
+    flex-basis: 216px;
+    width: 216px;
+    height: 148px;
+  }
+
+  .photo-strip img.wide {
+    flex-basis: 320px;
+    width: 320px;
   }
 }
 

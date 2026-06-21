@@ -43,7 +43,7 @@
 /* Hero */
 .about-hero {
   background: var(--color-surface);
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .about-hero-inner {
@@ -65,7 +65,7 @@
 .about-hero-body {
   margin-top: 48px;
   max-width: 637px;
-  font-size: 20px;
+  font-size: var(--font-size-body-large);
   font-weight: 300;
   line-height: var(--line-height-journal);
   color: var(--color-text);
@@ -113,7 +113,7 @@
 /* Why We Exist */
 .about-why-exist {
   background: var(--color-surface);
-  padding: 128px 0;
+  padding-bottom: 80px;
 }
 
 .about-why-exist-inner {
@@ -148,7 +148,7 @@
 /* Dual images */
 .about-dual-images {
   background: var(--color-text-inverse);
-  padding-bottom: 128px;
+  padding-bottom: 80px;
 }
 
 .about-dual-images-inner {
@@ -179,7 +179,7 @@
 /* What We Do */
 .about-what-we-do {
   background: var(--color-surface-atmospheric);
-  padding: 128px 0;
+  padding: 80px 0;
   color: var(--color-text-inverse);
 }
 
@@ -221,7 +221,7 @@
 /* How We're Different */
 .about-different {
   background: var(--color-text-inverse);
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .about-different-inner {
@@ -255,7 +255,7 @@
 /* Full image */
 .about-full-image {
   background: var(--color-text-inverse);
-  padding-bottom: 128px;
+  padding-bottom: 80px;
 }
 
 .about-full-image-img {
@@ -268,7 +268,7 @@
 /* Methodology */
 .about-methodology {
   background: var(--color-surface-secondary);
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .about-methodology-inner {
@@ -310,7 +310,7 @@
 /* Custodians */
 .about-custodians {
   background: var(--color-surface);
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .about-custodians-inner {
@@ -428,11 +428,11 @@
 /* The Breath */
 .about-breath {
   background: var(--color-surface-atmospheric);
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .about-breath-inner {
-  padding: 0 128px;
+  padding: 0 80px;
 }
 
 .about-breath-image-wrap {
@@ -442,11 +442,27 @@
 }
 
 .about-breath-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 25%;
-  display: block;
+  transform: scale(1);
+  transform-origin: center 30%;
+  animation: ocean-breath 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes ocean-breath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  42%,
+  58% {
+    transform: scale(1.09);
+  }
 }
 
 .about-breath-overlay {
@@ -478,10 +494,16 @@
   color: var(--color-surface);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .about-breath-image {
+    animation: none;
+  }
+}
+
 /* Expected */
 .about-expected {
   background: var(--color-surface);
-  padding: 128px 0;
+  padding: 80px 0;
 }
 
 .about-expected-inner {
@@ -512,8 +534,8 @@
 
 /* Private Invitation */
 .about-invitation {
-  background: var(--color-surface-atmospheric);
-  padding: 160px 0;
+  background: var(--color-green);
+  padding: 80px 0;
 }
 
 .about-invitation-inner {

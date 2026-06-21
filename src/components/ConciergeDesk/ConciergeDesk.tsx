@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { ArrowIcon } from '../ArrowIcon'
 import './ConciergeDesk.css'
 
 const assets = {
@@ -180,7 +181,7 @@ export function ConciergeDesk() {
             <label htmlFor="concierge-message">Continue your consultation...</label>
             <input id="concierge-message" type="text" aria-label="Continue your consultation" />
             <button type="button" aria-label="Send message">
-              &gt;
+              <ArrowIcon />
             </button>
           </form>
         </section>
@@ -221,7 +222,7 @@ export function ConciergeDesk() {
                 <div>
                   <header>
                     <h3>{recommendation.title}</h3>
-                    <span aria-hidden="true">&gt;</span>
+                    <ArrowIcon className="concierge-card-arrow" />
                   </header>
                   <p className="concierge-region">{recommendation.region}</p>
                   <p>{recommendation.copy}</p>

@@ -1,4 +1,5 @@
 import './Homepage.css'
+import { ArrowIcon } from '../ArrowIcon'
 
 const images = {
   hero: '/figma-homepage/hero.jpg',
@@ -335,7 +336,9 @@ export function Homepage() {
                 What travellers <em>discover about themselves.</em>
               </h2>
             </div>
-            <a href="/journal">Read all stories →</a>
+            <a href="/journal">
+              Read all stories <ArrowIcon />
+            </a>
           </header>
           <div className="figma-journal-grid">
             <article className="figma-feature-story">
@@ -347,7 +350,9 @@ export function Homepage() {
                 Lanka. She describes what happened when the island refused to let her remain a
                 spectator.
               </span>
-              <a href="/journal/the-sigiriya-dawn-ascent">Read her story →</a>
+              <a href="/journal/the-sigiriya-dawn-ascent">
+                Read her story <ArrowIcon />
+              </a>
             </article>
             <div className="figma-journal-list">
               {journalItems.map((item) => (

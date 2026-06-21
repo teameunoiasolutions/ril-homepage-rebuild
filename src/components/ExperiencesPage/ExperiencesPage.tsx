@@ -1,5 +1,6 @@
 import './ExperiencesPage.css'
 import { useState, type ReactNode } from 'react'
+import { ArrowIcon } from '../ArrowIcon'
 import { experienceImages } from './images'
 
 type Detail = {
@@ -259,7 +260,7 @@ function TextLink({
   return (
     <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href={href}>
       {children}
-      <span aria-hidden="true">-&gt;</span>
+      <ArrowIcon />
     </a>
   )
 }
@@ -535,10 +536,19 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="photo-strip" aria-label="Experience photography">
-        {photoStrip.map((photo) => (
-          <img key={photo.alt} className={photo.wide ? 'wide' : ''} src={photo.src} alt={photo.alt} />
-        ))}
+      <section className="photo-strip" aria-label="Experience photography carousel">
+        <div className="photo-strip-track">
+          <div className="photo-strip-set">
+            {photoStrip.map((photo) => (
+              <img key={photo.alt} className={photo.wide ? 'wide' : ''} src={photo.src} alt={photo.alt} />
+            ))}
+          </div>
+          <div className="photo-strip-set" aria-hidden="true">
+            {photoStrip.map((photo) => (
+              <img key={`repeat-${photo.alt}`} className={photo.wide ? 'wide' : ''} src={photo.src} alt="" />
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="experiences-final-cta" id="begin">

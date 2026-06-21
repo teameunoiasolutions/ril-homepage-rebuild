@@ -460,6 +460,8 @@
 }
 
 .concierge-compose button {
+  display: grid;
+  place-items: center;
   width: 40px;
   height: 40px;
   border: 1px solid rgba(197, 160, 89, 0.35);
@@ -585,9 +587,9 @@
   line-height: 1.5;
 }
 
-.concierge-destination-card header span {
+.concierge-card-arrow {
   color: rgba(197, 160, 89, 0.7);
-  font-size: 9px;
+  width: 18px;
 }
 
 .concierge-region {
