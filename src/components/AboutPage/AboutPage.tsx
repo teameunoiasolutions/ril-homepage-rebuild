@@ -2,28 +2,30 @@ import './AboutPage.css'
 import { aboutImages } from './images'
 
 const stats = [
-  { value: '2,400+', label: 'Travelers Guided' },
-  { value: '150+', label: 'Curated Experiences' },
-  { value: '45+', label: 'Local Partners' },
+  { value: '2,400+', label: 'Journeys Privately Guided' },
+  { value: '150+', label: 'Experiences Personally Vetted' },
+  { value: '45+', label: 'Trusted Local Custodians' },
 ] as const
 
 const methodologySteps = [
   {
-    title: 'Step 1: Personal Vetting',
+    title: 'Personal Verification',
     description:
-      'Every guide, artisan, and experience provider is personally met by our team. We assess not just quality, but values—do they respect the land, pay fair wages, honor tradition?',
+      'Every guide, host, property, and experience is known directly by our team before it is ever proposed to a guest.',
   },
   {
-    title: 'Step 2: Context Building',
+    title: 'Cultural Context',
     description:
-      "We don't just list experiences. We provide historical context, cultural significance, and honest assessments so you understand what you're choosing and why it matters.",
+      'We prepare travellers for what they are entering, so access is received with intelligence, respect, and emotional readiness.',
   },
   {
-    title: 'Step 3: Continuous Quality Control',
+    title: 'Quiet Quality Control',
     description:
-      'We regularly revisit our partners, collect traveler feedback, and adjust our recommendations. What worked last year might not meet our standards today.',
+      'Relationships, routes, timings, and hosts are reviewed continuously. If the standard changes, the recommendation changes.',
   },
 ] as const
+
+const romanNumerals = ['I', 'II', 'III'] as const
 
 const custodians = [
   {
@@ -61,13 +63,17 @@ export function AboutPage() {
           <div className="about-hero-content">
             <p className="about-eyebrow about-eyebrow--gold">ABOUT ROYALE ISLES LANKA</p>
             <h1 className="about-hero-heading">
-              A luxury travel discovery platform built on expertise, ethics, and deep local
-              knowledge.
+              The island,
+              <br />
+              <em>quietly opened</em>
+              <br />
+              for those who know what access means.
             </h1>
             <p className="about-hero-body">
-              Since 2019, we&apos;ve helped discerning travelers discover Sri Lanka through
-              meaningful experiences, cultural immersion, and authentic connections—never through
-              algorithms or instant bookings.
+              Since 2019, we have guided discerning travellers through Sri Lanka by relationship,
+              discretion, and deep local knowledge. No instant bookings. No generic itineraries.
+              Only considered introductions to places, people, and moments that cannot be found on
+              a public menu.
             </p>
             <div className="about-stats">
               {stats.map((stat) => (
@@ -78,13 +84,17 @@ export function AboutPage() {
               ))}
             </div>
           </div>
-          <div className="about-hero-image-wrap">
+          <figure className="about-hero-image-wrap">
             <img
               className="about-hero-image"
               src={aboutImages.heroForest}
               alt="Misty forest landscape in Sri Lanka"
             />
-          </div>
+            <figcaption>
+              <span>Private Access</span>
+              <span>Hill Country - Sri Lanka</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -94,70 +104,126 @@ export function AboutPage() {
           <div className="about-why-exist-left">
             <p className="about-eyebrow about-eyebrow--green">WHY WE EXIST</p>
             <h2 className="about-why-exist-heading">
-              Travel is not about
+              The rarest journeys are not
               <br />
-              collecting places.
+              found in public.
             </h2>
+            <p className="about-why-exist-note">
+              We exist for travellers who understand that true access is earned quietly, over time.
+            </p>
           </div>
           <div className="about-why-exist-right">
             <p>
-              We started Royale Isles Lanka because we saw too many people rushing through Sri
-              Lanka, ticking off landmarks without ever truly arriving. We wanted to create something
-              different—a space where travel slows down, where discovery is intentional, where the
-              journey inward is just as important as the journey across the island.
+              We started Royale Isles Lanka because too much luxury travel had become visible,
+              bookable, and strangely impersonal. Sri Lanka was being reduced to landmarks, hotel
+              categories, and lists of things to consume.
             </p>
             <p>
-              Our philosophy is simple:{' '}
-              <em>travel is not consumption</em>. It&apos;s self-discovery. And Sri Lanka, with its
-              ancient wisdom, stunning landscapes, and generous people, is the perfect place to
-              remember that.
+              Our work begins elsewhere: in private relationships, cultural fluency, and the patience
+              to understand what should be opened, what should remain untouched, and who should be
+              entrusted with your time.
             </p>
-            <p>
-              We&apos;re not here to sell you a holiday. We&apos;re here to help you find meaningful
-              experiences that change how you see the world—and yourself.
-            </p>
+            <blockquote>
+              <p>We are not here to sell a holiday. We are here to protect the conditions for wonder.</p>
+            </blockquote>
           </div>
         </div>
       </section>
 
-      {/* Dual images */}
+      {/* Proof of Access */}
       <section className="about-section about-dual-images">
         <div className="about-container about-dual-images-inner">
-          <img
-            className="about-dual-image about-dual-image--left"
-            src={aboutImages.sigiriya}
-            alt="Sigiriya rock fortress surrounded by lush greenery"
-          />
-          <img
-            className="about-dual-image about-dual-image--right"
-            src={aboutImages.craftsman}
-            alt="Artisan craftsman working with traditional tools"
-          />
+          <div className="about-access-copy">
+            <p className="about-eyebrow about-eyebrow--gold">HOW ACCESS IS EARNED</p>
+            <h2>
+              Not every door should open.
+              <br />
+              The right ones open slowly.
+            </h2>
+            <p>
+              The experiences we arrange are not inventory. They are invitations extended through
+              trust: a custodian willing to receive you before the crowds, an artisan who shares a
+              practice without performance, a guide who knows when silence is the greater luxury.
+            </p>
+            <dl>
+              <div>
+                <dt>I</dt>
+                <dd>Personally known hosts</dd>
+              </div>
+              <div>
+                <dt>II</dt>
+                <dd>Context before access</dd>
+              </div>
+              <div>
+                <dt>III</dt>
+                <dd>Discretion over display</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="about-access-visuals" aria-label="Examples of curated access">
+            <figure className="about-dual-image-card about-dual-image-card--primary">
+              <img
+                className="about-dual-image"
+                src={aboutImages.sigiriya}
+                alt="Sigiriya rock fortress surrounded by lush greenery"
+              />
+              <figcaption>
+                <span>Before the Gates Open</span>
+                <span>Heritage access, by arrangement</span>
+              </figcaption>
+            </figure>
+            <figure className="about-dual-image-card about-dual-image-card--secondary">
+              <img
+                className="about-dual-image"
+                src={aboutImages.craftsman}
+                alt="Artisan craftsman working with traditional tools"
+              />
+              <figcaption>
+                <span>Private Studio</span>
+                <span>Craft without performance</span>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
       {/* What We Do */}
       <section className="about-section about-what-we-do">
         <div className="about-container about-what-we-do-inner">
-          <p className="about-eyebrow about-eyebrow--gold">WHAT WE DO</p>
-          <h2 className="about-what-we-do-heading">
-            We are a luxury travel discovery platform, not a booking website.
-          </h2>
+          <div className="about-what-we-do-intro">
+            <p className="about-eyebrow about-eyebrow--gold">WHAT WE DO</p>
+            <h2 className="about-what-we-do-heading">
+              We design the conditions for travel that feels privately held.
+            </h2>
+            <p>
+              Our role is not to process a booking. It is to understand the traveller, protect the
+              integrity of the experience, and shape the right introduction at the right moment.
+            </p>
+          </div>
           <div className="about-what-we-do-columns">
             <div>
-              <h3 className="about-column-title">Discovery, Not Transactions</h3>
+              <span>I</span>
+              <h3 className="about-column-title">Private Discovery</h3>
               <p>
-                We don&apos;t do packages or instant bookings. Instead, we help you discover
-                meaningful journeys through cultural immersion, authentic encounters, and
-                experiences that respect both the land and its people.
+                We begin with appetite, pace, privacy, and intent, then select only what deserves a
+                place in the journey.
               </p>
             </div>
             <div>
-              <h3 className="about-column-title">Curated Connections</h3>
+              <span>II</span>
+              <h3 className="about-column-title">Curated Introductions</h3>
               <p>
-                We introduce you to experiences, guides, and places that align with your curiosity.
-                Our role is to open doors—yours is to walk through them with intention and
-                presence.
+                We connect guests to people and places through relationships, not listings, so every
+                encounter carries context and permission.
+              </p>
+            </div>
+            <div>
+              <span>III</span>
+              <h3 className="about-column-title">Quiet Orchestration</h3>
+              <p>
+                We handle the invisible work: timing, transitions, access, etiquette, and the small
+                decisions that make a journey feel effortless.
               </p>
             </div>
           </div>
@@ -167,29 +233,45 @@ export function AboutPage() {
       {/* How We're Different */}
       <section className="about-section about-different">
         <div className="about-container about-different-inner">
-          <p className="about-eyebrow about-eyebrow--green about-eyebrow--center">
-            HOW WE&apos;RE DIFFERENT
-          </p>
-          <blockquote className="about-pull-quote">
-            &ldquo;Most platforms want you to book fast. We want you to choose wisely.&rdquo;
-          </blockquote>
-          <p className="about-different-body">
-            We&apos;re not optimized for clicks or conversions. We&apos;re built for depth, for the
-            kind of travel that asks something of you in return. We don&apos;t have algorithms
-            pushing the most popular tours. We have human curation, context, and stories that help
-            you make better choices—choices that reflect who you are and who you want to become.
-          </p>
+          <div className="about-different-labels">
+            <span className="about-section-numeral">III</span>
+            <p className="about-eyebrow about-eyebrow--green">HOW WE&apos;RE DIFFERENT</p>
+          </div>
+          <div className="about-different-content">
+            <blockquote className="about-pull-quote">
+              &ldquo;Most platforms want you to book fast. We want you to choose wisely.&rdquo;
+            </blockquote>
+            <p className="about-different-body">
+              We are not optimized for clicks, urgency, or conversion. We are built for discernment:
+              fewer options, stronger context, and human judgment that understands when the most
+              luxurious answer is restraint.
+            </p>
+            <div className="about-difference-points">
+              <p>Human curation over algorithmic ranking</p>
+              <p>Context before commitment</p>
+              <p>Depth over availability</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Spa image */}
+      {/* Stillness image */}
       <section className="about-section about-full-image">
         <div className="about-container">
-          <img
-            className="about-full-image-img"
-            src={aboutImages.spa}
-            alt="Luxury spa with ocean view in Sri Lanka"
-          />
+          <figure className="about-full-image-frame">
+            <img
+              className="about-full-image-img"
+              src={aboutImages.spa}
+              alt="Luxury spa with ocean view in Sri Lanka"
+            />
+            <figcaption>
+              <span>Restoration Is Not An Add-On</span>
+              <p>
+                The best journeys understand when to move, when to pause, and when to let the island
+                do nothing more than return you to yourself.
+              </p>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -198,11 +280,19 @@ export function AboutPage() {
         <div className="about-container about-methodology-inner">
           <div className="about-methodology-left">
             <p className="about-eyebrow about-eyebrow--green">OUR METHODOLOGY</p>
-            <h2 className="about-methodology-heading">How we curate experiences.</h2>
+            <h2 className="about-methodology-heading">
+              The standard is invisible.
+              <br />
+              The difference is not.
+            </h2>
+            <p className="about-methodology-note">
+              We curate slowly, because the right journey depends on what we choose not to include.
+            </p>
           </div>
           <div className="about-methodology-steps">
-            {methodologySteps.map((step) => (
+            {methodologySteps.map((step, index) => (
               <div key={step.title} className="about-methodology-step">
+                <span>{romanNumerals[index]}</span>
                 <h3 className="about-step-title">{step.title}</h3>
                 <p className="about-step-description">{step.description}</p>
               </div>
@@ -216,7 +306,7 @@ export function AboutPage() {
         <div className="about-container about-custodians-inner">
           <header className="about-custodians-header">
             <div className="about-custodians-labels">
-              <span className="about-section-numeral">IV.</span>
+              <span className="about-section-numeral">IV</span>
               <span className="about-section-sub-label">THE CUSTODIANS</span>
             </div>
             <div className="about-custodians-intro">
@@ -226,8 +316,9 @@ export function AboutPage() {
                 Hold This Island&apos;s <em>Secrets.</em>
               </h2>
               <p className="about-custodians-description">
-                Behind every flawlessly realised journey is a team of individuals with a singular
-                obsession: knowing Ceylon more deeply than any guidebook ever could.
+                Behind every carefully realised journey is a small circle of specialists with a
+                singular responsibility: to know when access should be offered, and when it should
+                be protected.
               </p>
             </div>
           </header>
@@ -248,6 +339,7 @@ export function AboutPage() {
                 <div className="about-custodian-info">
                   <h3 className="about-custodian-name">{person.name}</h3>
                   <span className="about-custodian-role">{person.role}</span>
+                  <p>Trusted perspective, discreetly held.</p>
                 </div>
               </article>
             ))}
@@ -279,11 +371,12 @@ export function AboutPage() {
       {/* Expected */}
       <section className="about-section about-expected">
         <div className="about-container about-expected-inner">
-          <h2 className="about-expected-heading">You are exactly who we were expecting.</h2>
+          <p className="about-eyebrow about-eyebrow--green about-eyebrow--center">A QUIET RECOGNITION</p>
+          <h2 className="about-expected-heading">You already know whether this is for you.</h2>
           <p className="about-expected-body">
-            If you&apos;ve read this far, you already understand what we&apos;re about. We&apos;re
-            here when you&apos;re ready to explore Sri Lanka with intention, curiosity, and an open
-            heart.
+            If you have read this far, you are not looking for a faster way to book Sri Lanka. You
+            are looking for a more thoughtful way to enter it. That distinction is exactly where our
+            work begins.
           </p>
         </div>
       </section>
@@ -293,13 +386,13 @@ export function AboutPage() {
         <div className="about-container about-invitation-inner">
           <p className="about-invitation-label">A PRIVATE INVITATION</p>
           <h2 className="about-invitation-heading">
-            The island is patient.
+            Begin with a conversation.
             <br />
-            <em>It waits for those ready to receive it.</em>
+            <em>Everything else follows.</em>
           </h2>
           <p className="about-invitation-body">
-            We accept a limited number of enquiries each season. If you feel the pull of Ceylon, we
-            would be honoured to begin the conversation.
+            We accept a limited number of enquiries each season so each journey can be shaped with
+            care, discretion, and the right custodians around it.
           </p>
           <a className="about-invitation-button" href="#begin">ENTER THE ISLES</a>
         </div>
@@ -313,10 +406,11 @@ export function AboutPage() {
           alt="Beach at sunset in Sri Lanka"
         />
         <div className="about-footer-cta-overlay">
-          <h2 className="about-footer-cta-heading">Ready to discover Sri Lanka differently?</h2>
+          <p>Royale Isles Lanka</p>
+          <h2 className="about-footer-cta-heading">Sri Lanka, held privately.</h2>
           <p className="about-footer-cta-body">
-            Explore our curated experiences, meet our trusted partners, and start planning a journey
-            that goes beyond the surface.
+            For travellers who value silence, access, cultural intelligence, and the rare comfort of
+            being understood before anything is arranged.
           </p>
         </div>
       </section>

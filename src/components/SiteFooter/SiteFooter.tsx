@@ -4,6 +4,7 @@ const footerNav = {
   explore: [
     { href: '/#destinations', label: 'Discover Sri Lanka' },
     { href: '/experiences', label: 'Experiences' },
+    { href: '/travel-preparation', label: 'Travel Preparation' },
     { href: '/journal', label: 'Journal' },
     { href: '/about', label: 'About' },
   ] as const,

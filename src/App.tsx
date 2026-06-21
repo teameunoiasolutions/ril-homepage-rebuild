@@ -7,6 +7,7 @@ import { Homepage } from './components/Homepage/Homepage'
 import { JournalArticlePage } from './components/JournalArticlePage/JournalArticlePage'
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
+import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
 
 function App() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
@@ -40,6 +41,10 @@ function App() {
 
   if (path === '/about') {
     return renderPage(<AboutPage />)
+  }
+
+  if (path === '/travel-preparation') {
+    return renderPage(<TravelPreparationPage />)
   }
 
   return renderPage(<Homepage />)

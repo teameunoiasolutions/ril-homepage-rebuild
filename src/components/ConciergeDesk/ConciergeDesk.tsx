@@ -140,6 +140,25 @@ export function ConciergeDesk() {
         </aside>
 
         <section className="concierge-response" aria-label="Concierge response">
+          <div className="concierge-response-tabs" aria-label="Response type">
+            <span>Advisory Mode</span>
+            <div role="tablist" aria-label="Response filters">
+              {(Object.keys(responseModes) as ResponseMode[]).map((mode) => (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={responseMode === mode}
+                  className={responseMode === mode ? 'active' : undefined}
+                  key={mode}
+                  onClick={() => setResponseMode(mode)}
+                >
+                  {responseModes[mode].label}
+                </button>
+              ))}
+            </div>
+            {response.tabNote ? <em>{response.tabNote}</em> : null}
+          </div>
+
           <div className="concierge-response-scroll">
             <header className="concierge-response-header">
               <span aria-hidden="true" />
@@ -148,25 +167,6 @@ export function ConciergeDesk() {
                 <h2>"What are the best beaches in Sri Lanka?"</h2>
               </div>
             </header>
-
-            <div className="concierge-response-tabs" aria-label="Response type">
-              <span>Response</span>
-              <div role="tablist" aria-label="Response filters">
-                {(Object.keys(responseModes) as ResponseMode[]).map((mode) => (
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={responseMode === mode}
-                    className={responseMode === mode ? 'active' : undefined}
-                    key={mode}
-                    onClick={() => setResponseMode(mode)}
-                  >
-                    {responseModes[mode].label}
-                  </button>
-                ))}
-              </div>
-              {response.tabNote ? <em>{response.tabNote}</em> : null}
-            </div>
 
             <article className="concierge-answer">
               <p className="concierge-answer-lede">{response.lede}</p>

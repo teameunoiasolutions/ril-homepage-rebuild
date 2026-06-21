@@ -50,6 +50,25 @@
   color: var(--color-accent);
 }
 
+@media (max-width: 1120px) {
+  .site-header {
+    padding: 0 24px;
+  }
+
+  .site-header-nav {
+    gap: 18px;
+  }
+
+  .site-header-brand {
+    max-width: 132px;
+    line-height: var(--line-height-ui);
+  }
+
+  .site-header-cta {
+    padding-inline: 16px;
+  }
+}
+
 @media (max-width: 900px) {
   .site-header {
     padding: 0 20px;

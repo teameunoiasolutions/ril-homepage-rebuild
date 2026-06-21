@@ -283,7 +283,7 @@
   min-height: calc(100svh - var(--concierge-topbar-height));
   max-height: calc(100svh - var(--concierge-topbar-height));
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
 }
 
 .concierge-response-scroll {
@@ -343,10 +343,9 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-top: 36px;
-  padding: 13px 0;
-  border-top: 1px solid rgba(197, 160, 89, 0.15);
+  padding: 13px 52px;
   border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .concierge-response-tabs > span {
@@ -713,7 +712,6 @@
   }
 
   .concierge-response-tabs {
-    margin-top: 24px;
     padding-block: 10px;
   }
 
@@ -779,6 +777,7 @@
     border-right: 0;
   }
 
+  .concierge-response-tabs,
   .concierge-response-scroll,
   .concierge-compose {
     padding-inline: 32px;
@@ -816,6 +815,7 @@
     display: none;
   }
 
+  .concierge-response-tabs,
   .concierge-response-scroll,
   .concierge-compose,
   .concierge-recommendations,

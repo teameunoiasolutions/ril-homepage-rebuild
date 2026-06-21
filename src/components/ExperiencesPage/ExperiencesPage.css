@@ -77,6 +77,19 @@
   color: var(--experience-ivory);
 }
 
+.experiences-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 900ms ease,
+    transform 900ms ease;
+}
+
+.experiences-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .experiences-hero {
   padding: 80px 0 80px;
 }
@@ -176,6 +189,7 @@
 
 .hero-image-frame,
 .encounter-image-frame {
+  overflow: hidden;
   padding: 8px;
   border: 1px solid var(--color-border);
 }
@@ -183,8 +197,19 @@
 .hero-image-frame img {
   display: block;
   width: 100%;
-  height: 680px;
+  height: clamp(520px, 44vw, 620px);
   object-fit: cover;
+  transition: transform 1.6s ease;
+}
+
+.hero-image-frame:hover img,
+.encounter-image-frame:hover img,
+.chapter-card:hover img,
+.wilderness-grid:hover > img,
+.ceremony-quote figure:hover img,
+.ocean-main-image:hover,
+.ocean-grid figure:hover img {
+  transform: scale(1.025);
 }
 
 .hero-feature-label,
@@ -327,10 +352,6 @@
   letter-spacing: 3px;
 }
 
-/* .encounters-collection {
-  padding: 128px 0;
-} */
-
 .encounters-collection .experiences-container {
   display: flex;
   flex-direction: column;
@@ -415,8 +436,9 @@
 .encounter-image-frame img {
   display: block;
   width: 100%;
-  height: clamp(360px, 32vw, 460px);
+  height: clamp(320px, 28vw, 420px);
   object-fit: cover;
+  transition: transform 1.4s ease;
 }
 
 .encounter-badge {
@@ -579,6 +601,14 @@
   gap: 40px;
 }
 
+.chapter-card,
+.wilderness-grid,
+.ceremony-quote figure,
+.ocean-feature .experiences-container,
+.ocean-grid figure {
+  overflow: hidden;
+}
+
 .chapter-card--offset {
   padding-top: 64px;
 }
@@ -586,8 +616,9 @@
 .chapter-card img {
   display: block;
   width: 100%;
-  height: 320px;
+  height: clamp(240px, 22vw, 292px);
   object-fit: cover;
+  transition: transform 1.4s ease;
 }
 
 .chapter-card div {
@@ -642,10 +673,6 @@
   height: 1px;
   background: currentColor;
 }
-
-/* .wilderness-feature {
-  padding: 0 0 128px;
-} */
 
 .wilderness-grid {
   display: grid;
@@ -711,8 +738,9 @@
 .wilderness-grid > img {
   display: block;
   width: 100%;
-  height: 520px;
+  height: clamp(420px, 38vw, 480px);
   object-fit: cover;
+  transition: transform 1.6s ease;
 }
 
 .ceremony-grid {
@@ -725,8 +753,9 @@
 .ceremony-quote img {
   display: block;
   width: 100%;
-  height: 420px;
+  height: clamp(340px, 34vw, 392px);
   object-fit: cover;
+  transition: transform 1.6s ease;
 }
 
 .ceremony-quote figcaption,
@@ -774,10 +803,11 @@
 .ocean-main-image {
   display: block;
   width: 100%;
-  height: min(46vw, 664px);
-  min-height: 384px;
+  height: min(38vw, 520px);
+  min-height: 340px;
   margin-top: 48px;
   object-fit: cover;
+  transition: transform 1.8s ease;
 }
 
 .ocean-caption {
@@ -828,12 +858,13 @@
 
 .ocean-grid img {
   width: 100%;
-  height: 256px;
+  height: 232px;
   object-fit: cover;
+  transition: transform 1.4s ease;
 }
 
 .curation-process {
-  padding: 160px 0 128px;
+  padding: 80px 0 80px;
   background: var(--experience-forest);
   color: var(--experience-ivory);
 }
@@ -996,6 +1027,32 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .experiences-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-image-frame img,
+  .encounter-image-frame img,
+  .chapter-card img,
+  .wilderness-grid > img,
+  .ceremony-quote img,
+  .ocean-main-image,
+  .ocean-grid img {
+    transition: none;
+  }
+
+  .hero-image-frame:hover img,
+  .encounter-image-frame:hover img,
+  .chapter-card:hover img,
+  .wilderness-grid:hover > img,
+  .ceremony-quote figure:hover img,
+  .ocean-main-image:hover,
+  .ocean-grid figure:hover img {
+    transform: none;
+  }
+
   .photo-strip-track {
     animation: none;
   }

@@ -1,5 +1,5 @@
 import './ExperiencesPage.css'
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { ArrowIcon } from '../ArrowIcon'
 import { experienceImages } from './images'
 
@@ -273,7 +273,7 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
       : '#begin'
 
   return (
-    <article className={`encounter-row${imageFirst ? '' : ' encounter-row--reverse'}`}>
+    <article className={`encounter-row experiences-reveal${imageFirst ? '' : ' encounter-row--reverse'}`}>
       <div className="encounter-index">
         <span>{String(index + 1).padStart(2, '0')}</span>
         <i />
@@ -320,9 +320,35 @@ export function ExperiencesPage() {
       ? encounters
       : encounters.filter((encounter) => encounter.region === selectedRegion)
 
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const revealElements = document.querySelectorAll<HTMLElement>('.experiences-reveal')
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      revealElements.forEach((element) => element.classList.add('is-visible'))
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.18 },
+    )
+
+    revealElements.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [selectedRegion])
+
   return (
     <main className="experiences-page">
-      <section className="experiences-hero">
+      <section className="experiences-hero experiences-reveal">
         <div className="experiences-container experiences-hero-grid">
           <div className="experiences-hero-copy">
             <Eyebrow>The Collection - 2024</Eyebrow>
@@ -371,7 +397,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="region-filter" aria-label="Experience filters">
+      <section className="region-filter experiences-reveal" aria-label="Experience filters">
         <label htmlFor="experience-region">Filter By Region</label>
         <div className="region-filter-select-wrap">
           <select
@@ -398,7 +424,7 @@ export function ExperiencesPage() {
               <EncounterCard key={encounter.title} encounter={encounter} index={index} />
             ))
           ) : (
-            <div className="encounters-empty">
+            <div className="encounters-empty experiences-reveal">
               <p>No encounters currently match this region.</p>
               <span>Our curators can still shape marine access by arrangement.</span>
             </div>
@@ -406,7 +432,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="further-chapters">
+      <section className="further-chapters experiences-reveal">
         <div className="experiences-container">
           <header className="chapters-header">
             <div>
@@ -422,7 +448,14 @@ export function ExperiencesPage() {
 
           <div className="chapter-cards">
             {furtherChapters.map((chapter) => (
-              <article key={chapter.title} className={chapter.offset ? 'chapter-card chapter-card--offset' : 'chapter-card'}>
+              <article
+                key={chapter.title}
+                className={
+                  chapter.offset
+                    ? 'chapter-card chapter-card--offset experiences-reveal'
+                    : 'chapter-card experiences-reveal'
+                }
+              >
                 <img src={chapter.image} alt={chapter.alt} />
                 <div>
                   <p>{chapter.meta}</p>
@@ -436,7 +469,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="wilderness-feature">
+      <section className="wilderness-feature experiences-reveal">
         <div className="experiences-container wilderness-grid">
           <div className="wilderness-copy">
             <p>For Those Who Seek</p>
@@ -459,7 +492,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="ceremony-quote">
+      <section className="ceremony-quote experiences-reveal">
         <div className="experiences-container ceremony-grid">
           <figure>
             <img src={experienceImages.monks} alt="Buddhist monks walking through temple ruins" />
@@ -475,7 +508,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="ocean-feature">
+      <section className="ocean-feature experiences-reveal">
         <div className="experiences-container">
           <Eyebrow dark>Feature No. 03</Eyebrow>
           <img className="ocean-main-image" src={experienceImages.dhoni} alt="Private wooden dhoni sailing in turquoise lagoon" />
@@ -508,7 +541,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="curation-process">
+      <section className="curation-process experiences-reveal">
         <div className="experiences-container">
           <Eyebrow>Chapter III</Eyebrow>
           <h2>
@@ -536,7 +569,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="photo-strip" aria-label="Experience photography carousel">
+      <section className="photo-strip experiences-reveal" aria-label="Experience photography carousel">
         <div className="photo-strip-track">
           <div className="photo-strip-set">
             {photoStrip.map((photo) => (
@@ -551,7 +584,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="experiences-final-cta" id="begin">
+      <section className="experiences-final-cta experiences-reveal" id="begin">
         <p>Begin The Conversation</p>
         <h2>
           Every journey begins with a single question:
