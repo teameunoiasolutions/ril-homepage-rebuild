@@ -10,10 +10,10 @@ export function HomeHero() {
         </div>
 
         <nav className="home-hero-nav" aria-label="Primary navigation">
-          <a href="#discover">Discover Sri Lanka</a>
-          <a href="#experiences">Experiences</a>
-          <a href="#journal">Journal</a>
-          <a href="#about">About</a>
+          <a href="/#destinations">Discover Sri Lanka</a>
+          <a href="/experiences">Experiences</a>
+          <a href="/journal">Journal</a>
+          <a href="/about">About</a>
         </nav>
 
         <a className="home-hero-button" href="#begin">

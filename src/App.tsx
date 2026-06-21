@@ -1,34 +1,43 @@
+import type { ReactNode } from 'react'
+import { AboutPage } from './components/AboutPage/AboutPage'
 import { ExperienceDetailPage } from './components/ExperienceDetailPage/ExperienceDetailPage'
 import { ExperiencesPage } from './components/ExperiencesPage/ExperiencesPage'
 import { Homepage } from './components/Homepage/Homepage'
 import { JournalArticlePage } from './components/JournalArticlePage/JournalArticlePage'
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
+import { PageLayout } from './components/PageLayout/PageLayout'
 
 function App() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
   const path = rawPath === '' ? '/' : rawPath
 
+  const renderPage = (page: ReactNode) => <PageLayout>{page}</PageLayout>
+
   if (path === '/') {
-    return <Homepage />
+    return renderPage(<Homepage />)
   }
 
   if (path === '/experiences') {
-    return <ExperiencesPage />
+    return renderPage(<ExperiencesPage />)
   }
 
   if (path === '/experiences/the-sigiriya-dawn-ascent') {
-    return <ExperienceDetailPage />
+    return renderPage(<ExperienceDetailPage />)
   }
 
   if (path === '/journal') {
-    return <JournalLandingPage />
+    return renderPage(<JournalLandingPage />)
   }
 
   if (path === '/journal/the-sigiriya-dawn-ascent') {
-    return <JournalArticlePage />
+    return renderPage(<JournalArticlePage />)
   }
 
-  return <ExperiencesPage />
+  if (path === '/about') {
+    return renderPage(<AboutPage />)
+  }
+
+  return renderPage(<Homepage />)
 }
 
 export default App

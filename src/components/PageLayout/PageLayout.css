@@ -1,0 +1,10 @@
+.page-layout-content {
+  /* padding-top: 88px; */
+  background: var(--color-surface);
+}
+
+@media (max-width: 680px) {
+  .page-layout-content {
+    padding-top: 96px;
+  }
+}

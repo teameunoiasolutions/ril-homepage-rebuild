@@ -1,9 +1,21 @@
 import './SiteFooter.css'
 
 const footerNav = {
-  explore: ['Discover Sri Lanka', 'Experiences', 'Journal', 'About'],
-  connect: ['Begin a Conversation', 'Discovery Guide', 'Contact'],
-  legal: ['Privacy Policy', 'Accessibility'],
+  explore: [
+    { href: '/#destinations', label: 'Discover Sri Lanka' },
+    { href: '/experiences', label: 'Experiences' },
+    { href: '/journal', label: 'Journal' },
+    { href: '/about', label: 'About' },
+  ] as const,
+  connect: [
+    { href: '/#begin', label: 'Begin a Conversation' },
+    { href: '/#begin', label: 'Discovery Guide' },
+    { href: '/#begin', label: 'Contact' },
+  ] as const,
+  legal: [
+    { href: '/privacy', label: 'Privacy Policy' },
+    { href: '/accessibility', label: 'Accessibility' },
+  ] as const,
 } as const
 
 export function SiteFooter() {
@@ -27,9 +39,9 @@ export function SiteFooter() {
           <span className="footer-column-title">Explore</span>
           <ul className="footer-links">
             {footerNav.explore.map((link) => (
-              <li key={link}>
-                <a href="#" className="footer-link">
-                  {link}
+              <li key={link.label}>
+                <a href={link.href} className="footer-link">
+                  {link.label}
                 </a>
               </li>
             ))}
@@ -40,9 +52,9 @@ export function SiteFooter() {
           <span className="footer-column-title">Connect</span>
           <ul className="footer-links">
             {footerNav.connect.map((link) => (
-              <li key={link}>
-                <a href="#" className="footer-link">
-                  {link}
+              <li key={link.label}>
+                <a href={link.href} className="footer-link">
+                  {link.label}
                 </a>
               </li>
             ))}
@@ -53,9 +65,9 @@ export function SiteFooter() {
           <span className="footer-column-title">Legal</span>
           <ul className="footer-links">
             {footerNav.legal.map((link) => (
-              <li key={link}>
-                <a href="#" className="footer-link">
-                  {link}
+              <li key={link.label}>
+                <a href={link.href} className="footer-link">
+                  {link.label}
                 </a>
               </li>
             ))}

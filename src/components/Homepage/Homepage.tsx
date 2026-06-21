@@ -140,21 +140,6 @@ const questions = [
 export function Homepage() {
   return (
     <main className="figma-homepage" data-node-id="101:12274">
-      <nav className="figma-nav" aria-label="Primary navigation" data-node-id="101:12543">
-        <a className="figma-nav-brand" href="/">
-          Royale Isles Lanka
-        </a>
-        <div className="figma-nav-links">
-          <a href="#destinations">Destinations</a>
-          <a href="#experiences">Experiences</a>
-          <a href="#journal">Journal</a>
-          <a href="#about">About</a>
-        </div>
-        <a className="figma-outline-link" href="#begin">
-          Begin Your Journey
-        </a>
-      </nav>
-
       <section className="figma-hero" data-node-id="101:12275">
         <img src={images.hero} alt="Misty sunrise over Sri Lankan tea plantations" />
         <div className="figma-hero-overlay" />
@@ -322,7 +307,7 @@ export function Homepage() {
           <div className="figma-copy-stack figma-copy-stack-dark">
             <p className="figma-overline">The Destination</p>
             <h2>An Island That Changes With You</h2>
-            <p>
+            <p className="figma-destination-intro">
               Sri Lanka is not merely a place on a map; it is a rhythm. It is the scent of cinnamon
               bark in the morning mist, the intricate geometry of ancient stupas, and the untamed
               roar of the Indian Ocean against colonial ramparts.
