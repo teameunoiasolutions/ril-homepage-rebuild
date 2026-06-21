@@ -100,26 +100,39 @@ const journalItems = [
   },
 ]
 
-const testimonials = [
+const travelerStories = [
   {
     image: images.travellerOutcrop,
-    quote: "I've been to 60 countries. Sri Lanka is the first place where I forgot to count.",
-    name: 'Marcus B.',
-    location: 'New York',
+    format: 'Private Film',
+    duration: '02:48',
+    title: 'An anniversary carried by the island',
+    quote:
+      'We expected a beautiful trip. What we received felt like a private film of our own life, composed in tea country, temples, and candlelit coves.',
+    name: 'Isabella & Laurent',
+    location: 'Monaco',
+    detail: 'Southern coast villas, cinnamon estates, and a dusk sail captured by our discreet host.',
   },
   {
     image: images.hiroko,
-    quote: 'The journey they designed read like a novel. Every day had a tone, a colour.',
+    format: 'Photo Journal',
+    title: 'A quiet return to wonder',
+    quote: 'The photographs caught what I never would have asked anyone to capture: the pauses.',
     name: 'Hiroko S.',
     location: 'Tokyo',
+    detail: 'A contemplative route through Kandy, the highlands, and private artisan studios.',
   },
   {
-    image: images.journalHours,
-    quote: 'Sri Lanka undoes you, quietly. Not with spectacle but with accumulation.',
-    name: 'Catherine M.',
-    location: 'London',
+    image: images.beachDinner,
+    format: 'Hosted Story',
+    title: 'A family gathered without agenda',
+    quote: 'Every detail disappeared into ease. The films and photographs brought back the feeling.',
+    name: 'The Al-Khalid Family',
+    location: 'Dubai',
+    detail: 'Multi-generational coastal retreat with private dining, wildlife, and ocean rituals.',
   },
 ]
+
+const storyPromises = ['Photos and films handled privately', 'Hosted by discreet local experts', 'Built around your pace, not a schedule']
 
 const guideItems = [
   'A letter, to begin',
@@ -131,11 +144,36 @@ const guideItems = [
 ]
 
 const questions = [
-  'Do you create bespoke journeys, or use set itineraries?',
-  'How far in advance should we begin planning?',
-  'What distinguishes your curation from a travel agent?',
-  'Is this suitable for solo travellers?',
-  'What is the best time of year to visit?',
+  {
+    category: 'Bespoke Design',
+    question: 'Do you create bespoke journeys, or use set itineraries?',
+    answer:
+      'Every journey is designed privately around the guest. We may begin with proven routes and trusted relationships, but the final rhythm, access, accommodation, and pace are shaped around your interests.',
+  },
+  {
+    category: 'Planning Window',
+    question: 'How far in advance should we begin planning?',
+    answer:
+      'For the most considered VVIP arrangements, six to twelve weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
+  },
+  {
+    category: 'Private Curation',
+    question: 'What distinguishes your curation from a travel agent?',
+    answer:
+      'We do not simply reserve hotels and transfers. We listen first, then compose a journey through private hosts, local context, quiet access, and details that are held discreetly from arrival to departure.',
+  },
+  {
+    category: 'Solo Travel',
+    question: 'Is this suitable for solo travellers?',
+    answer:
+      'Yes. Many guests travel alone for reflection, restoration, or creative renewal. We design solo journeys with trusted hosting, privacy, and a balance of independence and quiet support.',
+  },
+  {
+    category: 'Seasonal Guidance',
+    question: 'What is the best time of year to visit?',
+    answer:
+      'Sri Lanka has several seasonal rhythms, so the best moment depends on the region and the kind of journey you want. We advise around weather, privacy, wildlife movement, festivals, and crowd patterns.',
+  },
 ]
 
 export function Homepage() {
@@ -372,22 +410,59 @@ export function Homepage() {
       </section>
 
       <section className="figma-testimonials" data-node-id="103:13017">
-        <div className="figma-container">
-          <p className="figma-centered-kicker">Testimonials</p>
-          <h2>What travellers carry home.</h2>
-          <div className="figma-testimonial-row">
-            {testimonials.map((testimonial) => (
-              <article key={testimonial.name}>
-                <span className="figma-gold-bar" />
-                <blockquote>{testimonial.quote}</blockquote>
+        <div className="figma-container figma-testimonials-inner">
+          <header className="figma-testimonials-heading">
+            <p className="figma-centered-kicker">Traveler Stories</p>
+            <h2>Journeys remembered in photographs, film, and feeling.</h2>
+            <p>
+              For our guests, memory is part of the craft. Select journeys are accompanied by a
+              discreet visual host, preserving the unposed details: the first tea estate sunrise, the
+              private table by the sea, the silence after a leopard crosses the track.
+            </p>
+          </header>
+
+          <div className="figma-story-showcase">
+            <article className="figma-featured-story">
+              <div className="figma-story-media">
+                <img src={travelerStories[0].image} alt="" />
+                <span className="figma-story-badge">{travelerStories[0].format}</span>
+                <div className="figma-video-control">
+                  <span aria-hidden="true" />
+                  <small>Watch the film · {travelerStories[0].duration}</small>
+                </div>
+              </div>
+              <div className="figma-featured-story-copy">
+                <p>{travelerStories[0].location}</p>
+                <h3>{travelerStories[0].title}</h3>
+                <blockquote>&ldquo;{travelerStories[0].quote}&rdquo;</blockquote>
                 <footer>
-                  <img src={testimonial.image} alt="" />
-                  <div>
-                    <strong>{testimonial.name}</strong>
-                    <small>{testimonial.location}</small>
-                  </div>
+                  <strong>{travelerStories[0].name}</strong>
+                  <span>{travelerStories[0].detail}</span>
                 </footer>
-              </article>
+              </div>
+            </article>
+
+            <div className="figma-story-stack">
+              {travelerStories.slice(1).map((story) => (
+                <article className="figma-story-card" key={story.name}>
+                  <img src={story.image} alt="" />
+                  <div>
+                    <p>{story.format}</p>
+                    <h3>{story.title}</h3>
+                    <blockquote>&ldquo;{story.quote}&rdquo;</blockquote>
+                    <footer>
+                      <strong>{story.name}</strong>
+                      <span>{story.location}</span>
+                    </footer>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="figma-story-promises" aria-label="Traveler story inclusions">
+            {storyPromises.map((promise) => (
+              <span key={promise}>{promise}</span>
             ))}
           </div>
         </div>
@@ -456,28 +531,50 @@ export function Homepage() {
       </section>
 
       <section className="figma-faq" data-node-id="103:13229">
-        <div className="figma-container figma-faq-grid">
-          <div className="figma-copy-stack">
-            <p className="figma-overline">Common Questions</p>
-            <h2>
-              The Questions
-              <em>Worth Asking</em>
-            </h2>
-            <p>
-              Our travellers are curious and careful planners. We welcome every question, including
-              the ones that feel too particular to ask.
-            </p>
-            <a className="figma-gold-button" href="#begin">
-              Ask Us Directly
-            </a>
+        <div className="figma-container figma-faq-inner">
+          <div className="figma-faq-header">
+            <div>
+              <div className="figma-faq-heading">
+                <span>07</span>
+                <i />
+                <p>Frequently Asked</p>
+              </div>
+              <h2>
+                The Questions
+                <em>Worth Asking</em>
+              </h2>
+              <p>
+                Public answers are intentionally brief. Personal preferences, family-office
+                requirements, security concerns, and pace are best understood in conversation.
+              </p>
+            </div>
+            <aside className="figma-faq-concierge">
+              <span>Private Advisory</span>
+              <h3>Questions with nuance belong in conversation.</h3>
+              <p>
+                For principals, private families, special access, medical needs, or
+                discretion-sensitive movement, our team will brief you directly before any journey is
+                finalised.
+              </p>
+              <a href="#begin">Ask Us Directly</a>
+            </aside>
           </div>
-          <div className="figma-question-list">
-            {questions.map((question) => (
-              <button type="button" key={question}>
-                <span>{question}</span>
-                <span aria-hidden="true">⌄</span>
-              </button>
-            ))}
+
+          <div className="figma-faq-panel">
+            <div className="figma-question-list">
+              {questions.map((question, index) => (
+                <details key={question.question}>
+                  <summary>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                      <small>{question.category}</small>
+                      <strong>{question.question}</strong>
+                    </div>
+                  </summary>
+                  <p>{question.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>
