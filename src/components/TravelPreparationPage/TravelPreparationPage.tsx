@@ -21,6 +21,20 @@ const handbookLinks = [
   { href: '#faq', label: 'FAQ' },
 ] as const
 
+const heroProtocols = [
+  'Private airport handling',
+  'Fast-track immigration guidance',
+  'Dedicated arrival host',
+  'Discreet onward transfer',
+] as const
+
+const assurancePoints = [
+  { value: '24/7', label: 'Journey desk' },
+  { value: 'Private', label: 'Airport liaison' },
+  { value: 'Curated', label: 'Regional timing' },
+  { value: 'Discreet', label: 'Guest support' },
+] as const
+
 const applicationSteps = [
   'Visit eta.gov.lk - the official portal',
   'Complete the form (approx. 15 minutes)',
@@ -176,26 +190,31 @@ const etiquette = [
 
 const faqs = [
   {
+    category: 'Entry Protocol',
     question: 'Do I need a visa to visit Sri Lanka?',
     answer:
       'Most travellers need an Electronic Travel Authorisation before arrival. Apply through the official ETA portal before departure.',
   },
   {
+    category: 'Seasonal Timing',
     question: 'When is the best time to visit?',
     answer:
       'There is always a good region in season. The south and west are strongest November to April, while the east is best from April to September.',
   },
   {
+    category: 'Private Payments',
     question: 'What currency is used and how do I manage money?',
     answer:
       'The local currency is the Sri Lankan Rupee. Cards are accepted at most curated establishments, but cash is useful for markets, tuk-tuks, and rural stops.',
   },
   {
+    category: 'Guest Assurance',
     question: 'Is Sri Lanka safe for international travellers?',
     answer:
       'Sri Lanka is welcoming and navigable with thoughtful planning. We arrange trusted drivers, context, and local guidance around each journey.',
   },
   {
+    category: 'Wellbeing',
     question: 'What vaccinations or health precautions are recommended?',
     answer:
       'Speak with your travel physician before departure. Bring personal medication, sun protection, mosquito repellent, and copies of prescriptions.',
@@ -223,7 +242,7 @@ export function TravelPreparationPage() {
         <div className="prep-hero-copy">
           <div className="prep-kicker">
             <span />
-            <p>Travel Preparation Handbook</p>
+            <p>Private Arrival Protocol</p>
           </div>
           <p className="prep-hero-numeral">I</p>
           <h1>
@@ -233,7 +252,8 @@ export function TravelPreparationPage() {
           </h1>
           <i className="prep-gold-rule" />
           <p className="prep-hero-intro">
-            A private handbook for the discerning traveller, prepared by the Royale Isles Lanka advisory team.
+            A discreet pre-arrival briefing for VVIP guests, prepared by the Royale Isles Lanka advisory team before
+            your first step onto the island.
           </p>
           <nav className="prep-chip-nav" aria-label="Travel preparation sections">
             {handbookLinks.map((link) => (
@@ -245,10 +265,19 @@ export function TravelPreparationPage() {
         </div>
         <div className="prep-hero-image">
           <img src={images.hero} alt="Sri Lanka hill country tea fields" />
+          <aside className="prep-hero-protocol" aria-label="VVIP arrival protocol highlights">
+            <p>Arrival Protocol</p>
+            <h2>Handled before you land.</h2>
+            <ul>
+              {heroProtocols.map((protocol) => (
+                <li key={protocol}>{protocol}</li>
+              ))}
+            </ul>
+          </aside>
         </div>
       </section>
 
-      <nav className="prep-contents" aria-label="Travel preparation contents">
+      {/* <nav className="prep-contents" aria-label="Travel preparation contents">
         <span>Contents</span>
         {handbookLinks.map((link, index) => (
           <a key={link.href} href={link.href}>
@@ -256,7 +285,25 @@ export function TravelPreparationPage() {
             {link.label}
           </a>
         ))}
-      </nav>
+      </nav> */}
+
+      <section className="prep-assurance" aria-label="Private travel assurance">
+        <div className="prep-assurance-copy">
+          <span>For Principals, Family Offices & Private Travellers</span>
+          <p>
+            Every detail below is paired with human coordination: airport receiving, driver briefing, pace control,
+            cultural context, and a private team that remains quietly reachable throughout the journey.
+          </p>
+        </div>
+        <dl className="prep-assurance-grid">
+          {assurancePoints.map((point) => (
+            <div key={point.label}>
+              <dt>{point.value}</dt>
+              <dd>{point.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       <section className="prep-section prep-visa" id="visa-entry">
         <div className="prep-container">
@@ -267,7 +314,8 @@ export function TravelPreparationPage() {
               <h3>Electronic Travel Authorisation</h3>
               <i />
               <p>
-                Available to most nationalities. Apply online before departure. Confirmation arrives by email within hours.
+                Available to most nationalities. Our advisory team confirms the correct entry path before departure and
+                keeps arrival documentation ready for your receiving host.
               </p>
               <dl>
                 <div>
@@ -308,8 +356,8 @@ export function TravelPreparationPage() {
               <h3>At the Airport</h3>
               <i />
               <p>
-                Bandaranaike International Airport (CMB) - modern, calm, and navigable. Your driver meets you in
-                Arrivals with a name card.
+                Bandaranaike International Airport (CMB) is calm and navigable. Your arrival is handled with a named
+                receiving point, discreet driver coordination, and private onward timing.
               </p>
               <ul>
                 {arrivalNotes.map((note) => (
@@ -321,6 +369,13 @@ export function TravelPreparationPage() {
               </ul>
             </article>
           </div>
+          <aside className="prep-service-note">
+            <span>VVIP Preference</span>
+            <p>
+              For guests requiring additional privacy, protocol vehicles, security coordination, or tarmac-adjacent
+              handling where available, arrangements are confirmed privately before travel.
+            </p>
+          </aside>
         </div>
       </section>
 
@@ -346,7 +401,8 @@ export function TravelPreparationPage() {
         <div className="prep-container">
           <SectionHeading number="04" title="Weather & Seasons" inverse />
           <p className="prep-seasons-note">
-            Peak season indicated by filled circles. Sri Lanka is always in season - somewhere.
+            Peak season indicated by filled circles. For VVIP journeys, timing is selected around privacy, weather,
+            movement, and the quietest access windows.
           </p>
           <div className="prep-season-table" role="table" aria-label="Sri Lanka seasonal guide">
             <div className="prep-season-months" role="row">
@@ -416,17 +472,40 @@ export function TravelPreparationPage() {
 
       <section className="prep-section prep-faq" id="faq">
         <div className="prep-faq-container">
-          <SectionHeading number="07" title="Frequently Asked" />
-          <div className="prep-faq-list">
-            {faqs.map((faq, index) => (
-              <details key={faq.question}>
-                <summary>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>{faq.question}</strong>
-                </summary>
-                <p>{faq.answer}</p>
-              </details>
-            ))}
+          <div className="prep-faq-header">
+            <div>
+              <SectionHeading number="07" title="Frequently Asked" />
+              <p>
+                Public answers are intentionally brief. Personal requirements, security preferences, and family-office
+                protocols are confirmed privately with your journey team.
+              </p>
+            </div>
+            <aside className="prep-faq-concierge">
+              <span>Private Advisory</span>
+              <h3>Questions with nuance belong in conversation.</h3>
+              <p>
+                For principals, entourages, medical considerations, special access, or discretion-sensitive movement,
+                our team will brief you directly before any itinerary is finalised.
+              </p>
+              <a href="/concierge">Ask The Concierge</a>
+            </aside>
+          </div>
+
+          <div className="prep-faq-panel">
+            <div className="prep-faq-list">
+              {faqs.map((faq, index) => (
+                <details key={faq.question}>
+                  <summary>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                      <small>{faq.category}</small>
+                      <strong>{faq.question}</strong>
+                    </div>
+                  </summary>
+                  <p>{faq.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -444,7 +523,7 @@ export function TravelPreparationPage() {
           </h2>
           <p>
             Our team has travelled these roads, stayed in these places, and eaten at these tables. Let us turn your
-            preparation into your itinerary.
+            preparation into a privately held Sri Lankan journey.
           </p>
           <div className="prep-cta-actions">
             <a href="/concierge">Ask The Concierge</a>
