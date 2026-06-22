@@ -21,6 +21,7 @@ const regions = [
 type Region = (typeof regions)[number]
 
 type Encounter = {
+  id: string
   region: Exclude<Region, 'All Encounters'>
   category: string
   title: string
@@ -45,6 +46,7 @@ const heroProofs = ['Private routing', 'Discreet hosts', 'Closed-door access'] a
 
 const encounters: Encounter[] = [
   {
+    id: 'sigiriya-dawn-ascent',
     region: 'Heritage',
     category: 'Heritage - Singular Access',
     title: 'The Sigiriya Dawn Ascent',
@@ -65,6 +67,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    id: 'private-tea-estate',
     region: 'Tea Country',
     category: 'Tea Country - Immersive',
     title: 'A Private Tea Estate, Locked Before Dawn',
@@ -84,6 +87,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    id: 'leopard-research-circuit',
     region: 'Wildlife',
     category: 'Wildlife - Expert-Led',
     title: 'The Leopard Research Circuit',
@@ -104,6 +108,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    id: 'mirissa-fishermens-dawn',
     region: 'Southern Coast',
     category: 'Southern Coast - Immersive',
     title: "The Mirissa Fishermen's Dawn",
@@ -123,6 +128,7 @@ const encounters: Encounter[] = [
     ],
   },
   {
+    id: 'kandyan-dance-rehearsal',
     region: 'Cultural',
     category: 'Cultural - Intimate Access',
     title: 'A Private Kandyan Dance Rehearsal',
@@ -144,8 +150,84 @@ const encounters: Encounter[] = [
   },
 ]
 
+const experienceThemes = [
+  {
+    number: '01',
+    title: 'Wildlife & Wilderness',
+    description:
+      'Leopards, elephants, forests, field researchers, remote ecosystems, and nature without performance.',
+    traveller: 'For the Seeker of Silence',
+    image: experienceImages.leopardFeature,
+    imageAlt: 'Leopard resting on ancient rock in the Sri Lankan wilderness',
+    href: '#leopard-research-circuit',
+    encounter: 'The Leopard Research Circuit',
+    featured: true,
+  },
+  {
+    number: '02',
+    title: 'Ocean & Discovery',
+    description:
+      'Whale watching, sailing, marine life, lagoons, east coast exploration, and hidden coastlines.',
+    traveller: 'For the Unhurried Wanderer',
+    image: experienceImages.blueWhaleAerial,
+    imageAlt: 'Blue whale surfacing in deep Sri Lankan water',
+    href: '#deep-water-hour',
+    encounter: 'The Deep-Water Hour',
+    featured: false,
+  },
+  {
+    number: '03',
+    title: 'Heritage & Memory',
+    description:
+      'Ancient kingdoms, sacred spaces, archaeology, historians, and living traditions carried forward.',
+    traveller: 'For the Heritage Guardian',
+    image: experienceImages.sigiriyaDawn,
+    imageAlt: 'Private dawn access to Sigiriya rock fortress',
+    href: '#sigiriya-dawn-ascent',
+    encounter: 'The Sigiriya Dawn Ascent',
+    featured: false,
+  },
+  {
+    number: '04',
+    title: 'Wellness & Restoration',
+    description:
+      'Ayurveda, healing traditions, retreats, slow living, and the quiet work of personal renewal.',
+    traveller: 'For the Restorer',
+    image: experienceImages.ayurveda,
+    imageAlt: 'Open-air Ayurvedic treatment pavilion in a rainforest setting',
+    href: '#ancient-grammar-of-healing',
+    encounter: 'The Ancient Grammar of Healing',
+    featured: true,
+  },
+  {
+    number: '05',
+    title: 'Rail & Landscape',
+    description:
+      'Hill country train journeys, tea estates, mountain routes, and scenery that changes by the hour.',
+    traveller: 'For the Story Collector',
+    image: experienceImages.teaEstate,
+    imageAlt: 'Misty tea estate landscape in Sri Lanka hill country',
+    href: '#begin',
+    encounter: 'Train journeys in development',
+    featured: false,
+  },
+  {
+    number: '06',
+    title: 'Culture & Human Connection',
+    description:
+      'Artisans, musicians, dancers, family traditions, private introductions, and everyday Sri Lanka.',
+    traveller: 'For the Curious Witness',
+    image: experienceImages.kandyanDancer,
+    imageAlt: 'Kandyan dancer in ceremonial costume',
+    href: '#kandyan-dance-rehearsal',
+    encounter: 'A Private Kandyan Dance Rehearsal',
+    featured: false,
+  },
+] as const
+
 const furtherChapters = [
   {
+    id: 'deep-water-hour',
     meta: 'Ocean - Mirissa - Nov-Apr',
     title: 'The Deep-Water Hour',
     copy:
@@ -156,6 +238,7 @@ const furtherChapters = [
     offset: false,
   },
   {
+    id: 'sacred-fire-private-vantage',
     meta: 'Ceremony - Kandy - Year-round',
     title: 'Sacred Fire, Private Vantage',
     copy:
@@ -166,6 +249,7 @@ const furtherChapters = [
     offset: true,
   },
   {
+    id: 'ancient-grammar-of-healing',
     meta: 'Restoration - Sinharaja - All Year',
     title: 'The Ancient Grammar of Healing',
     copy:
@@ -275,7 +359,7 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
       : '#begin'
 
   return (
-    <article className={`encounter-row experiences-reveal${imageFirst ? '' : ' encounter-row--reverse'}`}>
+    <article id={encounter.id} className={`encounter-row experiences-reveal${imageFirst ? '' : ' encounter-row--reverse'}`}>
       <div className="encounter-index">
         <span>{String(index + 1).padStart(2, '0')}</span>
         <i />
@@ -385,6 +469,48 @@ export function ExperiencesPage() {
         </div>
       </section>
 
+      <section className="experience-themes experiences-reveal" aria-labelledby="experience-themes-title">
+        <div className="experiences-container">
+          <header className="experience-themes-header">
+            <div>
+              <Eyebrow>Traveller Discovery - Experience Themes</Eyebrow>
+              <h2 id="experience-themes-title">
+                Ways Into
+                <br />
+                <em>The Island.</em>
+              </h2>
+            </div>
+            <p>
+              No two travellers experience Sri Lanka the same way. Some seek wilderness. Some seek
+              restoration. Some seek culture, memory, or stillness. The encounters below emerge from
+              these different motivations, shaped by who the traveller is before any itinerary is drawn.
+            </p>
+          </header>
+
+          <div className="experience-themes-board">
+            {experienceThemes.map((theme) => (
+              <a
+                key={theme.title}
+                className={theme.featured ? 'theme-chapter theme-chapter--featured' : 'theme-chapter'}
+                href={theme.href}
+                aria-label={`${theme.title}: continue to ${theme.encounter}`}
+              >
+                <figure>
+                  <img src={theme.image} alt={theme.imageAlt} />
+                </figure>
+                <div className="theme-chapter-copy">
+                  <span>{theme.number}</span>
+                  <p>{theme.traveller}</p>
+                  <h3>{theme.title}</h3>
+                  <p>{theme.description}</p>
+                  <small>{theme.encounter}</small>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="region-filter experiences-reveal" aria-label="Experience filters">
         <div className="region-filter-copy">
           <span>Access Index</span>
@@ -451,6 +577,7 @@ export function ExperiencesPage() {
           <div className="chapter-cards">
             {furtherChapters.map((chapter) => (
               <article
+                id={chapter.id}
                 key={chapter.title}
                 className={
                   chapter.offset
