@@ -1,5 +1,5 @@
 import './ExperiencesPage.css'
-import { useEffect, useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { ArrowIcon } from '../ArrowIcon'
 import { experienceImages } from './images'
 
@@ -35,11 +35,13 @@ type Encounter = {
 }
 
 const stats = [
-  { value: '24', label: 'Encounters' },
-  { value: '8', label: 'Regions' },
-  { value: '5', label: 'Curators' },
-  { value: '1', label: 'Channel Only' },
+  { value: '1:1', label: 'Curator Planning' },
+  { value: '48h', label: 'Access Review' },
+  { value: 'Max 4', label: 'Private Circles' },
+  { value: 'No Menu', label: 'Bespoke Only' },
 ] as const
+
+const heroProofs = ['Private routing', 'Discreet hosts', 'Closed-door access'] as const
 
 const encounters: Encounter[] = [
   {
@@ -320,54 +322,35 @@ export function ExperiencesPage() {
       ? encounters
       : encounters.filter((encounter) => encounter.region === selectedRegion)
 
-  useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const revealElements = document.querySelectorAll<HTMLElement>('.experiences-reveal')
-
-    if (reducedMotion || !('IntersectionObserver' in window)) {
-      revealElements.forEach((element) => element.classList.add('is-visible'))
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.18 },
-    )
-
-    revealElements.forEach((element) => observer.observe(element))
-
-    return () => observer.disconnect()
-  }, [selectedRegion])
-
   return (
     <main className="experiences-page">
       <section className="experiences-hero experiences-reveal">
         <div className="experiences-container experiences-hero-grid">
           <div className="experiences-hero-copy">
-            <Eyebrow>The Collection - 2024</Eyebrow>
+            <Eyebrow>Private Collection - Sri Lanka</Eyebrow>
             <h1>
-              Private
+              Rare
               <br />
-              <em>Encounters</em>
+              <em>Access</em>
               <br />
-              with Place.
+              to Place.
             </h1>
             <p>
-              Every experience in this collection has been personally vetted, quietly negotiated, and
-              approved by one of our curators. Nothing here is bookable through any other channel.
+              Quietly arranged encounters for guests who expect privacy, cultural depth, and flawless
+              discretion. Each experience is personally vetted, host-approved, and released only when
+              the right access can be secured.
             </p>
+            <ul className="experiences-hero-proof-list" aria-label="Experience standards">
+              {heroProofs.map((proof) => (
+                <li key={proof}>{proof}</li>
+              ))}
+            </ul>
+            <TextLink href="#begin">Begin A Private Briefing</TextLink>
             <aside className="opening-note">
-              <p>Opening Note</p>
+              <p>Curator's Note</p>
               <blockquote>
-                "What you'll find here isn't a menu. It's a considered argument for how Sri Lanka
-                deserves to be experienced."
+                "For our most private guests, luxury is not excess. It is timing, trust, and the
+                assurance that no one else is moving through the same moment."
               </blockquote>
               <div>
                 <img src={experienceImages.arjun} alt="" />
@@ -383,8 +366,13 @@ export function ExperiencesPage() {
             <div className="hero-image-frame">
               <img src={experienceImages.heroSigiriya} alt="Lone traveler at dawn on Sigiriya steps" />
             </div>
-            <span className="hero-feature-label">Featured Encounter</span>
-            <span className="hero-choice">Curator's Choice</span>
+            <span className="hero-feature-label">Featured Private Access</span>
+            <span className="hero-choice">By Introduction Only</span>
+            <div className="hero-access-card" aria-label="Arrival protocol">
+              <p>Arrival Protocol</p>
+              <strong>Pre-dawn ascent, sealed route, curator in attendance.</strong>
+              <span>Sigiriya - Central Province</span>
+            </div>
             <div className="experiences-stat-strip">
               {stats.map((stat) => (
                 <div key={stat.label}>
@@ -398,7 +386,10 @@ export function ExperiencesPage() {
       </section>
 
       <section className="region-filter experiences-reveal" aria-label="Experience filters">
-        <label htmlFor="experience-region">Filter By Region</label>
+        <div className="region-filter-copy">
+          <span>Access Index</span>
+          <label htmlFor="experience-region">Filter By Region</label>
+        </div>
         <div className="region-filter-select-wrap">
           <select
             id="experience-region"
@@ -413,12 +404,19 @@ export function ExperiencesPage() {
           </select>
         </div>
         <p>
-          {filteredEncounters.length} {filteredEncounters.length === 1 ? 'Encounter' : 'Encounters'} Shown
+          {filteredEncounters.length} {filteredEncounters.length === 1 ? 'Private Encounter' : 'Private Encounters'}
         </p>
       </section>
 
       <section className="encounters-collection" id="encounters">
         <div className="experiences-container">
+          <header className="encounters-collection-header experiences-reveal">
+            <p>Personally Introduced</p>
+            <h2>
+              The encounters below are not inventory. They are openings held by trust, timing, and
+              discretion.
+            </h2>
+          </header>
           {filteredEncounters.length > 0 ? (
             filteredEncounters.map((encounter, index) => (
               <EncounterCard key={encounter.title} encounter={encounter} index={index} />
@@ -437,13 +435,17 @@ export function ExperiencesPage() {
           <header className="chapters-header">
             <div>
               <span>Further Chapters</span>
-              <span>In The Anthology</span>
+              <span>By Private Arrangement</span>
             </div>
             <h2>
-              More <em>ways to enter</em>
+              Additional <em>private pathways</em>
               <br />
-              the island's interior.
+              into the island.
             </h2>
+            <p>
+              For guests whose journey calls for quieter doors, each chapter can be shaped around
+              season, access, and the right local host.
+            </p>
           </header>
 
           <div className="chapter-cards">
@@ -486,9 +488,12 @@ export function ExperiencesPage() {
               head naturalist has spent twenty years learning to read them all. He will teach you how
               to listen.
             </p>
-            <small>Private Expeditions Available</small>
+            <small>Private Expeditions - By Seasonal Clearance</small>
           </div>
-          <img src={experienceImages.leopardFeature} alt="Leopard resting on ancient rock in Yala" />
+          <figure className="wilderness-image-card">
+            <img src={experienceImages.leopardFeature} alt="Leopard resting on ancient rock in Yala" />
+            <figcaption>Yala Block V - guided by a field naturalist, not a driver.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -496,13 +501,16 @@ export function ExperiencesPage() {
         <div className="experiences-container ceremony-grid">
           <figure>
             <img src={experienceImages.monks} alt="Buddhist monks walking through temple ruins" />
-            <figcaption>Polonnaruwa, North Central</figcaption>
+            <figcaption>Polonnaruwa - North Central Province</figcaption>
           </figure>
           <blockquote>
             <p>On Ceremony</p>
             <h2>
               "We do not offer you religion. We offer you <em>proximity to the sacred.</em>"
             </h2>
+            <span>
+              A private vantage is only worthwhile when it protects the dignity of the ceremony itself.
+            </span>
             <cite>- Malini Fernando, Cultural Lead</cite>
           </blockquote>
         </div>
@@ -526,10 +534,9 @@ export function ExperiencesPage() {
               </h2>
               <span />
               <p>
-                A private traditional dhoni, a captain who has fished these waters since birth, and
-                an itinerary that is entirely at the mercy of the wind and tide. No fixed route. No
-                fixed return time. The east coast lagoons of Trincomalee offer some of the most
-                pristine and least-visited marine environments in Asia.
+                A private traditional dhoni, a captain who has fished these waters since birth, and a
+                route shaped by wind, tide, and privacy. No fixed return time. No staged theatre. Just
+                the quiet discipline of moving through the east coast on its own terms.
               </p>
               <small>Drift - 3-7 Days</small>
             </div>
@@ -563,7 +570,7 @@ export function ExperiencesPage() {
             ))}
           </div>
           <blockquote className="process-quote">
-            The collection doesn't grow. It <em>deepens.</em>
+            The collection does not grow for scale. It <em>deepens for trust.</em>
             <cite>Arjun Fernando - Co-Founder</cite>
           </blockquote>
         </div>
@@ -587,13 +594,13 @@ export function ExperiencesPage() {
       <section className="experiences-final-cta experiences-reveal" id="begin">
         <p>Begin The Conversation</p>
         <h2>
-          Every journey begins with a single question:
+          Every private journey begins with a single question:
           <br />
           <em>"What are you looking for?"</em>
         </h2>
         <p>
-          Not a form. Not a quote request. A conversation with Arjun or Dilini, who will listen
-          carefully and respond honestly about what is and isn't possible.
+          Not a form. Not a quote request. A private conversation with Arjun or Dilini, who will listen
+          carefully, protect your discretion, and respond honestly about what can be arranged.
         </p>
         <div>
           <a href="#begin" className="primary-cta">
