@@ -115,6 +115,10 @@ const archiveRegions: ArchiveRegion[] = [
   },
 ]
 
+function getArchiveRegionId(title: string) {
+  return `journal-region-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+}
+
 const vignettes: Vignette[] = [
   {
     entry: 'Entry #008 · Trincomalee',
@@ -286,7 +290,7 @@ function VignetteCard({ vignette }: { vignette: Vignette }) {
 
 function ArchiveCard({ region }: { region: ArchiveRegion }) {
   return (
-    <article className="journal-archive-card">
+    <article className="journal-archive-card" id={getArchiveRegionId(region.title)}>
       <span className="journal-archive-marker">{region.marker}</span>
       <h3>{region.title}</h3>
       <p className="journal-archive-places">{region.places}</p>
@@ -303,7 +307,7 @@ export function JournalLandingPage() {
         <p className="journal-watermark" aria-hidden="true">Lanka</p>
         <div className="journal-container journal-hero-inner">
           <div className="journal-title-block">
-            <p>Vol. IV · The Living Archive · 2024</p>
+            <p>Private Field Notes · Volume IV</p>
             <h1 id="journal-title">
               The Island
               <br />
@@ -312,10 +316,15 @@ export function JournalLandingPage() {
             <div>
               <span />
               <p>
-                A curated collection of travel notes, sensory observations, and half-remembered
-                conversations from across the island of Ceylon.
+                A quieter record of Sri Lanka for travellers who prefer meaning over itinerary: field
+                notes, cultural observations, and private moments gathered by our curators.
               </p>
             </div>
+            <ul className="journal-hero-signals" aria-label="Journal standards">
+              <li>Curator-written</li>
+              <li>No paid placements</li>
+              <li>Observed in person</li>
+            </ul>
           </div>
 
           <div className="journal-scattered-layout">
@@ -351,55 +360,75 @@ export function JournalLandingPage() {
             />
 
             <aside className="journal-pinned-note">
-              <p>Field Note #047</p>
+              <p>Opening Note</p>
               <blockquote>
-                "The cinnamon traders still wrap their bundles in banana leaf. Nothing has changed in
-                four centuries."
+                "The island rarely reveals itself to travellers in a hurry. The journal is where we
+                keep the slower evidence."
               </blockquote>
-              <cite>— Colombo Spice Quarter</cite>
+              <cite>— Arjun Fernando · Editor-at-large</cite>
             </aside>
 
             <aside className="journal-weather-note">
-              <p>Weather Log</p>
-              <strong>28°C · Humid · 74%</strong>
-              <span>Colombo · 14 Jan</span>
+              <p>Current Dispatch</p>
+              <strong>Galle · Kandy · Jaffna</strong>
+              <span>Filed across 4 regions</span>
             </aside>
 
-            <span className="journal-handwritten journal-handwritten--hero">Kandy dawn</span>
+            <span className="journal-handwritten journal-handwritten--hero">for slow arrivals</span>
           </div>
         </div>
       </section>
 
       <section className="journal-texture-rail" aria-label="Sensory archive">
         <div className="journal-rail-heading">
-          <p>Sensory Archive · Micro-textures of Ceylon</p>
+          <p>Sensory Prelude · Micro-textures of Ceylon</p>
           <span />
-          <p>Scroll</p>
+          <p>Collected Before The Story</p>
         </div>
-        <div className="journal-rail-scroll">
-          {textures.map((texture) =>
-            texture.image ? (
-              <figure
-                className={`journal-texture-item ${texture.wide ? 'journal-texture-item--wide' : ''}`}
-                key={texture.label}
-                style={{ '--rotate': texture.rotate ?? '0deg' } as CSSProperties}
-              >
-                <img src={texture.image} alt={texture.alt} />
-                <figcaption>{texture.label}</figcaption>
-              </figure>
-            ) : (
-              <blockquote className="journal-texture-quote" key={texture.label}>
-                <p>"{texture.quote}"</p>
-                <cite>{texture.cite}</cite>
-              </blockquote>
-            ),
-          )}
+        <div className="journal-rail-carousel">
+          <div className="journal-rail-track">
+            {[0, 1].map((setIndex) => (
+              <div className="journal-rail-set" key={setIndex} aria-hidden={setIndex === 1}>
+                {textures.map((texture) =>
+                  texture.image ? (
+                    <figure
+                      className={`journal-texture-item ${texture.wide ? 'journal-texture-item--wide' : ''}`}
+                      key={`${setIndex}-${texture.label}`}
+                    >
+                      <img src={texture.image} alt={setIndex === 0 ? texture.alt : ''} />
+                      <figcaption>{texture.label}</figcaption>
+                    </figure>
+                  ) : (
+                    <blockquote className="journal-texture-quote" key={`${setIndex}-${texture.label}`}>
+                      <p>"{texture.quote}"</p>
+                      <cite>{texture.cite}</cite>
+                    </blockquote>
+                  ),
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="journal-flow-intro" aria-labelledby="journal-flow-title">
+        <div className="journal-container journal-flow-intro-grid">
+          <p>How To Read This Page</p>
+          <h2 id="journal-flow-title">
+            Begin with texture. Stay for the entries. Leave with a sense of where the island asks you
+            to slow down.
+          </h2>
+          <p>
+            The Journal is not a brochure. It is a set of observations our team returns to when shaping
+            private journeys: a street after rain, a family rehearsal before performance, a coastline
+            before the boats arrive.
+          </p>
         </div>
       </section>
 
       <section className="journal-stories">
         <div className="journal-container">
-          <SectionRuleHeader title="Collected Stories" meta="Loose-leaf · Unordered by design" />
+          <SectionRuleHeader title="The Field Notes" meta="Two long-form entries · Read before you travel" />
 
           <article className="journal-story-entry journal-story-entry--galle">
             <p className="journal-side-note">Galle · 6.053° N</p>
@@ -451,7 +480,7 @@ export function JournalLandingPage() {
       <section className="journal-panorama">
         <img src={journalAssets.sigiriyaPanorama} alt="Panoramic view from Sigiriya rock fortress at sunrise" />
         <div>
-          <p>Full Entry · Sigiriya · Feb 2024</p>
+          <p>Featured Passage · Sigiriya · Feb 2024</p>
           <blockquote>
             "The King climbed this
             <br />
@@ -463,7 +492,26 @@ export function JournalLandingPage() {
         </div>
       </section>
 
-      <section className="journal-archive">
+      <section className="journal-region-guide" aria-labelledby="journal-region-guide-title">
+        <div className="journal-container">
+          <div className="journal-region-guide-card">
+            <div>
+              <p>Filed By Region</p>
+              <h2 id="journal-region-guide-title">Choose the chapter that matches your curiosity.</h2>
+            </div>
+            <nav aria-label="Journal regions">
+              {archiveRegions.map((region) => (
+                <a href={`#${getArchiveRegionId(region.title)}`} key={region.title}>
+                  <span>{region.title}</span>
+                  <small>{region.places}</small>
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section className="journal-archive" id="journal-archive">
         <div className="journal-container">
           <SectionRuleHeader title="The Archive" meta="55 entries · 4 volumes · Ongoing" />
           <div className="journal-archive-grid">
@@ -475,50 +523,27 @@ export function JournalLandingPage() {
       </section>
 
       <section className="journal-dispatch">
-        <div className="journal-container journal-dispatch-grid">
-          <div className="journal-dispatch-copy">
-            <p>The Monthly Dispatch</p>
-            <h2>
-              Receive entries as
-              <br />
-              <em>they are written</em>
-            </h2>
-            <p>
-              A letter in your inbox, once a month. No news, no agenda — only a new journal entry from
-              somewhere on the island, accompanied by a single photograph and a note on the weather.
-            </p>
-            <small>3,241 readers · No spam</small>
+        <div className="journal-dispatch-inner">
+          <div className="journal-dispatch-mark" aria-hidden="true">
+            ✦
           </div>
-
+          <p>Private Monthly Dispatch</p>
+          <h2>
+            Receive the island
+            <br />
+            <em>as it is observed.</em>
+          </h2>
+          <p>
+            One quiet letter each month: a new field note, a single photograph, and the weather as it
+            was. No campaigns, no urgency, no generic inspiration.
+          </p>
           <form className="journal-newsletter" action="#" onSubmit={(event) => event.preventDefault()}>
-            <p>Subscribe · It's free, and always will be</p>
-            <label>
-              Your Name
-              <input type="text" placeholder="As written in your passport" />
-            </label>
-            <label>
-              Email Address
-              <input type="email" placeholder="Where we'll send your dispatch" />
-            </label>
-            <label>
-              Region of Interest (Optional)
-              <select defaultValue="all">
-                <option value="all">All of the island</option>
-                <option value="south">The South</option>
-                <option value="hill-country">The Hill Country</option>
-                <option value="coast">The Coast</option>
-                <option value="ancient-north">The Ancient North</option>
-              </select>
-            </label>
-            <button type="submit">Add My Name To The List</button>
-            <small>Dispatched on the first Tuesday of each month · Unsubscribe with one click</small>
+            <input type="email" aria-label="Email address for the monthly dispatch" placeholder="Your email address" />
+            <button type="submit">Request The Dispatch</button>
           </form>
+          <small>Private correspondence. No campaigns. Unsubscribe with one click.</small>
         </div>
       </section>
-
-      <a className="journal-bookmark-tab" href="#journal-title" aria-label="Navigate to journal top">
-        <span>Navigate</span>
-      </a>
     </main>
   )
 }

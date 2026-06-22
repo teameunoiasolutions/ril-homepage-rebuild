@@ -592,21 +592,28 @@ export function ExperiencesPage() {
       </section>
 
       <section className="experiences-final-cta experiences-reveal" id="begin">
-        <p>Begin The Conversation</p>
-        <h2>
-          Every private journey begins with a single question:
-          <br />
-          <em>"What are you looking for?"</em>
-        </h2>
-        <p>
-          Not a form. Not a quote request. A private conversation with Arjun or Dilini, who will listen
-          carefully, protect your discretion, and respond honestly about what can be arranged.
-        </p>
-        <div>
-          <a href="#begin" className="primary-cta">
-            Start The Conversation
-          </a>
-          <TextLink inverse>View All Encounters</TextLink>
+        <div className="experiences-final-cta-inner">
+          <div className="experiences-final-cta-mark" aria-hidden="true">
+            ✦
+          </div>
+          <p>Private Access Briefing</p>
+          <h2>
+            Begin with the question
+            <br />
+            <em>that opens the right door.</em>
+          </h2>
+          <p>
+            A quiet conversation with Arjun or Dilini, shaped around privacy, timing, and the kind of
+            access that should never feel public. If an encounter cannot be arranged with integrity, we
+            will say so.
+          </p>
+          <div className="experiences-final-cta-actions">
+            <a href="#begin" className="primary-cta">
+              Request A Private Briefing
+            </a>
+            <TextLink inverse>Review The Collection</TextLink>
+          </div>
+          <small>Discreet planning. No packaged itineraries. Introductions only where trust exists.</small>
         </div>
       </section>
     </main>

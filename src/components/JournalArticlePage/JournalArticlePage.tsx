@@ -303,7 +303,7 @@ export function JournalArticlePage() {
 
           <div className="article-title-layout">
             <div className="article-title-block">
-              <p>Dawn Ascent · February 2024</p>
+              <p>Private Dawn Access · February 2024</p>
               <h1 id="article-title">
                 The Sigiriya
                 <br />
@@ -312,9 +312,9 @@ export function JournalArticlePage() {
               <div>
                 <span />
                 <p>
-                  Three hundred and seventy metres of ancient granite, risen from the jungle floor
-                  like a held breath. It has been waiting for four hundred years. I arrived before
-                  the sun did.
+                  Three hundred and seventy metres of ancient granite, entered before the public hour.
+                  The point was not to avoid people. It was to meet the place before it had to perform
+                  for anyone.
                 </p>
               </div>
             </div>
@@ -407,10 +407,10 @@ export function JournalArticlePage() {
             <div className="article-side-note">
               <p>Keeper's Note</p>
               <blockquote>
-                "Built by King Kashyapa I. 477 AD. He chose this summit because the gods could see it
-                clearly."
+                "The best access here is not speed. It is timing, silence, and knowing when to stop
+                explaining."
               </blockquote>
-              <span>From the site notice board</span>
+              <span>Amara Weerasinghe · Heritage Curation</span>
             </div>
             <div className="article-sketch-card">
               <span>Sketch: Lion's Paw Platform</span>
