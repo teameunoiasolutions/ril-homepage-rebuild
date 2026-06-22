@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './Homepage.css'
 import { ArrowIcon } from '../ArrowIcon'
 
@@ -21,36 +22,48 @@ const images = {
 const identityCards = [
   {
     image: images.teaEstate,
-    label: 'The Contemplative',
-    title: 'Solitude in the High Hills',
-    copy: 'Designed for those seeking profound silence and creative renewal amidst ancient tea trails.',
+    label: 'Previously Discovered',
+    title: 'The Seeker of Silence',
+    copy: 'A traveller who arrived asking for beauty, then discovered what they were really seeking was stillness.',
   },
   {
     image: images.artisan,
-    label: 'The Anthropologist',
-    title: 'Echoes of the Artisans',
-    copy: 'A journey weaving through private studios and ancestral homes, connecting with the living heritage.',
+    label: 'Previously Discovered',
+    title: 'The Curious Witness',
+    copy: 'A guest drawn not to monuments alone, but to the people, rituals, hands, and stories that keep them alive.',
   },
   {
     image: images.beachDinner,
-    label: 'The Romantic',
-    title: 'Shores of Intimacy',
-    copy: "Uncharted coastlines and secluded villas curated for deepening connections away from the world's gaze.",
+    label: 'Previously Discovered',
+    title: 'The Romantic',
+    copy: 'A traveller who discovered that intimacy, beauty, and time together were the real destination.',
+  },
+  {
+    image: images.journalHours,
+    label: 'Previously Discovered',
+    title: 'The Unhurried Wanderer',
+    copy: 'Someone who stopped asking what came next, and began noticing what was already unfolding.',
+  },
+  {
+    image: images.journalGuide,
+    label: 'Previously Discovered',
+    title: 'The Story Collector',
+    copy: 'A traveller who remembered Sri Lanka through voices, meals, thresholds, and conversations.',
   },
 ]
 
 const experiences = [
   {
     image: images.junglePavilion,
-    region: 'Southern Coast',
-    title: 'Dawn in the Tea Country',
-    copy: "Awake before the sun to trace the silent paths of ancestral tea estates. A private breakfast awaits on a cliff's edge, where the only sound is the distant call of a mountain eagle.",
+    region: 'Highland Estates',
+    title: 'A Tea Country Residence Before the World Wakes',
+    copy: "Arrive by private transfer to a hill-country estate where breakfast is prepared on a veranda above the mist, your guide knows when to speak, and the morning belongs only to your party.",
   },
   {
     image: images.ancientRuins,
     region: 'Cultural Triangle',
-    title: 'Where the Rock Holds History',
-    copy: 'A private audience with ancient frescoes, guided by a local historian long after the crowds have departed. Witness the golden hour illuminating centuries-old stone.',
+    title: 'After-Hours History, Held in Confidence',
+    copy: 'Move through ancient stone with a scholar-host, curated timing, and quiet access windows shaped around privacy, heat, light, and the absence of crowds.',
   },
 ]
 
@@ -73,10 +86,10 @@ const philosophyLines = [
 ]
 
 const sriLankaStats = [
-  ['8', 'UNESCO World Heritage Sites, all reachable within a single journey.'],
-  ['21', "National parks and reserves protecting Asia's most extraordinary wildlife."],
-  ['1,340km', 'Of coastline, shaped by six distinct bodies of water.'],
-  ['2,500+', 'Years of continuous civilisation - one of the oldest on earth.'],
+  ['Private', 'Hosts, drivers, guides, and residence teams briefed around your preferences.'],
+  ['8', 'UNESCO World Heritage Sites, accessed with timing designed around privacy.'],
+  ['21', "National parks and reserves, with expert naturalists and quiet safari pacing."],
+  ['1,340km', 'Of coastline for villas, yachts, wellness retreats, and family celebrations.'],
 ]
 
 const journalItems = [
@@ -134,6 +147,24 @@ const travelerStories = [
 
 const storyPromises = ['Photos and films handled privately', 'Hosted by discreet local experts', 'Built around your pace, not a schedule']
 
+const heroScenes = [
+  {
+    image: images.coastJungle,
+    label: 'Ocean at Dusk',
+  },
+  {
+    image: images.beachDinner,
+    label: 'Private Dinner',
+  },
+]
+
+const discoveryPrinciples = [
+  'Examples, not categories',
+  'No selections to make',
+  'A conversation, not a test',
+  'Yours has not been written yet',
+]
+
 const guideItems = [
   'A letter, to begin',
   'Field notes from the island',
@@ -177,35 +208,67 @@ const questions = [
 ]
 
 export function Homepage() {
+  const [activeIdentityIndex, setActiveIdentityIndex] = useState(0)
+  const visibleIdentityCards = [...identityCards, ...identityCards].slice(
+    activeIdentityIndex,
+    activeIdentityIndex + 3,
+  )
+
+  const showPreviousIdentity = () => {
+    setActiveIdentityIndex((currentIndex) => (currentIndex === 0 ? identityCards.length - 1 : currentIndex - 1))
+  }
+
+  const showNextIdentity = () => {
+    setActiveIdentityIndex((currentIndex) => (currentIndex + 1) % identityCards.length)
+  }
+
   return (
     <main className="figma-homepage" data-node-id="101:12274">
       <section className="figma-hero" data-node-id="101:12275">
-        <img src={images.hero} alt="Misty sunrise over Sri Lankan tea plantations" />
+        <div className="figma-hero-scenes" aria-hidden="true">
+          {heroScenes.map((scene) => (
+            <figure className="figma-hero-scene" key={scene.label}>
+              <img src={scene.image} alt="" />
+            </figure>
+          ))}
+        </div>
         <div className="figma-hero-overlay" />
         <div className="figma-hero-content">
-          <p className="figma-overline figma-overline-light">An Invitation to Serendipity</p>
           <h1>
-            Discover the
-            <span>Soul of Sri Lanka</span>
+            Sri Lanka,
+            <span>held privately.</span>
           </h1>
-          <div className="figma-hero-rule" />
+          <div className="figma-hero-actions">
+            <a href="#begin">Begin a Private Conversation</a>
+          </div>
         </div>
+        <p className="figma-hero-caption">Bespoke journeys for private families, principals, and discerning travellers.</p>
       </section>
 
       <section className="figma-discovery" id="about" data-node-id="103:12717">
         <div className="figma-container">
           <div className="figma-identities">
-            <p className="figma-overline">The Process of Being Understood</p>
+            <p className="figma-overline">Traveller Discovery</p>
             <header>
-              <h3>Curated Identities</h3>
-              <div className="figma-carousel-buttons" aria-hidden="true">
-                <span>‹</span>
-                <span>›</span>
+              <div>
+                <h3>Identities We Have Discovered</h3>
+                <p>
+                  A few travellers. A few different ways of moving through the world. Yours has not
+                  been written yet.
+                </p>
+              </div>
+              <div className="figma-carousel-buttons" aria-label="Browse discovered traveller identities">
+                <button type="button" onClick={showPreviousIdentity} aria-label="Show previous traveller identity">
+                  ‹
+                </button>
+                <button type="button" onClick={showNextIdentity} aria-label="Show next traveller identity">
+                  ›
+                </button>
               </div>
             </header>
             <div className="figma-card-row">
-              {identityCards.map((card) => (
-                <article className="figma-identity-card" key={card.title}>
+              {visibleIdentityCards.map((card, index) => (
+                <article className="figma-identity-card" key={`${card.title}-${activeIdentityIndex}-${index}`}>
                   <img src={card.image} alt="" />
                   <p>{card.label}</p>
                   <h4>{card.title}</h4>
@@ -216,36 +279,41 @@ export function Homepage() {
           </div>
           <div className="figma-discovery-grid">
             <div className="figma-copy-stack">
+              <p className="figma-overline">Traveller Identities · Part II</p>
               <h3 className="traveller-discovery-guide">
-                Masterpieces of
-                <em>Personal Discovery</em>
+                What would
+                <em>yours be?</em>
               </h3>
               <p>
-                We do not begin with itineraries. We begin with you. In quiet, unhurried
-                conversations within our private lounges, our concierges seek to understand the
-                cadences of your life, the nuances of your curiosity, and the unspoken desires of
-                your soul.
+                These identities are not options to choose from. They are glimpses of what can emerge
+                when a traveller is listened to carefully: a hidden need, a forgotten curiosity, a
+                way of moving through the world that no form could name.
               </p>
-              <blockquote>The finest journeys are not planned; they are revealed.</blockquote>
+              <blockquote>The question is not which one are you. The question is what might we discover?</blockquote>
               <p>
-                Through this meticulous art of listening, we curate not merely a trip, but a mirror
-                to your own evolving identity. Discover how others have found their quiet resonance
-                amidst the landscapes of Sri Lanka.
+                The identity conversation is where this begins. Through unhurried dialogue, we learn
+                the rhythm behind the journey before shaping the places, pace, people, and private
+                moments around it.
               </p>
               <a className="figma-text-link" href="#begin">
-                Consult Our Discovery Path
+                Find Your Traveller Identity
               </a>
             </div>
             <figure className="figma-feature-image">
               <img src={images.consultation} alt="Private consultation lounge in Sri Lanka" />
               <figcaption>
-                <strong>The Initial Resonance</strong>
+                <strong>The Identity Conversation</strong>
                 <span>
-                  Where your personal narrative intersects with the soul of the island. A bespoke
-                  consultation setting in our Galle Fort enclave.
+                  A guided conversation designed to reveal what kind of journey would feel personally
+                  true, not merely impressive.
                 </span>
               </figcaption>
             </figure>
+          </div>
+          <div className="figma-private-standards" aria-label="Traveller Discovery principles">
+            {discoveryPrinciples.map((principle) => (
+              <span key={principle}>{principle}</span>
+            ))}
           </div>
         </div>
       </section>
@@ -256,11 +324,11 @@ export function Homepage() {
             <div>
               <h2>Encounters That Cannot Be Catalogued</h2>
               <p>
-                Beyond the ordinary lie moments of pure serendipity. These are not itineraries; they
-                are narratives waiting to unfold.
+                Private access, expert timing, and human relationships transform Sri Lanka from a
+                destination into a sequence of moments unavailable to the casual traveller.
               </p>
             </div>
-            <a href="/experiences">View All Experiences</a>
+            <a href="/experiences">Explore Private Access</a>
           </header>
 
           <div className="figma-experience-list">
@@ -302,11 +370,11 @@ export function Homepage() {
             ))}
           </div>
           <div className="figma-discover-statement">
-            <strong>And then, you discover.</strong>
+            <strong>And then, the journey disappears into ease.</strong>
             <p>
-              What you experience in Sri Lanka won&apos;t feel like an itinerary that was executed.
-              It will feel like a sequence of moments that, looking back, seem like they were always
-              going to happen, because, in a way, they were.
+              What you experience in Sri Lanka should not feel managed. It should feel inevitable:
+              the right host at the right door, the right room prepared before arrival, the right
+              silence protected, the right celebration unfolding without strain.
             </p>
           </div>
           <footer className="figma-founder">
@@ -327,7 +395,7 @@ export function Homepage() {
         <div>
           <p className="figma-overline">Why Sri Lanka</p>
           <h2>
-            An island that <em>contains</em> a continent.
+            A small island with <em>private worlds</em> within it.
           </h2>
           <dl>
             {sriLankaStats.map(([value, label]) => (
@@ -344,16 +412,16 @@ export function Homepage() {
         <div className="figma-container figma-destination-grid">
           <div className="figma-copy-stack">
             <p className="figma-overline">The Destination</p>
-            <h2>An Island That Changes With You</h2>
+            <h2>Wild, Sacred, Coastal, and Deeply Personal</h2>
             <p className="figma-destination-intro">
-              Sri Lanka is not merely a place on a map; it is a rhythm. It is the scent of cinnamon
-              bark in the morning mist, the intricate geometry of ancient stupas, and the untamed
-              roar of the Indian Ocean against colonial ramparts.
+              Sri Lanka is compact enough for a seamless private journey and layered enough for a
+              lifetime of discovery: tea country residences, ancient cities, leopard country, ocean
+              villas, wellness sanctuaries, and colonial fort towns.
             </p>
             <p>
-              Here, luxury is found in authenticity. It is a slow, deliberate embrace of a culture
-              that honors both profound stillness and vibrant celebration. We invite you to lose
-              yourself to find something new.
+              The craft is in knowing what to reveal, when to move, where to pause, and how to keep
+              the journey protected from noise. This is Sri Lanka arranged for people who do not need
+              the obvious version.
             </p>
             <a className="figma-text-link figma-text-link-light" href="#destinations">
               Discover the Regions
@@ -371,7 +439,7 @@ export function Homepage() {
             <div>
               <p className="figma-kicker-line">Journal</p>
               <h2>
-                What travellers <em>discover about themselves.</em>
+                Private notes for <em>discerning travellers.</em>
               </h2>
             </div>
             <a href="/journal">
@@ -382,11 +450,10 @@ export function Homepage() {
             <article className="figma-feature-story">
               <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
               <p>Personal Essay</p>
-              <h3>&quot;I came for the leopards. I left with a question I&apos;m still answering.&quot;</h3>
+              <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
               <span>
-                Sarah P. had travelled professionally for a decade before her first visit to Sri
-                Lanka. She describes what happened when the island refused to let her remain a
-                spectator.
+                A guest reflects on private access, protected time, and the quiet intelligence of a
+                journey that never announced itself as luxury.
               </span>
               <a href="/journal/the-sigiriya-dawn-ascent">
                 Read her story <ArrowIcon />
@@ -474,18 +541,17 @@ export function Homepage() {
             ✦
           </div>
           <p className="figma-overline">A Personal Invitation</p>
-          <h2>What Have You Been Hoping to Find?</h2>
+          <h2>Begin With a Private Conversation</h2>
           <p>
-            Not every traveller arrives with a destination in mind. Some arrive with a feeling, a
-            wish to slow down, a curiosity they&apos;ve never quite explored, a hope for connection,
-            celebration, reflection, or discovery. Tell us a little about what you&apos;re seeking.
-            We&apos;ll take it from there.
+            Tell us who is travelling, what must be protected, what should feel effortless, and what
+            would make Sri Lanka feel personally meaningful. We will respond with considered next
+            steps, not a catalogue.
           </p>
           <form className="figma-email-form">
             <input type="email" aria-label="Your email address" placeholder="Your email address" />
             <button type="submit">Request a Dialogue</button>
           </form>
-          <small>No obligation. No agenda. Simply a conversation.</small>
+          <small>Private, discreet, and without obligation.</small>
         </div>
       </section>
 
