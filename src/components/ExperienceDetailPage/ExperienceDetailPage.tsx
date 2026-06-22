@@ -291,15 +291,23 @@ export function ExperienceDetailPage() {
       </section>
 
       <section className="detail-final-cta" id="enquire">
-        <div>
-          <p className="detail-eyebrow">The Next Step</p>
-          <h2>Begin a conversation.</h2>
+        <div className="detail-final-cta-inner">
+          <div className="detail-final-cta-mark" aria-hidden="true">
+            ✦
+          </div>
+          <p>Private Encounter Briefing</p>
+          <h2>
+            Begin with the access
+            <br />
+            <em>this ascent requires.</em>
+          </h2>
           <p>
-            We do not present packages. We ask questions. A Royale Isles Lanka curator will take
-            time to understand what moves you before suggesting what you might encounter.
+            A Royale Isles Lanka curator will review timing, privacy, physical readiness, guide
+            availability, and the quiet conditions required for Sigiriya to feel properly held.
+            Nothing is confirmed until the access is worthy of the moment.
           </p>
           <a href="mailto:hello@royaleisleslanka.com">Speak With a Curator</a>
-          <small>Response within 48 hours.</small>
+          <small>Private response within 48 hours. Access is reviewed before confirmation.</small>
         </div>
       </section>
     </main>

@@ -511,33 +511,26 @@ export function TravelPreparationPage() {
       </section>
 
       <section className="prep-final-cta">
-        <div className="prep-final-copy">
-          <div className="prep-cta-mark">
-            <span />
-            <i />
+        <div className="prep-final-cta-inner">
+          <div className="prep-final-cta-mark" aria-hidden="true">
+            ✦
           </div>
+          <p>Private Preparation Briefing</p>
           <h2>
-            You Are Ready
+            Arrive with every detail
             <br />
-            to Begin
+            <em>quietly handled.</em>
           </h2>
           <p>
-            Our team has travelled these roads, stayed in these places, and eaten at these tables. Let us turn your
-            preparation into a privately held Sri Lankan journey.
+            Before you travel, our advisory team reviews entry, arrival, health, wardrobe, currency, security,
+            and regional timing around your exact itinerary. Nothing is generic. Nothing is left for the airport.
           </p>
           <div className="prep-cta-actions">
-            <a href="/concierge">Ask The Concierge</a>
-            <a href="/#begin">Speak With Us</a>
+            <a href="/concierge">Request A Preparation Briefing</a>
+            <a href="#travel-notes">Review The Notes</a>
           </div>
+          <small>Private arrival handling. Discreet guest support. Prepared before the journey begins.</small>
         </div>
-        <figure className="prep-final-image">
-          <img src={images.train} alt="Sri Lanka train winding through jungle" />
-          <figcaption>
-            "The island is waiting.
-            <br />
-            It has been waiting for you specifically."
-          </figcaption>
-        </figure>
       </section>
     </main>
   )
