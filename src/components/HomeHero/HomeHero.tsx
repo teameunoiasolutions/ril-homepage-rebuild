@@ -32,7 +32,7 @@ export function HomeHero() {
         </p>
       </div>
 
-      <span className="home-hero-side-label">Vol. I 2025</span>
+      <span className="home-hero-side-label">Vol. I 2026</span>
     </section>
   )
 }

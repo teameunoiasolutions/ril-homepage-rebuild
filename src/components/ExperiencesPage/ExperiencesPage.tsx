@@ -1,5 +1,5 @@
 import './ExperiencesPage.css'
-import { useState, type ReactNode } from 'react'
+import { useState, type MouseEvent, type ReactNode } from 'react'
 import { ArrowIcon } from '../ArrowIcon'
 import { experienceImages } from './images'
 
@@ -8,21 +8,21 @@ type Detail = {
   value: string
 }
 
-const regions = [
+const experienceThemeOptions = [
   'All Encounters',
-  'Tea Country',
-  'Southern Coast',
-  'Wildlife',
-  'Heritage',
-  'Marine',
-  'Cultural',
+  'Wildlife & Wilderness',
+  'Ocean & Discovery',
+  'Heritage & Memory',
+  'Wellness & Restoration',
+  'Rail & Landscape',
+  'Culture & Human Connection',
 ] as const
 
-type Region = (typeof regions)[number]
+type ExperienceTheme = (typeof experienceThemeOptions)[number]
 
 type Encounter = {
   id: string
-  region: Exclude<Region, 'All Encounters'>
+  theme?: Exclude<ExperienceTheme, 'All Encounters'>
   category: string
   title: string
   note: string
@@ -47,7 +47,7 @@ const heroProofs = ['Private routing', 'Discreet hosts', 'Closed-door access'] a
 const encounters: Encounter[] = [
   {
     id: 'sigiriya-dawn-ascent',
-    region: 'Heritage',
+    theme: 'Heritage & Memory',
     category: 'Heritage - Singular Access',
     title: 'The Sigiriya Dawn Ascent',
     note:
@@ -68,7 +68,6 @@ const encounters: Encounter[] = [
   },
   {
     id: 'private-tea-estate',
-    region: 'Tea Country',
     category: 'Tea Country - Immersive',
     title: 'A Private Tea Estate, Locked Before Dawn',
     note:
@@ -88,7 +87,7 @@ const encounters: Encounter[] = [
   },
   {
     id: 'leopard-research-circuit',
-    region: 'Wildlife',
+    theme: 'Wildlife & Wilderness',
     category: 'Wildlife - Expert-Led',
     title: 'The Leopard Research Circuit',
     note:
@@ -109,7 +108,7 @@ const encounters: Encounter[] = [
   },
   {
     id: 'mirissa-fishermens-dawn',
-    region: 'Southern Coast',
+    theme: 'Ocean & Discovery',
     category: 'Southern Coast - Immersive',
     title: "The Mirissa Fishermen's Dawn",
     note:
@@ -129,7 +128,7 @@ const encounters: Encounter[] = [
   },
   {
     id: 'kandyan-dance-rehearsal',
-    region: 'Cultural',
+    theme: 'Culture & Human Connection',
     category: 'Cultural - Intimate Access',
     title: 'A Private Kandyan Dance Rehearsal',
     note:
@@ -228,6 +227,7 @@ const experienceThemes = [
 const furtherChapters = [
   {
     id: 'deep-water-hour',
+    theme: 'Ocean & Discovery',
     meta: 'Ocean - Mirissa - Nov-Apr',
     title: 'The Deep-Water Hour',
     copy:
@@ -239,6 +239,7 @@ const furtherChapters = [
   },
   {
     id: 'sacred-fire-private-vantage',
+    theme: 'Culture & Human Connection',
     meta: 'Ceremony - Kandy - Year-round',
     title: 'Sacred Fire, Private Vantage',
     copy:
@@ -250,6 +251,7 @@ const furtherChapters = [
   },
   {
     id: 'ancient-grammar-of-healing',
+    theme: 'Wellness & Restoration',
     meta: 'Restoration - Sinharaja - All Year',
     title: 'The Ancient Grammar of Healing',
     copy:
@@ -351,17 +353,18 @@ function TextLink({
   )
 }
 
+const encounterNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'] as const
+
 function EncounterCard({ encounter, index }: { encounter: Encounter; index: number }) {
-  const imageFirst = index % 2 === 0
   const enquiryHref =
     encounter.title === 'The Sigiriya Dawn Ascent'
       ? '/experiences/the-sigiriya-dawn-ascent'
       : '#begin'
 
   return (
-    <article id={encounter.id} className={`encounter-row experiences-reveal${imageFirst ? '' : ' encounter-row--reverse'}`}>
+    <article id={encounter.id} className="encounter-row experiences-reveal">
       <div className="encounter-index">
-        <span>{String(index + 1).padStart(2, '0')}</span>
+        <span>{encounterNumerals[index] ?? String(index + 1)}</span>
         <i />
       </div>
 
@@ -400,11 +403,27 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
 }
 
 export function ExperiencesPage() {
-  const [selectedRegion, setSelectedRegion] = useState<Region>('All Encounters')
+  const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>('All Encounters')
   const filteredEncounters =
-    selectedRegion === 'All Encounters'
+    selectedTheme === 'All Encounters'
       ? encounters
-      : encounters.filter((encounter) => encounter.region === selectedRegion)
+      : encounters.filter((encounter) => encounter.theme === selectedTheme)
+  const filteredFurtherChapters =
+    selectedTheme === 'All Encounters'
+      ? furtherChapters
+      : furtherChapters.filter((chapter) => chapter.theme === selectedTheme)
+  const curatedOpeningsCount = filteredEncounters.length + filteredFurtherChapters.length
+
+  function handleThemeExplore(
+    theme: Exclude<ExperienceTheme, 'All Encounters'>,
+    event: MouseEvent<HTMLAnchorElement>,
+  ) {
+    event.preventDefault()
+    setSelectedTheme(theme)
+    window.requestAnimationFrame(() => {
+      document.getElementById('encounters')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }
 
   return (
     <main className="experiences-page">
@@ -492,8 +511,9 @@ export function ExperiencesPage() {
               <a
                 key={theme.title}
                 className={theme.featured ? 'theme-chapter theme-chapter--featured' : 'theme-chapter'}
-                href={theme.href}
-                aria-label={`${theme.title}: continue to ${theme.encounter}`}
+                href="#encounters"
+                onClick={(event) => handleThemeExplore(theme.title, event)}
+                aria-label={`${theme.title}: explore this theme in the encounter collection`}
               >
                 <figure>
                   <img src={theme.image} alt={theme.imageAlt} />
@@ -511,26 +531,26 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className="region-filter experiences-reveal" aria-label="Experience filters">
+      <section className="region-filter experiences-reveal" aria-label="Explore encounters by theme">
         <div className="region-filter-copy">
-          <span>Access Index</span>
-          <label htmlFor="experience-region">Filter By Region</label>
+          <span>Browse The Collection</span>
+          <label htmlFor="experience-theme">Explore By Theme</label>
         </div>
         <div className="region-filter-select-wrap">
           <select
-            id="experience-region"
-            value={selectedRegion}
-            onChange={(event) => setSelectedRegion(event.target.value as Region)}
+            id="experience-theme"
+            value={selectedTheme}
+            onChange={(event) => setSelectedTheme(event.target.value as ExperienceTheme)}
           >
-            {regions.map((region) => (
-              <option key={region} value={region}>
-                {region}
+            {experienceThemeOptions.map((theme) => (
+              <option key={theme} value={theme}>
+                {theme}
               </option>
             ))}
           </select>
         </div>
         <p>
-          {filteredEncounters.length} {filteredEncounters.length === 1 ? 'Private Encounter' : 'Private Encounters'}
+          {curatedOpeningsCount} {curatedOpeningsCount === 1 ? 'Curated Opening' : 'Curated Openings'}
         </p>
       </section>
 
@@ -549,51 +569,71 @@ export function ExperiencesPage() {
             ))
           ) : (
             <div className="encounters-empty experiences-reveal">
-              <p>No encounters currently match this region.</p>
-              <span>Our curators can still shape marine access by arrangement.</span>
+              <p>New encounters are being prepared for this chapter of the collection.</p>
+              <span>This pathway is currently available through private consultation.</span>
             </div>
           )}
         </div>
       </section>
 
-      <section className="further-chapters experiences-reveal">
-        <div className="experiences-container">
-          <header className="chapters-header">
-            <div>
-              <span>Further Chapters</span>
-              <span>By Private Arrangement</span>
+      {filteredFurtherChapters.length > 0 ? (
+        <section className="further-chapters experiences-reveal">
+          <div className="experiences-container">
+            <header className="chapters-header">
+              <div>
+                <span>Further Chapters</span>
+                <span>By Private Arrangement</span>
+              </div>
+              <h2>
+                Additional <em>private pathways</em>
+                <br />
+                into the island.
+              </h2>
+              <p>
+                For guests whose journey calls for quieter doors, each chapter can be shaped around
+                season, access, and the right local host.
+              </p>
+            </header>
+
+            <div className="chapter-cards">
+              {filteredFurtherChapters.map((chapter) => (
+                <article
+                  id={chapter.id}
+                  key={chapter.title}
+                  className={
+                    chapter.offset
+                      ? 'chapter-card chapter-card--offset experiences-reveal'
+                      : 'chapter-card experiences-reveal'
+                  }
+                >
+                  <img src={chapter.image} alt={chapter.alt} />
+                  <div>
+                    <p>{chapter.meta}</p>
+                    <h3>{chapter.title}</h3>
+                    <p>{chapter.copy}</p>
+                    <span>{chapter.label}</span>
+                  </div>
+                </article>
+              ))}
             </div>
-            <h2>
-              Additional <em>private pathways</em>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="editorial-transition experiences-reveal" aria-labelledby="editorial-transition-title">
+        <div className="experiences-container">
+          <div className="editorial-transition-inner">
+            <p>The Philosophy Of Access</p>
+            <h2 id="editorial-transition-title">
+              Beyond the encounters,
               <br />
-              into the island.
+              <em>the thinking behind the collection.</em>
             </h2>
             <p>
-              For guests whose journey calls for quieter doors, each chapter can be shaped around
-              season, access, and the right local host.
+              The encounters above are only part of the story. What matters just as much is how we
+              think about access, wilderness, ceremony, stewardship, and place. The reflections below
+              are not experiences. They are the values that guide every introduction we make.
             </p>
-          </header>
-
-          <div className="chapter-cards">
-            {furtherChapters.map((chapter) => (
-              <article
-                id={chapter.id}
-                key={chapter.title}
-                className={
-                  chapter.offset
-                    ? 'chapter-card chapter-card--offset experiences-reveal'
-                    : 'chapter-card experiences-reveal'
-                }
-              >
-                <img src={chapter.image} alt={chapter.alt} />
-                <div>
-                  <p>{chapter.meta}</p>
-                  <h3>{chapter.title}</h3>
-                  <p>{chapter.copy}</p>
-                  <span>{chapter.label}</span>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -601,7 +641,7 @@ export function ExperiencesPage() {
       <section className="wilderness-feature experiences-reveal">
         <div className="experiences-container wilderness-grid">
           <div className="wilderness-copy">
-            <p>For Those Who Seek</p>
+            <p>The Wilderness Principle</p>
             <h2>
               <em>Wilderness</em>
               <br />
@@ -615,7 +655,7 @@ export function ExperiencesPage() {
               head naturalist has spent twenty years learning to read them all. He will teach you how
               to listen.
             </p>
-            <small>Private Expeditions - By Seasonal Clearance</small>
+            <small>Stewardship - Silence - Fieldcraft</small>
           </div>
           <figure className="wilderness-image-card">
             <img src={experienceImages.leopardFeature} alt="Leopard resting on ancient rock in Yala" />
@@ -636,7 +676,7 @@ export function ExperiencesPage() {
               "We do not offer you religion. We offer you <em>proximity to the sacred.</em>"
             </h2>
             <span>
-              A private vantage is only worthwhile when it protects the dignity of the ceremony itself.
+              Access is only meaningful when it protects the dignity of the ceremony itself.
             </span>
             <cite>- Malini Fernando, Cultural Lead</cite>
           </blockquote>
@@ -645,14 +685,14 @@ export function ExperiencesPage() {
 
       <section className="ocean-feature experiences-reveal">
         <div className="experiences-container">
-          <Eyebrow dark>Feature No. 03</Eyebrow>
+          <Eyebrow dark>Curator's Field Note</Eyebrow>
           <img className="ocean-main-image" src={experienceImages.dhoni} alt="Private wooden dhoni sailing in turquoise lagoon" />
           <div className="ocean-caption">
             <span>Trincomalee Lagoon, East Coast</span>
             <span>8 deg 34 N 81 deg 13 E</span>
           </div>
           <div className="ocean-grid">
-            <p className="ocean-label">Ocean - East Coast</p>
+            <p className="ocean-label">The Ocean Without Performance</p>
             <div>
               <h2>
                 <em>Drift</em> without
@@ -665,7 +705,7 @@ export function ExperiencesPage() {
                 route shaped by wind, tide, and privacy. No fixed return time. No staged theatre. Just
                 the quiet discipline of moving through the east coast on its own terms.
               </p>
-              <small>Drift - 3-7 Days</small>
+              <small>Tide - Privacy - Patience</small>
             </div>
             <figure>
               <img src={experienceImages.reef} alt="Tropical reef with diver silhouette" />
