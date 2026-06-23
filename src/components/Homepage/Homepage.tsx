@@ -55,17 +55,47 @@ const identityCards = [
 const experiences = [
   {
     image: images.junglePavilion,
-    region: 'Highland Estates',
-    title: 'A Tea Country Residence Before the World Wakes',
-    copy: "Arrive by private transfer to a hill-country estate where breakfast is prepared on a veranda above the mist, your guide knows when to speak, and the morning belongs only to your party.",
+    imageAlt: 'Private jungle pavilion surrounded by Sri Lankan wilderness',
+    numeral: 'I',
+    region: 'Wildlife & Wilderness',
+    identity: 'For the Seeker of Silence',
+    access: 'Fieldcraft - Private naturalist - Stillness',
+    title: 'Where Silence Becomes the Guide',
+    copy:
+      'For the traveller who does not want nature performed, wilderness begins with patience: a field naturalist, a protected route, and the discipline to wait until the island reveals itself.',
   },
   {
     image: images.ancientRuins,
-    region: 'Cultural Triangle',
-    title: 'After-Hours History, Held in Confidence',
-    copy: 'Move through ancient stone with a scholar-host, curated timing, and quiet access windows shaped around privacy, heat, light, and the absence of crowds.',
+    imageAlt: 'Ancient Sri Lankan stone ruins surrounded by forest',
+    numeral: 'II',
+    region: 'Heritage & Memory',
+    identity: 'For the Heritage Guardian',
+    access: 'Scholarship - Protected timing - Living memory',
+    title: 'Ancient Places, Entered With Care',
+    copy:
+      'Some travellers are drawn to what time has left behind. We shape access around light, silence, scholarship, and the dignity of places that should never feel consumed.',
+  },
+  {
+    image: images.artisan,
+    imageAlt: 'Sri Lankan artisan working by hand in a private studio',
+    numeral: 'III',
+    region: 'Culture & Human Connection',
+    identity: 'For the Curious Witness',
+    access: 'Private introductions - Family traditions - Human context',
+    title: 'The Human Thread Beneath the Journey',
+    copy:
+      'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of lives briefly, respectfully shared.',
   },
 ]
+
+const experienceThreads = [
+  'Wildlife & Wilderness',
+  'Ocean & Discovery',
+  'Heritage & Memory',
+  'Wellness & Restoration',
+  'Rail & Landscape',
+  'Culture & Human Connection',
+] as const
 
 const philosophyLines = [
   {
@@ -320,30 +350,51 @@ export function Homepage() {
 
       <section className="figma-experiences" id="experiences" data-node-id="103:12794">
         <div className="figma-container">
-          <header className="figma-section-header">
+          <header className="figma-section-header figma-experiences-header">
             <div>
-              <h2>Encounters That Cannot Be Catalogued</h2>
+              <p className="figma-overline">From Discovery To Encounter</p>
+              <h2>Ways Into The Island</h2>
               <p>
-                Private access, expert timing, and human relationships transform Sri Lanka from a
-                destination into a sequence of moments unavailable to the casual traveller.
+                Traveller Discovery reveals what kind of journey may feel true. From there, our
+                curators translate identity into experience themes, and themes into private
+                encounters shaped by timing, trust, and the right local host.
               </p>
             </div>
-            <a href="/experiences">Explore Private Access</a>
+            <aside className="figma-experience-brief">
+              <span>Private Collection</span>
+              <p>
+                Six pathways. No fixed catalogue. Each introduction is selected only when the access
+                protects the place, the host, and the traveller.
+              </p>
+              <a href="/experiences">Explore The Collection</a>
+            </aside>
           </header>
 
+          <div className="figma-theme-thread" aria-label="Experience themes">
+            {experienceThreads.map((thread) => (
+              <span key={thread}>{thread}</span>
+            ))}
+          </div>
+
           <div className="figma-experience-list">
-            {experiences.map((experience, index) => (
+            {experiences.map((experience) => (
               <article className="figma-experience" key={experience.title}>
-                <img src={experience.image} alt="" />
-                <div>
+                <figure className="figma-experience-media">
+                  <img src={experience.image} alt={experience.imageAlt} />
+                  <figcaption>
+                    <span>{experience.numeral}</span>
+                    <small>{experience.access}</small>
+                  </figcaption>
+                </figure>
+                <div className="figma-experience-copy">
                   <p className="figma-card-label">{experience.region}</p>
+                  <small>{experience.identity}</small>
                   <h3>{experience.title}</h3>
                   <p>{experience.copy}</p>
                   <a className="figma-button-secondary" href="/experiences">
-                    Read Story
+                    Follow This Thread
                   </a>
                 </div>
-                {index === 1 ? null : <span aria-hidden="true" />}
               </article>
             ))}
           </div>

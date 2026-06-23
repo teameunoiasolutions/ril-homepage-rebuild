@@ -14,8 +14,6 @@ import perahera from '../../assets/experiences/perahera.jpg'
 import ayurveda from '../../assets/experiences/ayurveda.jpg'
 import leopardFeature from '../../assets/experiences/leopard-feature.jpg'
 import monks from '../../assets/experiences/monks.jpg'
-import dhoni from '../../assets/experiences/dhoni.jpg'
-import reef from '../../assets/experiences/reef.jpg'
 import spices from '../../assets/experiences/spices.jpg'
 import poolVilla from '../../assets/experiences/pool-villa.jpg'
 import oilLamps from '../../assets/experiences/oil-lamps.jpg'
@@ -40,8 +38,6 @@ export const experienceImages = {
   ayurveda,
   leopardFeature,
   monks,
-  dhoni,
-  reef,
   spices,
   poolVilla,
   oilLamps,

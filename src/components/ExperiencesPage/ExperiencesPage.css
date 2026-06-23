@@ -263,11 +263,8 @@
 .hero-image-frame:hover img,
 .encounter-image-frame:hover img,
 .theme-chapter:hover img,
-.chapter-card:hover img,
 .wilderness-image-card:hover img,
-.ceremony-quote figure:hover img,
-.ocean-main-image:hover,
-.ocean-grid figure:hover img {
+.ceremony-quote figure:hover img {
   transform: scale(1.025);
 }
 
@@ -647,19 +644,13 @@
   outline-offset: 4px;
 }
 
-.encounter-row,
-.chapter-card {
+.encounter-row {
   scroll-margin-top: 96px;
 }
 
-.encounter-row:target,
-.chapter-card:target {
+.encounter-row:target {
   border-color: rgba(197, 160, 89, 0.58);
   box-shadow: 0 24px 70px rgba(13, 31, 23, 0.12);
-}
-
-.encounters-collection {
-  padding: 40px 0 104px;
 }
 
 .encounters-collection .experiences-container {
@@ -912,58 +903,10 @@
   font-weight: 400;
 }
 
-.further-chapters,
-.ocean-feature {
-  padding: 72px 0;
-}
-
 .ceremony-quote {
   padding-top: 80px;
 }
 
-.chapters-header {
-  display: grid;
-  grid-template-columns: 2fr minmax(0, 6fr) minmax(260px, 3fr);
-  gap: 40px;
-  align-items: end;
-  margin-bottom: 64px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(197, 160, 89, 0.24);
-}
-
-.chapters-header div {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  color: var(--color-text-faint);
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 3.6px;
-  line-height: var(--line-height-snug);
-  text-transform: uppercase;
-}
-
-.chapters-header div span:first-child {
-  color: var(--color-accent);
-  letter-spacing: 6px;
-}
-
-.chapters-header h2 {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 300;
-  line-height: var(--line-height-display);
-}
-
-.chapters-header > p {
-  color: var(--color-text-muted);
-  font-size: 14px;
-  font-weight: 300;
-  line-height: var(--line-height-body);
-}
-
-.chapters-header em,
-.ocean-grid em,
 .ceremony-quote em,
 .process-quote em {
   color: var(--experience-green);
@@ -971,49 +914,12 @@
   font-weight: 400;
 }
 
-.chapter-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.chapter-card,
 .wilderness-grid,
-.ceremony-quote figure,
-.ocean-feature .experiences-container,
-.ocean-grid figure {
+.ceremony-quote figure {
   overflow: hidden;
 }
 
-.chapter-card--offset {
-  padding-top: 40px;
-}
-
-.chapter-card img {
-  display: block;
-  width: 100%;
-  height: clamp(240px, 22vw, 300px);
-  object-fit: cover;
-  transition: transform 1.4s ease;
-}
-
-.chapter-card div {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-height: 300px;
-  padding: 24px;
-  border: 1px solid rgba(197, 160, 89, 0.22);
-  border-top: 0;
-  background: rgba(251, 249, 245, 0.72);
-}
-
-.chapter-card p:first-child,
-.chapter-card span,
-.ocean-label,
-.ocean-caption,
-.ceremony-quote figcaption,
-.ocean-grid figcaption {
+.ceremony-quote figcaption {
   color: var(--color-text-faint);
   font-family: var(--font-display);
   font-size: 12px;
@@ -1022,31 +928,7 @@
   text-transform: uppercase;
 }
 
-.chapter-card h3 {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-style: italic;
-  font-weight: 300;
-  line-height: var(--line-height-snug);
-}
-
-.chapter-card p:nth-child(3) {
-  color: var(--color-text-subtle);
-  font-size: 13px;
-  font-weight: 300;
-  line-height: var(--line-height-body);
-}
-
-.chapter-card span {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--color-accent);
-}
-
-.chapter-card span::before,
-.wilderness-copy small::before,
-.ocean-grid small::before {
+.wilderness-copy small::before {
   content: '';
   width: 16px;
   height: 1px;
@@ -1054,7 +936,7 @@
 }
 
 .editorial-transition {
-  padding: 56px 0 72px;
+  /* padding: 56px 0 72px; */
   background: var(--experience-ivory);
 }
 
@@ -1170,8 +1052,7 @@
   line-height: var(--line-height-body);
 }
 
-.wilderness-copy small,
-.ocean-grid small {
+.wilderness-copy small {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1227,8 +1108,7 @@
   transition: transform 1.6s ease;
 }
 
-.ceremony-quote figcaption,
-.ocean-grid figcaption {
+.ceremony-quote figcaption {
   margin-top: 12px;
   font-style: italic;
   letter-spacing: 1.2px;
@@ -1273,100 +1153,6 @@
   font-style: normal;
   letter-spacing: 3.6px;
   text-transform: uppercase;
-}
-
-.ocean-feature {
-  padding: 88px 0;
-  border-top: 1px solid var(--color-text-whisper);
-  background: linear-gradient(180deg, var(--experience-ivory), rgba(232, 225, 213, 0.2));
-}
-
-.ocean-feature .experiences-container {
-  display: grid;
-  grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.05fr);
-  gap: 56px;
-  align-items: start;
-}
-
-.ocean-feature .experiences-eyebrow {
-  grid-column: 1 / -1;
-}
-
-.ocean-main-image {
-  display: block;
-  width: 100%;
-  height: clamp(300px, 30vw, 380px);
-  min-height: 0;
-  margin-top: 0;
-  padding: 8px;
-  border: 1px solid rgba(197, 160, 89, 0.26);
-  object-fit: cover;
-  transition: transform 1.8s ease;
-}
-
-.ocean-caption {
-  display: flex;
-  justify-content: space-between;
-  grid-column: 1;
-  gap: 24px;
-  margin-top: -40px;
-  padding: 16px 20px;
-  background: rgba(251, 249, 245, 0.94);
-  border: 1px solid rgba(197, 160, 89, 0.22);
-  text-transform: none;
-  letter-spacing: 1.2px;
-  z-index: 1;
-}
-
-.ocean-grid {
-  display: grid;
-  grid-column: 2;
-  grid-row: 2 / span 2;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 28px;
-  margin-top: 0;
-  padding: 40px;
-  border: 1px solid rgba(197, 160, 89, 0.22);
-  background: rgba(251, 249, 245, 0.74);
-}
-
-.ocean-grid h2 {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 400;
-  line-height: var(--line-height-display);
-}
-
-.ocean-grid > div > span {
-  display: block;
-  width: 32px;
-  height: 1px;
-  margin: 24px 0;
-  background: var(--color-accent);
-}
-
-.ocean-grid > div > p {
-  color: var(--color-text-muted);
-  font-size: 14px;
-  font-weight: 300;
-  line-height: var(--line-height-body);
-}
-
-.ocean-grid small {
-  color: var(--color-accent);
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 3.6px;
-  text-transform: uppercase;
-}
-
-.ocean-grid img {
-  width: 100%;
-  height: 220px;
-  padding: 8px;
-  border: 1px solid rgba(197, 160, 89, 0.22);
-  object-fit: cover;
-  transition: transform 1.4s ease;
 }
 
 .curation-process {
@@ -1549,22 +1335,16 @@
   .hero-image-frame img,
   .encounter-image-frame img,
   .theme-chapter img,
-  .chapter-card img,
   .wilderness-image-card img,
-  .ceremony-quote img,
-  .ocean-main-image,
-  .ocean-grid img {
+  .ceremony-quote img {
     transition: none;
   }
 
   .hero-image-frame:hover img,
   .encounter-image-frame:hover img,
   .theme-chapter:hover img,
-  .chapter-card:hover img,
   .wilderness-image-card:hover img,
-  .ceremony-quote figure:hover img,
-  .ocean-main-image:hover,
-  .ocean-grid figure:hover img {
+  .ceremony-quote figure:hover img {
     transform: none;
   }
 
@@ -1735,9 +1515,7 @@
   .encounter-row,
   .editorial-transition-inner,
   .wilderness-grid,
-  .ceremony-grid,
-  .ocean-feature .experiences-container,
-  .ocean-grid {
+  .ceremony-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1798,31 +1576,12 @@
     border: 0;
   }
 
-  .chapter-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .chapter-card--offset {
-    padding-top: 0;
-  }
-
   .wilderness-copy {
     padding: 48px;
   }
 
   .wilderness-image-card img {
     height: 380px;
-  }
-
-  .ocean-feature .experiences-eyebrow,
-  .ocean-caption,
-  .ocean-grid {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .ocean-caption {
-    margin-top: 12px;
   }
 
   .curation-column {
@@ -1839,10 +1598,8 @@
   .experiences-hero,
   .experience-themes,
   .encounters-collection,
-  .further-chapters,
   .editorial-transition,
   .ceremony-quote,
-  .ocean-feature,
   .curation-process,
   .experiences-final-cta {
     padding-top: 80px;
@@ -1857,14 +1614,12 @@
   .hero-image-frame img,
   .encounter-image-frame img,
   .wilderness-image-card img,
-  .ceremony-quote img,
-  .ocean-main-image {
+  .ceremony-quote img {
     height: 420px;
     min-height: 0;
   }
 
-  .wilderness-feature,
-  .ocean-feature {
+  .wilderness-feature {
     padding-top: 72px;
     padding-bottom: 72px;
   }
@@ -1875,8 +1630,7 @@
   }
 
   .wilderness-copy,
-  .ceremony-grid,
-  .ocean-grid {
+.ceremony-grid {
     padding: 32px 24px;
   }
 
@@ -1965,14 +1719,8 @@
   .encounter-details,
   .encounters-collection-header,
   .curation-grid,
-  .chapters-header,
   .editorial-transition-inner {
     grid-template-columns: 1fr;
-  }
-
-  .chapters-header {
-    gap: 24px;
-    margin-bottom: 56px;
   }
 
   .editorial-transition-inner {
@@ -1989,7 +1737,6 @@
     margin-top: 48px;
   }
 
-  .ocean-caption,
   .experiences-final-cta-actions {
     flex-direction: column;
   }
@@ -2050,13 +1797,8 @@
   }
 
   .wilderness-image-card img,
-  .ceremony-quote img,
-  .ocean-main-image {
+  .ceremony-quote img {
     height: 280px;
-  }
-
-  .ocean-grid img {
-    height: 180px;
   }
 
   .process-quote cite::before,

@@ -147,6 +147,67 @@ const encounters: Encounter[] = [
       { label: 'Curator', value: 'Amara W.' },
     ],
   },
+  {
+    id: 'deep-water-hour',
+    theme: 'Ocean & Discovery',
+    category: 'Ocean - Singular Access',
+    title: 'The Deep-Water Hour',
+    note:
+      'At 5am, a private vessel departs before the tour boats have woken. The blue whale, the largest creature alive, surfaces without warning and without ceremony - merely because it must. The privilege is not proximity alone. It is entering the water on its own terms, without performance.',
+    curator: 'Sahan Mendis, Coastal Experiences',
+    curatorImage: experienceImages.sahan,
+    image: experienceImages.blueWhaleAerial,
+    imageAlt: 'Blue whale surfacing in the Indian Ocean near Mirissa',
+    caption: 'Ocean - Mirissa',
+    details: [
+      { label: 'Duration', value: 'Half Day' },
+      { label: 'Best Season', value: 'Nov - Apr' },
+      { label: 'Group Size', value: 'Max 4' },
+      { label: 'Key Highlight', value: 'Private pre-dawn vessel, marine naturalist' },
+      { label: 'Curator', value: 'Sahan M.' },
+    ],
+  },
+  {
+    id: 'sacred-fire-private-vantage',
+    theme: 'Culture & Human Connection',
+    category: 'Ceremony - Private Vantage',
+    title: 'Sacred Fire, Private Vantage',
+    note:
+      "Access to the inner sanctum of the Temple of the Tooth is never treated as spectacle. A private audience with the temple's senior custodian begins with context, restraint, and the understanding that the ceremony is not adjusted for visitors - you adjust yourself to the ceremony.",
+    curator: 'Malini Fernando, Cultural Lead',
+    curatorImage: experienceImages.amara,
+    image: experienceImages.perahera,
+    imageAlt: 'Kandy Esala Perahera festival procession at night',
+    caption: 'Ceremony - Kandy',
+    details: [
+      { label: 'Duration', value: 'Evening' },
+      { label: 'Best Season', value: 'Year-round' },
+      { label: 'Group Size', value: 'Max 4' },
+      { label: 'Key Highlight', value: 'Senior custodian context, protected vantage' },
+      { label: 'Curator', value: 'Malini F.' },
+    ],
+  },
+  {
+    id: 'ancient-grammar-of-healing',
+    theme: 'Wellness & Restoration',
+    category: 'Restoration - Healing Traditions',
+    title: 'The Ancient Grammar of Healing',
+    note:
+      'Embedded within a rainforest reserve, this five-day Ayurvedic immersion is guided by a fourth-generation vaidya. It is not a spa and not a retreat in the decorative sense. It is a diagnostic and restorative system refined for two thousand years, entered slowly and with discipline.',
+    curator: 'Dilini Perera, Co-Founder',
+    curatorImage: experienceImages.dilini,
+    image: experienceImages.ayurveda,
+    imageAlt: 'Open-air Ayurvedic treatment pavilion in Sri Lanka jungle',
+    badge: 'By Consultation',
+    caption: 'Restoration - Sinharaja',
+    details: [
+      { label: 'Duration', value: '5 Days' },
+      { label: 'Best Season', value: 'All Year' },
+      { label: 'Group Size', value: 'Individual' },
+      { label: 'Key Highlight', value: 'Fourth-generation vaidya, rainforest setting' },
+      { label: 'Curator', value: 'Dilini P.' },
+    ],
+  },
 ]
 
 const experienceThemes = [
@@ -221,45 +282,6 @@ const experienceThemes = [
     href: '#kandyan-dance-rehearsal',
     encounter: 'A Private Kandyan Dance Rehearsal',
     featured: false,
-  },
-] as const
-
-const furtherChapters = [
-  {
-    id: 'deep-water-hour',
-    theme: 'Ocean & Discovery',
-    meta: 'Ocean - Mirissa - Nov-Apr',
-    title: 'The Deep-Water Hour',
-    copy:
-      'At 5am, a private vessel departs before the tour boats have woken. The blue whale, the largest creature alive, surfaces without warning and without ceremony - merely because it must.',
-    label: 'Wilderness',
-    image: experienceImages.blueWhaleAerial,
-    alt: 'Blue whale surfacing in the Indian Ocean near Mirissa',
-    offset: false,
-  },
-  {
-    id: 'sacred-fire-private-vantage',
-    theme: 'Culture & Human Connection',
-    meta: 'Ceremony - Kandy - Year-round',
-    title: 'Sacred Fire, Private Vantage',
-    copy:
-      "Access to the inner sanctum of the Temple of the Tooth. Private audience with the temple's senior custodian. The ceremony is not adjusted for visitors - you adjust yourself to the ceremony.",
-    label: 'Ceremony',
-    image: experienceImages.perahera,
-    alt: 'Kandy Esala Perahera festival procession at night',
-    offset: true,
-  },
-  {
-    id: 'ancient-grammar-of-healing',
-    theme: 'Wellness & Restoration',
-    meta: 'Restoration - Sinharaja - All Year',
-    title: 'The Ancient Grammar of Healing',
-    copy:
-      'Embedded within a rainforest reserve, a five-day Ayurvedic immersion guided by a fourth-generation vaidya. Not a spa. A diagnostic and restorative system refined for two thousand years.',
-    label: 'Solitude',
-    image: experienceImages.ayurveda,
-    alt: 'Open-air Ayurvedic treatment pavilion in Sri Lanka jungle',
-    offset: false,
   },
 ] as const
 
@@ -408,11 +430,7 @@ export function ExperiencesPage() {
     selectedTheme === 'All Encounters'
       ? encounters
       : encounters.filter((encounter) => encounter.theme === selectedTheme)
-  const filteredFurtherChapters =
-    selectedTheme === 'All Encounters'
-      ? furtherChapters
-      : furtherChapters.filter((chapter) => chapter.theme === selectedTheme)
-  const curatedOpeningsCount = filteredEncounters.length + filteredFurtherChapters.length
+  const curatedOpeningsCount = filteredEncounters.length
 
   function handleThemeExplore(
     theme: Exclude<ExperienceTheme, 'All Encounters'>,
@@ -576,63 +594,19 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      {filteredFurtherChapters.length > 0 ? (
-        <section className="further-chapters experiences-reveal">
-          <div className="experiences-container">
-            <header className="chapters-header">
-              <div>
-                <span>Further Chapters</span>
-                <span>By Private Arrangement</span>
-              </div>
-              <h2>
-                Additional <em>private pathways</em>
-                <br />
-                into the island.
-              </h2>
-              <p>
-                For guests whose journey calls for quieter doors, each chapter can be shaped around
-                season, access, and the right local host.
-              </p>
-            </header>
-
-            <div className="chapter-cards">
-              {filteredFurtherChapters.map((chapter) => (
-                <article
-                  id={chapter.id}
-                  key={chapter.title}
-                  className={
-                    chapter.offset
-                      ? 'chapter-card chapter-card--offset experiences-reveal'
-                      : 'chapter-card experiences-reveal'
-                  }
-                >
-                  <img src={chapter.image} alt={chapter.alt} />
-                  <div>
-                    <p>{chapter.meta}</p>
-                    <h3>{chapter.title}</h3>
-                    <p>{chapter.copy}</p>
-                    <span>{chapter.label}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       <section className="editorial-transition experiences-reveal" aria-labelledby="editorial-transition-title">
         <div className="experiences-container">
           <div className="editorial-transition-inner">
             <p>The Philosophy Of Access</p>
             <h2 id="editorial-transition-title">
-              Beyond the encounters,
+              Two principles sit beneath
               <br />
-              <em>the thinking behind the collection.</em>
+              <em>every introduction we make.</em>
             </h2>
             <p>
-              The encounters above are only part of the story. What matters just as much is how we
-              think about access, wilderness, ceremony, stewardship, and place. The reflections below
-              are not experiences. They are the values that guide every introduction we make.
+              The encounters above show what can be arranged. The principles below explain how we
+              decide what should be arranged at all: nature must not be staged, and access must protect
+              dignity. Together, they shape the standard behind the collection.
             </p>
           </div>
         </div>
@@ -671,7 +645,7 @@ export function ExperiencesPage() {
             <figcaption>Polonnaruwa - North Central Province</figcaption>
           </figure>
           <blockquote>
-            <p>On Ceremony</p>
+            <p>The Ceremony Principle</p>
             <h2>
               "We do not offer you religion. We offer you <em>proximity to the sacred.</em>"
             </h2>
@@ -680,38 +654,6 @@ export function ExperiencesPage() {
             </span>
             <cite>- Malini Fernando, Cultural Lead</cite>
           </blockquote>
-        </div>
-      </section>
-
-      <section className="ocean-feature experiences-reveal">
-        <div className="experiences-container">
-          <Eyebrow dark>Curator's Field Note</Eyebrow>
-          <img className="ocean-main-image" src={experienceImages.dhoni} alt="Private wooden dhoni sailing in turquoise lagoon" />
-          <div className="ocean-caption">
-            <span>Trincomalee Lagoon, East Coast</span>
-            <span>8 deg 34 N 81 deg 13 E</span>
-          </div>
-          <div className="ocean-grid">
-            <p className="ocean-label">The Ocean Without Performance</p>
-            <div>
-              <h2>
-                <em>Drift</em> without
-                <br />
-                destination.
-              </h2>
-              <span />
-              <p>
-                A private traditional dhoni, a captain who has fished these waters since birth, and a
-                route shaped by wind, tide, and privacy. No fixed return time. No staged theatre. Just
-                the quiet discipline of moving through the east coast on its own terms.
-              </p>
-              <small>Tide - Privacy - Patience</small>
-            </div>
-            <figure>
-              <img src={experienceImages.reef} alt="Tropical reef with diver silhouette" />
-              <figcaption>Pigeon Island Marine Reserve</figcaption>
-            </figure>
-          </div>
         </div>
       </section>
 
