@@ -8,7 +8,6 @@ import { JournalArticlePage } from './components/JournalArticlePage/JournalArtic
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
 import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
-import { TravellerDiscovery } from './components/TravellerDiscovery/TravellerDiscovery'
 
 function App() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
