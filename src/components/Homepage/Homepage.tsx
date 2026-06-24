@@ -129,9 +129,9 @@ const philosophyLines = [
 
 const sriLankaStats = [
   ['Private', 'Hosts, drivers, guides, and residence teams briefed around your preferences.'],
-  ['VIII', 'UNESCO World Heritage Sites, accessed with timing designed around privacy.'],
-  ['XXI', "National parks and reserves, with expert naturalists and quiet safari pacing."],
-  ['MCCCXLkm', 'Of coastline for villas, yachts, wellness retreats, and family celebrations.'],
+  ['8', 'UNESCO World Heritage Sites, accessed with timing designed around privacy.'],
+  ['21', "National parks and reserves, with expert naturalists and quiet safari pacing."],
+  ['1,340km', 'Of coastline for villas, yachts, wellness retreats, and family celebrations.'],
 ]
 
 const journalItems = [
