@@ -288,6 +288,10 @@
 
 .concierge-response-scroll {
   min-height: 0;
+  display: grid;
+  align-content: start;
+  justify-content: center;
+  grid-template-columns: minmax(0, min(100%, 720px));
   overflow-y: auto;
   padding: 44px 52px 36px;
   scrollbar-color: var(--color-accent) rgba(197, 160, 89, 0.12);
@@ -310,7 +314,8 @@
 .concierge-response-header {
   display: flex;
   gap: 20px;
-  max-width: 680px;
+  width: 100%;
+  max-width: none;
 }
 
 .concierge-response-header > span {
@@ -385,7 +390,8 @@
 }
 
 .concierge-answer {
-  max-width: 680px;
+  width: 100%;
+  max-width: none;
   padding-top: 36px;
 }
 
@@ -621,9 +627,9 @@
 
   .concierge-shell {
     grid-template-columns:
-      clamp(320px, 18vw, 380px)
+      clamp(280px, 17vw, 340px)
       minmax(680px, 1fr)
-      clamp(380px, 22vw, 460px);
+      clamp(360px, 24vw, 520px);
   }
 
   .concierge-panel {
@@ -633,15 +639,11 @@
   .concierge-response-tabs,
   .concierge-response-scroll,
   .concierge-compose {
-    padding-inline: clamp(56px, 5vw, 96px);
+    padding-inline: clamp(40px, 4vw, 72px);
   }
 
-  .concierge-response-header {
-    max-width: 760px;
-  }
-
-  .concierge-answer {
-    max-width: 760px;
+  .concierge-response-scroll {
+    grid-template-columns: minmax(0, min(100%, 840px));
   }
 
   .concierge-recommendations {
