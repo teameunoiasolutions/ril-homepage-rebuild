@@ -310,7 +310,7 @@
 .concierge-response-header {
   display: flex;
   gap: 20px;
-  max-width: 620px;
+  max-width: 680px;
 }
 
 .concierge-response-header > span {
@@ -385,7 +385,7 @@
 }
 
 .concierge-answer {
-  max-width: 580px;
+  max-width: 680px;
   padding-top: 36px;
 }
 
@@ -612,6 +612,45 @@
   font-size: 10px;
   font-style: italic;
   line-height: 1.65;
+}
+
+@media (min-width: 1440px) {
+  .concierge-topbar {
+    padding-inline: clamp(44px, 4vw, 72px);
+  }
+
+  .concierge-shell {
+    grid-template-columns:
+      clamp(320px, 18vw, 380px)
+      minmax(680px, 1fr)
+      clamp(380px, 22vw, 460px);
+  }
+
+  .concierge-panel {
+    padding-inline: clamp(32px, 2.4vw, 44px);
+  }
+
+  .concierge-response-tabs,
+  .concierge-response-scroll,
+  .concierge-compose {
+    padding-inline: clamp(56px, 5vw, 96px);
+  }
+
+  .concierge-response-header {
+    max-width: 760px;
+  }
+
+  .concierge-answer {
+    max-width: 760px;
+  }
+
+  .concierge-recommendations {
+    padding-inline: clamp(28px, 2.2vw, 40px);
+  }
+
+  .concierge-destination-card figure {
+    height: clamp(148px, 9vw, 180px);
+  }
 }
 
 @media (max-width: 1180px) {
