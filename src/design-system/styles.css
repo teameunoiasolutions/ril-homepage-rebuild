@@ -1,3 +1,8 @@
+@import './spacing.css';
+@import './layout.css';
+@import './typography.css';
+@import './patterns.css';
+
 :root {
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -99,16 +104,20 @@
   --letter-spacing-wide: 0.12em;
   --letter-spacing-wider: 0.2em;
 
-  --container-max: 1280px;
-  --container-gutter-mobile: 16px;
-  --container-gutter-tablet: 40px;
-  --container-gutter-desktop: 80px;
-  --container-inset-mobile: 32px;
-  --container-inset-tablet: 80px;
-  --container-inset-desktop: 160px;
+  --container-max: 1440px;
+  --container-max-narrow: 900px;
+  --container-max-prose: 720px;
+  --container-max-legacy: 1280px;
+  --container-max-prep: 1312px;
+  --container-gutter-mobile: var(--space-sm);
+  --container-gutter-tablet: var(--space-xl);
+  --container-gutter-desktop: var(--space-4xl);
+  --container-inset-mobile: calc(var(--container-gutter-mobile) * 2);
+  --container-inset-tablet: calc(var(--container-gutter-tablet) * 2);
+  --container-inset-desktop: calc(var(--container-gutter-desktop) * 2);
 
-  --section-padding: 80px;
-  --section-padding-compact: 60px;
+  --section-padding: var(--space-section);
+  --section-padding-compact: var(--space-section-compact);
 
   --shadow-forest: rgba(13, 31, 23, 0.28);
   --shadow-forest-strong: rgba(13, 31, 23, 0.34);
@@ -148,8 +157,10 @@
 }
 
 .ds-container {
-  width: min(var(--container-max), calc(100% - var(--container-inset-mobile)));
+  width: 100%;
+  max-width: var(--container-max);
   margin-inline: auto;
+  padding-inline: var(--container-gutter-mobile);
 }
 
 .ds-section {
@@ -213,13 +224,13 @@
 
 @media (min-width: 768px) {
   .ds-container {
-    width: min(var(--container-max), calc(100% - var(--container-inset-tablet)));
+    padding-inline: var(--container-gutter-tablet);
   }
 }
 
 @media (min-width: 1200px) {
   .ds-container {
-    width: min(var(--container-max), calc(100% - var(--container-inset-desktop)));
+    padding-inline: var(--container-gutter-desktop);
   }
 }
 

@@ -1,0 +1,66 @@
+.type-eyebrow,
+.type-kicker,
+.ds-kicker,
+.ds-meta {
+  font-family: var(--font-body);
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  line-height: var(--line-height-caption);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+}
+
+.type-kicker,
+.ds-kicker {
+  color: var(--color-accent);
+  letter-spacing: 0.22em;
+}
+
+.type-display,
+.ds-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--line-height-display);
+}
+
+.type-section-heading,
+.ds-section-heading {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  line-height: var(--line-height-display);
+}
+
+.type-body,
+.ds-body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+}
+
+.type-body-muted,
+.ds-body-muted {
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+}
+
+.type-caption,
+.ds-caption {
+  font-family: var(--font-body);
+  font-size: var(--font-size-caption);
+  font-weight: 400;
+  line-height: var(--line-height-caption);
+}
+
+.type-pullquote,
+.ds-pullquote {
+  font-family: var(--font-display);
+  font-size: var(--font-size-pullquote);
+  font-style: italic;
+  font-weight: 600;
+  line-height: var(--line-height-caption);
+}

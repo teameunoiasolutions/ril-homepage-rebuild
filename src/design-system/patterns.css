@@ -1,0 +1,100 @@
+:root {
+  --color-forest-deep: #071710;
+  --color-forest-dark: #04130c;
+  --color-surface-warm: #f4efe6;
+  --color-accent-rule: rgba(197, 160, 89, 0.24);
+  --color-accent-ring: rgba(197, 160, 89, 0.34);
+  --color-accent-haze: rgba(197, 160, 89, 0.14);
+  --color-forest-panel: rgba(13, 31, 23, 0.78);
+  --color-ivory-panel: rgba(251, 249, 245, 0.68);
+  --color-ivory-panel-strong: rgba(251, 249, 245, 0.92);
+}
+
+.editorial-header,
+.ds-editorial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-xl);
+}
+
+.eyebrow-rule,
+.ds-eyebrow-rule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-accent);
+}
+
+.eyebrow-rule::before,
+.ds-eyebrow-rule::before {
+  width: var(--space-lg);
+  height: 1px;
+  background: currentColor;
+  content: '';
+  opacity: 0.7;
+}
+
+.section-divider,
+.ds-section-divider {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.feature-card,
+.ds-editorial-card {
+  border: 1px solid var(--color-accent-subtle);
+  background: var(--color-ivory-panel);
+  box-shadow: 0 18px 42px var(--shadow-card-soft);
+}
+
+.feature-card--dark,
+.ds-editorial-card--dark {
+  border-color: var(--color-accent-rule);
+  background: var(--color-forest-panel);
+  color: var(--color-text-inverse);
+  box-shadow: 0 24px 60px var(--shadow-forest);
+}
+
+.image-caption,
+.ds-image-caption {
+  border: 1px solid var(--color-accent-subtle);
+  background: var(--color-forest-panel);
+  color: var(--color-text-muted-on-dark);
+  backdrop-filter: blur(8px);
+}
+
+.quote-block,
+.ds-quote-block {
+  border-left: 1px solid var(--color-accent-mid);
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-style: italic;
+  line-height: var(--line-height-body);
+}
+
+.final-cta,
+.ds-final-cta {
+  width: min(var(--container-max-narrow), calc(100% - var(--space-2xl)));
+  margin-inline: auto;
+  border: 1px solid var(--color-accent-rule);
+  background:
+    radial-gradient(circle at 50% 0%, var(--color-accent-haze), transparent 34%),
+    linear-gradient(135deg, var(--color-forest-deep), var(--color-primary) 58%, var(--color-forest-dark));
+  color: var(--color-text-inverse);
+  box-shadow: 0 28px 80px var(--shadow-forest);
+}
+
+@media (max-width: 767px) {
+  .editorial-header,
+  .ds-editorial-header {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .final-cta,
+  .ds-final-cta {
+    width: min(100% - var(--space-lg), 480px);
+  }
+}

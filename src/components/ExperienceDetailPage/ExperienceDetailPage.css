@@ -16,9 +16,10 @@
 }
 
 .detail-container {
-  width: min(100%, 1440px);
+  width: 100%;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 80px;
+  padding: 0 var(--container-gutter-desktop);
 }
 
 .detail-eyebrow {
@@ -681,8 +682,8 @@
   overflow: hidden;
   padding: 104px 0;
   background:
-    radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.16), transparent 34%),
-    linear-gradient(135deg, #071710, var(--detail-green) 58%, #04130c);
+    radial-gradient(circle at 50% 0%, var(--color-accent-haze), transparent 34%),
+    linear-gradient(135deg, var(--color-forest-deep), var(--detail-green) 58%, var(--color-forest-dark));
   color: var(--detail-ivory);
 }
 
@@ -705,7 +706,7 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  width: min(900px, calc(100% - 48px));
+  width: min(var(--container-max-narrow), calc(100% - var(--space-2xl)));
   margin: 0 auto;
   text-align: center;
 }
@@ -714,7 +715,7 @@
   content: '';
   position: absolute;
   inset: -48px;
-  border: 1px solid rgba(197, 160, 89, 0.18);
+  border: 1px solid var(--color-accent-rule);
   pointer-events: none;
 }
 
@@ -804,8 +805,8 @@
   .detail-container,
   .detail-hero-top,
   .detail-hero-bottom {
-    padding-left: 48px;
-    padding-right: 48px;
+    padding-left: var(--space-2xl);
+    padding-right: var(--space-2xl);
   }
 
   .detail-hero-number {
@@ -856,8 +857,8 @@
   .detail-container,
   .detail-hero-top,
   .detail-hero-bottom {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
 
   .detail-hero {

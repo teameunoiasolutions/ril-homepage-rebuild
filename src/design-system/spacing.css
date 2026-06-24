@@ -1,0 +1,31 @@
+:root {
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 40px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+  --space-5xl: 96px;
+  --space-6xl: 112px;
+  --space-7xl: 128px;
+  --space-8xl: 160px;
+
+  --space-section: var(--space-4xl);
+  --space-section-compact: 60px;
+  --space-section-large: var(--space-5xl);
+  --space-card: var(--space-md);
+  --space-card-large: var(--space-lg);
+  --space-stack-sm: var(--space-sm);
+  --space-stack-md: var(--space-md);
+  --space-stack-lg: var(--space-xl);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --space-section: var(--space-3xl);
+    --space-section-compact: var(--space-2xl);
+  }
+}

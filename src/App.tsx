@@ -8,6 +8,7 @@ import { JournalArticlePage } from './components/JournalArticlePage/JournalArtic
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
 import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
+import { TravellerDiscovery } from './components/TravellerDiscovery/TravellerDiscovery'
 
 function App() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
@@ -45,6 +46,10 @@ function App() {
 
   if (path === '/travel-preparation') {
     return renderPage(<TravelPreparationPage />)
+  }
+
+  if (path === '/traveller-discovery') {
+    return renderPage(<TravellerDiscovery />)
   }
 
   return renderPage(<Homepage />)

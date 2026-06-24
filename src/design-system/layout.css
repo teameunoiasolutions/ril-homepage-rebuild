@@ -1,0 +1,92 @@
+:root {
+  --container-max: 1440px;
+  --container-max-narrow: 900px;
+  --container-max-prose: 720px;
+  --container-max-legacy: 1280px;
+  --container-max-prep: 1312px;
+  --container-gutter: var(--space-sm);
+  --container-gutter-mobile: var(--space-sm);
+  --container-gutter-tablet: var(--space-xl);
+  --container-gutter-desktop: var(--space-4xl);
+  --container-inset-mobile: calc(var(--container-gutter-mobile) * 2);
+  --container-inset-tablet: calc(var(--container-gutter-tablet) * 2);
+  --container-inset-desktop: calc(var(--container-gutter-desktop) * 2);
+}
+
+.container,
+.ds-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter-mobile);
+}
+
+.container-narrow,
+.ds-container--narrow {
+  width: 100%;
+  max-width: var(--container-max-narrow);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter-mobile);
+}
+
+.container-wide,
+.ds-container--wide {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter-mobile);
+}
+
+.container-legacy,
+.ds-container--legacy {
+  width: 100%;
+  max-width: var(--container-max-legacy);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter-mobile);
+}
+
+.content-measure,
+.ds-content-measure {
+  max-width: var(--container-max-prose);
+}
+
+.layout-section,
+.ds-section {
+  padding-block: var(--space-section);
+}
+
+.layout-section--compact,
+.ds-section--compact {
+  padding-block: var(--space-section-compact);
+}
+
+.layout-section--large,
+.ds-section--large {
+  padding-block: var(--space-section-large);
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-narrow,
+  .container-wide,
+  .container-legacy,
+  .ds-container,
+  .ds-container--narrow,
+  .ds-container--wide,
+  .ds-container--legacy {
+    padding-inline: var(--container-gutter-tablet);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-narrow,
+  .container-wide,
+  .container-legacy,
+  .ds-container,
+  .ds-container--narrow,
+  .ds-container--wide,
+  .ds-container--legacy {
+    padding-inline: var(--container-gutter-desktop);
+  }
+}

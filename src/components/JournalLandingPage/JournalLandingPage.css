@@ -23,9 +23,10 @@
 }
 
 .journal-container {
-  width: min(100%, 1280px);
+  width: 100%;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 var(--container-gutter-desktop);
 }
 
 .journal-landing-page a {
@@ -1123,7 +1124,7 @@
 
 @media (max-width: 767px) {
   .journal-container {
-    padding: 0 24px;
+    padding: 0 var(--space-md);
   }
 
   .journal-hero {
@@ -1411,8 +1412,9 @@
 }
 
 .journal-container {
-  width: min(100%, 1280px);
-  padding-inline: 40px;
+  width: 100%;
+  max-width: var(--container-max);
+  padding-inline: var(--container-gutter-tablet);
 }
 
 .journal-hero {
@@ -1785,7 +1787,7 @@
 
 @media (max-width: 767px) {
   .journal-container {
-    padding-inline: 24px;
+    padding-inline: var(--space-md);
   }
 
   .journal-hero {
@@ -1864,8 +1866,8 @@
   overflow: hidden;
   padding: 96px 0;
   background:
-    radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.16), transparent 34%),
-    linear-gradient(135deg, #071710, var(--color-primary) 58%, #04130c);
+    radial-gradient(circle at 50% 0%, var(--color-accent-haze), transparent 34%),
+    linear-gradient(135deg, var(--color-forest-deep), var(--color-primary) 58%, var(--color-forest-dark));
   color: var(--journal-ivory);
 }
 
@@ -1888,7 +1890,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: min(900px, calc(100% - 48px));
+  width: min(var(--container-max-narrow), calc(100% - var(--space-2xl)));
   margin: 0 auto;
   text-align: center;
 }
@@ -1897,7 +1899,7 @@
   content: '';
   position: absolute;
   inset: -48px;
-  border: 1px solid rgba(197, 160, 89, 0.18);
+  border: 1px solid var(--color-accent-rule);
   pointer-events: none;
 }
 

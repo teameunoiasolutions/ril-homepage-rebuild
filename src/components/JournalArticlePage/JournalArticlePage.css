@@ -26,9 +26,10 @@
 }
 
 .article-container {
-  width: min(100%, 1280px);
+  width: 100%;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 64px;
+  padding: 0 var(--container-gutter-desktop);
 }
 
 .journal-article-page a {
@@ -66,7 +67,7 @@
 .article-breadcrumb {
   position: absolute;
   top: 96px;
-  left: max(32px, calc((100vw - 1280px) / 2 + 64px));
+  left: max(var(--space-lg), calc((100vw - var(--container-max)) / 2 + var(--container-gutter-desktop)));
   z-index: 4;
   display: flex;
   gap: 8px;
@@ -1215,7 +1216,7 @@
 
 @media (max-width: 1199px) {
   .article-container {
-    padding: 0 48px;
+    padding: 0 var(--space-2xl);
   }
 
   .article-hero {
@@ -1359,7 +1360,7 @@
 
 @media (max-width: 767px) {
   .article-container {
-    padding: 0 24px;
+    padding: 0 var(--space-md);
   }
 
   .article-breadcrumb {
@@ -1523,8 +1524,9 @@
 }
 
 .article-container {
-  width: min(100%, 1280px);
-  padding-inline: 40px;
+  width: 100%;
+  max-width: var(--container-max);
+  padding-inline: var(--container-gutter-tablet);
 }
 
 .article-breadcrumb {
@@ -1532,7 +1534,8 @@
   top: auto;
   left: auto;
   z-index: 1;
-  width: min(100%, 1280px);
+  width: 100%;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 40px 40px 0;
 }
@@ -1974,7 +1977,7 @@
 @media (max-width: 767px) {
   .article-container,
   .article-breadcrumb {
-    padding-inline: 24px;
+    padding-inline: var(--space-md);
   }
 
   .article-hero {

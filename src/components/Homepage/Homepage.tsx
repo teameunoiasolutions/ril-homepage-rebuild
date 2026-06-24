@@ -222,13 +222,13 @@ const discoveryPrinciples = [
   'Yours has not been written yet',
 ]
 
-const guideItems = [
-  'A letter, to begin',
-  'Field notes from the island',
-  'Where to begin',
-  'The island through its seasons',
-  'A few hidden corners',
-  'Pages left blank, for you',
+const brochureHighlights = [
+  'Private residences, villas, and estate houses',
+  'Discreet wildlife, heritage, and coastal access',
+  'Seasonal guidance for private family travel',
+  'Family-office level movement, hosting, and privacy',
+  'Sample journey rhythms, never fixed itineraries',
+  'A private consultation path for serious enquiries',
 ]
 
 const questions = [
@@ -352,38 +352,38 @@ export function Homepage() {
           <div className="figma-discovery-grid">
             <div className="figma-copy-stack">
               <p className="figma-overline">Traveller Identities · Part II</p>
-              <h3 className="traveller-discovery-guide">
-                What would
-                <em>yours be?</em>
+              <h3 className="figma-discovery-heading">
+                What would yours be?
               </h3>
               <p>
-                These identities are not options to choose from. They are glimpses of what can emerge
-                when a traveller is listened to carefully: a hidden need, a forgotten curiosity, a
-                way of moving through the world that no form could name.
+                The identities above are real examples from travellers we have come to understand:
+                a hidden need, a forgotten curiosity, a preferred rhythm, or a way of moving through
+                the world that only becomes clear with the right prompts.
               </p>
-              <blockquote>The question is not which one are you. The question is what might we discover?</blockquote>
+              <blockquote>Your own traveller identity may begin with a question, a reflection, or a guided path.</blockquote>
               <p>
-                The identity conversation is where this begins. Through unhurried dialogue, we learn
-                the rhythm behind the journey before shaping the places, pace, people, and private
-                moments around it.
+                On the Traveller Identity page, you can begin privately in the way that feels most
+                natural: an AI-assisted self-discovery guide for deeper reflection, or a short
+                two-minute guided journey for a more immediate first reading.
               </p>
-              <a className="figma-text-link" href="#begin">
+              <a className="figma-text-link" href="/traveller-discovery">
                 Find Your Traveller Identity
               </a>
               <aside className="figma-discovery-brief">
-                <span>Private Identity Salon</span>
+                <span>Your Discovery Path</span>
                 <p>
-                  No questionnaire. No traveller type to select. The identity emerges through a
-                  confidential conversation before any route, residence, host, or encounter is proposed.
+                  Choose between an AI-assisted self-discovery guide or a concise guided quiz. Either
+                  path helps us understand the kind of Sri Lanka journey that may feel personally true
+                  before any route, residence, host, or encounter is proposed.
                 </p>
               </aside>
             </div>
             <figure className="figma-feature-image">
               <img src={images.consultation} alt="Private consultation lounge in Sri Lanka" />
               <figcaption>
-                <strong>The Identity Conversation</strong>
+                <strong>The Identity Discovery</strong>
                 <span>
-                  A guided conversation designed to reveal what kind of journey would feel personally
+                  A private starting point for discovering what kind of journey would feel personally
                   true, not merely impressive.
                 </span>
               </figcaption>
@@ -736,6 +736,63 @@ export function Homepage() {
         </div>
       </section>
 
+      <section className="figma-brochure" data-node-id="103:13062">
+        <div className="figma-container figma-brochure-grid">
+          <div className="figma-brochure-copy">
+            <p className="figma-copper-overline">Private Sri Lanka Briefing</p>
+            <h2>Request the Private Brochure</h2>
+            <span className="figma-copper-rule" />
+            <p>
+              A considered introduction for private families, principals, and discerning travellers
+              exploring Sri Lanka at the highest level: quiet residences, trusted hosts, protected
+              timing, and experiences arranged with discretion rather than display.
+            </p>
+            <div className="figma-brochure-panel">
+              <span>Inside the briefing</span>
+              <ol className="figma-brochure-list">
+                {brochureHighlights.map((item, index) => (
+                  <li key={item}>
+                    <small>{String(index + 1).padStart(2, '0')}</small>
+                    {item}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <p className="figma-brochure-note">
+              Sent privately. No automated itinerary. No mailing-list noise. Just a polished first
+              briefing for travellers who expect careful judgement before any recommendation is made.
+            </p>
+            <form className="figma-brochure-form">
+              <input type="email" aria-label="Your email address" placeholder="Your email address" />
+              <button type="submit">Request Brochure</button>
+            </form>
+          </div>
+          <aside className="figma-brochure-card" aria-label="Private brochure preview">
+            <figure className="figma-brochure-preview" aria-hidden="true">
+              <span className="figma-brochure-sheet">
+                <small>Private Briefing</small>
+                <strong>Sri Lanka</strong>
+                <i />
+              </span>
+              <span className="figma-brochure-leaf">
+                <i />
+                <i />
+                <i />
+              </span>
+            </figure>
+            <div>
+              <p>Royale Isles Lanka</p>
+              <h3>Sri Lanka, held privately for the discerning traveller.</h3>
+              <span>
+                A confidential prelude to the conversation: residences, access, family movement,
+                wellness, wildlife, and the moments best kept away from the obvious path.
+              </span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/*
       <section className="figma-guide" data-node-id="103:13062">
         <div className="figma-container figma-guide-grid">
           <figure>
@@ -776,6 +833,7 @@ export function Homepage() {
           </div>
         </div>
       </section>
+      */}
 
       <section className="figma-faq" data-node-id="103:13229">
         <div className="figma-container figma-faq-inner">

@@ -2,7 +2,7 @@
   min-height: 100vh;
   background:
     radial-gradient(circle at 10% 7%, rgba(197, 160, 89, 0.1), transparent 24%),
-    linear-gradient(180deg, var(--color-surface) 0%, #f4efe6 46%, var(--color-surface) 100%);
+    linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-warm) 46%, var(--color-surface) 100%);
   color: var(--color-text);
   font-family: var(--font-body);
 }
@@ -20,8 +20,10 @@
 }
 
 .figma-container {
-  width: min(var(--container-max), calc(100% - var(--container-inset-desktop)));
+  width: 100%;
+  max-width: var(--container-max);
   margin: 0 auto;
+  padding-inline: var(--container-gutter-desktop);
 }
 
 .figma-nav {
@@ -107,7 +109,7 @@
 }
 
 .figma-hero-scenes {
-  background: #071710;
+  background: var(--color-forest-deep);
 }
 
 .figma-hero-scene {
@@ -255,6 +257,7 @@
 
 .figma-discovery,
 .figma-experiences,
+.figma-brochure,
 .figma-guide {
   padding: var(--section-padding) 0;
   background: var(--color-surface);
@@ -508,7 +511,8 @@
   gap: 20px;
 }
 
-.figma-identities h3 {
+.figma-identities h3,
+.figma-discovery-heading {
   color: var(--color-primary);
   font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 42px);
@@ -949,7 +953,7 @@
   background:
     radial-gradient(circle at 82% 14%, rgba(197, 160, 89, 0.18), transparent 30%),
     radial-gradient(circle at 16% 82%, rgba(197, 160, 89, 0.09), transparent 26%),
-    linear-gradient(135deg, #071710, var(--color-surface-atmospheric) 58%, #04130c);
+    linear-gradient(135deg, var(--color-forest-deep), var(--color-surface-atmospheric) 58%, var(--color-forest-dark));
   color: var(--color-surface);
 }
 
@@ -1171,7 +1175,7 @@
   overflow: hidden;
   background:
     radial-gradient(circle at 78% 18%, rgba(197, 160, 89, 0.18), transparent 30%),
-    linear-gradient(135deg, #071710, var(--color-surface-atmospheric) 58%, #04130c);
+    linear-gradient(135deg, var(--color-forest-deep), var(--color-surface-atmospheric) 58%, var(--color-forest-dark));
   color: var(--color-surface);
 }
 
@@ -2226,8 +2230,8 @@
   padding: var(--section-padding) 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.18), transparent 34%),
-    linear-gradient(135deg, #071710, var(--color-primary) 58%, #04130c);
+    radial-gradient(circle at 50% 0%, var(--color-accent-haze), transparent 34%),
+    linear-gradient(135deg, var(--color-forest-deep), var(--color-primary) 58%, var(--color-forest-dark));
   color: var(--color-surface);
 }
 
@@ -2245,7 +2249,7 @@
 .figma-invitation-inner {
   position: relative;
   z-index: 1;
-  width: min(900px, calc(100% - 48px));
+  width: min(var(--container-max-narrow), calc(100% - var(--space-2xl)));
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -2258,7 +2262,7 @@
   content: '';
   position: absolute;
   inset: -48px;
-  border: 1px solid rgba(197, 160, 89, 0.18);
+  border: 1px solid var(--color-accent-rule);
   pointer-events: none;
 }
 
@@ -2293,6 +2297,7 @@
 }
 
 .figma-email-form,
+.figma-brochure-form,
 .figma-guide-form {
   display: flex;
   width: min(448px, 100%);
@@ -2300,6 +2305,7 @@
 }
 
 .figma-email-form input,
+.figma-brochure-form input,
 .figma-guide-form input {
   min-width: 0;
   flex: 1;
@@ -2317,6 +2323,7 @@
 }
 
 .figma-email-form button,
+.figma-brochure-form button,
 .figma-guide-form button {
   border: 1px solid var(--color-accent);
   border-left: 0;
@@ -2335,6 +2342,305 @@
   opacity: 0.3;
   font-size: 12px;
   letter-spacing: 0.3px;
+}
+
+.figma-brochure {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(197, 160, 89, 0.16);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(197, 160, 89, 0.15), transparent 30%),
+    linear-gradient(135deg, rgba(13, 31, 23, 0.04), transparent 42%),
+    linear-gradient(180deg, rgba(232, 225, 213, 0.24), var(--color-surface) 50%);
+}
+
+.figma-brochure::before {
+  content: '';
+  position: absolute;
+  inset: 32px;
+  border: 1px solid rgba(197, 160, 89, 0.13);
+  pointer-events: none;
+}
+
+.figma-brochure-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.68fr);
+  gap: clamp(48px, 7vw, 104px);
+  align-items: center;
+}
+
+.figma-brochure-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.figma-brochure h2 {
+  max-width: 720px;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  line-height: var(--line-height-display);
+}
+
+.figma-brochure-copy > p:not(.figma-copper-overline) {
+  max-width: 720px;
+  color: var(--color-text-muted);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: var(--line-height-loose);
+}
+
+.figma-brochure-panel {
+  width: min(680px, 100%);
+  padding: 28px;
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  background: rgba(251, 249, 245, 0.72);
+  box-shadow: 0 24px 64px rgba(13, 31, 23, 0.07);
+}
+
+.figma-brochure-panel > span {
+  color: var(--color-accent);
+  font-size: 10px;
+  letter-spacing: 3px;
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.figma-brochure-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+  margin-top: 18px;
+  list-style: none;
+}
+
+.figma-brochure-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 15px 0;
+  border-top: 1px solid rgba(197, 160, 89, 0.16);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: var(--line-height-snug);
+}
+
+.figma-brochure-list small {
+  min-width: 24px;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1;
+}
+
+.figma-brochure-note {
+  font-style: italic;
+}
+
+.figma-brochure-form {
+  width: min(520px, 100%);
+}
+
+.figma-brochure-form input {
+  border-color: rgba(26, 26, 26, 0.28);
+  color: var(--color-text);
+}
+
+.figma-brochure-form input::placeholder {
+  color: rgba(26, 26, 26, 0.46);
+}
+
+.figma-brochure-card {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  background:
+    linear-gradient(145deg, rgba(0, 66, 37, 0.94), rgba(13, 31, 23, 0.98)),
+    var(--color-surface-atmospheric);
+  color: var(--color-surface);
+  box-shadow: 0 34px 90px rgba(13, 31, 23, 0.18);
+}
+
+.figma-brochure-card::after {
+  content: '';
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 88px;
+  height: 88px;
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  pointer-events: none;
+}
+
+.figma-brochure-card figure {
+  position: relative;
+  height: 430px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(197, 160, 89, 0.24), transparent 28%),
+    linear-gradient(145deg, rgba(251, 249, 245, 0.96), rgba(232, 225, 213, 0.88));
+}
+
+.figma-brochure-preview::before,
+.figma-brochure-preview::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  background: rgba(251, 249, 245, 0.72);
+  box-shadow: 0 22px 54px rgba(13, 31, 23, 0.12);
+}
+
+.figma-brochure-preview::before {
+  inset: 58px 62px 72px 82px;
+  transform: rotate(-7deg);
+}
+
+.figma-brochure-preview::after {
+  inset: 76px 74px 54px 70px;
+  transform: rotate(5deg);
+}
+
+.figma-brochure-sheet {
+  position: absolute;
+  z-index: 1;
+  inset: 50px 54px 50px 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 34px;
+  border: 1px solid rgba(197, 160, 89, 0.34);
+  background:
+    linear-gradient(180deg, rgba(251, 249, 245, 0.18), rgba(251, 249, 245, 0.86)),
+    linear-gradient(145deg, #f8f1e2, #d9c8a5);
+  box-shadow: 0 34px 80px rgba(13, 31, 23, 0.18);
+}
+
+.figma-brochure-sheet::before {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.figma-brochure-sheet small {
+  position: relative;
+  z-index: 1;
+  color: var(--color-accent);
+  font-size: 10px;
+  letter-spacing: 2.6px;
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.figma-brochure-sheet strong {
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 400;
+  line-height: var(--line-height-display);
+}
+
+.figma-brochure-sheet > i {
+  position: relative;
+  z-index: 1;
+  width: 72px;
+  height: 1px;
+  margin-top: 22px;
+  background: var(--color-accent);
+}
+
+.figma-brochure-leaf {
+  position: absolute;
+  z-index: 2;
+  top: 92px;
+  right: 48px;
+  width: 124px;
+  height: 164px;
+  transform: rotate(18deg);
+}
+
+.figma-brochure-leaf::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 58px;
+  width: 1px;
+  height: 136px;
+  background: linear-gradient(180deg, rgba(197, 160, 89, 0.2), rgba(197, 160, 89, 0.95));
+}
+
+.figma-brochure-leaf i {
+  position: absolute;
+  width: 70px;
+  height: 32px;
+  border: 1px solid rgba(197, 160, 89, 0.62);
+  border-radius: 70px 0 70px 0;
+  background:
+    linear-gradient(135deg, rgba(197, 160, 89, 0.92), rgba(236, 211, 142, 0.58)),
+    var(--color-accent);
+  box-shadow: 0 16px 28px rgba(13, 31, 23, 0.16);
+}
+
+.figma-brochure-leaf i:nth-child(1) {
+  top: 14px;
+  left: 0;
+  transform: rotate(-26deg);
+}
+
+.figma-brochure-leaf i:nth-child(2) {
+  top: 58px;
+  right: 2px;
+  transform: scaleX(-1) rotate(-22deg);
+}
+
+.figma-brochure-leaf i:nth-child(3) {
+  top: 104px;
+  left: 8px;
+  transform: rotate(-18deg);
+}
+
+.figma-brochure-card div {
+  position: relative;
+  z-index: 1;
+  padding: 30px 12px 8px;
+}
+
+.figma-brochure-card p {
+  color: var(--color-accent);
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.figma-brochure-card h3 {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 400;
+  line-height: var(--line-height-heading);
+}
+
+.figma-brochure-card span {
+  display: block;
+  margin-top: 18px;
+  color: var(--color-text-muted-on-dark);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: var(--line-height-copy);
 }
 
 .figma-guide-grid {
@@ -2788,7 +3094,8 @@
 
 @media (max-width: 1200px) {
   .figma-container {
-    width: min(calc(100% - var(--container-inset-tablet)), 1040px);
+    max-width: 1200px;
+    padding-inline: var(--container-gutter-tablet);
   }
 
   .figma-nav {
@@ -2811,6 +3118,7 @@
 
   .figma-discovery-grid,
   .figma-destination-grid,
+  .figma-brochure-grid,
   .figma-guide-grid,
   .figma-journal-grid,
   .figma-journal-header,
@@ -2912,7 +3220,8 @@
 
 @media (max-width: 860px) {
   .figma-container {
-    width: min(100% - 48px, 720px);
+    max-width: 720px;
+    padding-inline: var(--space-md);
   }
 
   .figma-nav {
@@ -3110,12 +3419,14 @@
 
 @media (max-width: 560px) {
   .figma-container {
-    width: min(100% - 32px, 480px);
+    max-width: 480px;
+    padding-inline: var(--container-gutter-mobile);
   }
 
   .figma-discovery,
   .figma-experiences,
   .figma-journal,
+  .figma-brochure,
   .figma-guide,
   .figma-testimonials,
   .figma-faq,
@@ -3154,6 +3465,7 @@
   .figma-destination h2,
   .figma-testimonials h2,
   .figma-invitation h2,
+  .figma-brochure h2,
   .figma-guide h2,
   .figma-faq h2 {
     font-size: clamp(30px, 9vw, 36px);
@@ -3168,6 +3480,7 @@
   .figma-feature-story-copy > span,
   .figma-journal-list article > div > span,
   .figma-invitation-inner > p:not(.figma-overline),
+  .figma-brochure-copy > p:not(.figma-copper-overline),
   .figma-guide .figma-copy-stack > p:not(.figma-copper-overline),
   .figma-faq-header > div > p,
   .figma-question-list details > p {
@@ -3181,6 +3494,7 @@
 
   .figma-feature-image,
   .figma-bordered-image,
+  .figma-brochure-card figure,
   .figma-guide figure {
     min-height: 0;
     height: 340px;
@@ -3328,13 +3642,57 @@
     text-align: left;
   }
 
+  .figma-brochure::before {
+    inset: 18px;
+  }
+
+  .figma-brochure-copy {
+    gap: 18px;
+  }
+
+  .figma-brochure-panel {
+    padding: 20px;
+  }
+
+  .figma-brochure-list {
+    grid-template-columns: 1fr;
+    margin-top: 14px;
+  }
+
+  .figma-brochure-list li {
+    padding: 13px 0;
+    font-size: 13px;
+  }
+
+  .figma-brochure-card {
+    padding: 14px;
+  }
+
+  .figma-brochure-sheet {
+    inset: 42px 34px 42px;
+    padding: 26px;
+  }
+
+  .figma-brochure-leaf {
+    top: 66px;
+    right: 22px;
+    transform: scale(0.82) rotate(18deg);
+    transform-origin: top right;
+  }
+
+  .figma-brochure-card div {
+    padding: 24px 6px 6px;
+  }
+
   .figma-email-form,
+  .figma-brochure-form,
   .figma-guide-form {
     flex-direction: column;
     padding-top: 12px;
   }
 
   .figma-email-form button,
+  .figma-brochure-form button,
   .figma-guide-form button {
     border-left: 1px solid currentColor;
   }
