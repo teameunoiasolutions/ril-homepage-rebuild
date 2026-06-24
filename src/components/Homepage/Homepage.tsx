@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './Homepage.css'
 import { ArrowIcon } from '../ArrowIcon'
 
+const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const
+
 const images = {
   hero: '/figma-homepage/hero.jpg',
   consultation: '/figma-homepage/consultation.jpg',
@@ -127,9 +129,9 @@ const philosophyLines = [
 
 const sriLankaStats = [
   ['Private', 'Hosts, drivers, guides, and residence teams briefed around your preferences.'],
-  ['8', 'UNESCO World Heritage Sites, accessed with timing designed around privacy.'],
-  ['21', "National parks and reserves, with expert naturalists and quiet safari pacing."],
-  ['1,340km', 'Of coastline for villas, yachts, wellness retreats, and family celebrations.'],
+  ['VIII', 'UNESCO World Heritage Sites, accessed with timing designed around privacy.'],
+  ['XXI', "National parks and reserves, with expert naturalists and quiet safari pacing."],
+  ['MCCCXLkm', 'Of coastline for villas, yachts, wellness retreats, and family celebrations.'],
 ]
 
 const journalItems = [
@@ -137,7 +139,7 @@ const journalItems = [
     image: images.journalHours,
     imageAlt: 'Private terrace set for tea during a quiet Sri Lankan afternoon',
     type: 'Field Notes',
-    date: 'May 2025',
+    date: 'May MMXXV',
     title: 'The Art of Protecting Unscheduled Time',
     excerpt: 'Why the most memorable VVIP journeys often depend on what we deliberately leave unplanned.',
     path: '/journal/protecting-unscheduled-time',
@@ -146,7 +148,7 @@ const journalItems = [
     image: images.journalGuide,
     imageAlt: 'Private Sri Lankan guide standing near an ancient temple threshold',
     type: 'Private Interview',
-    date: 'April 2025',
+    date: 'April MMXXV',
     title: 'The Temple Keeper Who Knows When Not to Speak',
     excerpt: 'A conversation on timing, restraint, and giving sacred places the privacy they deserve.',
     path: '/journal/the-temple-keeper',
@@ -155,7 +157,7 @@ const journalItems = [
     image: images.highlandGolden,
     imageAlt: 'Golden light over Sri Lankan highland tea country',
     type: 'Seasonal Briefing',
-    date: 'March 2025',
+    date: 'March MMXXV',
     title: 'When Tea Country Feels Entirely Yours',
     excerpt: "A curator's note on private residences, cloud forest mornings, and highland routes away from spectacle.",
     path: '/journal/private-tea-country',
@@ -166,7 +168,7 @@ const travellerStories = [
   {
     image: images.travellerOutcrop,
     format: 'Private Film',
-    duration: '02:48',
+    duration: 'II:XLVIII',
     title: 'An anniversary carried by the island',
     quote:
       'We expected a beautiful trip. What we received felt like a private film of our own life, composed in tea country, temples, and candlelit coves.',
@@ -179,7 +181,7 @@ const travellerStories = [
   {
     image: images.hiroko,
     format: 'Photo Journal',
-    duration: '01:56',
+    duration: 'I:LVI',
     title: 'A quiet return to wonder',
     quote: 'The photographs caught what I never would have asked anyone to capture: the pauses.',
     name: 'Hiroko S.',
@@ -191,7 +193,7 @@ const travellerStories = [
   {
     image: images.beachDinner,
     format: 'Hosted Story',
-    duration: '03:12',
+    duration: 'III:XII',
     title: 'A family gathered without agenda',
     quote: 'Every detail disappeared into ease. The films and photographs brought back the feeling.',
     name: 'The Al-Khalid Family',
@@ -242,7 +244,7 @@ const questions = [
     category: 'Planning Window',
     question: 'How far in advance should we begin planning?',
     answer:
-      'For the most considered VVIP arrangements, six to twelve weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
+      'For the most considered VVIP arrangements, VI to XII weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
   },
   {
     category: 'Private Curation',
@@ -372,7 +374,7 @@ export function Homepage() {
               <p>
                 On the Traveller Identity page, you can begin privately in the way that feels most
                 natural: an AI-assisted self-discovery guide for deeper reflection, or a short
-                two-minute guided journey for a more immediate first reading.
+                II-minute guided journey for a more immediate first reading.
               </p>
               <a className="figma-text-link" href="/traveller-discovery">
                 Find Your Traveller Identity
@@ -410,7 +412,7 @@ export function Homepage() {
             <aside className="figma-experience-brief">
               <span>Private Collection</span>
               <p>
-                Six pathways. No fixed catalogue. Each introduction is selected only when the access
+                VI pathways. No fixed catalogue. Each introduction is selected only when the access
                 protects the place, the host, and the traveller.
               </p>
               <a href="/experiences">Explore The Collection</a>
@@ -469,7 +471,7 @@ export function Homepage() {
           <div className="figma-philosophy-lines">
             {philosophyLines.map((line, index) => (
               <article key={line.title}>
-                <span className="figma-line-number">{String(index + 1).padStart(2, '0')}</span>
+                <span className="figma-line-number">{romanNumerals[index]}</span>
                 <span className="figma-roman">{line.numeral}</span>
                 <div>
                   <h3>{line.title}</h3>
@@ -492,7 +494,7 @@ export function Homepage() {
               <small>Founder · Royale Isles Lanka</small>
             </div>
             <p>
-              The island is small enough to feel intimate, yet vast enough that after twenty years,
+              The island is small enough to feel intimate, yet vast enough that after XX years,
               it still surprises me.
             </p>
           </footer>
@@ -594,7 +596,7 @@ export function Homepage() {
             <article className="figma-feature-story">
               <div className="figma-feature-story-copy">
                 <p>
-                  VVIP Field Letter <span>June 2025</span>
+                  VVIP Field Letter <span>June MMXXV</span>
                 </p>
                 <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
                 <span>
@@ -621,7 +623,7 @@ export function Homepage() {
             <div className="figma-journal-list">
               {journalItems.map((item, index) => (
                 <article key={item.title}>
-                  <span className="figma-journal-index">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="figma-journal-index">{romanNumerals[index]}</span>
                   <div>
                     <p>
                       {item.type} <span>{item.date}</span>
@@ -750,7 +752,7 @@ export function Homepage() {
               <ol className="figma-brochure-list">
                 {brochureHighlights.map((item, index) => (
                   <li key={item}>
-                    <small>{String(index + 1).padStart(2, '0')}</small>
+                    <small>{romanNumerals[index]}</small>
                     {item}
                   </li>
                 ))}
@@ -838,7 +840,6 @@ export function Homepage() {
           <div className="figma-faq-header">
             <div>
               <div className="figma-faq-heading">
-                <span>07</span>
                 <i />
                 <p>Frequently Asked</p>
               </div>
@@ -868,7 +869,7 @@ export function Homepage() {
               {questions.map((question, index) => (
                 <details key={question.question}>
                   <summary>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <span>{romanNumerals[index]}</span>
                     <div>
                       <small>{question.category}</small>
                       <strong>{question.question}</strong>
