@@ -162,7 +162,7 @@ const journalItems = [
   },
 ]
 
-const travelerStories = [
+const travellerStories = [
   {
     image: images.travellerOutcrop,
     format: 'Private Film',
@@ -271,7 +271,7 @@ export function Homepage() {
     activeIdentityIndex,
     activeIdentityIndex + 3,
   )
-  const activeStory = travelerStories[activeStoryIndex]
+  const activeStory = travellerStories[activeStoryIndex]
 
   const showPreviousIdentity = () => {
     setActiveIdentityIndex((currentIndex) => (currentIndex === 0 ? identityCards.length - 1 : currentIndex - 1))
@@ -282,11 +282,11 @@ export function Homepage() {
   }
 
   const showPreviousStory = () => {
-    setActiveStoryIndex((currentIndex) => (currentIndex === 0 ? travelerStories.length - 1 : currentIndex - 1))
+    setActiveStoryIndex((currentIndex) => (currentIndex === 0 ? travellerStories.length - 1 : currentIndex - 1))
   }
 
   const showNextStory = () => {
-    setActiveStoryIndex((currentIndex) => (currentIndex + 1) % travelerStories.length)
+    setActiveStoryIndex((currentIndex) => (currentIndex + 1) % travellerStories.length)
   }
 
   return (
@@ -673,7 +673,7 @@ export function Homepage() {
                   ‹
                 </button>
                 <div>
-                  {travelerStories.map((story, index) => (
+                  {travellerStories.map((story, index) => (
                     <button
                       type="button"
                       key={story.name}

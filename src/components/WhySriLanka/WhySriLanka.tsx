@@ -11,7 +11,7 @@ const moments = [
   },
   {
     title: 'Evening, the coast',
-    body: 'By six, the light turns gold and the ocean begins collecting the last colours of the day. Fishing boats drift toward shore as conversations stretch a little longer and the air carries the scent of salt and evening meals. The hills you left this morning already feel like another chapter entirely. Yet somehow, it still feels like the same journey.',
+    body: 'By six, the light turns gold and the ocean begins collecting the last colours of the day. Fishing boats drift towards shore as conversations stretch a little longer and the air carries the scent of salt and evening meals. The hills you left this morning already feel like another chapter entirely. Yet somehow, it still feels like the same journey.',
   },
 ] as const
 

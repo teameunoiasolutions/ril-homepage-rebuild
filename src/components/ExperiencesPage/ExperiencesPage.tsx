@@ -55,7 +55,7 @@ const encounters: Encounter[] = [
     curator: 'Amara Weerasinghe, Heritage & Research',
     curatorImage: experienceImages.amara,
     image: experienceImages.sigiriyaDawn,
-    imageAlt: 'Traveler at private dawn access to Sigiriya rock fortress',
+    imageAlt: 'Traveller at private dawn access to Sigiriya rock fortress',
     badge: "Curator's Choice",
     caption: 'Cultural Heritage - Central Province',
     details: [
@@ -116,7 +116,7 @@ const encounters: Encounter[] = [
     curator: 'Sahan Mendis, Coastal Experiences',
     curatorImage: experienceImages.sahan,
     image: experienceImages.mirissaBoats,
-    imageAlt: 'Traditional Sri Lankan outrigger fishing boats at dawn in Mirissa harbor',
+    imageAlt: 'Traditional Sri Lankan outrigger fishing boats at dawn in Mirissa harbour',
     caption: 'Southern Coast - Mirissa',
     details: [
       { label: 'Duration', value: '1 Day' },
@@ -485,7 +485,7 @@ export function ExperiencesPage() {
 
           <div className="experiences-hero-image">
             <div className="hero-image-frame">
-              <img src={experienceImages.heroSigiriya} alt="Lone traveler at dawn on Sigiriya steps" />
+              <img src={experienceImages.heroSigiriya} alt="Lone traveller at dawn on Sigiriya steps" />
             </div>
             <span className="hero-feature-label">Featured Private Access</span>
             <span className="hero-choice">By Introduction Only</span>

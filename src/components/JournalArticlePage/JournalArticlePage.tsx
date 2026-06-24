@@ -474,7 +474,7 @@ export function JournalArticlePage() {
             <div className="article-two-column-copy">
               <div>
                 <p>
-                  Kashyapa held court here for eleven years. His throne faced east - toward the rising
+                  Kashyapa held court here for eleven years. His throne faced east - towards the rising
                   sun, away from the brother who would eventually reclaim the crown. The archaeologists
                   have reassembled the outline of his throne room in white paint on the rock surface:
                   a ghost floor plan for a ghost life.
@@ -504,7 +504,7 @@ export function JournalArticlePage() {
             </div>
             <figcaption>
               <span>Summit · 370m · 07:03 AM</span>
-              <small>Looking east toward Polonnaruwa</small>
+              <small>Looking east towards Polonnaruwa</small>
             </figcaption>
             <Tape />
           </figure>
