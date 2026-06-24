@@ -325,10 +325,18 @@ export function Homepage() {
                 </p>
               </div>
               <div className="figma-carousel-buttons" aria-label="Browse discovered traveller identities">
-                <button type="button" onClick={showPreviousIdentity} aria-label="Show previous traveller identity">
+                <button
+                  type="button"
+                  onClick={showPreviousIdentity}
+                  aria-label="Show previous traveller identity"
+                >
                   ‹
                 </button>
-                <button type="button" onClick={showNextIdentity} aria-label="Show next traveller identity">
+                <button
+                  type="button"
+                  onClick={showNextIdentity}
+                  aria-label="Show next traveller identity"
+                >
                   ›
                 </button>
               </div>
@@ -378,16 +386,6 @@ export function Homepage() {
                 </p>
               </aside>
             </div>
-            <figure className="figma-feature-image">
-              <img src={images.consultation} alt="Private consultation lounge in Sri Lanka" />
-              <figcaption>
-                <strong>The Identity Discovery</strong>
-                <span>
-                  A private starting point for discovering what kind of journey would feel personally
-                  true, not merely impressive.
-                </span>
-              </figcaption>
-            </figure>
           </div>
           <div className="figma-private-standards" aria-label="Traveller Discovery principles">
             {discoveryPrinciples.map((principle) => (
@@ -594,13 +592,6 @@ export function Homepage() {
           </header>
           <div className="figma-journal-grid">
             <article className="figma-feature-story">
-              <figure className="figma-feature-story-media">
-                <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
-                <figcaption>
-                  <span>Private Access</span>
-                  <small>Sigiriya before the first public ascent</small>
-                </figcaption>
-              </figure>
               <div className="figma-feature-story-copy">
                 <p>
                   VVIP Field Letter <span>June 2025</span>
@@ -619,11 +610,18 @@ export function Homepage() {
                   Read The Field Letter <ArrowIcon />
                 </a>
               </div>
+              <figure className="figma-feature-story-stamp">
+                <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
+                <figcaption>
+                  <span>Private Access</span>
+                  <small>Sigiriya before the first public ascent</small>
+                </figcaption>
+              </figure>
             </article>
             <div className="figma-journal-list">
-              {journalItems.map((item) => (
+              {journalItems.map((item, index) => (
                 <article key={item.title}>
-                  <img src={item.image} alt={item.imageAlt} />
+                  <span className="figma-journal-index">{String(index + 1).padStart(2, '0')}</span>
                   <div>
                     <p>
                       {item.type} <span>{item.date}</span>

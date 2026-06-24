@@ -48,9 +48,9 @@ function App() {
     return renderPage(<TravelPreparationPage />)
   }
 
-  if (path === '/traveller-discovery') {
-    return renderPage(<TravellerDiscovery />)
-  }
+  // if (path === '/traveller-discovery') {
+  //   return renderPage(<TravellerDiscovery />)
+  // }
 
   return renderPage(<Homepage />)
 }
