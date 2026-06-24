@@ -22,32 +22,42 @@ const images = {
 const identityCards = [
   {
     image: images.teaEstate,
+    numeral: 'I',
     label: 'Previously Discovered',
     title: 'The Seeker of Silence',
+    signal: 'Revealed through stillness, restraint, and protected mornings.',
     copy: 'A traveller who arrived asking for beauty, then discovered what they were really seeking was stillness.',
   },
   {
     image: images.artisan,
+    numeral: 'II',
     label: 'Previously Discovered',
     title: 'The Curious Witness',
+    signal: 'Revealed through hands, rituals, and lives kept close to place.',
     copy: 'A guest drawn not to monuments alone, but to the people, rituals, hands, and stories that keep them alive.',
   },
   {
     image: images.beachDinner,
+    numeral: 'III',
     label: 'Previously Discovered',
     title: 'The Romantic',
+    signal: 'Revealed through privacy, time together, and beauty without theatre.',
     copy: 'A traveller who discovered that intimacy, beauty, and time together were the real destination.',
   },
   {
     image: images.journalHours,
+    numeral: 'IV',
     label: 'Previously Discovered',
     title: 'The Unhurried Wanderer',
+    signal: 'Revealed through spaciousness, soft timing, and the absence of hurry.',
     copy: 'Someone who stopped asking what came next, and began noticing what was already unfolding.',
   },
   {
     image: images.journalGuide,
+    numeral: 'V',
     label: 'Previously Discovered',
     title: 'The Story Collector',
+    signal: 'Revealed through thresholds, meals, voices, and remembered detail.',
     copy: 'A traveller who remembered Sri Lanka through voices, meals, thresholds, and conversations.',
   },
 ]
@@ -125,21 +135,30 @@ const sriLankaStats = [
 const journalItems = [
   {
     image: images.journalHours,
+    imageAlt: 'Private terrace set for tea during a quiet Sri Lankan afternoon',
     type: 'Field Notes',
     date: 'May 2025',
-    title: 'The Hours Between Itinerary Items',
+    title: 'The Art of Protecting Unscheduled Time',
+    excerpt: 'Why the most memorable VVIP journeys often depend on what we deliberately leave unplanned.',
+    path: '/journal/protecting-unscheduled-time',
   },
   {
     image: images.journalGuide,
-    type: 'Interview',
+    imageAlt: 'Private Sri Lankan guide standing near an ancient temple threshold',
+    type: 'Private Interview',
     date: 'April 2025',
-    title: 'A Guide Who Has Shown 10,000 People the Same Temple',
+    title: 'The Temple Keeper Who Knows When Not to Speak',
+    excerpt: 'A conversation on timing, restraint, and giving sacred places the privacy they deserve.',
+    path: '/journal/the-temple-keeper',
   },
   {
     image: images.highlandGolden,
-    type: 'Essay',
+    imageAlt: 'Golden light over Sri Lankan highland tea country',
+    type: 'Seasonal Briefing',
     date: 'March 2025',
-    title: 'What Slow Travel Actually Means in Sri Lanka',
+    title: 'When Tea Country Feels Entirely Yours',
+    excerpt: "A curator's note on private residences, cloud forest mornings, and highland routes away from spectacle.",
+    path: '/journal/private-tea-country',
   },
 ]
 
@@ -154,24 +173,32 @@ const travelerStories = [
     name: 'Isabella & Laurent',
     location: 'Monaco',
     detail: 'Southern coast villas, cinnamon estates, and a dusk sail captured by our discreet host.',
+    photoCaption: 'A private coastal anniversary journey, held between cinnamon estates and candlelit coves.',
+    videoCaption: 'A discreet film of the moments between the formal itinerary: arrival, laughter, silence, sea air.',
   },
   {
     image: images.hiroko,
     format: 'Photo Journal',
+    duration: '01:56',
     title: 'A quiet return to wonder',
     quote: 'The photographs caught what I never would have asked anyone to capture: the pauses.',
     name: 'Hiroko S.',
     location: 'Tokyo',
     detail: 'A contemplative route through Kandy, the highlands, and private artisan studios.',
+    photoCaption: 'A contemplative journey through Kandy, tea country, and private artisan rooms.',
+    videoCaption: 'A soft visual record of rituals, thresholds, hands at work, and highland mornings.',
   },
   {
     image: images.beachDinner,
     format: 'Hosted Story',
+    duration: '03:12',
     title: 'A family gathered without agenda',
     quote: 'Every detail disappeared into ease. The films and photographs brought back the feeling.',
     name: 'The Al-Khalid Family',
     location: 'Dubai',
     detail: 'Multi-generational coastal retreat with private dining, wildlife, and ocean rituals.',
+    photoCaption: 'A multi-generational coastal gathering shaped around privacy, ease, and shared meals.',
+    videoCaption: 'A private family film preserving dinners, wildlife mornings, and unposed time together.',
   },
 ]
 
@@ -239,10 +266,12 @@ const questions = [
 
 export function Homepage() {
   const [activeIdentityIndex, setActiveIdentityIndex] = useState(0)
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0)
   const visibleIdentityCards = [...identityCards, ...identityCards].slice(
     activeIdentityIndex,
     activeIdentityIndex + 3,
   )
+  const activeStory = travelerStories[activeStoryIndex]
 
   const showPreviousIdentity = () => {
     setActiveIdentityIndex((currentIndex) => (currentIndex === 0 ? identityCards.length - 1 : currentIndex - 1))
@@ -250,6 +279,14 @@ export function Homepage() {
 
   const showNextIdentity = () => {
     setActiveIdentityIndex((currentIndex) => (currentIndex + 1) % identityCards.length)
+  }
+
+  const showPreviousStory = () => {
+    setActiveStoryIndex((currentIndex) => (currentIndex === 0 ? travelerStories.length - 1 : currentIndex - 1))
+  }
+
+  const showNextStory = () => {
+    setActiveStoryIndex((currentIndex) => (currentIndex + 1) % travelerStories.length)
   }
 
   return (
@@ -299,10 +336,15 @@ export function Homepage() {
             <div className="figma-card-row">
               {visibleIdentityCards.map((card, index) => (
                 <article className="figma-identity-card" key={`${card.title}-${activeIdentityIndex}-${index}`}>
-                  <img src={card.image} alt="" />
-                  <p>{card.label}</p>
-                  <h4>{card.title}</h4>
-                  <span>{card.copy}</span>
+                  <figure>
+                    <img src={card.image} alt="" />
+                  </figure>
+                  <div>
+                    <p>{card.label}</p>
+                    <h4>{card.title}</h4>
+                    <small>{card.signal}</small>
+                    <span>{card.copy}</span>
+                  </div>
                 </article>
               ))}
             </div>
@@ -328,6 +370,13 @@ export function Homepage() {
               <a className="figma-text-link" href="#begin">
                 Find Your Traveller Identity
               </a>
+              <aside className="figma-discovery-brief">
+                <span>Private Identity Salon</span>
+                <p>
+                  No questionnaire. No traveller type to select. The identity emerges through a
+                  confidential conversation before any route, residence, host, or encounter is proposed.
+                </p>
+              </aside>
             </div>
             <figure className="figma-feature-image">
               <img src={images.consultation} alt="Private consultation lounge in Sri Lanka" />
@@ -403,8 +452,19 @@ export function Homepage() {
 
       <section className="figma-philosophy" data-node-id="103:12834">
         <div className="figma-container">
-          <p className="figma-overline">The Philosophy</p>
-          <h2>Why We Exist</h2>
+          <header className="figma-philosophy-header">
+            <div>
+              <p className="figma-overline">The Philosophy</p>
+              <h2>The Standard Behind The Journey</h2>
+            </div>
+            <aside>
+              <span>House Principles</span>
+              <p>
+                Before a route is designed, before access is requested, before any host is approached,
+                we decide whether the journey can be held with enough care.
+              </p>
+            </aside>
+          </header>
           <span className="figma-watermark" aria-hidden="true">
             R
           </span>
@@ -442,12 +502,25 @@ export function Homepage() {
       </section>
 
       <section className="figma-island-stats" id="destinations" data-node-id="103:12887">
-        <img src={images.highlandGolden} alt="Sri Lanka highland landscape at golden hour" />
-        <div>
-          <p className="figma-overline">Why Sri Lanka</p>
-          <h2>
-            A small island with <em>private worlds</em> within it.
-          </h2>
+        <figure className="figma-island-stats-media">
+          <img src={images.highlandGolden} alt="Sri Lanka highland landscape at golden hour" />
+          <figcaption>
+            <span>Central Highlands</span>
+            <small>Tea country, cloud forest, private residences, and routes held away from the obvious path.</small>
+          </figcaption>
+        </figure>
+        <div className="figma-island-stats-copy">
+          <div className="figma-island-stats-heading">
+            <p className="figma-overline">Why Sri Lanka</p>
+            <h2>
+              A small island with <em>private worlds</em> within it.
+            </h2>
+            <p>
+              For VVIP travel, scale matters. Sri Lanka is compact enough to move through with ease,
+              yet layered enough to hold wilderness, sacred cities, coastal privacy, wellness, and
+              family celebration in one carefully protected journey.
+            </p>
+          </div>
           <dl>
             {sriLankaStats.map(([value, label]) => (
               <div key={value}>
@@ -464,6 +537,10 @@ export function Homepage() {
           <div className="figma-copy-stack">
             <p className="figma-overline">The Destination</p>
             <h2>Wild, Sacred, Coastal, and Deeply Personal</h2>
+            <blockquote>
+              The island is not revealed by covering more ground. It is revealed by knowing which door
+              should open, which hour should be protected, and which silence should remain untouched.
+            </blockquote>
             <p className="figma-destination-intro">
               Sri Lanka is compact enough for a seamless private journey and layered enough for a
               lifetime of discovery: tea country residences, ancient cities, leopard country, ocean
@@ -480,45 +557,82 @@ export function Homepage() {
           </div>
           <figure className="figma-bordered-image">
             <img src={images.coastJungle} alt="Aerial view of Sri Lankan coastline and jungle" />
+            <figcaption>
+              <span>Coast & Jungle</span>
+              <small>Private villas, hidden coves, rainforest edges, and coastal routes shaped by discretion.</small>
+            </figcaption>
           </figure>
         </div>
       </section>
 
       <section className="figma-journal" id="journal" data-node-id="103:12936">
+        <span className="figma-journal-mark" aria-hidden="true">
+          Royale Isles Journal
+        </span>
         <div className="figma-container">
-          <header className="figma-section-header">
+          <header className="figma-section-header figma-journal-header">
             <div>
-              <p className="figma-kicker-line">Journal</p>
+              <p className="figma-kicker-line">The Private Journal</p>
               <h2>
-                Private notes for <em>discerning travellers.</em>
+                Intelligence for journeys that must feel <em>effortless.</em>
               </h2>
+              <p>
+                Essays, field letters, and curator briefings for travellers who value privacy,
+                discretion, and access that is meaningful precisely because it is never obvious.
+              </p>
             </div>
-            <a href="/journal">
-              Read all stories <ArrowIcon />
-            </a>
+            <aside className="figma-journal-brief">
+              <span>For principals and private families</span>
+              <p>
+                Notes on timing, hosting, residences, wellness, family movement, and the quiet
+                details that separate a good trip from a fully held journey.
+              </p>
+              <a href="/journal">
+                Enter The Journal <ArrowIcon />
+              </a>
+            </aside>
           </header>
           <div className="figma-journal-grid">
             <article className="figma-feature-story">
-              <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
-              <p>Personal Essay</p>
-              <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
-              <span>
-                A guest reflects on private access, protected time, and the quiet intelligence of a
-                journey that never announced itself as luxury.
-              </span>
-              <a href="/journal/the-sigiriya-dawn-ascent">
-                Read her story <ArrowIcon />
-              </a>
+              <figure className="figma-feature-story-media">
+                <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
+                <figcaption>
+                  <span>Private Access</span>
+                  <small>Sigiriya before the first public ascent</small>
+                </figcaption>
+              </figure>
+              <div className="figma-feature-story-copy">
+                <p>
+                  VVIP Field Letter <span>June 2025</span>
+                </p>
+                <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
+                <span>
+                  A guest reflects on private access, protected time, and the quiet intelligence of a
+                  journey that never announced itself as luxury.
+                </span>
+                <ul className="figma-feature-story-points" aria-label="Featured journal themes">
+                  <li>Protected dawn access</li>
+                  <li>Discreet family-office pacing</li>
+                  <li>Resident scholar accompaniment</li>
+                </ul>
+                <a href="/journal/the-sigiriya-dawn-ascent">
+                  Read The Field Letter <ArrowIcon />
+                </a>
+              </div>
             </article>
             <div className="figma-journal-list">
               {journalItems.map((item) => (
                 <article key={item.title}>
-                  <img src={item.image} alt="" />
+                  <img src={item.image} alt={item.imageAlt} />
                   <div>
                     <p>
                       {item.type} <span>{item.date}</span>
                     </p>
                     <h4>{item.title}</h4>
+                    <span>{item.excerpt}</span>
+                    <a href={item.path}>
+                      Read note <ArrowIcon />
+                    </a>
                   </div>
                 </article>
               ))}
@@ -530,55 +644,71 @@ export function Homepage() {
       <section className="figma-testimonials" data-node-id="103:13017">
         <div className="figma-container figma-testimonials-inner">
           <header className="figma-testimonials-heading">
-            <p className="figma-centered-kicker">Traveler Stories</p>
-            <h2>Journeys remembered in photographs, film, and feeling.</h2>
+            <p className="figma-centered-kicker">Traveller Stories</p>
+            <h2>Traveller stories, held in photographs and private film.</h2>
             <p>
-              For our guests, memory is part of the craft. Select journeys are accompanied by a
-              discreet visual host, preserving the unposed details: the first tea estate sunrise, the
+              For select journeys, memory is part of the craft. A discreet visual host can travel
+              alongside the guest, preserving the unposed details: the first tea estate sunrise, the
               private table by the sea, the silence after a leopard crosses the track.
             </p>
           </header>
 
-          <div className="figma-story-showcase">
-            <article className="figma-featured-story">
-              <div className="figma-story-media">
-                <img src={travelerStories[0].image} alt="" />
-                <span className="figma-story-badge">{travelerStories[0].format}</span>
-                <div className="figma-video-control">
-                  <span aria-hidden="true" />
-                  <small>Watch the film · {travelerStories[0].duration}</small>
+          <article className="figma-testimonial-carousel" aria-live="polite">
+            <figure className="figma-testimonial-photo">
+              <img src={activeStory.image} alt="" />
+              <figcaption>
+                <span>Photo Story</span>
+                <p>{activeStory.photoCaption}</p>
+              </figcaption>
+            </figure>
+
+            <div className="figma-testimonial-copy">
+              <p className="figma-story-location">{activeStory.location}</p>
+              <h3>{activeStory.title}</h3>
+              <blockquote>&ldquo;{activeStory.quote}&rdquo;</blockquote>
+              <footer>
+                <strong>{activeStory.name}</strong>
+                <span>{activeStory.detail}</span>
+              </footer>
+              <div className="figma-story-carousel-controls" aria-label="Browse traveller stories">
+                <button type="button" onClick={showPreviousStory} aria-label="Show previous traveller story">
+                  ‹
+                </button>
+                <div>
+                  {travelerStories.map((story, index) => (
+                    <button
+                      type="button"
+                      key={story.name}
+                      className={index === activeStoryIndex ? 'is-active' : undefined}
+                      onClick={() => setActiveStoryIndex(index)}
+                      aria-label={`Show ${story.name} traveller story`}
+                      aria-current={index === activeStoryIndex ? 'true' : undefined}
+                    />
+                  ))}
                 </div>
+                <button type="button" onClick={showNextStory} aria-label="Show next traveller story">
+                  ›
+                </button>
               </div>
-              <div className="figma-featured-story-copy">
-                <p>{travelerStories[0].location}</p>
-                <h3>{travelerStories[0].title}</h3>
-                <blockquote>&ldquo;{travelerStories[0].quote}&rdquo;</blockquote>
-                <footer>
-                  <strong>{travelerStories[0].name}</strong>
-                  <span>{travelerStories[0].detail}</span>
-                </footer>
-              </div>
-            </article>
-
-            <div className="figma-story-stack">
-              {travelerStories.slice(1).map((story) => (
-                <article className="figma-story-card" key={story.name}>
-                  <img src={story.image} alt="" />
-                  <div>
-                    <p>{story.format}</p>
-                    <h3>{story.title}</h3>
-                    <blockquote>&ldquo;{story.quote}&rdquo;</blockquote>
-                    <footer>
-                      <strong>{story.name}</strong>
-                      <span>{story.location}</span>
-                    </footer>
-                  </div>
-                </article>
-              ))}
             </div>
-          </div>
 
-          <div className="figma-story-promises" aria-label="Traveler story inclusions">
+            <aside className="figma-testimonial-video">
+              <div className="figma-testimonial-video-media">
+                <img src={activeStory.image} alt="" />
+                <button type="button" aria-label={`Watch ${activeStory.name} private film`}>
+                  <span aria-hidden="true" />
+                  <small>Watch private film · {activeStory.duration}</small>
+                </button>
+              </div>
+              <div>
+                <p>{activeStory.format}</p>
+                <h4>Video companion</h4>
+                <span>{activeStory.videoCaption}</span>
+              </div>
+            </aside>
+          </article>
+
+          <div className="figma-story-promises" aria-label="Traveller story inclusions">
             {storyPromises.map((promise) => (
               <span key={promise}>{promise}</span>
             ))}
