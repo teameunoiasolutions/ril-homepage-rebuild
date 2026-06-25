@@ -364,7 +364,7 @@
 .prep-visa-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: clamp(16px, 2vw, 28px);
   margin-top: 56px;
 }
 
@@ -862,8 +862,9 @@
 
 .prep-faq-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 392px);
-  gap: 72px;
+  grid-template-columns: minmax(0, 760px) minmax(340px, 420px);
+  justify-content: center;
+  gap: clamp(36px, 4vw, 64px);
   align-items: start;
 }
 
@@ -1071,7 +1072,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  width: min(var(--container-max-narrow), calc(100% - var(--space-2xl)));
+  width: min(1080px, calc(100% - var(--space-5xl)));
   margin: 0 auto;
   text-align: center;
 }

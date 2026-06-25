@@ -3,7 +3,7 @@
   --container-max-narrow: 900px;
   --container-max-prose: 720px;
   --container-max-legacy: 1280px;
-  --container-max-prep: 1312px;
+  --container-max-prep: 1560px;
   --container-gutter: var(--space-sm);
   --container-gutter-mobile: var(--space-sm);
   --container-gutter-tablet: var(--space-xl);

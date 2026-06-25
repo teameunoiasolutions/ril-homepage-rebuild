@@ -323,7 +323,7 @@
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(520px, 1.18fr);
-  gap: 72px;
+  gap: clamp(40px, 5vw, 72px);
   align-items: center;
 }
 
@@ -556,7 +556,7 @@
 .about-different-inner {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  gap: 72px;
+  gap: clamp(40px, 5vw, 72px);
   align-items: start;
 }
 
@@ -789,7 +789,7 @@
 .about-custodians-header {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  gap: 72px;
+  gap: clamp(40px, 5vw, 72px);
   margin-bottom: 72px;
 }
 
@@ -1046,9 +1046,9 @@
 .about-invitation-inner {
   position: relative;
   z-index: 1;
-  max-width: 896px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 64px;
+  padding: 0 clamp(40px, 5vw, 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1067,6 +1067,7 @@
 }
 
 .about-invitation-heading {
+  max-width: 820px;
   font-family: var(--font-serif);
   font-size: clamp(32px, 4vw, 40px);
   font-weight: 400;
@@ -1080,7 +1081,7 @@
 }
 
 .about-invitation-body {
-  max-width: 520px;
+  max-width: 760px;
   color: var(--color-text-muted-on-dark);
   font-size: 15px;
   font-weight: 300;

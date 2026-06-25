@@ -139,7 +139,7 @@ const journalItems = [
     image: images.journalHours,
     imageAlt: 'Private terrace set for tea during a quiet Sri Lankan afternoon',
     type: 'Field Notes',
-    date: 'May MMXXV',
+    date: 'May 2025',
     title: 'The Art of Protecting Unscheduled Time',
     excerpt: 'Why the most memorable VVIP journeys often depend on what we deliberately leave unplanned.',
     path: '/journal/protecting-unscheduled-time',
@@ -148,7 +148,7 @@ const journalItems = [
     image: images.journalGuide,
     imageAlt: 'Private Sri Lankan guide standing near an ancient temple threshold',
     type: 'Private Interview',
-    date: 'April MMXXV',
+    date: 'April 2025',
     title: 'The Temple Keeper Who Knows When Not to Speak',
     excerpt: 'A conversation on timing, restraint, and giving sacred places the privacy they deserve.',
     path: '/journal/the-temple-keeper',
@@ -157,7 +157,7 @@ const journalItems = [
     image: images.highlandGolden,
     imageAlt: 'Golden light over Sri Lankan highland tea country',
     type: 'Seasonal Briefing',
-    date: 'March MMXXV',
+    date: 'March 2025',
     title: 'When Tea Country Feels Entirely Yours',
     excerpt: "A curator's note on private residences, cloud forest mornings, and highland routes away from spectacle.",
     path: '/journal/private-tea-country',
@@ -412,7 +412,7 @@ export function Homepage() {
             <aside className="figma-experience-brief">
               <span>Private Collection</span>
               <p>
-                VI pathways. No fixed catalogue. Each introduction is selected only when the access
+                6 pathways. No fixed catalogue. Each introduction is selected only when the access
                 protects the place, the host, and the traveller.
               </p>
               <a href="/experiences">Explore The Collection</a>
@@ -494,7 +494,7 @@ export function Homepage() {
               <small>Founder · Royale Isles Lanka</small>
             </div>
             <p>
-              The island is small enough to feel intimate, yet vast enough that after XX years,
+              The island is small enough to feel intimate, yet vast enough that after 20 years,
               it still surprises me.
             </p>
           </footer>
@@ -596,7 +596,7 @@ export function Homepage() {
             <article className="figma-feature-story">
               <div className="figma-feature-story-copy">
                 <p>
-                  VVIP Field Letter <span>June MMXXV</span>
+                  VVIP Field Letter <span>June 2025</span>
                 </p>
                 <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
                 <span>
