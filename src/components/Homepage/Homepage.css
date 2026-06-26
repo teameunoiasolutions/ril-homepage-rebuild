@@ -2240,9 +2240,11 @@
 .figma-invitation-inner > p:not(.figma-overline) {
   max-width: 900px;
   opacity: 0.6;
-  font-size: var(--font-size-body-large);
-  font-weight: 500;
-  line-height: var(--line-height-loose);
+  font-size: var(--font-size-body);
+  font-weight: 300;
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted-on-dark)
+  
 }
 
 .figma-email-form,
