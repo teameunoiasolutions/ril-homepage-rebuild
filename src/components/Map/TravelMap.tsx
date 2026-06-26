@@ -4,11 +4,83 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import { MapControls } from './MapControls'
 import './TravelMap.css'
 
-const SRI_LANKA_CENTER: LngLatLike = [80.74, 7.62]
+const SRI_LANKA_CENTER: LngLatLike = [80.77, 7.87]
 const SRI_LANKA_BOUNDS: LngLatBoundsLike = [
-  [78.95, 5.45],
-  [82.25, 10.15],
+  [79.45, 5.72],
+  [81.95, 9.84],
 ]
+const SRI_LANKA_FOCUS_BOUNDS: LngLatBoundsLike = [
+  [79.62, 5.92],
+  [81.84, 9.72],
+]
+const OVERVIEW_DRAG_ZOOM_THRESHOLD = 7.6
+const MAP_MASK_COLOR = '#fbf9f5'
+const COUNTRY_BOUNDARIES_SOURCE_ID = 'country-boundaries'
+const COUNTRY_MASK_LAYER_ID = 'sri-lanka-country-mask'
+
+// Keep Sri Lanka visible and paint every other country with the map background color.
+const excludeSriLankaFilter = [
+  '!',
+  [
+    'any',
+    ['==', ['get', 'iso_3166_1'], 'LK'],
+    ['==', ['get', 'iso_3166_1_alpha_2'], 'LK'],
+    ['==', ['get', 'iso_3166_1_alpha_3'], 'LKA'],
+  ],
+] as const
+
+function isWaterLayer(layer: { id: string }) {
+  return layer.id.toLowerCase().includes('water')
+}
+
+function muteBaseMapSymbols(map: Map, layerId: string) {
+  map.setPaintProperty(layerId, 'text-opacity', 0)
+  map.setPaintProperty(layerId, 'icon-opacity', 0)
+}
+
+function applySriLankaMask(map: Map) {
+  if (!map.getSource(COUNTRY_BOUNDARIES_SOURCE_ID)) {
+    map.addSource(COUNTRY_BOUNDARIES_SOURCE_ID, {
+      type: 'vector',
+      url: 'mapbox://mapbox.country-boundaries-v1',
+    })
+  }
+
+  const styleLayers = map.getStyle().layers ?? []
+
+  for (const layer of styleLayers) {
+    if (layer.type === 'symbol') {
+      muteBaseMapSymbols(map, layer.id)
+    }
+
+    if (isWaterLayer(layer) && layer.type === 'fill') {
+      map.setPaintProperty(layer.id, 'fill-color', MAP_MASK_COLOR)
+    }
+  }
+
+  if (!map.getLayer(COUNTRY_MASK_LAYER_ID)) {
+    map.addLayer({
+      id: COUNTRY_MASK_LAYER_ID,
+      type: 'fill',
+      source: COUNTRY_BOUNDARIES_SOURCE_ID,
+      'source-layer': 'country_boundaries',
+      filter: excludeSriLankaFilter,
+      paint: {
+        'fill-color': MAP_MASK_COLOR,
+        'fill-opacity': 1,
+      },
+    })
+  }
+}
+
+function keepOverviewFocused(map: Map) {
+  if (map.getZoom() <= OVERVIEW_DRAG_ZOOM_THRESHOLD) {
+    map.dragPan.disable()
+    return
+  }
+
+  map.dragPan.enable()
+}
 
 export type TravelMapProps = {
   children?: ReactNode | ((map: Map) => ReactNode)
@@ -28,10 +100,10 @@ export function TravelMap({
   center = SRI_LANKA_CENTER,
   maxBounds = SRI_LANKA_BOUNDS,
   maxZoom = 14,
-  minZoom = 6.25,
+  minZoom = 6.8,
   onMapReady,
   styleUrl = 'mapbox://styles/mapbox/streets-v12',
-  zoom = 7.25,
+  zoom = 7.4,
 }: TravelMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<Map | null>(null)
@@ -53,14 +125,42 @@ export function TravelMap({
       minZoom,
       maxZoom,
       maxBounds,
+      renderWorldCopies: false,
     })
 
     mapRef.current = map
+    let isRestoringOverview = false
 
     const handleMapLoad = () => {
+      applySriLankaMask(map)
+      map.fitBounds(SRI_LANKA_FOCUS_BOUNDS, {
+        duration: 0,
+        padding: 12,
+      })
+      keepOverviewFocused(map)
       setMapInstance(map)
       onMapReady?.(map)
     }
+
+    const handleZoomEnd = () => {
+      keepOverviewFocused(map)
+
+      if (map.getZoom() > OVERVIEW_DRAG_ZOOM_THRESHOLD || isRestoringOverview) {
+        return
+      }
+
+      isRestoringOverview = true
+      map.fitBounds(SRI_LANKA_FOCUS_BOUNDS, {
+        duration: 320,
+        padding: 12,
+      })
+      map.once('moveend', () => {
+        isRestoringOverview = false
+        keepOverviewFocused(map)
+      })
+    }
+
+    map.on('zoomend', handleZoomEnd)
 
     if (map.loaded()) {
       handleMapLoad()
@@ -70,6 +170,7 @@ export function TravelMap({
 
     return () => {
       map.off('load', handleMapLoad)
+      map.off('zoomend', handleZoomEnd)
       map.remove()
       mapRef.current = null
       setMapInstance(null)
