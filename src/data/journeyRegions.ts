@@ -9,6 +9,7 @@ import oilLamps from '../assets/experiences/oil-lamps.jpg'
 import poolVilla from '../assets/experiences/pool-villa.jpg'
 import sigiriyaDawn from '../assets/experiences/sigiriya-dawn.jpg'
 import teaEstate from '../assets/experiences/tea-estate.jpg'
+import { getExperienceIdsForDestination } from './experiences'
 import { MapMode, type MapMode as MapModeValue } from './mapModes'
 
 export type RegionDestination = {
@@ -16,12 +17,13 @@ export type RegionDestination = {
   title: string
   /** Mapbox coordinates are stored as [longitude, latitude]. */
   coordinates: [number, number]
-  coverImage: string
+  heroImage: string
   description: string
   bestTimeToVisit: string
   journeyMood: string[]
   nearbyExperiences: string[]
   travelNotes: string
+  experienceIds: string[]
   activities: string[]
   experiences: string[]
 }
@@ -42,10 +44,20 @@ export type JourneyRegion = {
   destinations: RegionDestination[]
 }
 
+type RegionDestinationInput = Omit<
+  RegionDestination,
+  'activities' | 'experiences' | 'experienceIds' | 'heroImage'
+> & {
+  coverImage?: string
+  heroImage?: string
+}
+
 const createDestination = (
-  destination: Omit<RegionDestination, 'activities' | 'experiences'>,
+  destination: RegionDestinationInput,
 ): RegionDestination => ({
   ...destination,
+  heroImage: destination.heroImage ?? destination.coverImage ?? '',
+  experienceIds: getExperienceIdsForDestination(destination.id),
   activities: [],
   experiences: [],
 })

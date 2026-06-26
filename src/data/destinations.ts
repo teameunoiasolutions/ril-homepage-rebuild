@@ -8,6 +8,7 @@ import oilLamps from '../assets/experiences/oil-lamps.jpg'
 import poolVilla from '../assets/experiences/pool-villa.jpg'
 import sigiriyaDawn from '../assets/experiences/sigiriya-dawn.jpg'
 import teaEstate from '../assets/experiences/tea-estate.jpg'
+import { getExperienceIdsForDestination } from './experiences'
 import { MapMode, type MapMode as MapModeValue } from './mapModes'
 
 export type Destination = {
@@ -19,6 +20,7 @@ export type Destination = {
   coordinates: [number, number]
   heroImage: string
   shortDescription: string
+  experienceIds: string[]
   themes: string[]
   moods: string[]
   bestMonths: string[]
@@ -27,7 +29,7 @@ export type Destination = {
   hotels: string[]
 }
 
-const destinationRecords: Destination[] = [
+const destinationRecordsBase: Array<Omit<Destination, 'experienceIds'>> = [
   {
     id: 'colombo',
     name: 'Colombo',
@@ -180,13 +182,21 @@ const destinationRecords: Destination[] = [
   },
 ]
 
-const destinationById = Object.fromEntries(
-  destinationRecords.map((destination) => [destination.id, destination]),
-) as Record<string, Destination>
+const addExperienceIds = (destination: Omit<Destination, 'experienceIds'> | Destination): Destination => ({
+  ...destination,
+  experienceIds: getExperienceIdsForDestination(destination.id),
+})
+
+const destinationRecords: Destination[] = destinationRecordsBase.map(addExperienceIds)
+
+const destinationById = Object.fromEntries(destinationRecords.map((destination) => [destination.id, destination])) as Record<
+  string,
+  Destination
+>
 
 export const generalDestinations: Destination[] = destinationRecords
 
-export const personalisedDestinations: Destination[] = [
+const personalisedDestinationRecordsBase: Array<Omit<Destination, 'experienceIds'> | Destination> = [
   destinationById.tangalle,
   {
     id: 'mirissa',
@@ -281,6 +291,8 @@ export const personalisedDestinations: Destination[] = [
     hotels: [],
   },
 ]
+
+export const personalisedDestinations: Destination[] = personalisedDestinationRecordsBase.map(addExperienceIds)
 
 export const mapModeDestinations: Record<MapModeValue, Destination[]> = {
   [MapMode.GENERAL]: generalDestinations,

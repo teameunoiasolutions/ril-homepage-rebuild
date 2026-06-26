@@ -9,6 +9,7 @@ import {
   type JourneyRegion,
   type RegionDestination,
 } from '../data/journeyRegions'
+import { experiencesById, type Experience } from '../data/experiences'
 import { MapMode, mapModeContent } from '../data/mapModes'
 import './TravelPlanner.css'
 
@@ -26,6 +27,8 @@ export function TravelPlanner() {
   const [mapMode, setMapMode] = useState<MapMode>(MapMode.GENERAL)
   const [selectedRegionId, setSelectedRegionId] = useState<string | undefined>()
   const [selectedDestinationId, setSelectedDestinationId] = useState<string | undefined>()
+  const [selectedExperienceId, setSelectedExperienceId] = useState<string | undefined>()
+  const [journeyExperienceIds, setJourneyExperienceIds] = useState<string[]>([])
   const mapRef = useRef<Map | null>(null)
 
   const activeContent = mapModeContent[mapMode]
@@ -34,10 +37,16 @@ export function TravelPlanner() {
   const selectedDestination = selectedRegion?.destinations.find(
     (destination) => destination.id === selectedDestinationId,
   )
+  const selectedDestinationExperiences =
+    selectedDestination?.experienceIds
+      .map((experienceId) => experiencesById[experienceId])
+      .filter((experience): experience is Experience => Boolean(experience)) ?? []
+  const selectedExperience = selectedExperienceId ? experiencesById[selectedExperienceId] : undefined
 
   useEffect(() => {
     setSelectedRegionId(undefined)
     setSelectedDestinationId(undefined)
+    setSelectedExperienceId(undefined)
     mapRef.current?.fitBounds(SRI_LANKA_OVERVIEW_BOUNDS, {
       duration: 700,
       padding: 12,
@@ -51,6 +60,7 @@ export function TravelPlanner() {
   const handleExploreRegions = useCallback(() => {
     setSelectedRegionId(undefined)
     setSelectedDestinationId(undefined)
+    setSelectedExperienceId(undefined)
     mapRef.current?.fitBounds(SRI_LANKA_OVERVIEW_BOUNDS, {
       duration: 700,
       padding: 12,
@@ -60,6 +70,7 @@ export function TravelPlanner() {
   const handleRegionSelect = useCallback((region: JourneyRegion) => {
     setSelectedRegionId(region.id)
     setSelectedDestinationId(undefined)
+    setSelectedExperienceId(undefined)
     mapRef.current?.flyTo({
       center: region.center,
       curve: 1.22,
@@ -73,6 +84,7 @@ export function TravelPlanner() {
   const handleDestinationSelect = useCallback(
     (destination: RegionDestination) => {
       setSelectedDestinationId(destination.id)
+      setSelectedExperienceId(undefined)
       mapRef.current?.flyTo({
         center: destination.coordinates,
         curve: 1.16,
@@ -84,6 +96,22 @@ export function TravelPlanner() {
     },
     [selectedRegion?.zoom],
   )
+
+  const handleExperienceSelect = useCallback((experience: Experience) => {
+    setSelectedExperienceId(experience.id)
+  }, [])
+
+  const handleBackToDestination = useCallback(() => {
+    setSelectedExperienceId(undefined)
+  }, [])
+
+  const handleAddExperienceToJourney = useCallback((experience: Experience) => {
+    setJourneyExperienceIds((currentExperienceIds) =>
+      currentExperienceIds.includes(experience.id)
+        ? currentExperienceIds
+        : [...currentExperienceIds, experience.id],
+    )
+  }, [])
 
   return (
     <main className="travel-planner-page">
@@ -155,8 +183,15 @@ export function TravelPlanner() {
             </TravelMap>
 
             <JourneyDiscoveryPanel
+              addedExperienceIds={journeyExperienceIds}
+              experiences={selectedDestinationExperiences}
+              experienceLookup={experiencesById}
               selectedRegion={selectedRegion}
               selectedDestination={selectedDestination}
+              selectedExperience={selectedExperience}
+              onAddExperienceToJourney={handleAddExperienceToJourney}
+              onBackToDestination={handleBackToDestination}
+              onExperienceSelect={handleExperienceSelect}
               onExploreRegions={handleExploreRegions}
             />
           </div>
