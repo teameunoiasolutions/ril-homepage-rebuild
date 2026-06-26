@@ -8,6 +8,7 @@ import oilLamps from '../assets/experiences/oil-lamps.jpg'
 import poolVilla from '../assets/experiences/pool-villa.jpg'
 import sigiriyaDawn from '../assets/experiences/sigiriya-dawn.jpg'
 import teaEstate from '../assets/experiences/tea-estate.jpg'
+import { MapMode, type MapMode as MapModeValue } from './mapModes'
 
 export type Destination = {
   id: string
@@ -26,7 +27,7 @@ export type Destination = {
   hotels: string[]
 }
 
-export const destinations: Destination[] = [
+const destinationRecords: Destination[] = [
   {
     id: 'colombo',
     name: 'Colombo',
@@ -178,3 +179,112 @@ export const destinations: Destination[] = [
     hotels: [],
   },
 ]
+
+const destinationById = Object.fromEntries(
+  destinationRecords.map((destination) => [destination.id, destination]),
+) as Record<string, Destination>
+
+export const generalDestinations: Destination[] = destinationRecords
+
+export const personalisedDestinations: Destination[] = [
+  destinationById.tangalle,
+  {
+    id: 'mirissa',
+    name: 'Mirissa',
+    province: 'Southern Province',
+    district: 'Matara',
+    coordinates: [80.4716, 5.9485],
+    heroImage: mirissaBoats,
+    shortDescription: 'A soft southern bay for slow mornings, ocean rituals and candlelit coastal evenings.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'rekawa',
+    name: 'Rekawa',
+    province: 'Southern Province',
+    district: 'Hambantota',
+    coordinates: [80.8356, 6.0477],
+    heroImage: blueWhaleSunset,
+    shortDescription: 'A quiet lagoon-edge coast where twilight, turtles and tide pools set the pace.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  destinationById.ella,
+  destinationById['nuwara-eliya'],
+  {
+    id: 'private-villas',
+    name: 'Private Villas',
+    province: 'Southern Province',
+    district: 'Galle',
+    coordinates: [80.2467, 6.0367],
+    heroImage: poolVilla,
+    shortDescription: 'Secluded garden residences and poolside stillness for journeys that feel entirely your own.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'hidden-beaches',
+    name: 'Hidden Beaches',
+    province: 'Southern Province',
+    district: 'Hambantota',
+    coordinates: [80.7676, 5.9834],
+    heroImage: mirissaBoats,
+    shortDescription: 'Low-key stretches of coast chosen for privacy, warm water and unhurried conversation.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'sunset-dining',
+    name: 'Sunset Dining',
+    province: 'Southern Province',
+    district: 'Galle',
+    coordinates: [80.2168, 6.0261],
+    heroImage: galleFort,
+    shortDescription: 'Golden-hour tables, sea breeze and intimate menus arranged around the mood of the evening.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'mountain-retreats',
+    name: 'Mountain Retreats',
+    province: 'Uva Province',
+    district: 'Badulla',
+    coordinates: [80.9562, 6.7654],
+    heroImage: teaEstate,
+    shortDescription: 'Highland hideaways wrapped in tea, cloud forest and the quiet drama of the hills.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+]
+
+export const mapModeDestinations: Record<MapModeValue, Destination[]> = {
+  [MapMode.GENERAL]: generalDestinations,
+  [MapMode.PERSONALISED]: personalisedDestinations,
+}
+
+export const destinations = generalDestinations

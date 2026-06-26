@@ -54,6 +54,16 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  animation: destination-marker-enter 280ms ease both;
+}
+
+.destination-marker--leaving {
+  pointer-events: none;
+  animation: destination-marker-leave 220ms ease both;
+}
+
+.mapboxgl-canvas {
+  cursor: default;
 }
 
 .destination-marker__visual {
@@ -286,5 +296,25 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes destination-marker-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes destination-marker-leave {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
