@@ -1,0 +1,909 @@
+DestinationMarker.tsx file
+
+import { useEffect } from 'react'
+import { createRoot } from 'react-dom/client'
+import mapboxgl, { type Map, type Popup } from 'mapbox-gl'
+import type { Destination } from '../../data/destinations'
+import { DestinationPopup } from './DestinationPopup'
+
+type PopupAnchor =
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left'
+  | 'right'
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+
+type DestinationMarkerProps = {
+  destination: Destination
+  map: Map
+}
+
+let activePopupRequest = 0
+let closeActivePopup: (() => void) | null = null
+
+function createMarkerElement(destination: Destination) {
+  const marker = document.createElement('button')
+  const visual = document.createElement('span')
+  const halo = document.createElement('span')
+  const core = document.createElement('span')
+  const label = document.createElement('span')
+
+  marker.type = 'button'
+  marker.className = 'destination-marker'
+  marker.setAttribute('aria-label', `Discover ${destination.name}`)
+
+  visual.className = 'destination-marker__visual'
+  halo.className = 'destination-marker__halo'
+  core.className = 'destination-marker__core'
+  label.className = 'destination-marker__label'
+  label.textContent = destination.name
+
+  visual.append(halo, core)
+  marker.append(visual, label)
+
+  return marker
+}
+
+function getPopupAnchor(map: Map, coordinates: Destination['coordinates']): PopupAnchor {
+  const point = map.project(coordinates)
+  const canvas = map.getCanvas()
+  const edgePadding = 220
+  const isNearTop = point.y < edgePadding
+  const isNearBottom = point.y > canvas.clientHeight - edgePadding
+  const isNearLeft = point.x < edgePadding
+  const isNearRight = point.x > canvas.clientWidth - edgePadding
+
+  if (isNearTop && isNearLeft) {
+    return 'top-left'
+  }
+
+  if (isNearTop && isNearRight) {
+    return 'top-right'
+  }
+
+  if (isNearBottom && isNearLeft) {
+    return 'bottom-left'
+  }
+
+  if (isNearBottom && isNearRight) {
+    return 'bottom-right'
+  }
+
+  if (isNearTop) {
+    return 'top'
+  }
+
+  if (isNearBottom) {
+    return 'bottom'
+  }
+
+  if (isNearLeft) {
+    return 'left'
+  }
+
+  if (isNearRight) {
+    return 'right'
+  }
+
+  return 'bottom'
+}
+
+function getFlyToOffset(anchor: PopupAnchor): [number, number] {
+  const x =
+    anchor.endsWith('left') || anchor === 'left'
+      ? -140
+      : anchor.endsWith('right') || anchor === 'right'
+        ? 140
+        : 0
+  const y = anchor.startsWith('top') ? -120 : anchor.startsWith('bottom') ? 120 : 0
+
+  return [x, y]
+}
+
+export function DestinationMarker({ destination, map }: DestinationMarkerProps) {
+  useEffect(() => {
+    const markerElement = createMarkerElement(destination)
+    const popupElement = document.createElement('div')
+    const popupRoot = createRoot(popupElement)
+
+    popupRoot.render(<DestinationPopup destination={destination} />)
+
+    let popup: Popup | null = null
+    const removePopup = () => popup?.remove()
+
+    const marker = new mapboxgl.Marker({
+      anchor: 'center',
+      element: markerElement,
+    })
+      .setLngLat(destination.coordinates)
+      .addTo(map)
+
+    const openPopup = () => {
+      const popupRequest = activePopupRequest + 1
+      const anchor = getPopupAnchor(map, destination.coordinates)
+      const targetZoom = Math.max(map.getZoom(), 7.55)
+
+      activePopupRequest = popupRequest
+      closeActivePopup?.()
+      popup?.remove()
+      popup = new mapboxgl.Popup({
+        anchor,
+        className: 'destination-popup',
+        closeButton: false,
+        closeOnClick: true,
+        focusAfterOpen: false,
+        maxWidth: '360px',
+        offset: 28,
+      })
+      closeActivePopup = removePopup
+
+      map.flyTo({
+        center: destination.coordinates,
+        curve: 1.25,
+        duration: 850,
+        essential: true,
+        offset: getFlyToOffset(anchor),
+        speed: 0.75,
+        zoom: targetZoom,
+      })
+
+      map.once('moveend', () => {
+        if (popupRequest !== activePopupRequest) {
+          return
+        }
+
+        popup?.setLngLat(destination.coordinates).setDOMContent(popupElement).addTo(map)
+      })
+    }
+
+    markerElement.addEventListener('click', openPopup)
+
+    return () => {
+      markerElement.removeEventListener('click', openPopup)
+      marker.remove()
+      popup?.remove()
+      if (closeActivePopup === removePopup) {
+        closeActivePopup = null
+      }
+      popupRoot.unmount()
+    }
+  }, [destination, map])
+
+  return null
+}
+
+
+DestinationPopup.tsx file
+
+import type { Destination } from '../../data/destinations'
+
+type DestinationPopupProps = {
+  destination: Destination
+}
+
+export function DestinationPopup({ destination }: DestinationPopupProps) {
+  return (
+    <article className="destination-popup-card">
+      <img
+        className="destination-popup-card__image"
+        src={destination.heroImage}
+        alt={`${destination.name} destination preview`}
+      />
+      <div className="destination-popup-card__content">
+        <p className="destination-popup-card__eyebrow">{destination.province}</p>
+        <h2>{destination.name}</h2>
+        <p>{destination.shortDescription}</p>
+        <a className="destination-popup-card__link" href={`/travel-planner#${destination.id}`}>
+          Explore Destination
+        </a>
+      </div>
+    </article>
+  )
+}
+
+MapControls.tsx
+
+import { useEffect } from 'react'
+import mapboxgl, { type Map } from 'mapbox-gl'
+
+type MapControlsProps = {
+  map: Map
+}
+
+export function MapControls({ map }: MapControlsProps) {
+  useEffect(() => {
+    const navigationControl = new mapboxgl.NavigationControl({ showCompass: true, showZoom: true })
+    map.addControl(navigationControl, 'top-right')
+
+    return () => {
+      map.removeControl(navigationControl)
+    }
+  }, [map])
+
+  return null
+}
+
+
+TravelMap.css
+
+.travel-map {
+  position: relative;
+  width: 100%;
+  min-height: 640px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+  background: var(--color-surface-secondary);
+  box-shadow: 0 28px 90px var(--shadow-card-soft);
+}
+
+.travel-map__canvas {
+  width: 100%;
+  min-height: inherit;
+  height: 100%;
+}
+
+.travel-map--empty {
+  display: grid;
+  place-items: center;
+  padding: var(--space-xl);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+}
+
+.travel-map .mapboxgl-ctrl-top-right {
+  top: 24px;
+  right: 24px;
+}
+
+.travel-map .mapboxgl-ctrl-group {
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.32);
+  border-radius: 14px;
+  background: rgba(251, 249, 245, 0.92);
+  box-shadow: 0 16px 40px var(--shadow-card);
+}
+
+.travel-map .mapboxgl-ctrl button {
+  width: 34px;
+  height: 34px;
+}
+
+.destination-marker {
+  position: relative;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  appearance: none;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.destination-marker__visual {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+  transition: transform 240ms ease;
+}
+
+.destination-marker__halo,
+.destination-marker__core {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.destination-marker__halo {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(197, 160, 89, 0.48);
+  background: rgba(251, 249, 245, 0.72);
+  box-shadow: 0 10px 26px rgba(13, 31, 23, 0.22);
+  transition:
+    border-color 240ms ease,
+    transform 240ms ease,
+    background 240ms ease;
+}
+
+.destination-marker__core {
+  width: 9px;
+  height: 9px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 66, 37, 0.78);
+  transition:
+    box-shadow 240ms ease,
+    transform 240ms ease;
+}
+
+.destination-marker__label {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  width: max-content;
+  max-width: 150px;
+  padding: 7px 11px;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: 999px;
+  background: rgba(251, 249, 245, 0.94);
+  box-shadow: 0 12px 34px rgba(13, 31, 23, 0.16);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-caption);
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translate(-50%, 6px);
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
+  white-space: nowrap;
+}
+
+.destination-marker:hover,
+.destination-marker:focus-visible {
+  z-index: 2;
+}
+
+.destination-marker:hover .destination-marker__visual,
+.destination-marker:focus-visible .destination-marker__visual {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.destination-marker:hover .destination-marker__halo,
+.destination-marker:focus-visible .destination-marker__halo {
+  border-color: var(--color-accent);
+  background: rgba(251, 249, 245, 0.95);
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.destination-marker:hover .destination-marker__core,
+.destination-marker:focus-visible .destination-marker__core {
+  box-shadow: 0 0 0 4px rgba(0, 66, 37, 0.74);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.destination-marker:hover .destination-marker__label,
+.destination-marker:focus-visible .destination-marker__label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.destination-marker:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.destination-popup.mapboxgl-popup {
+  z-index: 5;
+}
+
+.destination-popup .mapboxgl-popup-content {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: 26px;
+  background: var(--color-surface);
+  box-shadow: 0 28px 80px rgba(13, 31, 23, 0.22);
+  animation: destination-popup-enter 260ms ease both;
+}
+
+.destination-popup .mapboxgl-popup-tip {
+  border-top-color: var(--color-surface);
+}
+
+.destination-popup.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.destination-popup.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.destination-popup.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  border-bottom-color: var(--color-surface);
+}
+
+.destination-popup.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.destination-popup.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.destination-popup.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  border-top-color: var(--color-surface);
+}
+
+.destination-popup.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: var(--color-surface);
+}
+
+.destination-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: var(--color-surface);
+}
+
+.destination-popup-card {
+  width: min(340px, calc(100vw - 40px));
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.destination-popup-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.destination-popup-card__content {
+  padding: 24px 24px 26px;
+}
+
+.destination-popup-card__eyebrow {
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-wider);
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.destination-popup-card h2 {
+  margin-top: 8px;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.035em;
+}
+
+.destination-popup-card p:not(.destination-popup-card__eyebrow) {
+  margin-top: 12px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: var(--line-height-copy);
+}
+
+.destination-popup-card__link {
+  display: inline-flex;
+  margin-top: 22px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid currentColor;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-caption);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.destination-popup-card__link:hover,
+.destination-popup-card__link:focus-visible {
+  color: var(--color-primary);
+}
+
+@media (max-width: 767px) {
+  .travel-map {
+    min-height: 520px;
+    border-radius: 22px;
+  }
+
+  .travel-map .mapboxgl-ctrl-top-right {
+    top: 16px;
+    right: 16px;
+  }
+
+  .destination-popup-card {
+    width: min(310px, calc(100vw - 32px));
+  }
+}
+
+@keyframes destination-popup-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+TravelMap.tsx
+
+import { type ReactNode, useEffect, useRef, useState } from 'react'
+import mapboxgl, { type LngLatBoundsLike, type LngLatLike, type Map } from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
+import { MapControls } from './MapControls'
+import './TravelMap.css'
+
+const SRI_LANKA_CENTER: LngLatLike = [80.74, 7.62]
+const SRI_LANKA_BOUNDS: LngLatBoundsLike = [
+  [78.95, 5.45],
+  [82.25, 10.15],
+]
+
+export type TravelMapProps = {
+  children?: ReactNode | ((map: Map) => ReactNode)
+  className?: string
+  center?: LngLatLike
+  maxBounds?: LngLatBoundsLike
+  maxZoom?: number
+  minZoom?: number
+  onMapReady?: (map: Map) => void
+  styleUrl?: string
+  zoom?: number
+}
+
+export function TravelMap({
+  children,
+  className,
+  center = SRI_LANKA_CENTER,
+  maxBounds = SRI_LANKA_BOUNDS,
+  maxZoom = 14,
+  minZoom = 6.25,
+  onMapReady,
+  styleUrl = 'mapbox://styles/mapbox/streets-v12',
+  zoom = 7.25,
+}: TravelMapProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const mapRef = useRef<Map | null>(null)
+  const [mapInstance, setMapInstance] = useState<Map | null>(null)
+  const accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
+
+  useEffect(() => {
+    if (!containerRef.current || !accessToken || mapRef.current) {
+      return
+    }
+
+    mapboxgl.accessToken = accessToken
+
+    const map = new mapboxgl.Map({
+      container: containerRef.current,
+      style: styleUrl,
+      center,
+      zoom,
+      minZoom,
+      maxZoom,
+      maxBounds,
+    })
+
+    mapRef.current = map
+    setMapInstance(map)
+    onMapReady?.(map)
+
+    return () => {
+      map.remove()
+      mapRef.current = null
+      setMapInstance(null)
+    }
+  }, [accessToken, center, maxBounds, maxZoom, minZoom, onMapReady, styleUrl, zoom])
+
+  if (!accessToken) {
+    return (
+      <div className={`travel-map travel-map--empty ${className ?? ''}`.trim()} role="status">
+        Mapbox access token is not configured.
+      </div>
+    )
+  }
+
+  return (
+    <div className={`travel-map ${className ?? ''}`.trim()}>
+      <div ref={containerRef} className="travel-map__canvas" aria-label="Interactive map of Sri Lanka" />
+      {mapInstance ? (
+        <>
+          <MapControls map={mapInstance} />
+          {typeof children === 'function' ? children(mapInstance) : children}
+        </>
+      ) : null}
+    </div>
+  )
+}
+
+travelplanner.css
+
+.travel-planner-page {
+  width: 100%;
+  min-height: 100svh;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 84% 8%, var(--color-accent-faint) 0, transparent 32%),
+    linear-gradient(180deg, var(--color-surface-secondary-soft) 0%, var(--color-surface) 44%);
+}
+
+.travel-planner-page__container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--container-gutter-mobile);
+}
+
+.travel-planner-page__intro {
+  padding-block: 86px 34px;
+}
+
+.travel-planner-page__intro h1 {
+  max-width: 840px;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.travel-planner-page__intro p:not(.travel-planner-page__eyebrow) {
+  max-width: 680px;
+  margin-top: 24px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body);
+}
+
+.travel-planner-page__eyebrow {
+  color: var(--color-primary);
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+.travel-planner-page__map-section {
+  padding-block: 0 98px;
+}
+
+.travel-planner-page__container--map {
+  max-width: min(1520px, 100%);
+}
+
+@media (min-width: 768px) {
+  .travel-planner-page__container {
+    padding-inline: var(--container-gutter-tablet);
+  }
+}
+
+@media (min-width: 1200px) {
+  .travel-planner-page__container {
+    padding-inline: var(--container-gutter-desktop);
+  }
+}
+
+@media (max-width: 680px) {
+  .travel-planner-page__intro {
+    padding-block: 58px 28px;
+  }
+
+  .travel-planner-page__map-section {
+    padding-block-end: 64px;
+  }
+}
+
+travelplanner.tsx
+
+import { DestinationMarker } from '../components/Map/DestinationMarker'
+import { TravelMap } from '../components/Map/TravelMap'
+import { destinations } from '../data/destinations'
+import './TravelPlanner.css'
+
+export function TravelPlanner() {
+  return (
+    <main className="travel-planner-page">
+      <section className="travel-planner-page__intro">
+        <div className="travel-planner-page__container">
+          <p className="travel-planner-page__eyebrow">Destination Discovery</p>
+          <h1>Discover Sri Lanka</h1>
+          <p>
+            A calm editorial map of the island's essential places, designed as the foundation for
+            future themes, moods, routes, stays and journey intelligence.
+          </p>
+        </div>
+      </section>
+
+      <section className="travel-planner-page__map-section" aria-label="Sri Lanka destination discovery map">
+        <div className="travel-planner-page__container travel-planner-page__container--map">
+          <TravelMap>
+            {(map) =>
+              destinations.map((destination) => (
+                <DestinationMarker key={destination.id} destination={destination} map={map} />
+              ))
+            }
+          </TravelMap>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+
+destinations.tsx
+
+import blueWhaleSunset from '../assets/experiences/blue-whale-sunset.jpg'
+import brassLamp from '../assets/experiences/brass-lamp.jpg'
+import galleFort from '../assets/experiences/galle-fort.jpg'
+import kandyanDancer from '../assets/experiences/kandyan-dancer.jpg'
+import mirissaBoats from '../assets/experiences/mirissa-boats.jpg'
+import monks from '../assets/experiences/monks.jpg'
+import oilLamps from '../assets/experiences/oil-lamps.jpg'
+import poolVilla from '../assets/experiences/pool-villa.jpg'
+import sigiriyaDawn from '../assets/experiences/sigiriya-dawn.jpg'
+import teaEstate from '../assets/experiences/tea-estate.jpg'
+
+export type Destination = {
+  id: string
+  name: string
+  province: string
+  district: string
+  /** Mapbox coordinates are stored as [longitude, latitude]. */
+  coordinates: [number, number]
+  heroImage: string
+  shortDescription: string
+  themes: string[]
+  moods: string[]
+  bestMonths: string[]
+  experiences: string[]
+  journalArticles: string[]
+  hotels: string[]
+}
+
+export const destinations: Destination[] = [
+  {
+    id: 'colombo',
+    name: 'Colombo',
+    province: 'Western Province',
+    district: 'Colombo',
+    coordinates: [79.8612, 6.9271],
+    heroImage: poolVilla,
+    shortDescription: 'A coastal capital of garden villas, galleries, old clubs and modern island rhythm.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'galle',
+    name: 'Galle',
+    province: 'Southern Province',
+    district: 'Galle',
+    coordinates: [80.217, 6.0535],
+    heroImage: galleFort,
+    shortDescription: 'Fort walls, sea air and ochre lanes shaped by centuries of ocean trade.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'tangalle',
+    name: 'Tangalle',
+    province: 'Southern Province',
+    district: 'Hambantota',
+    coordinates: [80.7911, 6.024],
+    heroImage: mirissaBoats,
+    shortDescription: 'Quiet southern beaches, coconut shade and long, unhurried days beside the Indian Ocean.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'ella',
+    name: 'Ella',
+    province: 'Uva Province',
+    district: 'Badulla',
+    coordinates: [81.0463, 6.8667],
+    heroImage: teaEstate,
+    shortDescription: 'Mist-covered mountains, tea estates and slow railway journeys through the hills.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'nuwara-eliya',
+    name: 'Nuwara Eliya',
+    province: 'Central Province',
+    district: 'Nuwara Eliya',
+    coordinates: [80.7829, 6.9497],
+    heroImage: blueWhaleSunset,
+    shortDescription: 'Cool highland air, tea country rituals and soft mornings above emerald valleys.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'kandy',
+    name: 'Kandy',
+    province: 'Central Province',
+    district: 'Kandy',
+    coordinates: [80.6337, 7.2906],
+    heroImage: kandyanDancer,
+    shortDescription: 'A sacred hill capital of temple bells, lake reflections and living Kandyan culture.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'sigiriya',
+    name: 'Sigiriya',
+    province: 'Central Province',
+    district: 'Matale',
+    coordinates: [80.7603, 7.957],
+    heroImage: sigiriyaDawn,
+    shortDescription: 'Ancient gardens, jungle silence and a rock citadel rising from morning gold.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'anuradhapura',
+    name: 'Anuradhapura',
+    province: 'North Central Province',
+    district: 'Anuradhapura',
+    coordinates: [80.4037, 8.3114],
+    heroImage: oilLamps,
+    shortDescription: 'Sacred stupas, moonstones and ancient reservoirs under wide northern skies.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'trincomalee',
+    name: 'Trincomalee',
+    province: 'Eastern Province',
+    district: 'Trincomalee',
+    coordinates: [81.233, 8.5874],
+    heroImage: monks,
+    shortDescription: 'Eastern coves, temple cliffs and luminous blue water at the edge of the island.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+  {
+    id: 'jaffna',
+    name: 'Jaffna',
+    province: 'Northern Province',
+    district: 'Jaffna',
+    coordinates: [80.0255, 9.6615],
+    heroImage: brassLamp,
+    shortDescription: 'Northern light, Tamil heritage, palmyrah landscapes and a culture of quiet resilience.',
+    themes: [],
+    moods: [],
+    bestMonths: [],
+    experiences: [],
+    journalArticles: [],
+    hotels: [],
+  },
+]
