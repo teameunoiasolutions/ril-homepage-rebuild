@@ -4,6 +4,7 @@ import type { JourneyRegion } from '../../data/journeyRegions'
 
 type JourneyRegionLayerProps = {
   map: Map
+  recommendedRegionIds?: string[]
   regions: JourneyRegion[]
   selectedRegionId?: string
   onRegionSelect: (region: JourneyRegion) => void
@@ -89,9 +90,22 @@ function setSourceData(map: Map, sourceId: string, data: unknown) {
   source?.setData?.(data)
 }
 
-function getRegionOpacityExpression(selectedRegionId?: string) {
+function getRegionOpacityExpression(selectedRegionId?: string, recommendedRegionIds: string[] = []) {
+  const hasRecommendations = recommendedRegionIds.length > 0
+
   if (!selectedRegionId) {
-    return ['case', ['boolean', ['feature-state', 'hover'], false], 0.3, 0.12]
+    if (!hasRecommendations) {
+      return ['case', ['boolean', ['feature-state', 'hover'], false], 0.3, 0.12]
+    }
+
+    return [
+      'case',
+      ['boolean', ['feature-state', 'hover'], false],
+      0.34,
+      ['in', ['get', 'id'], ['literal', recommendedRegionIds]],
+      0.22,
+      0.035,
+    ]
   }
 
   return [
@@ -100,20 +114,36 @@ function getRegionOpacityExpression(selectedRegionId?: string) {
     0.34,
     ['==', ['get', 'id'], selectedRegionId],
     0.24,
+    ['in', ['get', 'id'], ['literal', recommendedRegionIds]],
+    0.11,
     0.035,
   ]
 }
 
-function getLabelOpacityExpression(selectedRegionId?: string) {
+function getLabelOpacityExpression(selectedRegionId?: string, recommendedRegionIds: string[] = []) {
+  const hasRecommendations = recommendedRegionIds.length > 0
+
   if (!selectedRegionId) {
-    return 0.82
+    if (!hasRecommendations) {
+      return 0.82
+    }
+
+    return ['case', ['in', ['get', 'id'], ['literal', recommendedRegionIds]], 0.9, 0.18]
   }
 
-  return ['case', ['==', ['get', 'id'], selectedRegionId], 0.96, 0.18]
+  return [
+    'case',
+    ['==', ['get', 'id'], selectedRegionId],
+    0.96,
+    ['in', ['get', 'id'], ['literal', recommendedRegionIds]],
+    0.44,
+    0.14,
+  ]
 }
 
 export function JourneyRegionLayer({
   map,
+  recommendedRegionIds = [],
   regions,
   selectedRegionId,
   onRegionSelect,
@@ -149,7 +179,7 @@ export function JourneyRegionLayer({
         source: REGION_SOURCE_ID,
         paint: {
           'fill-color': '#c5a059',
-          'fill-opacity': getRegionOpacityExpression(selectedRegionId),
+          'fill-opacity': getRegionOpacityExpression(selectedRegionId, recommendedRegionIds),
         },
       })
     }
@@ -199,7 +229,7 @@ export function JourneyRegionLayer({
           'text-color': '#004225',
           'text-halo-color': '#fbf9f5',
           'text-halo-width': 1.4,
-          'text-opacity': getLabelOpacityExpression(selectedRegionId),
+          'text-opacity': getLabelOpacityExpression(selectedRegionId, recommendedRegionIds),
         },
       })
     }
@@ -259,14 +289,14 @@ export function JourneyRegionLayer({
         map.setFeatureState({ source: REGION_SOURCE_ID, id: hoveredRegionId }, { hover: false })
       }
     }
-  }, [map, onRegionSelect, regions, selectedRegionId])
+  }, [map, onRegionSelect, recommendedRegionIds, regions, selectedRegionId])
 
   useEffect(() => {
     if (map.getLayer(REGION_FILL_LAYER_ID)) {
       map.setPaintProperty(
         REGION_FILL_LAYER_ID,
         'fill-opacity',
-        getRegionOpacityExpression(selectedRegionId),
+        getRegionOpacityExpression(selectedRegionId, recommendedRegionIds),
       )
     }
 
@@ -274,10 +304,10 @@ export function JourneyRegionLayer({
       map.setPaintProperty(
         REGION_LABEL_LAYER_ID,
         'text-opacity',
-        getLabelOpacityExpression(selectedRegionId),
+        getLabelOpacityExpression(selectedRegionId, recommendedRegionIds),
       )
     }
-  }, [map, selectedRegionId])
+  }, [map, recommendedRegionIds, selectedRegionId])
 
   return null
 }

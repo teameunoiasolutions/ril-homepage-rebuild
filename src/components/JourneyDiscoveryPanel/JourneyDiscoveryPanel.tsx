@@ -1,4 +1,10 @@
 import type { Experience } from '../../data/experiences'
+import {
+  journeySeasons,
+  journeyThemes,
+  type JourneyConsultationSelection,
+  type JourneyRecommendation,
+} from '../../data/journeyConsultation'
 import type { JourneyRegion, RegionDestination } from '../../data/journeyRegions'
 import './JourneyDiscoveryPanel.css'
 
@@ -6,6 +12,8 @@ type JourneyDiscoveryPanelProps = {
   addedExperienceIds?: string[]
   experienceLookup?: Record<string, Experience>
   experiences?: Experience[]
+  consultationSelection?: JourneyConsultationSelection
+  journeyRecommendation?: JourneyRecommendation
   selectedDestination?: RegionDestination
   selectedExperience?: Experience
   selectedRegion?: JourneyRegion
@@ -19,6 +27,8 @@ export function JourneyDiscoveryPanel({
   addedExperienceIds = [],
   experienceLookup = {},
   experiences = [],
+  consultationSelection,
+  journeyRecommendation,
   selectedDestination,
   selectedExperience,
   selectedRegion,
@@ -29,6 +39,8 @@ export function JourneyDiscoveryPanel({
 }: JourneyDiscoveryPanelProps) {
   const panelKey =
     selectedExperience?.id ?? selectedDestination?.id ?? selectedRegion?.id ?? 'default-discovery-panel'
+  const selectedTheme = journeyThemes.find((theme) => theme.id === consultationSelection?.themeId)
+  const selectedSeason = journeySeasons.find((season) => season.id === consultationSelection?.seasonId)
 
   if (selectedDestination && selectedExperience) {
     const relatedExperiences = selectedExperience.relatedExperiences
@@ -267,6 +279,65 @@ export function JourneyDiscoveryPanel({
             <ul className="journey-discovery-panel__list">
               {selectedRegion.destinations.map((destination) => (
                 <li key={destination.id}>{destination.title}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    )
+  }
+
+  if (journeyRecommendation && consultationSelection) {
+    return (
+      <aside key={`recommendation-${panelKey}`} className="journey-discovery-panel" aria-live="polite">
+        <div className="journey-discovery-panel__body">
+          <p className="journey-discovery-panel__eyebrow">Your First Recommendation</p>
+          <h2>{selectedTheme?.title ?? 'A Curated Sri Lanka'}</h2>
+          <div className="journey-discovery-panel__consultation-list">
+            <div>
+              <span>Discover Through</span>
+              <strong>{selectedTheme?.title}</strong>
+            </div>
+            <div>
+              <span>Journey Mood</span>
+              <strong>{consultationSelection.mood}</strong>
+            </div>
+            <div>
+              <span>Best Time</span>
+              <strong>{selectedSeason?.label}</strong>
+            </div>
+          </div>
+
+          <div className="journey-discovery-panel__section">
+            <h3>Why We Chose This</h3>
+            <p>{journeyRecommendation.whyWeChoseThis}</p>
+          </div>
+
+          <div className="journey-discovery-panel__section">
+            <h3>Recommended Journey Regions</h3>
+            <ul className="journey-discovery-panel__recommendation-list">
+              {journeyRecommendation.regions.map((region) => (
+                <li key={region.id}>{region.title}</li>
+              ))}
+            </ul>
+          </div>
+
+          {selectedSeason ? (
+            <div className="journey-discovery-panel__section">
+              <h3>Seasonal Highlights</h3>
+              <ul className="journey-discovery-panel__list">
+                {selectedSeason.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          <div className="journey-discovery-panel__section">
+            <h3>Suggested Experiences</h3>
+            <ul className="journey-discovery-panel__tag-list">
+              {journeyRecommendation.suggestedExperiences.map((experience) => (
+                <li key={experience}>{experience}</li>
               ))}
             </ul>
           </div>

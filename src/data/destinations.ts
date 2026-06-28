@@ -8,6 +8,7 @@ import oilLamps from '../assets/experiences/oil-lamps.jpg'
 import poolVilla from '../assets/experiences/pool-villa.jpg'
 import sigiriyaDawn from '../assets/experiences/sigiriya-dawn.jpg'
 import teaEstate from '../assets/experiences/tea-estate.jpg'
+import { getDestinationRecommendationMetadata } from './journeyConsultation'
 import { getExperienceIdsForDestination } from './experiences'
 import { MapMode, type MapMode as MapModeValue } from './mapModes'
 
@@ -21,6 +22,13 @@ export type Destination = {
   heroImage: string
   shortDescription: string
   experienceIds: string[]
+  journeyThemes: string[]
+  journeyMoods: string[]
+  bestTimeOptions: string[]
+  journeyRegion: string
+  suggestedExperiences: string[]
+  nearby: string[]
+  recommendationReason: string
   themes: string[]
   moods: string[]
   bestMonths: string[]
@@ -29,7 +37,19 @@ export type Destination = {
   hotels: string[]
 }
 
-const destinationRecordsBase: Array<Omit<Destination, 'experienceIds'>> = [
+type DestinationInput = Omit<
+  Destination,
+  | 'experienceIds'
+  | 'journeyThemes'
+  | 'journeyMoods'
+  | 'bestTimeOptions'
+  | 'journeyRegion'
+  | 'suggestedExperiences'
+  | 'nearby'
+  | 'recommendationReason'
+>
+
+const destinationRecordsBase: DestinationInput[] = [
   {
     id: 'colombo',
     name: 'Colombo',
@@ -182,12 +202,23 @@ const destinationRecordsBase: Array<Omit<Destination, 'experienceIds'>> = [
   },
 ]
 
-const addExperienceIds = (destination: Omit<Destination, 'experienceIds'> | Destination): Destination => ({
-  ...destination,
-  experienceIds: getExperienceIdsForDestination(destination.id),
-})
+const addDestinationMetadata = (destination: DestinationInput | Destination): Destination => {
+  const metadata = getDestinationRecommendationMetadata(destination.id, 'Sri Lanka')
 
-const destinationRecords: Destination[] = destinationRecordsBase.map(addExperienceIds)
+  return {
+    ...destination,
+    experienceIds: getExperienceIdsForDestination(destination.id),
+    journeyThemes: metadata.journeyThemes,
+    journeyMoods: metadata.journeyMoods,
+    bestTimeOptions: metadata.bestTimeOptions,
+    journeyRegion: metadata.journeyRegion,
+    suggestedExperiences: metadata.suggestedExperiences,
+    nearby: metadata.nearby,
+    recommendationReason: metadata.recommendationReason,
+  }
+}
+
+const destinationRecords: Destination[] = destinationRecordsBase.map(addDestinationMetadata)
 
 const destinationById = Object.fromEntries(destinationRecords.map((destination) => [destination.id, destination])) as Record<
   string,
@@ -196,7 +227,7 @@ const destinationById = Object.fromEntries(destinationRecords.map((destination) 
 
 export const generalDestinations: Destination[] = destinationRecords
 
-const personalisedDestinationRecordsBase: Array<Omit<Destination, 'experienceIds'> | Destination> = [
+const personalisedDestinationRecordsBase: Array<DestinationInput | Destination> = [
   destinationById.tangalle,
   {
     id: 'mirissa',
@@ -292,10 +323,10 @@ const personalisedDestinationRecordsBase: Array<Omit<Destination, 'experienceIds
   },
 ]
 
-export const personalisedDestinations: Destination[] = personalisedDestinationRecordsBase.map(addExperienceIds)
+export const personalisedDestinations: Destination[] = personalisedDestinationRecordsBase.map(addDestinationMetadata)
 
 export const mapModeDestinations: Record<MapModeValue, Destination[]> = {
-  [MapMode.GENERAL]: generalDestinations,
+  [MapMode.DISCOVER]: generalDestinations,
   [MapMode.PERSONALISED]: personalisedDestinations,
 }
 

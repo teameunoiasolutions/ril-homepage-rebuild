@@ -1,5 +1,5 @@
 export const MapMode = {
-  GENERAL: 'general',
+  DISCOVER: 'discover',
   PERSONALISED: 'personalised',
 } as const
 
@@ -14,7 +14,7 @@ export type MapModeContent = {
 }
 
 export const mapModeContent: Record<MapMode, MapModeContent> = {
-  [MapMode.GENERAL]: {
+  [MapMode.DISCOVER]: {
     eyebrow: 'Destination Discovery',
     title: 'Discover Sri Lanka',
     description:

@@ -9,6 +9,7 @@ import oilLamps from '../assets/experiences/oil-lamps.jpg'
 import poolVilla from '../assets/experiences/pool-villa.jpg'
 import sigiriyaDawn from '../assets/experiences/sigiriya-dawn.jpg'
 import teaEstate from '../assets/experiences/tea-estate.jpg'
+import { getDestinationRecommendationMetadata } from './journeyConsultation'
 import { getExperienceIdsForDestination } from './experiences'
 import { MapMode, type MapMode as MapModeValue } from './mapModes'
 
@@ -24,6 +25,13 @@ export type RegionDestination = {
   nearbyExperiences: string[]
   travelNotes: string
   experienceIds: string[]
+  journeyThemes: string[]
+  journeyMoods: string[]
+  bestTimeOptions: string[]
+  journeyRegion: string
+  suggestedExperiences: string[]
+  nearby: string[]
+  recommendationReason: string
   activities: string[]
   experiences: string[]
 }
@@ -46,7 +54,17 @@ export type JourneyRegion = {
 
 type RegionDestinationInput = Omit<
   RegionDestination,
-  'activities' | 'experiences' | 'experienceIds' | 'heroImage'
+  | 'activities'
+  | 'experiences'
+  | 'experienceIds'
+  | 'heroImage'
+  | 'journeyThemes'
+  | 'journeyMoods'
+  | 'bestTimeOptions'
+  | 'journeyRegion'
+  | 'suggestedExperiences'
+  | 'nearby'
+  | 'recommendationReason'
 > & {
   coverImage?: string
   heroImage?: string
@@ -54,13 +72,24 @@ type RegionDestinationInput = Omit<
 
 const createDestination = (
   destination: RegionDestinationInput,
-): RegionDestination => ({
-  ...destination,
-  heroImage: destination.heroImage ?? destination.coverImage ?? '',
-  experienceIds: getExperienceIdsForDestination(destination.id),
-  activities: [],
-  experiences: [],
-})
+): RegionDestination => {
+  const metadata = getDestinationRecommendationMetadata(destination.id, 'Sri Lanka')
+
+  return {
+    ...destination,
+    heroImage: destination.heroImage ?? destination.coverImage ?? '',
+    experienceIds: getExperienceIdsForDestination(destination.id),
+    journeyThemes: metadata.journeyThemes,
+    journeyMoods: metadata.journeyMoods,
+    bestTimeOptions: metadata.bestTimeOptions,
+    journeyRegion: metadata.journeyRegion,
+    suggestedExperiences: metadata.suggestedExperiences,
+    nearby: metadata.nearby,
+    recommendationReason: metadata.recommendationReason,
+    activities: [],
+    experiences: [],
+  }
+}
 
 export const journeyRegions: JourneyRegion[] = [
   {
@@ -876,6 +905,6 @@ const romanticJourneyRegions: JourneyRegion[] = [
 ]
 
 export const journeyRegionCollections: Record<MapModeValue, JourneyRegion[]> = {
-  [MapMode.GENERAL]: journeyRegions,
+  [MapMode.DISCOVER]: journeyRegions,
   [MapMode.PERSONALISED]: romanticJourneyRegions,
 }
