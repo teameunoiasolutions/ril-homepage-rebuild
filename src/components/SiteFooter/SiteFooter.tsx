@@ -2,9 +2,10 @@ import './SiteFooter.css'
 
 const footerNav = {
   explore: [
-    { href: '/#destinations', label: 'Discover Sri Lanka' },
+    { href: '/discover-sri-lanka', label: 'Discover Sri Lanka' },
     { href: '/experiences', label: 'Experiences' },
-    { href: '/travel-preparation', label: 'Travel Preparation' },
+    { href: '/travel-preparation', label: 'Before You Arrive' },
+    { href: '/my-journey', label: 'My Journey' },
     { href: '/journal', label: 'Journal' },
     { href: '/about', label: 'About' },
   ] as const,

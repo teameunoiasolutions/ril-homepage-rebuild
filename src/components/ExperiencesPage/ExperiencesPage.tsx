@@ -1,7 +1,10 @@
 import './ExperiencesPage.css'
-import { useState, type MouseEvent, type ReactNode } from 'react'
+import { useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react'
 import { ArrowIcon } from '../ArrowIcon'
 import { experienceImages } from './images'
+import { JourneyIncludedPill } from '../../journey/JourneyChrome'
+import { useJourney } from '../../journey/JourneyContext'
+import { inferJourneyRegion } from '../../journey/journeyTaxonomy'
 
 type Detail = {
   label: string
@@ -68,6 +71,7 @@ const encounters: Encounter[] = [
   },
   {
     id: 'private-tea-estate',
+    theme: 'Rail & Landscape',
     category: 'Tea Country - Immersive',
     title: 'A Private Tea Estate, Locked Before Dawn',
     note:
@@ -362,13 +366,15 @@ function TextLink({
   children,
   href = '#begin',
   inverse = false,
+  onClick,
 }: {
   children: ReactNode
   href?: string
   inverse?: boolean
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void
 }) {
   return (
-    <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href={href}>
+    <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href={href} onClick={onClick}>
       {children}
       <ArrowIcon />
     </a>
@@ -377,14 +383,91 @@ function TextLink({
 
 const encounterNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'] as const
 
+function toJourneyId(kind: string, value: string) {
+  return `${kind}:${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+}
+
 function EncounterCard({ encounter, index }: { encounter: Encounter; index: number }) {
+  const { confirmRemoveItem, includeItem, isIncluded, pendingRemovalId, requestRemoveItem } = useJourney()
   const enquiryHref =
     encounter.title === 'The Sigiriya Dawn Ascent'
       ? '/experiences/the-sigiriya-dawn-ascent'
       : '#begin'
+  const journeyId = toJourneyId('experience', encounter.title)
+  const isEncounterIncluded = isIncluded(journeyId)
+
+  function handleEncounterInterest(event?: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) {
+    event?.stopPropagation()
+    const parentRegion = inferJourneyRegion({
+      kind: 'experience',
+      label: encounter.title,
+      detail: encounter.note,
+      source: `${encounter.category} ${encounter.caption}`,
+    })
+
+    if (isEncounterIncluded) {
+      event?.preventDefault()
+      if (pendingRemovalId === journeyId) {
+        confirmRemoveItem(journeyId)
+      } else {
+        requestRemoveItem(journeyId)
+      }
+      return
+    }
+
+    if (encounter.theme) {
+      includeItem({
+        id: toJourneyId('theme', encounter.theme),
+        kind: 'theme',
+        label: encounter.theme,
+        detail: 'A preferred way into Sri Lanka from the experience collection.',
+        source: 'Experiences',
+      })
+    }
+
+    if (encounter.theme && parentRegion && !isIncluded(toJourneyId('region', parentRegion))) {
+      includeItem({
+        id: toJourneyId('region', parentRegion),
+        kind: 'region',
+        label: parentRegion,
+        detail: `A regional setting naturally aligned with ${encounter.theme}.`,
+        source: 'Experiences',
+        parentTheme: encounter.theme,
+      })
+    }
+
+    includeItem({
+      id: journeyId,
+      kind: 'experience',
+      label: encounter.title,
+      detail: encounter.note,
+      source: encounter.category,
+      parentTheme: encounter.theme,
+      parentRegion,
+    })
+  }
+
+  function handleEncounterKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return
+    }
+
+    event.preventDefault()
+    handleEncounterInterest(event)
+  }
 
   return (
-    <article id={encounter.id} className="encounter-row experiences-reveal">
+    <article
+      id={encounter.id}
+      className={`encounter-row experiences-reveal journey-selectable${isEncounterIncluded ? ' is-included' : ''}`}
+      role="button"
+      tabIndex={0}
+      onClick={handleEncounterInterest}
+      onKeyDown={handleEncounterKeyDown}
+      aria-pressed={isEncounterIncluded}
+      aria-label={`${encounter.title}: include in your journey`}
+    >
+      {isEncounterIncluded ? <JourneyIncludedPill /> : null}
       <div className="encounter-index">
         <span>{encounterNumerals[index] ?? String(index + 1)}</span>
         <i />
@@ -409,7 +492,21 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
             <span>- {encounter.curator}</span>
           </div>
         </div>
-        <TextLink href={enquiryHref}>Enquire About This Encounter</TextLink>
+        <TextLink href={enquiryHref} onClick={handleEncounterInterest}>
+          Enquire About This Encounter
+        </TextLink>
+        {isEncounterIncluded ? (
+          <button
+            className="encounter-remove-button"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation()
+              confirmRemoveItem(journeyId)
+            }}
+          >
+            Remove from Journey
+          </button>
+        ) : null}
       </div>
 
       <dl className="encounter-details">
@@ -420,12 +517,25 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
           </div>
         ))}
       </dl>
+      {isEncounterIncluded || pendingRemovalId === journeyId ? (
+        <button
+          className="journey-remove-action"
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation()
+            confirmRemoveItem(journeyId)
+          }}
+        >
+          Remove from Journey
+        </button>
+      ) : null}
     </article>
   )
 }
 
 export function ExperiencesPage() {
   const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>('All Encounters')
+  const { confirmRemoveItem, includeItem, isIncluded, pendingRemovalId, requestRemoveItem } = useJourney()
   const filteredEncounters =
     selectedTheme === 'All Encounters'
       ? encounters
@@ -438,8 +548,38 @@ export function ExperiencesPage() {
   ) {
     event.preventDefault()
     setSelectedTheme(theme)
+
+    const journeyId = toJourneyId('theme', theme)
+    if (isIncluded(journeyId)) {
+      confirmRemoveItem(journeyId)
+    } else {
+      includeItem({
+        id: journeyId,
+        kind: 'theme',
+        label: theme,
+        detail: 'A preferred way into Sri Lanka from the experience collection.',
+        source: 'Experiences',
+      })
+    }
+
     window.requestAnimationFrame(() => {
       document.getElementById('encounters')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }
+
+  function handleThemeFilter(theme: ExperienceTheme) {
+    setSelectedTheme(theme)
+
+    if (theme === 'All Encounters') {
+      return
+    }
+
+    includeItem({
+      id: toJourneyId('theme', theme),
+      kind: 'theme',
+      label: theme,
+      detail: 'A preferred way into Sri Lanka from the experience collection.',
+      source: 'Experiences',
     })
   }
 
@@ -526,24 +666,50 @@ export function ExperiencesPage() {
 
           <div className="experience-themes-board">
             {experienceThemes.map((theme) => (
-              <a
+              <article
                 key={theme.title}
-                className={theme.featured ? 'theme-chapter theme-chapter--featured' : 'theme-chapter'}
-                href="#encounters"
-                onClick={(event) => handleThemeExplore(theme.title, event)}
-                aria-label={`${theme.title}: explore this theme in the encounter collection`}
+                className={`theme-chapter-shell journey-selectable${theme.featured ? ' theme-chapter-shell--featured' : ''}${isIncluded(toJourneyId('theme', theme.title)) ? ' is-included' : ''}`}
               >
-                <figure>
-                  <img src={theme.image} alt={theme.imageAlt} />
-                </figure>
-                <div className="theme-chapter-copy">
-                  <span>{theme.number}</span>
-                  <p>{theme.traveller}</p>
-                  <h3>{theme.title}</h3>
-                  <p>{theme.description}</p>
-                  <small>{theme.encounter}</small>
-                </div>
-              </a>
+                {isIncluded(toJourneyId('theme', theme.title)) ? (
+                  <button
+                    className="journey-included-pill journey-included-pill--button"
+                    type="button"
+                    onClick={(event) => {
+                      event.preventDefault()
+                      event.stopPropagation()
+                      confirmRemoveItem(toJourneyId('theme', theme.title))
+                    }}
+                  >
+                    Included in Your Journey
+                  </button>
+                ) : null}
+                <a
+                  className="theme-chapter"
+                  href="#encounters"
+                  onClick={(event) => handleThemeExplore(theme.title, event)}
+                  aria-label={`${theme.title}: explore this theme in the encounter collection`}
+                >
+                  <figure>
+                    <img src={theme.image} alt={theme.imageAlt} />
+                  </figure>
+                  <div className="theme-chapter-copy">
+                    <span>{theme.number}</span>
+                    <p>{theme.traveller}</p>
+                    <h3>{theme.title}</h3>
+                    <p>{theme.description}</p>
+                    <small>{theme.encounter}</small>
+                  </div>
+                </a>
+                {isIncluded(toJourneyId('theme', theme.title)) || pendingRemovalId === toJourneyId('theme', theme.title) ? (
+                  <button
+                    className="journey-remove-action"
+                    type="button"
+                    onClick={() => confirmRemoveItem(toJourneyId('theme', theme.title))}
+                  >
+                    Remove from Journey
+                  </button>
+                ) : null}
+              </article>
             ))}
           </div>
         </div>
@@ -558,7 +724,7 @@ export function ExperiencesPage() {
           <select
             id="experience-theme"
             value={selectedTheme}
-            onChange={(event) => setSelectedTheme(event.target.value as ExperienceTheme)}
+            onChange={(event) => handleThemeFilter(event.target.value as ExperienceTheme)}
           >
             {experienceThemeOptions.map((theme) => (
               <option key={theme} value={theme}>

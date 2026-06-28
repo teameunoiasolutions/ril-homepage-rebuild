@@ -1,6 +1,9 @@
 import './HomeHero.css'
+import { useJourney } from '../../journey/JourneyContext'
 
 export function HomeHero() {
+  const { count } = useJourney()
+
   return (
     <section className="home-hero">
       <div className="home-hero-top">
@@ -10,8 +13,9 @@ export function HomeHero() {
         </div>
 
         <nav className="home-hero-nav" aria-label="Primary navigation">
-          <a href="/#destinations">Discover Sri Lanka</a>
+          <a href="/discover-sri-lanka">Discover Sri Lanka</a>
           <a href="/experiences">Experiences</a>
+          <a href="/my-journey">My Journey{count > 0 ? ` • ${count}` : ''}</a>
           <a href="/journal">Journal</a>
           <a href="/about">About</a>
         </nav>

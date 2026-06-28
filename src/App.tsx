@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { AboutPage } from './components/AboutPage/AboutPage'
 import { ConciergeDesk } from './components/ConciergeDesk/ConciergeDesk'
+import { DiscoveryGuide } from './components/DiscoveryGuide/DiscoveryGuide'
 import { ExperienceDetailPage } from './components/ExperienceDetailPage/ExperienceDetailPage'
 import { ExperiencesPage } from './components/ExperiencesPage/ExperiencesPage'
 import { Homepage } from './components/Homepage/Homepage'
@@ -8,8 +9,10 @@ import { JournalArticlePage } from './components/JournalArticlePage/JournalArtic
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
 import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
+import { JourneyProvider } from './journey/JourneyContext'
+import { MyJourneyPage } from './journey/JourneyChrome'
 
-function App() {
+function AppContent() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
   const path = rawPath === '' ? '/' : rawPath
 
@@ -21,6 +24,10 @@ function App() {
 
   if (path === '/concierge') {
     return <ConciergeDesk />
+  }
+
+  if (path === '/discover-sri-lanka') {
+    return renderPage(<DiscoveryGuide />)
   }
 
   if (path === '/experiences') {
@@ -47,11 +54,23 @@ function App() {
     return renderPage(<TravelPreparationPage />)
   }
 
+  if (path === '/my-journey') {
+    return renderPage(<MyJourneyPage />)
+  }
+
   // if (path === '/traveller-discovery') {
   //   return renderPage(<TravellerDiscovery />)
   // }
 
   return renderPage(<Homepage />)
+}
+
+function App() {
+  return (
+    <JourneyProvider>
+      <AppContent />
+    </JourneyProvider>
+  )
 }
 
 export default App

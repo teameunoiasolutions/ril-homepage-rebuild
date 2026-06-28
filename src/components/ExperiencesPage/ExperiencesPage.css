@@ -531,11 +531,22 @@
   align-items: stretch;
 }
 
-.theme-chapter {
+.theme-chapter-shell {
   position: relative;
   display: grid;
   grid-column: span 3;
   min-height: 520px;
+}
+
+.theme-chapter-shell--featured {
+  grid-column: span 6;
+  min-height: 620px;
+}
+
+.theme-chapter {
+  position: relative;
+  display: grid;
+  min-height: inherit;
   overflow: hidden;
   border: 1px solid rgba(197, 160, 89, 0.22);
   background: var(--experience-forest);
@@ -544,9 +555,8 @@
   box-shadow: 0 22px 58px rgba(13, 31, 23, 0.1);
 }
 
-.theme-chapter--featured {
-  grid-column: span 6;
-  min-height: 620px;
+.theme-chapter-shell.is-included .theme-chapter {
+  border-color: rgba(0, 66, 37, 0.54);
 }
 
 .theme-chapter figure,
@@ -733,6 +743,40 @@
   border-bottom: 1px solid rgba(197, 160, 89, 0.2);
   background: transparent;
   box-shadow: none;
+  cursor: pointer;
+}
+
+.encounter-row:focus-visible {
+  outline: 1px solid var(--experience-gold);
+  outline-offset: 6px;
+}
+
+.encounter-row.is-included {
+  padding-right: 18px;
+  padding-left: 18px;
+  border: 1px solid rgba(0, 66, 37, 0.44);
+  border-bottom-color: rgba(0, 66, 37, 0.44);
+}
+
+.encounter-remove-button {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 11px 15px;
+  border: 1px solid rgba(197, 160, 89, 0.38);
+  background: transparent;
+  color: var(--experience-gold);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.encounter-remove-button:hover,
+.encounter-remove-button:focus-visible {
+  background: rgba(197, 160, 89, 0.1);
+  outline: none;
 }
 
 .encounter-index {
@@ -1502,8 +1546,8 @@
     gap: 28px;
   }
 
-  .theme-chapter,
-  .theme-chapter--featured {
+  .theme-chapter-shell,
+  .theme-chapter-shell--featured {
     grid-column: span 6;
     min-height: 560px;
   }
@@ -1686,8 +1730,8 @@
     grid-template-columns: 1fr;
   }
 
-  .theme-chapter,
-  .theme-chapter--featured {
+  .theme-chapter-shell,
+  .theme-chapter-shell--featured {
     grid-column: auto;
     min-height: 480px;
   }
@@ -1787,8 +1831,8 @@
     height: 360px;
   }
 
-  .theme-chapter,
-  .theme-chapter--featured {
+  .theme-chapter-shell,
+  .theme-chapter-shell--featured {
     min-height: 420px;
   }
 

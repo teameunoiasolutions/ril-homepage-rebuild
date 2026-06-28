@@ -540,6 +540,37 @@
   line-height: 1.8;
 }
 
+.prep-service-note--stacked {
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+}
+
+.prep-service-note--stacked ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prep-service-note--stacked li {
+  color: rgba(26, 26, 26, 0.62);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.prep-service-note--stacked li::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--prep-gold);
+  vertical-align: middle;
+}
+
 .prep-payments {
   border-top: 1px solid rgba(26, 26, 26, 0.08);
   background: linear-gradient(180deg, rgba(232, 225, 213, 0.2), rgba(251, 249, 245, 0));
@@ -825,6 +856,13 @@
   font-style: italic;
   font-weight: 400;
   line-height: 1.56;
+}
+
+.prep-etiquette-grid h3 span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--prep-gold);
+  font-size: 13px;
 }
 
 .prep-etiquette-grid p {

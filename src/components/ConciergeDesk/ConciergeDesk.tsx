@@ -43,7 +43,7 @@ const responseModes = {
   personalised: {
     label: 'Personalised',
     tabNote: 'Tailored to The Romantic Traveller',
-    recommendationsLabel: 'Selected For You',
+    recommendationsLabel: 'Prepared For You',
     lede:
       'For a romantic traveller such as yourself, the finest beaches are those where the world seems to pause - where privacy replaces performance, and the quality of light at dusk matters far more than the crowd at noon.',
     paragraphs: [

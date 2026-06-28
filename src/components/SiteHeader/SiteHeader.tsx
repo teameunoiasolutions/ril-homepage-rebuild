@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
+import { useJourney } from '../../journey/JourneyContext'
 import './SiteHeader.css'
 
 const navLinks = [
-  { href: '/#destinations', label: 'Discover Sri Lanka' },
+  { href: '/discover-sri-lanka', label: 'Discover Sri Lanka' },
   { href: '/experiences', label: 'Experiences' },
-  { href: '/travel-preparation', label: 'Travel Preparation' },
+  { href: '/travel-preparation', label: 'Before You Arrive' },
   { href: '/journal', label: 'Journal' },
   { href: '/about', label: 'About' },
 ] as const
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { count } = useJourney()
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -54,6 +56,9 @@ export function SiteHeader() {
               {link.label}
             </a>
           ))}
+          <a href="/my-journey" onClick={closeMenu}>
+            My Journey{count > 0 ? ` • ${count}` : ''}
+          </a>
         </nav>
 
         <a className="site-header-cta" href="/#begin" onClick={closeMenu}>

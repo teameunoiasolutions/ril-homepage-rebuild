@@ -3,221 +3,137 @@ import { experienceImages } from '../ExperiencesPage/images'
 
 const images = {
   hero: experienceImages.teaEstate,
-  southCoast: experienceImages.mirissaBoats,
-  eastCoast: experienceImages.blueWhaleSunset,
-  hillCountry: experienceImages.teaEstate,
-  culturalTriangle: experienceImages.sigiriyaDawn,
-  westCoast: experienceImages.galleFort,
-  train: experienceImages.perahera,
 } as const
 
 const handbookLinks = [
-  { href: '#visa-entry', label: 'Visa & Entry' },
-  { href: '#arrival', label: 'Arrival' },
-  { href: '#currency', label: 'Currency' },
-  { href: '#seasons', label: 'Seasons' },
-  { href: '#travel-notes', label: 'Travel Notes' },
-  { href: '#etiquette', label: 'Etiquette' },
-  { href: '#faq', label: 'FAQ' },
+  { href: '#welcome', label: 'Your Welcome' },
+  { href: '#tea-ritual', label: 'Welcome Tea' },
+  { href: '#arranged', label: 'Arranged Details' },
+  { href: '#concierge', label: 'Concierge' },
+  { href: '#begin', label: 'Begin' },
 ] as const
 
 const heroProtocols = [
-  'Private airport handling',
-  'Fast-track immigration guidance',
-  'Dedicated arrival host',
-  'Discreet onward transfer',
+  'Personal airport welcome',
+  'Private transfer prepared',
+  'Luggage quietly handled',
+  'Concierge already briefed',
 ] as const
 
 const assurancePoints = [
-  { value: '24/7', label: 'Journey desk' },
-  { value: 'Private', label: 'Airport liaison' },
-  { value: 'Curated', label: 'Regional timing' },
-  { value: 'Discreet', label: 'Guest support' },
+  { value: 'Personal', label: 'Arrival host' },
+  { value: 'Prepared', label: 'Chauffeur team' },
+  { value: 'Quiet', label: 'Lounge welcome' },
+  { value: 'Always', label: 'Concierge support' },
 ] as const
 
-const applicationSteps = [
-  'Visit eta.gov.lk - the official portal',
-  'Complete the form (approx. 15 minutes)',
-  'Pay the processing fee online',
-  'Receive confirmation by email',
-  'Present your ETA on arrival at immigration',
-] as const
-
-const arrivalNotes = [
-  { label: 'SIM Cards', copy: 'Dialog or Mobitel at arrivals' },
-  { label: 'Currency', copy: 'Exchange desk available; ATMs also on-site' },
-  { label: 'Your Driver', copy: 'Name card in Arrivals, typically within 20 min' },
-  { label: 'First Journey', copy: 'Approximately 30 min to Colombo city centre' },
-] as const
-
-const paymentNotes = [
+const welcomeMoments = [
   {
-    icon: 'Rs',
-    label: 'Local Currency',
-    title: 'Sri Lankan Rupee',
-    copy: 'LKR - approx. 300-320 to USD',
+    label: 'At the threshold',
+    title: 'A personal welcome, never a search for a name board.',
+    copy:
+      'Your Royale Isles Lanka representative will be waiting to receive you with calm, discretion, and the first reassuring sense that the journey is already held.',
   },
   {
-    icon: 'hex',
-    label: 'Cards',
-    title: 'Widely Accepted',
-    copy: 'Visa & Mastercard at most curated establishments',
+    label: 'After the flight',
+    title: 'A pause before the island opens.',
+    copy:
+      'Rather than moving immediately into the next transfer, you are invited to settle into one of our carefully selected partner hotels or lounges.',
   },
   {
-    icon: 'circle',
-    label: 'Cash',
-    title: 'Carry Some',
-    copy: 'Markets, tuk-tuks, and rural areas prefer cash',
-  },
-  {
-    icon: '+',
-    label: 'ATMs',
-    title: 'Nationwide',
-    copy: 'Commercial Bank & HNB are the most reliable networks',
+    label: 'Behind the scenes',
+    title: 'The practical details continue without needing your attention.',
+    copy:
+      'While you exhale, our team confirms the chauffeur, luggage, accommodation, local support, and the final rhythm of your first day.',
   },
 ] as const
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const
+const quietlyPrepared = [
+  'Your transfer timing is confirmed around the actual moment you arrive.',
+  'Your chauffeur is briefed on pace, privacy, luggage, and first-day preferences.',
+  'Your accommodation team is expecting you, with arrival notes already shared.',
+  'Local connectivity, if required, is handled before it becomes something to think about.',
+  'Dietary requirements, celebrations, and personal preferences are reviewed once more.',
+] as const
 
-const seasons = [
+const arrangedDetails = [
   {
-    region: 'South Coast',
-    copy: 'Wide beaches, whale watching, colonial forts, surf',
-    activeMonths: [0, 1, 2, 3, 9, 10],
-    best: 'November - April',
-    image: images.southCoast,
-    imageCopy: 'Wide white beaches, colonial fort towns, surf breaks and whale-watching season.',
+    icon: 'I',
+    label: 'Transfers',
+    title: 'Your chauffeur is already waiting.',
+    copy:
+      'The first movement through Sri Lanka is prepared before you step outside arrivals, with vehicle, route, and timing handled quietly.',
   },
   {
-    region: 'East Coast',
-    copy: 'Turquoise bays, diving, empty beaches, solitude',
-    activeMonths: [3, 4, 5, 6, 7],
-    best: 'April - September',
-    image: images.eastCoast,
-    imageCopy: 'While the south rests under cloud, the east awakens.',
+    icon: 'II',
+    label: 'Connectivity',
+    title: 'Staying reachable is one less consideration.',
+    copy:
+      'If local connectivity is helpful for your journey, our team ensures the arrangement is considered before you need it.',
   },
   {
-    region: 'Hill Country',
-    copy: 'Tea terraces, mist, waterfalls, cool mornings',
-    activeMonths: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    best: 'Year-round - cooler Dec-Feb',
-    image: images.hillCountry,
-    imageCopy: 'The highlands exist in their own weather.',
+    icon: 'III',
+    label: 'Accommodation',
+    title: 'Your hosts are ready before you arrive.',
+    copy:
+      'Room readiness, welcome preferences, dietary notes, and arrival pacing are confirmed privately with each property.',
   },
   {
-    region: 'Cultural Triangle',
-    copy: 'Ancient cities, wildlife, dry plains, ruins',
-    activeMonths: [4, 5, 6, 7, 8, 9],
-    best: 'May - October',
-    image: images.culturalTriangle,
-    imageCopy: 'Ancient cities built over centuries sit between jungle and sky.',
-  },
-  {
-    region: 'West Coast',
-    copy: 'Colombo, Negombo, calm seas, gateway coast',
-    activeMonths: [0, 1, 2, 9, 10],
-    best: 'November - March',
-    image: images.westCoast,
-    imageCopy: 'Colombo, Negombo, and the coast most travellers meet first.',
+    icon: 'IV',
+    label: 'Preferences',
+    title: 'The small details travel ahead of you.',
+    copy:
+      'Celebrations, wellness needs, family rhythms, privacy preferences, and personal rituals are woven into the journey in advance.',
   },
 ] as const
 
-const travelNotes = [
+const conciergeNotes = [
   {
     numeral: 'I',
-    title: 'Time Moves Differently Here',
+    title: 'Before departure',
     copy:
-      'A two-hour drive can take four. The train schedule is a suggestion. Meetings begin when everyone has arrived. Surrender to this, and you will discover that unhurried is not the same as slow.',
+      'Your concierge team reviews the journey with the people who will receive you: chauffeurs, hosts, residence teams, guides, and private specialists.',
   },
   {
     numeral: 'II',
-    title: 'The Best Experiences Cannot Be Scheduled',
+    title: 'On arrival',
     copy:
-      'The fisherman who waves you over for tea. The ceremony that spills into the street on a Tuesday evening. The waterfall behind the guesthouse garden. Leave space for what cannot be planned.',
+      'You are personally welcomed, invited to pause, and given the rare luxury of not having to solve the first hour in a new country.',
   },
   {
     numeral: 'III',
-    title: 'Hospitality Is Personal',
+    title: 'Throughout the journey',
     copy:
-      'When someone invites you into their home, they are not performing a custom. They are extending themselves. Accept graciously. Remove your shoes. Stay longer than you planned.',
+      'Support remains close without becoming visible. Adjustments, confirmations, and small comforts are handled in the background.',
   },
   {
     numeral: 'IV',
-    title: 'The Train Is Part Of The Journey',
+    title: 'For private households',
     copy:
-      'The Kandy-Ella line is not transport - it is an event. Book the observation car or stand at an open door. The tea country rolls past like something remembered, not seen.',
-  },
-  {
-    numeral: 'V',
-    title: 'A Smile Travels Further Than An Itinerary',
-    copy:
-      'Sri Lankans are among the most warmly curious people in the world. Put down the phone. Make eye contact. Say Ayubowan. Something unexpectedly beautiful will follow.',
+      'Family offices, principals, multi-generational groups, and discretion-sensitive travellers are briefed through a private channel.',
   },
 ] as const
 
-const etiquette = [
+const assurances = [
   {
-    title: 'Remove Your Shoes',
+    title: 'Entry details are reviewed with care',
     copy:
-      'Before entering a home, temple, or any sacred space. This is non-negotiable and deeply felt. Look for the pile of shoes at the door.',
+      'Where documentation or arrival formalities require attention, our advisory team confirms the appropriate path before travel and keeps your receiving host informed.',
   },
   {
-    title: 'Dress for Temples',
+    title: 'Practical expenses are anticipated',
     copy:
-      'Shoulders and knees covered. Many temples have sarongs available for those who need them. This extends to mosques and kovils.',
+      'If local currency or incidental arrangements are useful during your journey, they are considered within the wider preparation rather than left to the moment.',
   },
   {
-    title: 'The Greeting',
+    title: 'Wellbeing is part of the briefing',
     copy:
-      "Ayubowan - hands pressed together at the chest, a slight bow. It means 'may you live long.' Attempting it will disarm almost anyone.",
+      'Preferences, sensitivities, medical considerations, rest periods, and first-day pacing are held discreetly so the journey feels considered from the beginning.',
   },
   {
-    title: 'Accepting Food',
+    title: 'The first day is intentionally gentle',
     copy:
-      'When offered food or drink, accepting is an act of trust. Refusing repeatedly can cause quiet offence. Taste at least a little.',
-  },
-  {
-    title: 'The Head Wobble',
-    copy:
-      'A lateral wobble often means yes, understanding, or agreement. It is not a European head-shake. Takes a few days to read correctly.',
-  },
-  {
-    title: 'Photography',
-    copy:
-      'Always ask before photographing people, particularly at religious sites. A smile and a gesture go a long way. Respect a no graciously.',
-  },
-] as const
-
-const faqs = [
-  {
-    category: 'Entry Protocol',
-    question: 'Do I need a visa to visit Sri Lanka?',
-    answer:
-      'Most travellers need an Electronic Travel Authorisation before arrival. Apply through the official ETA portal before departure.',
-  },
-  {
-    category: 'Seasonal Timing',
-    question: 'When is the best time to visit?',
-    answer:
-      'There is always a good region in season. The south and west are strongest November to April, while the east is best from April to September.',
-  },
-  {
-    category: 'Private Payments',
-    question: 'What currency is used and how do I manage money?',
-    answer:
-      'The local currency is the Sri Lankan Rupee. Cards are accepted at most curated establishments, but cash is useful for markets, tuk-tuks, and rural stops.',
-  },
-  {
-    category: 'Guest Assurance',
-    question: 'Is Sri Lanka safe for international travellers?',
-    answer:
-      'Sri Lanka is welcoming and navigable with thoughtful planning. We arrange trusted drivers, context, and local guidance around each journey.',
-  },
-  {
-    category: 'Wellbeing',
-    question: 'What vaccinations or health precautions are recommended?',
-    answer:
-      'Speak with your travel physician before departure. Bring personal medication, sun protection, mosquito repellent, and copies of prescriptions.',
+      'Arrival is not treated as a transition to endure. It is composed as the first quiet chapter of your time in Sri Lanka.',
   },
 ] as const
 
@@ -231,10 +147,6 @@ function SectionHeading({ number, title, inverse = false }: { number: string; ti
   )
 }
 
-function isPeakMonth(activeMonths: readonly number[], monthIndex: number) {
-  return activeMonths.includes(monthIndex)
-}
-
 export function TravelPreparationPage() {
   return (
     <main className="travel-prep-page">
@@ -242,7 +154,7 @@ export function TravelPreparationPage() {
         <div className="prep-hero-copy">
           <div className="prep-kicker">
             <span />
-            <p>Private Arrival Protocol</p>
+            <p>Before Your Journey Begins</p>
           </div>
           <p className="prep-hero-numeral">I</p>
           <h1>
@@ -252,10 +164,10 @@ export function TravelPreparationPage() {
           </h1>
           <i className="prep-gold-rule" />
           <p className="prep-hero-intro">
-            A discreet pre-arrival briefing for VVIP guests, prepared by the Royale Isles Lanka advisory team before
-            your first step onto the island.
+            From the moment your flight touches Sri Lanka, Royale Isles Lanka has already considered the details that
+            allow you to simply arrive, breathe, and begin.
           </p>
-          <nav className="prep-chip-nav" aria-label="Travel preparation sections">
+          <nav className="prep-chip-nav" aria-label="Before you arrive sections">
             {handbookLinks.map((link) => (
               <a key={link.href} href={link.href}>
                 {link.label}
@@ -264,10 +176,10 @@ export function TravelPreparationPage() {
           </nav>
         </div>
         <div className="prep-hero-image">
-          <img src={images.hero} alt="Sri Lanka hill country tea fields" />
-          <aside className="prep-hero-protocol" aria-label="VVIP arrival protocol highlights">
-            <p>Arrival Protocol</p>
-            <h2>Handled before you land.</h2>
+          <img src={images.hero} alt="Sri Lankan tea country in soft morning light" />
+          <aside className="prep-hero-protocol" aria-label="Arrival care highlights">
+            <p>Arrival Care</p>
+            <h2>Everything is in motion before you land.</h2>
             <ul>
               {heroProtocols.map((protocol) => (
                 <li key={protocol}>{protocol}</li>
@@ -277,22 +189,12 @@ export function TravelPreparationPage() {
         </div>
       </section>
 
-      {/* <nav className="prep-contents" aria-label="Travel preparation contents">
-        <span>Contents</span>
-        {handbookLinks.map((link, index) => (
-          <a key={link.href} href={link.href}>
-            <strong>{String(index + 1).padStart(2, '0')}</strong>
-            {link.label}
-          </a>
-        ))}
-      </nav> */}
-
-      <section className="prep-assurance" aria-label="Private travel assurance">
+      <section className="prep-assurance" aria-label="Private arrival assurance">
         <div className="prep-assurance-copy">
           <span>For Principals, Family Offices & Private Travellers</span>
           <p>
-            Every detail below is paired with human coordination: airport receiving, driver briefing, pace control,
-            cultural context, and a private team that remains quietly reachable throughout the journey.
+            Arrival should never feel like a list of tasks. It should feel like being expected, recognised, and quietly
+            looked after from the first minute.
           </p>
         </div>
         <dl className="prep-assurance-grid">
@@ -305,164 +207,100 @@ export function TravelPreparationPage() {
         </dl>
       </section>
 
-      <section className="prep-section prep-visa" id="visa-entry">
+      <section className="prep-section prep-visa" id="welcome">
         <div className="prep-container">
-          <SectionHeading number="01" title="Visa & Entry" />
+          <SectionHeading number="01" title="Your Welcome to Sri Lanka" />
           <div className="prep-visa-grid">
-            <article className="prep-visa-card prep-visa-card--primary">
-              <p>Primary Route</p>
-              <h3>Electronic Travel Authorisation</h3>
-              <i />
-              <p>
-                Available to most nationalities. Our advisory team confirms the correct entry path before departure and
-                keeps arrival documentation ready for your receiving host.
-              </p>
-              <dl>
-                <div>
-                  <dt>Duration</dt>
-                  <dd>30 days</dd>
-                </div>
-                <div>
-                  <dt>Extendable</dt>
-                  <dd>90 days</dd>
-                </div>
-                <div>
-                  <dt>Apply by</dt>
-                  <dd>48 hrs prior</dd>
-                </div>
-                <div>
-                  <dt>Portal</dt>
-                  <dd>eta.gov.lk</dd>
-                </div>
-              </dl>
-            </article>
-
-            <article className="prep-visa-card prep-visa-card--steps">
-              <p>Application Steps</p>
-              <h3>How to Apply</h3>
-              <i />
-              <ol>
-                {applicationSteps.map((step, index) => (
-                  <li key={step}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </article>
-
-            <article className="prep-visa-card prep-visa-card--arrival" id="arrival">
-              <p>02 - Arrival</p>
-              <h3>At the Airport</h3>
-              <i />
-              <p>
-                Bandaranaike International Airport (CMB) is calm and navigable. Your arrival is handled with a named
-                receiving point, discreet driver coordination, and private onward timing.
-              </p>
-              <ul>
-                {arrivalNotes.map((note) => (
-                  <li key={note.label}>
-                    <strong>{note.label}</strong>
-                    <span>{note.copy}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+            {welcomeMoments.map((moment, index) => (
+              <article
+                key={moment.label}
+                className={`prep-visa-card${index === 0 ? ' prep-visa-card--primary' : ''}${index === 1 ? ' prep-visa-card--steps' : ''}${index === 2 ? ' prep-visa-card--arrival' : ''}`}
+              >
+                <p>{moment.label}</p>
+                <h3>{moment.title}</h3>
+                <i />
+                <p>{moment.copy}</p>
+              </article>
+            ))}
           </div>
           <aside className="prep-service-note">
-            <span>VVIP Preference</span>
+            <span>Private Receiving</span>
             <p>
-              For guests requiring additional privacy, protocol vehicles, security coordination, or tarmac-adjacent
-              handling where available, arrangements are confirmed privately before travel.
+              For guests requiring additional privacy, protocol vehicles, family-office coordination, or discretion-led
+              arrival handling, those arrangements are confirmed privately before travel.
             </p>
           </aside>
         </div>
       </section>
 
-      <section className="prep-section prep-payments" id="currency">
+      <section className="prep-section prep-notes" id="tea-ritual">
         <div className="prep-container">
-          <SectionHeading number="03" title="Currency & Payments" />
-          <div className="prep-payment-grid">
-            {paymentNotes.map((note) => (
-              <article key={note.label} className="prep-payment-card">
-                <span className={`prep-payment-icon${note.icon === 'hex' ? ' prep-payment-icon--hex' : ''}${note.icon === 'circle' ? ' prep-payment-icon--circle' : ''}`}>
-                  {note.icon}
-                </span>
-                <p>{note.label}</p>
-                <h3>{note.title}</h3>
-                <small>{note.copy}</small>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="prep-section prep-seasons" id="seasons">
-        <div className="prep-container">
-          <SectionHeading number="04" title="Weather & Seasons" inverse />
-          <p className="prep-seasons-note">
-            Peak season indicated by filled circles. For VVIP journeys, timing is selected around privacy, weather,
-            movement, and the quietest access windows.
-          </p>
-          <div className="prep-season-table" role="table" aria-label="Sri Lanka seasonal guide">
-            <div className="prep-season-months" role="row">
-              <span />
-              {months.map((month) => (
-                <span key={month}>{month}</span>
-              ))}
-              <span />
-            </div>
-            {seasons.map((season) => (
-              <div className="prep-season-row" key={season.region} role="row">
-                <div className="prep-season-region">
-                  <strong>{season.region}</strong>
-                  <span>{season.copy}</span>
-                </div>
-                {months.map((month, index) => (
-                  <span
-                    key={month}
-                    className={isPeakMonth(season.activeMonths, index) ? 'is-active' : ''}
-                    aria-label={`${month}: ${isPeakMonth(season.activeMonths, index) ? 'peak' : 'off peak'}`}
-                  />
-                ))}
-                <p>{season.best}</p>
-              </div>
-            ))}
-          </div>
-          <div className="prep-region-cards">
-            {seasons.map((season) => (
-              <article key={season.region}>
-                <img src={season.image} alt={`${season.region} in Sri Lanka`} />
-                <h3>{season.region}</h3>
-                <p>{season.imageCopy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="prep-section prep-notes" id="travel-notes">
-        <div className="prep-container">
-          <SectionHeading number="05" title="Travel Notes" />
+          <SectionHeading number="02" title="The Welcome Tea Experience" />
           <div className="prep-notes-list">
-            {travelNotes.map((note) => (
-              <article key={note.numeral}>
-                <span>{note.numeral}</span>
-                <h3>{note.title}</h3>
-                <p>{note.copy}</p>
-              </article>
-            ))}
+            <article>
+              <span>I</span>
+              <h3>The first ritual of the journey</h3>
+              <p>
+                On arrival, you are invited to pause over a complimentary cup of premium Ceylon tea in one of our
+                selected partner hotels or lounges. It is not simply refreshment after a flight. It is the symbolic
+                beginning of every Royale Isles Lanka journey.
+              </p>
+            </article>
+            <article>
+              <span>II</span>
+              <h3>While you settle, we prepare</h3>
+              <p>
+                As tea is poured, the practical world continues quietly behind the scenes: transfers reconfirmed,
+                chauffeur prepared, luggage arranged, accommodation alerted, preferences reviewed, and the first day
+                softened around your arrival.
+              </p>
+            </article>
+            <article>
+              <span>III</span>
+              <h3>The journey has already begun</h3>
+              <p>
+                There is no rush to solve, organise, or ask what comes next. The welcome tea is a gentle threshold
+                between the long flight and the island itself: a moment of stillness before Sri Lanka opens around you.
+              </p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="prep-section prep-etiquette" id="etiquette">
+      <section className="prep-section prep-payments" id="arranged">
         <div className="prep-container">
-          <SectionHeading number="06" title="Sri Lankan Etiquette" />
+          <SectionHeading number="03" title="Every Detail Thoughtfully Arranged" />
+          <div className="prep-payment-grid">
+            {arrangedDetails.map((detail) => (
+              <article key={detail.label} className="prep-payment-card">
+                <span className="prep-payment-icon">{detail.icon}</span>
+                <p>{detail.label}</p>
+                <h3>{detail.title}</h3>
+                <small>{detail.copy}</small>
+              </article>
+            ))}
+          </div>
+          <aside className="prep-service-note prep-service-note--stacked">
+            <span>Quietly Prepared</span>
+            <ul>
+              {quietlyPrepared.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section className="prep-section prep-etiquette" id="concierge">
+        <div className="prep-container">
+          <SectionHeading number="04" title="Your Personal Concierge" />
           <div className="prep-etiquette-grid">
-            {etiquette.map((item) => (
+            {conciergeNotes.map((item) => (
               <article key={item.title}>
-                <h3>{item.title}</h3>
+                <h3>
+                  <span>{item.numeral}</span>
+                  {item.title}
+                </h3>
                 <p>{item.copy}</p>
               </article>
             ))}
@@ -470,14 +308,14 @@ export function TravelPreparationPage() {
         </div>
       </section>
 
-      <section className="prep-section prep-faq" id="faq">
+      <section className="prep-section prep-faq" id="assurance">
         <div className="prep-faq-container">
           <div className="prep-faq-header">
             <div>
-              <SectionHeading number="07" title="Frequently Asked" />
+              <SectionHeading number="05" title="Quiet Assurances" />
               <p>
-                Public answers are intentionally brief. Personal requirements, security preferences, and family-office
-                protocols are confirmed privately with your journey team.
+                The purpose of preparation is not to give you more to remember. It is to remove the need to keep track
+                of what has already been considered.
               </p>
             </div>
             <aside className="prep-faq-concierge">
@@ -485,7 +323,7 @@ export function TravelPreparationPage() {
               <h3>Questions with nuance belong in conversation.</h3>
               <p>
                 For principals, entourages, medical considerations, special access, or discretion-sensitive movement,
-                our team will brief you directly before any itinerary is finalised.
+                our team briefs you directly before any journey is finalised.
               </p>
               <a href="/concierge">Ask The Concierge</a>
             </aside>
@@ -493,16 +331,16 @@ export function TravelPreparationPage() {
 
           <div className="prep-faq-panel">
             <div className="prep-faq-list">
-              {faqs.map((faq, index) => (
-                <details key={faq.question}>
+              {assurances.map((item, index) => (
+                <details key={item.title}>
                   <summary>
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     <div>
-                      <small>{faq.category}</small>
-                      <strong>{faq.question}</strong>
+                      <small>Prepared Privately</small>
+                      <strong>{item.title}</strong>
                     </div>
                   </summary>
-                  <p>{faq.answer}</p>
+                  <p>{item.copy}</p>
                 </details>
               ))}
             </div>
@@ -510,26 +348,26 @@ export function TravelPreparationPage() {
         </div>
       </section>
 
-      <section className="prep-final-cta">
+      <section className="prep-final-cta" id="begin">
         <div className="prep-final-cta-inner">
           <div className="prep-final-cta-mark" aria-hidden="true">
             ✦
           </div>
-          <p>Private Preparation Briefing</p>
+          <p>Begin Your Journey</p>
           <h2>
-            Arrive with every detail
+            Arrive in Sri Lanka
             <br />
-            <em>quietly handled.</em>
+            <em>already cared for.</em>
           </h2>
           <p>
-            Before you travel, our advisory team reviews entry, arrival, health, wardrobe, currency, security,
-            and regional timing around your exact itinerary. Nothing is generic. Nothing is left for the airport.
+            Your welcome, tea, chauffeur, luggage, accommodation, local support, and first quiet hour are prepared before
+            you arrive. All that remains is to enter the journey.
           </p>
           <div className="prep-cta-actions">
-            <a href="/concierge">Request A Preparation Briefing</a>
-            <a href="#travel-notes">Review The Notes</a>
+            <a href="/concierge">Begin A Private Conversation</a>
+            <a href="#tea-ritual">The Welcome Tea Ritual</a>
           </div>
-          <small>Private arrival handling. Discreet guest support. Prepared before the journey begins.</small>
+          <small>Personally welcomed. Quietly prepared. Held from the moment you arrive.</small>
         </div>
       </section>
     </main>
