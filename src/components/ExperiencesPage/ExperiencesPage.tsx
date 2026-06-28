@@ -650,7 +650,7 @@ export function ExperiencesPage() {
         <div className="experiences-container">
           <header className="experience-themes-header">
             <div>
-              <Eyebrow>Traveller Discovery - Experience Themes</Eyebrow>
+              <Eyebrow>Experience Themes</Eyebrow>
               <h2 id="experience-themes-title">
                 Ways Into
                 <br />
@@ -659,8 +659,8 @@ export function ExperiencesPage() {
             </div>
             <p>
               No two travellers experience Sri Lanka the same way. Some seek wilderness. Some seek
-              restoration. Some seek culture, memory, or stillness. The encounters below emerge from
-              these different motivations, shaped by who the traveller is before any itinerary is drawn.
+              restoration. Some seek culture, memory, or stillness. As you explore, these themes
+              quietly reveal the kind of journey that may feel personally true.
             </p>
           </header>
 

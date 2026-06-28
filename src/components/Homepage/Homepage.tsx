@@ -21,49 +21,6 @@ const images = {
   guideCover: '/figma-homepage/guide-cover.jpg',
 }
 
-const identityCards = [
-  {
-    image: images.teaEstate,
-    numeral: 'I',
-    label: 'Previously Discovered',
-    title: 'The Seeker of Silence',
-    signal: 'Revealed through stillness, restraint, and protected mornings.',
-    copy: 'A traveller who arrived asking for beauty, then discovered what they were really seeking was stillness.',
-  },
-  {
-    image: images.artisan,
-    numeral: 'II',
-    label: 'Previously Discovered',
-    title: 'The Curious Witness',
-    signal: 'Revealed through hands, rituals, and lives kept close to place.',
-    copy: 'A guest drawn not to monuments alone, but to the people, rituals, hands, and stories that keep them alive.',
-  },
-  {
-    image: images.beachDinner,
-    numeral: 'III',
-    label: 'Previously Discovered',
-    title: 'The Romantic',
-    signal: 'Revealed through privacy, time together, and beauty without theatre.',
-    copy: 'A traveller who discovered that intimacy, beauty, and time together were the real destination.',
-  },
-  {
-    image: images.journalHours,
-    numeral: 'IV',
-    label: 'Previously Discovered',
-    title: 'The Unhurried Wanderer',
-    signal: 'Revealed through spaciousness, soft timing, and the absence of hurry.',
-    copy: 'Someone who stopped asking what came next, and began noticing what was already unfolding.',
-  },
-  {
-    image: images.journalGuide,
-    numeral: 'V',
-    label: 'Previously Discovered',
-    title: 'The Story Collector',
-    signal: 'Revealed through thresholds, meals, voices, and remembered detail.',
-    copy: 'A traveller who remembered Sri Lanka through voices, meals, thresholds, and conversations.',
-  },
-]
-
 const experiences = [
   {
     image: images.junglePavilion,
@@ -217,13 +174,6 @@ const heroScenes = [
   },
 ]
 
-const discoveryPrinciples = [
-  'Examples, not categories',
-  'No selections to make',
-  'A conversation, not a test',
-  'Yours has not been written yet',
-]
-
 const brochureHighlights = [
   'Private residences, villas, and estate houses',
   'Discreet wildlife, heritage, and coastal access',
@@ -267,21 +217,8 @@ const questions = [
 ]
 
 export function Homepage() {
-  const [activeIdentityIndex, setActiveIdentityIndex] = useState(0)
   const [activeStoryIndex, setActiveStoryIndex] = useState(0)
-  const visibleIdentityCards = [...identityCards, ...identityCards].slice(
-    activeIdentityIndex,
-    activeIdentityIndex + 3,
-  )
   const activeStory = travellerStories[activeStoryIndex]
-
-  const showPreviousIdentity = () => {
-    setActiveIdentityIndex((currentIndex) => (currentIndex === 0 ? identityCards.length - 1 : currentIndex - 1))
-  }
-
-  const showNextIdentity = () => {
-    setActiveIdentityIndex((currentIndex) => (currentIndex + 1) % identityCards.length)
-  }
 
   const showPreviousStory = () => {
     setActiveStoryIndex((currentIndex) => (currentIndex === 0 ? travellerStories.length - 1 : currentIndex - 1))
@@ -314,89 +251,6 @@ export function Homepage() {
         <p className="figma-hero-caption">Bespoke journeys for private families, principals, and discerning travellers.</p>
       </section>
 
-      <section className="figma-discovery" id="about" data-node-id="103:12717">
-        <div className="figma-container">
-          <div className="figma-identities">
-            <p className="figma-overline">Traveller Discovery</p>
-            <header>
-              <div>
-                <h3>Identities We Have Discovered</h3>
-                <p>
-                  A few travellers. A few different ways of moving through the world. Yours has not
-                  been written yet.
-                </p>
-              </div>
-              <div className="figma-carousel-buttons" aria-label="Browse discovered traveller identities">
-                <button
-                  type="button"
-                  onClick={showPreviousIdentity}
-                  aria-label="Show previous traveller identity"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={showNextIdentity}
-                  aria-label="Show next traveller identity"
-                >
-                  ›
-                </button>
-              </div>
-            </header>
-            <div className="figma-card-row">
-              {visibleIdentityCards.map((card, index) => (
-                <article className="figma-identity-card" key={`${card.title}-${activeIdentityIndex}-${index}`}>
-                  <figure>
-                    <img src={card.image} alt="" />
-                  </figure>
-                  <div>
-                    <p>{card.label}</p>
-                    <h4>{card.title}</h4>
-                    <small>{card.signal}</small>
-                    <span>{card.copy}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-          <div className="figma-discovery-grid">
-            <div className="figma-copy-stack">
-              <p className="figma-overline">Traveller Identities · Part II</p>
-              <h3 className="figma-discovery-heading">
-                What would yours be?
-              </h3>
-              <p>
-                The identities above are real examples from travellers we have come to understand:
-                a hidden need, a forgotten curiosity, a preferred rhythm, or a way of moving through
-                the world that only becomes clear with the right prompts.
-              </p>
-              <blockquote>Your own traveller identity may begin with a question, a reflection, or a guided path.</blockquote>
-              <p>
-                On the Traveller Identity page, you can begin privately in the way that feels most
-                natural: an AI-assisted self-discovery guide for deeper reflection, or a short
-                II-minute guided journey for a more immediate first reading.
-              </p>
-              <a className="figma-text-link" href="/traveller-discovery">
-                Find Your Traveller Identity
-              </a>
-              <aside className="figma-discovery-brief">
-                <span>Your Discovery Path</span>
-                <p>
-                  Choose between an AI-assisted self-discovery guide or a concise guided quiz. Either
-                  path helps us understand the kind of Sri Lanka journey that may feel personally true
-                  before any route, residence, host, or encounter is proposed.
-                </p>
-              </aside>
-            </div>
-          </div>
-          <div className="figma-private-standards" aria-label="Traveller Discovery principles">
-            {discoveryPrinciples.map((principle) => (
-              <span key={principle}>{principle}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="figma-experiences" id="experiences" data-node-id="103:12794">
         <div className="figma-container">
           <header className="figma-section-header figma-experiences-header">
@@ -404,9 +258,9 @@ export function Homepage() {
               <p className="figma-overline">From Discovery To Encounter</p>
               <h2>Ways Into The Island</h2>
               <p>
-                Traveller Discovery reveals what kind of journey may feel true. From there, our
-                curators translate identity into experience themes, and themes into private
-                encounters shaped by timing, trust, and the right local host.
+                As you explore themes, regions, destinations, moods, and encounters, Royale Isles
+                Lanka quietly reads the pattern. Our curators translate those signals into private
+                introductions shaped by timing, trust, and the right local host.
               </p>
             </div>
             <aside className="figma-experience-brief">
