@@ -5,6 +5,7 @@ import { experienceImages } from './images'
 import { JourneyIncludedPill } from '../../journey/JourneyChrome'
 import { useJourney } from '../../journey/JourneyContext'
 import { inferJourneyRegion } from '../../journey/journeyTaxonomy'
+import { sharedHeritageRecommendations, sharedHeritageWorld } from '../../journey/discoveryWorlds'
 
 type Detail = {
   label: string
@@ -19,6 +20,7 @@ const experienceThemeOptions = [
   'Wellness & Restoration',
   'Rail & Landscape',
   'Culture & Human Connection',
+  sharedHeritageWorld.name,
 ] as const
 
 type ExperienceTheme = (typeof experienceThemeOptions)[number]
@@ -87,6 +89,27 @@ const encounters: Encounter[] = [
       { label: 'Group Size', value: 'Max 2' },
       { label: 'Key Highlight', value: 'Private estate access, master blender session' },
       { label: 'Curator', value: 'Dilini P.' },
+    ],
+  },
+  {
+    id: 'shared-heritage-quietly-read',
+    theme: sharedHeritageWorld.name,
+    category: 'Shared History - Editorial Route',
+    title: 'Shared Heritage, Quietly Read',
+    note:
+      "This is not a tour of colonial relics. It is a considered route through tea country, railway engineering, old gardens, civic streets, and grand hotels where Sri Lankan and British histories still meet in architecture, education, hospitality, and daily ritual.",
+    curator: 'Amara Weerasinghe, Heritage & Research',
+    curatorImage: experienceImages.amara,
+    image: experienceImages.teaEstate,
+    imageAlt: 'Misty tea estate hills in soft morning light',
+    badge: 'New Discovery World',
+    caption: 'Tea Country - Railways - Colombo',
+    details: [
+      { label: 'Duration', value: '3-7 Days' },
+      { label: 'Best Season', value: 'Dec - Apr' },
+      { label: 'Group Size', value: 'Private' },
+      { label: 'Key Highlight', value: 'Tea, railways, gardens, and civic memory' },
+      { label: 'Curator', value: 'Amara W.' },
     ],
   },
   {
@@ -285,6 +308,17 @@ const experienceThemes = [
     imageAlt: 'Kandyan dancer in ceremonial costume',
     href: '#kandyan-dance-rehearsal',
     encounter: 'A Private Kandyan Dance Rehearsal',
+    featured: false,
+  },
+  {
+    number: sharedHeritageWorld.number,
+    title: sharedHeritageWorld.name,
+    description: sharedHeritageWorld.description,
+    traveller: sharedHeritageWorld.traveller,
+    image: sharedHeritageWorld.image,
+    imageAlt: sharedHeritageWorld.imageAlt,
+    href: '#shared-heritage-quietly-read',
+    encounter: 'Shared Heritage, Quietly Read',
     featured: false,
   },
 ] as const
@@ -542,6 +576,25 @@ export function ExperiencesPage() {
       : encounters.filter((encounter) => encounter.theme === selectedTheme)
   const curatedOpeningsCount = filteredEncounters.length
 
+  function includeSharedHeritageRecommendations() {
+    sharedHeritageRecommendations.slice(1, 5).forEach(({ destination }) => {
+      includeItem({
+        id: toJourneyId('destination', destination),
+        kind: 'destination',
+        label: destination,
+        detail: `A high-relevance recommendation for ${sharedHeritageWorld.name}.`,
+        source: 'Recommendation Engine',
+        parentTheme: sharedHeritageWorld.name,
+        parentRegion: inferJourneyRegion({
+          kind: 'destination',
+          label: destination,
+          detail: sharedHeritageWorld.description,
+          source: 'Shared Heritage recommendations',
+        }),
+      })
+    })
+  }
+
   function handleThemeExplore(
     theme: Exclude<ExperienceTheme, 'All Encounters'>,
     event: MouseEvent<HTMLAnchorElement>,
@@ -560,6 +613,9 @@ export function ExperiencesPage() {
         detail: 'A preferred way into Sri Lanka from the experience collection.',
         source: 'Experiences',
       })
+      if (theme === sharedHeritageWorld.name) {
+        includeSharedHeritageRecommendations()
+      }
     }
 
     window.requestAnimationFrame(() => {
@@ -581,6 +637,10 @@ export function ExperiencesPage() {
       detail: 'A preferred way into Sri Lanka from the experience collection.',
       source: 'Experiences',
     })
+
+    if (theme === sharedHeritageWorld.name) {
+      includeSharedHeritageRecommendations()
+    }
   }
 
   return (

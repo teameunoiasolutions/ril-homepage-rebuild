@@ -1,11 +1,12 @@
 import type { JourneyItem } from './JourneyContext'
+import { DISCOVERY_WORLD_NAMES, destinationDiscoveryWorlds } from './discoveryWorlds'
 
 export const regionThemeFallbacks: Record<string, string> = {
   'South Coast': 'Ocean & Discovery',
   'East Coast': 'Ocean & Discovery',
   'Hill Country': 'Rail & Landscape',
   'Cultural Triangle': 'Heritage & Memory',
-  'West Coast': 'Culture & Human Connection',
+  'West Coast': DISCOVERY_WORLD_NAMES.sharedHeritage,
 }
 
 export const regionSignatureExperiences: Record<string, string> = {
@@ -17,6 +18,7 @@ export const regionSignatureExperiences: Record<string, string> = {
 export const experienceThemeFallbacks: Record<string, string> = {
   'The Sigiriya Dawn Ascent': 'Heritage & Memory',
   'A Private Tea Estate, Locked Before Dawn': 'Rail & Landscape',
+  'Shared Heritage, Quietly Read': DISCOVERY_WORLD_NAMES.sharedHeritage,
   'The Leopard Research Circuit': 'Wildlife & Wilderness',
   "The Mirissa Fishermen's Dawn": 'Ocean & Discovery',
   'A Private Kandyan Dance Rehearsal': 'Culture & Human Connection',
@@ -29,6 +31,7 @@ export const experienceThemeFallbacks: Record<string, string> = {
 export const experienceRegionFallbacks: Record<string, string> = {
   'The Sigiriya Dawn Ascent': 'Cultural Triangle',
   'A Private Tea Estate, Locked Before Dawn': 'Hill Country',
+  'Shared Heritage, Quietly Read': 'Hill Country',
   'The Leopard Research Circuit': 'South Coast',
   "The Mirissa Fishermen's Dawn": 'South Coast',
   'A Private Kandyan Dance Rehearsal': 'Hill Country',
@@ -47,6 +50,7 @@ const regionSignals: Array<{ region: string; signals: string[] }> = [
       'southern province',
       'mirissa',
       'galle',
+      'galle fort',
       'weligama',
       'tangalle',
       'yala',
@@ -58,7 +62,19 @@ const regionSignals: Array<{ region: string; signals: string[] }> = [
   },
   {
     region: 'Hill Country',
-    signals: ['hill country', 'hill province', 'kandy', 'nuwara eliya', 'ella', 'hatton', 'tea country'],
+    signals: [
+      'hill country',
+      'hill province',
+      'kandy',
+      'nuwara eliya',
+      'ella',
+      'hatton',
+      'tea country',
+      'nine arches',
+      'hakgala',
+      'badulla',
+      'peradeniya',
+    ],
   },
   {
     region: 'Cultural Triangle',
@@ -66,7 +82,17 @@ const regionSignals: Array<{ region: string; signals: string[] }> = [
   },
   {
     region: 'West Coast',
-    signals: ['west coast', 'western coast', 'colombo', 'negombo', 'kalpitiya', 'bentota', 'sinharaja'],
+    signals: [
+      'west coast',
+      'western coast',
+      'colombo',
+      'colombo fort',
+      'galle face',
+      'negombo',
+      'kalpitiya',
+      'bentota',
+      'sinharaja',
+    ],
   },
 ]
 
@@ -108,7 +134,15 @@ export function inferJourneyTheme(item: Pick<JourneyItem, 'kind' | 'label' | 'pa
     return item.label
   }
 
+  if (item.kind === 'destination') {
+    return destinationDiscoveryWorlds[item.label]?.primary
+  }
+
   return undefined
+}
+
+export function getDestinationDiscoveryWorlds(destination: string) {
+  return destinationDiscoveryWorlds[destination]
 }
 
 export function normalizeJourneyItem(item: JourneyItem): JourneyItem {

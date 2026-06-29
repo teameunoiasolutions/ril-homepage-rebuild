@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { ArrowIcon } from '../ArrowIcon'
 import './ConciergeDesk.css'
+import { experienceImages } from '../ExperiencesPage/images'
+import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
 
 const assets = {
   tangalle: 'https://www.figma.com/api/mcp/asset/3889a33d-1629-4928-bc7f-9d5451b6f3dd',
@@ -13,9 +15,10 @@ const suggestedEnquiries = [
   'Which experiences feel unlike anything we have seen before?',
   'What property offers the most genuine privacy?',
   'Tell me about the best time to visit the Hill Country.',
+  `Build around ${sharedHeritageWorld.name}.`,
 ]
 
-const recommendations = [
+const defaultRecommendations = [
   {
     image: assets.tangalle,
     number: '01',
@@ -36,6 +39,30 @@ const recommendations = [
     title: 'Pasikuda',
     region: 'Eastern Coast',
     copy: 'Calm, shallow waters stretching far to sea. A beach for unhurried mornings and the pleasure of having found somewhere still belonging to itself.',
+  },
+]
+
+const sharedHeritageRecommendations = [
+  {
+    image: experienceImages.teaEstate,
+    number: '01',
+    title: 'Nuwara Eliya',
+    region: 'Hill Country Legacy',
+    copy: 'A cool highland chapter of tea estates, gardens, old hotels, and hill-station atmosphere, best read with context rather than nostalgia.',
+  },
+  {
+    image: experienceImages.teaEstate,
+    number: '02',
+    title: 'Nine Arches Bridge',
+    region: 'Railway Legacy',
+    copy: "An elegant piece of railway engineering where landscape, movement, and memory meet in one of Sri Lanka's most cinematic valleys.",
+  },
+  {
+    image: experienceImages.galleFort,
+    number: '03',
+    title: 'Galle Face Hotel',
+    region: 'Colombo Legacy',
+    copy: "A seafront institution where hospitality, arrival, public life, and Colombo's layered history can be understood in a single evening.",
   },
 ]
 
@@ -67,6 +94,20 @@ const responseModes = {
     ],
     note: 'General recommendations across all traveller types, unfiltered by preference profile.',
   },
+  sharedHeritage: {
+    label: sharedHeritageWorld.name,
+    tabNote: 'Tea, railways, gardens and civic memory',
+    recommendationsLabel: 'Heritage Recommendations',
+    lede:
+      "For travellers drawn to Sri Lanka's relationship with Britain, the strongest journeys avoid nostalgia and look instead at what endures: tea landscapes, railways, education, gardens, architecture and hospitality now fully part of modern Sri Lankan life.",
+    paragraphs: [
+      'I would begin in the hill country, where tea estates and old highland towns reveal how landscape, labour, climate and commerce reshaped the island. Nuwara Eliya is best approached not as a costume of the past, but as a living town with layered memory.',
+      'From there, the railway gives the theme movement. Nine Arches Bridge and the hill country line turn engineering into atmosphere: mist, stone, forest, stations and slow travel held together in one route.',
+      'In Colombo, the story becomes civic and social. Fort, the Galle Face Hotel, old public buildings and museum gardens are places where administration, education, architecture and daily city life continue to overlap.',
+    ],
+    note:
+      'Selections prioritise shared cultural landscapes and living context. The route is educational and elegant, never a celebration of empire.',
+  },
 } as const
 
 type ResponseMode = keyof typeof responseModes
@@ -75,6 +116,7 @@ export function ConciergeDesk() {
   const [responseMode, setResponseMode] = useState<ResponseMode>('personalised')
   const recommendationListRef = useRef<HTMLDivElement>(null)
   const response = responseModes[responseMode]
+  const recommendations = responseMode === 'sharedHeritage' ? sharedHeritageRecommendations : defaultRecommendations
 
   const scrollRecommendations = (direction: 'up' | 'down') => {
     const list = recommendationListRef.current

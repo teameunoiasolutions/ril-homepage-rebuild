@@ -70,12 +70,20 @@ export function MyJourneyPage() {
         parentTheme: inferJourneyTheme(item),
         parentRegion: inferJourneyRegion(item),
       }))
+    const themedDestinations = items
+      .filter((item) => item.kind === 'destination' && inferJourneyTheme(item))
+      .map((item) => ({
+        ...item,
+        parentTheme: inferJourneyTheme(item),
+        parentRegion: inferJourneyRegion(item),
+      }))
     const themeNames = Array.from(
       new Set(
         [
           ...themeItems.map((item) => item.label),
           ...themedRegions.map((item) => item.parentTheme),
           ...themedExperiences.map((item) => item.parentTheme),
+          ...themedDestinations.map((item) => item.parentTheme),
         ].filter(Boolean),
       ),
     ) as string[]
@@ -83,8 +91,15 @@ export function MyJourneyPage() {
     const groups = themeNames.map((themeName) => {
       const regions = themedRegions.filter((item) => item.parentTheme === themeName)
       const experiences = themedExperiences.filter((item) => item.parentTheme === themeName)
+      const destinations = themedDestinations.filter((item) => item.parentTheme === themeName)
       const regionNames = Array.from(
-        new Set([...regions.map((item) => item.label), ...experiences.map((item) => item.parentRegion)].filter(Boolean)),
+        new Set(
+          [
+            ...regions.map((item) => item.label),
+            ...destinations.map((item) => item.parentRegion),
+            ...experiences.map((item) => item.parentRegion),
+          ].filter(Boolean),
+        ),
       ) as string[]
 
       return {
@@ -93,8 +108,10 @@ export function MyJourneyPage() {
         regions: regionNames.map((regionName) => ({
           regionName,
           regionItem: regions.find((item) => item.label === regionName),
+          destinations: destinations.filter((item) => item.parentRegion === regionName),
           experiences: experiences.filter((item) => item.parentRegion === regionName),
         })),
+        destinations: destinations.filter((item) => !item.parentRegion),
         experiences: experiences.filter((item) => !item.parentRegion),
       }
     })
@@ -108,6 +125,7 @@ export function MyJourneyPage() {
           item.kind !== 'theme' &&
           !(item.kind === 'region' && nestedRegionNames.has(item.label)) &&
           !(item.kind === 'region' && item.parentTheme) &&
+          !(item.kind === 'destination' && inferJourneyTheme(item)) &&
           !(item.kind === 'experience' && inferJourneyTheme(item)),
       )
       .reduce<Partial<Record<JourneyItemKind, typeof items>>>((groups, item) => {
@@ -157,6 +175,8 @@ export function MyJourneyPage() {
                     <small>
                       {group.regions.length > 0
                         ? `${group.regions.length} region${group.regions.length === 1 ? '' : 's'} held beneath this theme`
+                        : group.destinations.length > 0
+                          ? `${group.destinations.length} destination${group.destinations.length === 1 ? '' : 's'} held beneath this theme`
                         : group.experiences.length > 0
                           ? `${group.experiences.length} experience${group.experiences.length === 1 ? '' : 's'} held beneath this theme`
                           : 'Theme held for your journey'}
@@ -190,6 +210,18 @@ export function MyJourneyPage() {
                         </button>
                       ) : null}
                     </section>
+                    {region.destinations.map((item) => (
+                      <section className="my-journey-child-item" key={item.id}>
+                        <div>
+                          <h2>{item.label}</h2>
+                          {item.detail ? <p>{item.detail}</p> : null}
+                          {item.source ? <small>{item.source}</small> : null}
+                        </div>
+                        <button type="button" onClick={() => confirmRemoveItem(item.id)}>
+                          Remove from Journey
+                        </button>
+                      </section>
+                    ))}
                     {region.experiences.map((item) => (
                       <section className="my-journey-child-item" key={item.id}>
                         <div>
@@ -203,6 +235,19 @@ export function MyJourneyPage() {
                       </section>
                     ))}
                   </div>
+                ))}
+
+                {group.destinations.map((item) => (
+                  <section className="my-journey-child-item" key={item.id}>
+                    <div>
+                      <h2>{item.label}</h2>
+                      {item.detail ? <p>{item.detail}</p> : null}
+                      {item.source ? <small>{item.source}</small> : null}
+                    </div>
+                    <button type="button" onClick={() => confirmRemoveItem(item.id)}>
+                      Remove from Journey
+                    </button>
+                  </section>
                 ))}
 
                 {group.experiences.map((item) => (

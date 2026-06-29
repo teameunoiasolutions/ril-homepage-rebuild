@@ -1,5 +1,6 @@
 import './TravelPreparationPage.css'
 import { experienceImages } from '../ExperiencesPage/images'
+import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
 
 const images = {
   hero: experienceImages.teaEstate,
@@ -18,6 +19,7 @@ const heroProtocols = [
   'Private transfer prepared',
   'Luggage quietly handled',
   'Concierge already briefed',
+  'Historical context prepared',
 ] as const
 
 const assurancePoints = [
@@ -85,6 +87,13 @@ const arrangedDetails = [
     copy:
       'Celebrations, wellness needs, family rhythms, privacy preferences, and personal rituals are woven into the journey in advance.',
   },
+  {
+    icon: 'V',
+    label: sharedHeritageWorld.name,
+    title: 'Context travels with the route.',
+    copy:
+      'If your journey includes tea country, railways, old hotels, civic streets, or gardens, your host prepares the shared historical context before you arrive.',
+  },
 ] as const
 
 const conciergeNotes = [
@@ -134,6 +143,11 @@ const assurances = [
     title: 'The first day is intentionally gentle',
     copy:
       'Arrival is not treated as a transition to endure. It is composed as the first quiet chapter of your time in Sri Lanka.',
+  },
+  {
+    title: `${sharedHeritageWorld.name} is introduced with balance`,
+    copy:
+      'Where British and Sri Lankan histories intersect, the framing remains thoughtful: architecture, tea, railways, education, gardens, and engineering are read as living cultural landscapes.',
   },
 ] as const
 

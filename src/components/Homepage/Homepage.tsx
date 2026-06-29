@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Homepage.css'
 import { ArrowIcon } from '../ArrowIcon'
+import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
 
 const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const
 
@@ -55,6 +56,16 @@ const experiences = [
     copy:
       'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of lives briefly, respectfully shared.',
   },
+  {
+    image: sharedHeritageWorld.image,
+    imageAlt: sharedHeritageWorld.imageAlt,
+    numeral: 'VII',
+    region: sharedHeritageWorld.name,
+    identity: sharedHeritageWorld.traveller,
+    access: 'Tea country - Railways - Civic memory',
+    title: sharedHeritageWorld.homepageTitle,
+    copy: sharedHeritageWorld.homepageCopy,
+  },
 ]
 
 const experienceThreads = [
@@ -64,6 +75,7 @@ const experienceThreads = [
   'Wellness & Restoration',
   'Rail & Landscape',
   'Culture & Human Connection',
+  sharedHeritageWorld.name,
 ] as const
 
 const philosophyLines = [
@@ -266,7 +278,7 @@ export function Homepage() {
             <aside className="figma-experience-brief">
               <span>Private Collection</span>
               <p>
-                6 pathways. No fixed catalogue. Each introduction is selected only when the access
+                7 pathways. No fixed catalogue. Each introduction is selected only when the access
                 protects the place, the host, and the traveller.
               </p>
               <a href="/experiences">Explore The Collection</a>

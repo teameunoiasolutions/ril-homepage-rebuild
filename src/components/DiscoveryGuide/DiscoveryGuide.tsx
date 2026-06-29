@@ -3,7 +3,8 @@ import './DiscoveryGuide.css'
 import { experienceImages } from '../ExperiencesPage/images'
 import { JourneyIncludedPill } from '../../journey/JourneyChrome'
 import { useJourney } from '../../journey/JourneyContext'
-import { regionThemeFallbacks } from '../../journey/journeyTaxonomy'
+import { getDestinationDiscoveryWorlds, regionThemeFallbacks } from '../../journey/journeyTaxonomy'
+import { sharedHeritageCollections, sharedHeritageWorld } from '../../journey/discoveryWorlds'
 
 const images = {
   hero: experienceImages.sigiriyaDawn,
@@ -25,7 +26,7 @@ const regions = [
     overview:
       'The southern coast is Sri Lanka in golden light: fortified towns, quiet coves, sea air, and villas held close to the palms.',
     landscapes: 'Golden beaches, colonial streets, cinnamon gardens, reef-fringed bays',
-    themes: ['Ocean & Discovery', 'Wellness & Restoration', 'Culture & Human Connection'],
+    themes: ['Ocean & Discovery', 'Wellness & Restoration', 'Culture & Human Connection', sharedHeritageWorld.name],
     destinations: ['Galle Fort', 'Weligama', 'Tangalle', 'Mirissa'],
     experiences: ['Private coastal residences', 'Whale-watching by season', 'Cinnamon estate visits', 'Sunset suppers by the sea'],
   },
@@ -49,8 +50,8 @@ const regions = [
     overview:
       'The highlands belong to mist, tea, and silence. Days begin cool, the landscape folds in layers, and movement becomes part of the pleasure.',
     landscapes: 'Tea estates, cloud forest, waterfalls, mountain railways',
-    themes: ['Rail & Landscape', 'Wellness & Restoration', 'Culture & Human Connection'],
-    destinations: ['Kandy', 'Nuwara Eliya', 'Ella', 'Hatton'],
+    themes: ['Rail & Landscape', 'Wellness & Restoration', 'Culture & Human Connection', sharedHeritageWorld.name],
+    destinations: ['Kandy', 'Nuwara Eliya', 'Ella', 'Hatton', 'Nine Arches Bridge'],
     experiences: ['Tea estate residences', 'Scenic rail journeys', 'Garden lunches', 'Restorative highland retreats'],
   },
   {
@@ -73,8 +74,8 @@ const regions = [
     overview:
       "The west is often the island's first welcome: Colombo's layered elegance, Negombo's lagoon light, and a coast shaped by arrival and return.",
     landscapes: 'Lagoon, colonial architecture, coastal villas, city gardens',
-    themes: ['Culture & Human Connection', 'Ocean & Discovery', 'Wellness & Restoration'],
-    destinations: ['Colombo', 'Negombo', 'Kalpitiya', 'Bentota'],
+    themes: ['Culture & Human Connection', 'Ocean & Discovery', 'Wellness & Restoration', sharedHeritageWorld.name],
+    destinations: ['Colombo', 'Colombo Fort', 'Galle Face Hotel', 'Negombo', 'Kalpitiya', 'Bentota'],
     experiences: ['Private city introductions', 'Lagoon-side arrivals', 'Architectural walks', 'Gentle first-night stays'],
   },
 ] as const
@@ -112,7 +113,12 @@ export function DiscoveryGuide() {
 
   function rememberValue(kind: 'theme' | 'destination' | 'experience', value: string, regionName = activeRegion.name) {
     const id = toJourneyId(kind, value)
-    const parentTheme = kind === 'experience' ? regionThemeFallbacks[regionName] : undefined
+    const parentTheme =
+      kind === 'experience'
+        ? regionThemeFallbacks[regionName]
+        : kind === 'destination'
+          ? getDestinationDiscoveryWorlds(value)?.primary
+          : undefined
 
     if (isIncluded(id)) {
       requestRemoveItem(id)
@@ -146,8 +152,8 @@ export function DiscoveryGuide() {
       label: value,
       detail: `Naturally aligned with ${regionName}.`,
       source: 'Discover Sri Lanka',
-      parentTheme: kind === 'experience' ? parentTheme : undefined,
-      parentRegion: kind === 'experience' ? regionName : undefined,
+      parentTheme,
+      parentRegion: kind === 'experience' || kind === 'destination' ? regionName : undefined,
     })
   }
 
@@ -172,6 +178,35 @@ export function DiscoveryGuide() {
             <small>Dawn, forest, stone, and the quiet intelligence of timing.</small>
           </figcaption>
         </figure>
+      </section>
+
+      <section className="guide-themes guide-shared-heritage" aria-labelledby="shared-heritage-heading">
+        <div className="guide-section-heading">
+          <span>Discovery World VII</span>
+          <h2 id="shared-heritage-heading">{sharedHeritageWorld.name}</h2>
+          <p>{sharedHeritageWorld.description}</p>
+        </div>
+        <div className="guide-theme-grid">
+          {sharedHeritageCollections.map((collection) => (
+            <article key={collection.title}>
+              <h3>{collection.title}</h3>
+              <p>{collection.description}</p>
+              <ul>
+                {collection.destinations.map((destination) => (
+                  <li key={destination}>
+                    <button
+                      className={isIncluded(toJourneyId('destination', destination)) ? 'is-included' : undefined}
+                      type="button"
+                      onClick={() => rememberValue('destination', destination)}
+                    >
+                      {destination}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="guide-intro" aria-label="How to understand Sri Lanka">
