@@ -179,7 +179,6 @@
   color: var(--article-body);
   font-family: var(--font-display);
   font-size: 15px;
-  font-style: italic;
   line-height: var(--line-height-body);
 }
 
@@ -446,7 +445,6 @@
   color: var(--article-ink);
   font-family: var(--font-display);
   font-size: 22px;
-  font-style: italic;
   line-height: var(--line-height-ui);
 }
 
@@ -463,6 +461,7 @@
 
 .article-prose em {
   color: var(--article-body);
+  font-style: normal;
   text-decoration: underline;
   text-decoration-color: var(--color-primary);
   text-underline-offset: 3px;
@@ -526,7 +525,6 @@
   color: var(--article-body);
   font-family: var(--font-display);
   font-size: 15px;
-  font-style: italic;
   line-height: var(--line-height-copy);
 }
 
@@ -642,7 +640,6 @@
   color: var(--article-ink);
   font-family: var(--font-display);
   font-size: 20px;
-  font-style: italic;
   font-weight: 400;
   line-height: var(--line-height-heading);
 }
@@ -664,7 +661,6 @@
   color: var(--color-primary);
   font-family: var(--font-display);
   font-size: 16px;
-  font-style: italic;
 }
 
 .article-note footer {
@@ -755,7 +751,6 @@
   color: var(--article-ink);
   font-family: var(--font-display);
   font-size: 38px;
-  font-style: italic;
   font-weight: 400;
   line-height: var(--line-height-heading);
 }
@@ -856,7 +851,6 @@
   color: var(--article-body);
   font-family: var(--font-display);
   font-size: 15px;
-  font-style: italic;
   line-height: var(--line-height-body);
 }
 
@@ -1057,7 +1051,6 @@
   color: var(--article-ink);
   font-family: var(--font-display);
   font-size: 17px;
-  font-style: italic;
   line-height: var(--line-height-body);
 }
 
@@ -1138,7 +1131,6 @@
   color: var(--article-ink);
   font-family: var(--font-display);
   font-size: 18px;
-  font-style: italic;
   font-weight: 400;
   line-height: var(--line-height-copy);
 }

@@ -181,7 +181,6 @@
   color: var(--color-text-muted);
   font-family: var(--font-display);
   font-size: 16px;
-  font-style: italic;
   line-height: var(--line-height-body);
 }
 
@@ -524,7 +523,7 @@
 
 .experience-themes-header h2 em {
   color: var(--experience-gold);
-  font-style: italic;
+  font-style: normal;
   font-weight: 300;
 }
 
@@ -893,7 +892,6 @@
   color: var(--color-text);
   font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 40px);
-  font-style: italic;
   line-height: var(--line-height-heading);
 }
 
@@ -1064,7 +1062,6 @@
   color: var(--color-text-muted);
   font-family: var(--font-display);
   font-size: clamp(16px, 1.4vw, 20px);
-  font-style: italic;
   line-height: var(--line-height-relaxed);
 }
 
@@ -1120,7 +1117,6 @@
 
 .encounter-details div:last-child dd {
   font-family: var(--font-display);
-  font-style: italic;
   font-weight: 400;
 }
 
@@ -1131,7 +1127,7 @@
 .ceremony-quote em,
 .process-quote em {
   color: var(--experience-green);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 
@@ -1199,7 +1195,7 @@
 
 .editorial-transition h2 em {
   color: var(--experience-green);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 
@@ -1255,7 +1251,7 @@
 }
 
 .wilderness-copy h2 em {
-  font-style: italic;
+  font-style: normal;
   font-weight: 300;
 }
 
@@ -1303,7 +1299,6 @@
   color: var(--color-text-subtle);
   font-family: var(--font-display);
   font-size: 12px;
-  font-style: italic;
   letter-spacing: 0.7px;
   line-height: var(--line-height-caption);
 }
@@ -1331,7 +1326,6 @@
 
 .ceremony-quote figcaption {
   margin-top: 12px;
-  font-style: italic;
   letter-spacing: 1.2px;
   text-transform: none;
 }
@@ -1394,7 +1388,7 @@
 
 .curation-process h2 em {
   color: inherit;
-  font-style: italic;
+  font-style: normal;
 }
 
 .curation-grid {
@@ -1655,7 +1649,7 @@
 
 .experiences-final-cta h2 em {
   color: var(--color-accent);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 
