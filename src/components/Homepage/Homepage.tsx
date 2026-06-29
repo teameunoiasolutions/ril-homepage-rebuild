@@ -12,6 +12,8 @@ import nuwaraEliyaImage from '../../assets/images/NuwaraEliya .jpg'
 import peradeniyaImage from '../../assets/images/Peradeniya.jpg'
 import royaleIslesMapImage from '../../assets/images/royale-isles-map-transparent-clean.png'
 import sigiriyaImage from '../../assets/images/Sigiriya.JPG'
+import travelOneImage from '../../assets/images/travel1.jpg'
+import travelTwoImage from '../../assets/images/travel2.jpg'
 
 const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const
 
@@ -43,6 +45,8 @@ const localImages = {
   peradeniya: peradeniyaImage,
   royaleIslesMap: royaleIslesMapImage,
   sigiriya: sigiriyaImage,
+  travelOne: travelOneImage,
+  travelTwo: travelTwoImage,
 } as const
 
 const experiences = [
@@ -158,7 +162,7 @@ const journalItems = [
 
 const travellerStories = [
   {
-    image: localImages.ahangama,
+    image: localImages.travelTwo,
     format: 'Private Film',
     duration: 'II:XLVIII',
     title: 'An anniversary carried by the island',
@@ -171,7 +175,7 @@ const travellerStories = [
     videoCaption: 'A discreet film of the moments between the formal itinerary: arrival, laughter, silence, sea air.',
   },
   {
-    image: localImages.peradeniya,
+    image: localImages.travelOne,
     format: 'Photo Journal',
     duration: 'I:LVI',
     title: 'A quiet return to wonder',
