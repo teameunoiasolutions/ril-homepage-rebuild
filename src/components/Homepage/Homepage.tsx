@@ -2,6 +2,16 @@ import { useState } from 'react'
 import './Homepage.css'
 import { ArrowIcon } from '../ArrowIcon'
 import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
+import ahangamaImage from '../../assets/images/Ahangama.jpeg'
+import galleBeachImage from '../../assets/images/Galle beach.jpeg'
+import kelaniTempleImage from '../../assets/images/Kelani temple.jpeg'
+import kithulgalaImage from '../../assets/images/Kithulgala.jpeg'
+import kandyPeraheraImage from '../../assets/images/Kandy Perahera.JPG'
+import maduRiverImage from '../../assets/images/Madu River.jpeg'
+import nuwaraEliyaImage from '../../assets/images/NuwaraEliya .jpg'
+import peradeniyaImage from '../../assets/images/Peradeniya.jpg'
+import royaleIslesMapImage from '../../assets/images/royale-isles-map-transparent-clean.png'
+import sigiriyaImage from '../../assets/images/Sigiriya.JPG'
 
 const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const
 
@@ -22,10 +32,23 @@ const images = {
   guideCover: '/figma-homepage/guide-cover.jpg',
 }
 
+const localImages = {
+  ahangama: ahangamaImage,
+  galleBeach: galleBeachImage,
+  kelaniTemple: kelaniTempleImage,
+  kithulgala: kithulgalaImage,
+  kandyPerahera: kandyPeraheraImage,
+  maduRiver: maduRiverImage,
+  nuwaraEliya: nuwaraEliyaImage,
+  peradeniya: peradeniyaImage,
+  royaleIslesMap: royaleIslesMapImage,
+  sigiriya: sigiriyaImage,
+} as const
+
 const experiences = [
   {
-    image: images.junglePavilion,
-    imageAlt: 'Private jungle pavilion surrounded by Sri Lankan wilderness',
+    image: localImages.kithulgala,
+    imageAlt: 'Forest river landscape in Kithulgala, Sri Lanka',
     numeral: 'I',
     region: 'Wildlife & Wilderness',
     identity: 'For the Seeker of Silence',
@@ -35,8 +58,8 @@ const experiences = [
       'For the traveller who does not want nature performed, wilderness begins with patience: a field naturalist, a protected route, and the discipline to wait until the island reveals itself.',
   },
   {
-    image: images.ancientRuins,
-    imageAlt: 'Ancient Sri Lankan stone ruins surrounded by forest',
+    image: localImages.sigiriya,
+    imageAlt: 'Sigiriya rock fortress rising above the Sri Lankan landscape',
     numeral: 'II',
     region: 'Heritage & Memory',
     identity: 'For the Heritage Guardian',
@@ -46,8 +69,8 @@ const experiences = [
       'Some travellers are drawn to what time has left behind. We shape access around light, silence, scholarship, and the dignity of places that should never feel consumed.',
   },
   {
-    image: images.artisan,
-    imageAlt: 'Sri Lankan artisan working by hand in a private studio',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera procession with ceremonial performers in Sri Lanka',
     numeral: 'III',
     region: 'Culture & Human Connection',
     identity: 'For the Curious Witness',
@@ -57,8 +80,8 @@ const experiences = [
       'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of lives briefly, respectfully shared.',
   },
   {
-    image: sharedHeritageWorld.image,
-    imageAlt: sharedHeritageWorld.imageAlt,
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country landscape shaped by tea estates and colonial memory',
     numeral: 'VII',
     region: sharedHeritageWorld.name,
     identity: sharedHeritageWorld.traveller,
@@ -105,8 +128,8 @@ const sriLankaStats = [
 
 const journalItems = [
   {
-    image: images.journalHours,
-    imageAlt: 'Private terrace set for tea during a quiet Sri Lankan afternoon',
+    image: localImages.peradeniya,
+    imageAlt: 'Peradeniya gardens in soft daylight',
     type: 'Field Notes',
     date: 'May 2025',
     title: 'The Art of Protecting Unscheduled Time',
@@ -114,8 +137,8 @@ const journalItems = [
     path: '/journal/protecting-unscheduled-time',
   },
   {
-    image: images.journalGuide,
-    imageAlt: 'Private Sri Lankan guide standing near an ancient temple threshold',
+    image: localImages.kelaniTemple,
+    imageAlt: 'Kelani temple architecture and sacred details in Sri Lanka',
     type: 'Private Interview',
     date: 'April 2025',
     title: 'The Temple Keeper Who Knows When Not to Speak',
@@ -123,8 +146,8 @@ const journalItems = [
     path: '/journal/the-temple-keeper',
   },
   {
-    image: images.highlandGolden,
-    imageAlt: 'Golden light over Sri Lankan highland tea country',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya highland landscape and tea country',
     type: 'Seasonal Briefing',
     date: 'March 2025',
     title: 'When Tea Country Feels Entirely Yours',
@@ -135,7 +158,7 @@ const journalItems = [
 
 const travellerStories = [
   {
-    image: images.travellerOutcrop,
+    image: localImages.ahangama,
     format: 'Private Film',
     duration: 'II:XLVIII',
     title: 'An anniversary carried by the island',
@@ -148,7 +171,7 @@ const travellerStories = [
     videoCaption: 'A discreet film of the moments between the formal itinerary: arrival, laughter, silence, sea air.',
   },
   {
-    image: images.hiroko,
+    image: localImages.peradeniya,
     format: 'Photo Journal',
     duration: 'I:LVI',
     title: 'A quiet return to wonder',
@@ -160,7 +183,7 @@ const travellerStories = [
     videoCaption: 'A soft visual record of rituals, thresholds, hands at work, and highland mornings.',
   },
   {
-    image: images.beachDinner,
+    image: localImages.galleBeach,
     format: 'Hosted Story',
     duration: 'III:XII',
     title: 'A family gathered without agenda',
@@ -372,10 +395,14 @@ export function Homepage() {
 
       <section className="figma-island-stats" id="destinations" data-node-id="103:12887">
         <figure className="figma-island-stats-media">
-          <img src={images.highlandGolden} alt="Sri Lanka highland landscape at golden hour" />
+          <img
+            className="figma-island-stats-map"
+            src={localImages.royaleIslesMap}
+            alt="Illustrated map of Sri Lanka for Royale Isles Lanka"
+          />
           <figcaption>
-            <span>Central Highlands</span>
-            <small>Tea country, cloud forest, private residences, and routes held away from the obvious path.</small>
+            <span>Royale Isles Map</span>
+            <small>Regions, coastlines, highlands, and cultural routes arranged as one private island journey.</small>
           </figcaption>
         </figure>
         <div className="figma-island-stats-copy">
@@ -425,7 +452,7 @@ export function Homepage() {
             </a>
           </div>
           <figure className="figma-bordered-image">
-            <img src={images.coastJungle} alt="Aerial view of Sri Lankan coastline and jungle" />
+            <img src={localImages.maduRiver} alt="Madu River winding through coastal wetland and jungle" />
             <figcaption>
               <span>Coast & Jungle</span>
               <small>Private villas, hidden coves, rainforest edges, and coastal routes shaped by discretion.</small>
@@ -479,7 +506,7 @@ export function Homepage() {
                 </a>
               </div>
               <figure className="figma-feature-story-stamp">
-                <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
+                <img src={localImages.sigiriya} alt="Sigiriya rock fortress before the public ascent" />
                 <figcaption>
                   <span>Private Access</span>
                   <small>Sigiriya before the first public ascent</small>

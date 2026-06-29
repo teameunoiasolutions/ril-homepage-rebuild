@@ -1,6 +1,19 @@
 import { useEffect, useState } from 'react'
 import './AboutPage.css'
 import { aboutImages } from './images'
+import ahangama from '../../assets/images/Ahangama.jpeg'
+import galleBeach from '../../assets/images/Galle beach.jpeg'
+import gorakaElla from '../../assets/images/Goraka ella.jpg'
+import kithulgala from '../../assets/images/Kithulgala.jpeg'
+import sigiriya from '../../assets/images/Sigiriya.JPG'
+
+const localImages = {
+  ahangama,
+  galleBeach,
+  gorakaElla,
+  kithulgala,
+  sigiriya,
+} as const
 
 const stats = [
   { value: '2,400+', label: 'Journeys Privately Guided' },
@@ -147,8 +160,8 @@ export function AboutPage() {
           <figure className="about-hero-image-wrap">
             <img
               className="about-hero-image"
-              src={aboutImages.heroForest}
-              alt="Misty forest landscape in Sri Lanka"
+              src={localImages.kithulgala}
+              alt="Forest river landscape in Kithulgala, Sri Lanka"
             />
             <figcaption>
               <span>Private Access</span>
@@ -225,8 +238,8 @@ export function AboutPage() {
             <figure className="about-dual-image-card about-dual-image-card--primary">
               <img
                 className="about-dual-image"
-                src={aboutImages.sigiriya}
-                alt="Sigiriya rock fortress surrounded by lush greenery"
+                src={localImages.sigiriya}
+                alt="Sigiriya rock fortress surrounded by Sri Lankan landscape"
               />
               <figcaption>
                 <span>Before the Gates Open</span>
@@ -321,8 +334,8 @@ export function AboutPage() {
           <figure className="about-full-image-frame">
             <img
               className="about-full-image-img"
-              src={aboutImages.spa}
-              alt="Luxury spa with ocean view in Sri Lanka"
+              src={localImages.gorakaElla}
+              alt="Rainforest waterfall landscape in Sri Lanka"
             />
             <figcaption>
               <span>Restoration Is Not An Add-On</span>
@@ -455,8 +468,8 @@ export function AboutPage() {
           <div className="about-breath-image-wrap">
             <img
               className="about-breath-image"
-              src={aboutImages.coastline}
-              alt="Aerial view of Sri Lanka coastline"
+              src={localImages.ahangama}
+              alt="Ocean shoreline at Ahangama in Sri Lanka"
             />
             <div className="about-breath-overlay">
               <p className="about-breath-label">THE BREATH</p>
@@ -504,8 +517,8 @@ export function AboutPage() {
       <section className="about-section about-footer-cta">
         <img
           className="about-footer-cta-image"
-          src={aboutImages.sunsetBeach}
-          alt="Beach at sunset in Sri Lanka"
+          src={localImages.galleBeach}
+          alt="Galle beach at sunset in Sri Lanka"
         />
         <div className="about-footer-cta-overlay">
           <p>Royale Isles Lanka</p>

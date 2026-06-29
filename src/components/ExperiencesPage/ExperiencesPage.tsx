@@ -6,6 +6,17 @@ import { JourneyIncludedPill } from '../../journey/JourneyChrome'
 import { useJourney } from '../../journey/JourneyContext'
 import { inferJourneyRegion } from '../../journey/journeyTaxonomy'
 import { sharedHeritageRecommendations, sharedHeritageWorld } from '../../journey/discoveryWorlds'
+import ahangama from '../../assets/images/Ahangama.jpeg'
+import galle from '../../assets/images/Galle.jpeg'
+import galleBeach from '../../assets/images/Galle beach.jpeg'
+import gorakaElla from '../../assets/images/Goraka ella.jpg'
+import kandyPerahera from '../../assets/images/Kandy Perahera.JPG'
+import kelaniTemple from '../../assets/images/Kelani temple.jpeg'
+import kithulgala from '../../assets/images/Kithulgala.jpeg'
+import maduRiver from '../../assets/images/Madu River.jpeg'
+import nuwaraEliya from '../../assets/images/NuwaraEliya .jpg'
+import peradeniya from '../../assets/images/Peradeniya.jpg'
+import sigiriya from '../../assets/images/Sigiriya.JPG'
 
 type Detail = {
   label: string
@@ -42,12 +53,26 @@ type Encounter = {
 
 const stats = [
   { value: '1:1', label: 'Curator Planning' },
-  { value: '48h', label: 'Access Review' },
-  { value: 'Max 4', label: 'Private Circles' },
-  { value: 'No Menu', label: 'Bespoke Only' },
+  { value: 'Immediate', label: 'Concierge Attention' },
+  { value: 'Private', label: 'Closed-Circle Access' },
+  { value: 'Bespoke', label: 'Designed Around You' },
 ] as const
 
 const heroProofs = ['Private routing', 'Discreet hosts', 'Closed-door access'] as const
+
+const localImages = {
+  ahangama,
+  galle,
+  galleBeach,
+  gorakaElla,
+  kandyPerahera,
+  kelaniTemple,
+  kithulgala,
+  maduRiver,
+  nuwaraEliya,
+  peradeniya,
+  sigiriya,
+} as const
 
 const encounters: Encounter[] = [
   {
@@ -59,8 +84,8 @@ const encounters: Encounter[] = [
       'There are two Sigiriyas. The one you visit at 9am with three thousand other people, and the one that exists between 5 and 7am - when the frescoes catch low light no photograph has ever adequately described. We negotiated singular access. It takes eight months of patience per year to maintain.',
     curator: 'Amara Weerasinghe, Heritage & Research',
     curatorImage: experienceImages.amara,
-    image: experienceImages.sigiriyaDawn,
-    imageAlt: 'Traveller at private dawn access to Sigiriya rock fortress',
+    image: localImages.sigiriya,
+    imageAlt: 'Sigiriya rock fortress rising above the Sri Lankan landscape',
     badge: "Curator's Choice",
     caption: 'Cultural Heritage - Central Province',
     details: [
@@ -80,8 +105,8 @@ const encounters: Encounter[] = [
       'Tea tourism is everywhere. What is almost nowhere is the thing that precedes it: the stillness of a working estate at 4:45am, before the pickers arrive, when the mist sits exactly at shoulder height and the silence has a particular quality I can only describe as earned. This is the version we offer.',
     curator: 'Dilini Perera, Co-Founder',
     curatorImage: experienceImages.dilini,
-    image: experienceImages.teaEstate,
-    imageAlt: 'Misty dawn over terraced tea estate in Nuwara Eliya',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country in soft morning light',
     caption: 'Tea Country - Hill Province',
     details: [
       { label: 'Duration', value: 'Full Day' },
@@ -100,8 +125,8 @@ const encounters: Encounter[] = [
       "This is not a tour of colonial relics. It is a considered route through tea country, railway engineering, old gardens, civic streets, and grand hotels where Sri Lankan and British histories still meet in architecture, education, hospitality, and daily ritual.",
     curator: 'Amara Weerasinghe, Heritage & Research',
     curatorImage: experienceImages.amara,
-    image: experienceImages.teaEstate,
-    imageAlt: 'Misty tea estate hills in soft morning light',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country shaped by tea estates and colonial memory',
     badge: 'New Discovery World',
     caption: 'Tea Country - Railways - Colombo',
     details: [
@@ -142,8 +167,8 @@ const encounters: Encounter[] = [
       'The coast, for most visitors, is an amenity. A view. A backdrop. But Mirissa runs on a different clock - one that starts at 3am, when the tuna boats come in and the auction begins. I have spent years building trust with three families on this stretch of water. You are not joining a tour. You are, briefly, joining a life.',
     curator: 'Sahan Mendis, Coastal Experiences',
     curatorImage: experienceImages.sahan,
-    image: experienceImages.mirissaBoats,
-    imageAlt: 'Traditional Sri Lankan outrigger fishing boats at dawn in Mirissa harbour',
+    image: localImages.ahangama,
+    imageAlt: 'Southern Sri Lankan coast at Ahangama',
     caption: 'Southern Coast - Mirissa',
     details: [
       { label: 'Duration', value: '1 Day' },
@@ -162,8 +187,8 @@ const encounters: Encounter[] = [
       'Performances are for audiences. Rehearsals are where the art lives. We arranged access to a family that has been training in the Kandyan tradition for four generations. You will watch the eldest son correct the youngest daughter. You will understand something about transmission, about inheritance, that no performance could ever convey.',
     curator: 'Amara Weerasinghe, Cultural Curation Lead',
     curatorImage: experienceImages.amara,
-    image: experienceImages.kandyanDancer,
-    imageAlt: 'Sri Lankan Kandyan dancer in ceremonial costume',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera procession with ceremonial performers',
     badge: 'By Arrangement',
     caption: 'Cultural - Kandy',
     details: [
@@ -203,8 +228,8 @@ const encounters: Encounter[] = [
       "Access to the inner sanctum of the Temple of the Tooth is never treated as spectacle. A private audience with the temple's senior custodian begins with context, restraint, and the understanding that the ceremony is not adjusted for visitors - you adjust yourself to the ceremony.",
     curator: 'Malini Fernando, Cultural Lead',
     curatorImage: experienceImages.amara,
-    image: experienceImages.perahera,
-    imageAlt: 'Kandy Esala Perahera festival procession at night',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera ceremonial procession in Sri Lanka',
     caption: 'Ceremony - Kandy',
     details: [
       { label: 'Duration', value: 'Evening' },
@@ -223,8 +248,8 @@ const encounters: Encounter[] = [
       'Embedded within a rainforest reserve, this five-day Ayurvedic immersion is guided by a fourth-generation vaidya. It is not a spa and not a retreat in the decorative sense. It is a diagnostic and restorative system refined for two thousand years, entered slowly and with discipline.',
     curator: 'Dilini Perera, Co-Founder',
     curatorImage: experienceImages.dilini,
-    image: experienceImages.ayurveda,
-    imageAlt: 'Open-air Ayurvedic treatment pavilion in Sri Lanka jungle',
+    image: localImages.gorakaElla,
+    imageAlt: 'Rainforest waterfall landscape in Sri Lanka',
     badge: 'By Consultation',
     caption: 'Restoration - Sinharaja',
     details: [
@@ -243,8 +268,8 @@ const experienceThemes = [
     description:
       'Leopards, elephants, forests, field researchers, remote ecosystems, and nature without performance.',
     traveller: 'For the Seeker of Silence',
-    image: experienceImages.leopardFeature,
-    imageAlt: 'Leopard resting on ancient rock in the Sri Lankan wilderness',
+    image: localImages.kithulgala,
+    imageAlt: 'Forest river landscape in Kithulgala, Sri Lanka',
     href: '#leopard-research-circuit',
     encounter: 'The Leopard Research Circuit',
   },
@@ -253,8 +278,8 @@ const experienceThemes = [
     description:
       'Whale watching, sailing, marine life, lagoons, east coast exploration, and hidden coastlines.',
     traveller: 'For the Unhurried Wanderer',
-    image: experienceImages.blueWhaleAerial,
-    imageAlt: 'Blue whale surfacing in deep Sri Lankan water',
+    image: localImages.galleBeach,
+    imageAlt: 'Southern Sri Lankan beach and ocean light',
     href: '#deep-water-hour',
     encounter: 'The Deep-Water Hour',
   },
@@ -263,8 +288,8 @@ const experienceThemes = [
     description:
       'Ancient kingdoms, sacred spaces, archaeology, historians, and living traditions carried forward.',
     traveller: 'For the Heritage Guardian',
-    image: experienceImages.sigiriyaDawn,
-    imageAlt: 'Private dawn access to Sigiriya rock fortress',
+    image: localImages.sigiriya,
+    imageAlt: 'Sigiriya rock fortress in Sri Lanka',
     href: '#sigiriya-dawn-ascent',
     encounter: 'The Sigiriya Dawn Ascent',
   },
@@ -273,8 +298,8 @@ const experienceThemes = [
     description:
       'Ayurveda, healing traditions, retreats, slow living, and the quiet work of personal renewal.',
     traveller: 'For the Restorer',
-    image: experienceImages.ayurveda,
-    imageAlt: 'Open-air Ayurvedic treatment pavilion in a rainforest setting',
+    image: localImages.gorakaElla,
+    imageAlt: 'Rainforest waterfall landscape in Sri Lanka',
     href: '#ancient-grammar-of-healing',
     encounter: 'The Ancient Grammar of Healing',
   },
@@ -283,8 +308,8 @@ const experienceThemes = [
     description:
       'Hill country train journeys, tea estates, mountain routes, and scenery that changes by the hour.',
     traveller: 'For the Story Collector',
-    image: experienceImages.teaEstate,
-    imageAlt: 'Misty tea estate landscape in Sri Lanka hill country',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country landscape',
     href: '#begin',
     encounter: 'Train journeys in development',
   },
@@ -293,8 +318,8 @@ const experienceThemes = [
     description:
       'Artisans, musicians, dancers, family traditions, private introductions, and everyday Sri Lanka.',
     traveller: 'For the Curious Witness',
-    image: experienceImages.kandyanDancer,
-    imageAlt: 'Kandyan dancer in ceremonial costume',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera cultural procession in Sri Lanka',
     href: '#kandyan-dance-rehearsal',
     encounter: 'A Private Kandyan Dance Rehearsal',
   },
@@ -302,8 +327,8 @@ const experienceThemes = [
     title: sharedHeritageWorld.name,
     description: sharedHeritageWorld.description,
     traveller: sharedHeritageWorld.traveller,
-    image: sharedHeritageWorld.image,
-    imageAlt: sharedHeritageWorld.imageAlt,
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country shaped by tea estates and colonial memory',
     href: '#shared-heritage-quietly-read',
     encounter: 'Shared Heritage, Quietly Read',
   },
@@ -365,12 +390,12 @@ const curationColumns = [
 ] as const
 
 const photoStrip = [
-  { src: experienceImages.spices, alt: 'Hands sorting cardamom pods', wide: false },
-  { src: experienceImages.poolVilla, alt: 'Private pool villa overlooking misty mountains', wide: true },
-  { src: experienceImages.oilLamps, alt: 'Ancient Buddhist temple oil lamps at dawn', wide: false },
-  { src: experienceImages.blueWhaleSunset, alt: 'Blue whale surfacing at sunset', wide: true },
-  { src: experienceImages.galleFort, alt: 'Overhead aerial view of Galle Fort', wide: false },
-  { src: experienceImages.brassLamp, alt: 'Traditional Sri Lankan brass oil lamp detail', wide: false },
+  { src: localImages.peradeniya, alt: 'Peradeniya gardens in soft daylight', wide: false },
+  { src: localImages.nuwaraEliya, alt: 'Nuwara Eliya hill country landscape', wide: true },
+  { src: localImages.kelaniTemple, alt: 'Kelani temple sacred architecture and ritual setting', wide: false },
+  { src: localImages.maduRiver, alt: 'Madu River winding through coastal wetland and jungle', wide: true },
+  { src: localImages.galle, alt: 'Galle coastal heritage landscape', wide: false },
+  { src: localImages.kandyPerahera, alt: 'Kandy Perahera ceremonial procession', wide: false },
 ] as const
 
 function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
@@ -546,18 +571,6 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
           </div>
         ))}
       </dl>
-      {isEncounterIncluded || pendingRemovalId === journeyId ? (
-        <button
-          className="journey-remove-action"
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation()
-            confirmRemoveItem(journeyId)
-          }}
-        >
-          Remove from Journey
-        </button>
-      ) : null}
     </article>
   )
 }
@@ -685,7 +698,7 @@ export function ExpectationsPage() {
 
           <div className="experiences-hero-image">
             <div className="hero-image-frame">
-              <img src={experienceImages.heroSigiriya} alt="Lone traveller at dawn on Sigiriya steps" />
+              <img src={localImages.sigiriya} alt="Sigiriya rock fortress in Sri Lanka" />
             </div>
             <span className="hero-feature-label">Featured Private Access</span>
             <span className="hero-choice">By Introduction Only</span>
@@ -863,8 +876,8 @@ export function ExpectationsPage() {
             <small>Stewardship - Silence - Fieldcraft</small>
           </div>
           <figure className="wilderness-image-card">
-            <img src={experienceImages.leopardFeature} alt="Leopard resting on ancient rock in Yala" />
-            <figcaption>Yala Block V - guided by a field naturalist, not a driver.</figcaption>
+            <img src={localImages.kithulgala} alt="Forest river landscape in Kithulgala, Sri Lanka" />
+            <figcaption>Rainforest routes - guided by a field naturalist, not a driver.</figcaption>
           </figure>
         </div>
       </section>
@@ -872,8 +885,8 @@ export function ExpectationsPage() {
       <section className="ceremony-quote experiences-reveal">
         <div className="experiences-container ceremony-grid">
           <figure>
-            <img src={experienceImages.monks} alt="Buddhist monks walking through temple ruins" />
-            <figcaption>Polonnaruwa - North Central Province</figcaption>
+            <img src={localImages.kelaniTemple} alt="Kelani temple sacred architecture and ritual setting" />
+            <figcaption>Kelani Temple - Western Province</figcaption>
           </figure>
           <blockquote>
             <p>The Ceremony Principle</p>

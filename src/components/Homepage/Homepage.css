@@ -1164,6 +1164,11 @@
   filter: saturate(0.84) contrast(1.06);
 }
 
+.figma-island-stats-media img.figma-island-stats-map {
+  object-fit: contain;
+  padding: clamp(28px, 4vw, 56px);
+}
+
 .figma-island-stats-media::after {
   content: '';
   position: absolute;

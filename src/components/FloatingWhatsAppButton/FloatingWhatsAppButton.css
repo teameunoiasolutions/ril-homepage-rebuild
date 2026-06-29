@@ -14,11 +14,11 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0;
-  width: 58px;
-  min-height: 56px;
-  max-width: 58px;
+  width: 48px;
+  min-height: 48px;
+  max-width: 48px;
   overflow: hidden;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid var(--color-accent);
   border-radius: 999px;
   background: var(--color-primary);
@@ -54,8 +54,8 @@
 .floating-action-button:focus-visible {
   width: auto;
   max-width: 220px;
-  gap: 10px;
-  padding: 12px 18px 12px 14px;
+  gap: 8px;
+  padding: 10px 16px 10px 12px;
   background: var(--color-primary-hover);
   box-shadow: 0 22px 54px var(--shadow-forest-strong);
   transform: translateX(-2px);
@@ -74,8 +74,8 @@
 .floating-action-button__icon {
   flex: 0 0 auto;
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   place-items: center;
   border-radius: 50%;
   background: var(--color-icon-surface-on-dark);
@@ -86,8 +86,8 @@
 }
 
 .floating-action-button__icon svg {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   fill: currentColor;
 }
 
@@ -115,27 +115,27 @@
   }
 
   .floating-action-button {
-    width: 48px;
-    max-width: 48px;
-    min-height: 48px;
-    padding: 9px;
+    width: 42px;
+    max-width: 42px;
+    min-height: 42px;
+    padding: 8px;
   }
 
   .floating-action-button:hover,
   .floating-action-button:focus-visible {
     max-width: 210px;
-    padding: 11px 14px;
+    padding: 9px 12px;
   }
 }
 
 @media (max-width: 420px) {
   .floating-action-button__icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 
   .floating-action-button__icon svg {
-    width: 21px;
-    height: 21px;
+    width: 18px;
+    height: 18px;
   }
 }

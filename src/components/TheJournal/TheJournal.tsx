@@ -1,7 +1,13 @@
 import './TheJournal.css'
+import kandyPeraheraImage from '../../assets/images/Kandy Perahera.JPG'
+import kelaniTempleImage from '../../assets/images/Kelani temple.jpeg'
+import nuwaraEliyaImage from '../../assets/images/NuwaraEliya .jpg'
 
-const journalImage =
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1400&q=80'
+const journalImages = {
+  featured: kandyPeraheraImage,
+  temple: kelaniTempleImage,
+  tea: nuwaraEliyaImage,
+} as const
 
 const featuredParagraphs = [
   'We sat in the jeep for almost two hours and saw nothing. The guide said nothing either. He simply waited, as though waiting were part of the arrangement.',
@@ -31,8 +37,8 @@ export function TheJournal() {
       <article className="journal-featured">
         <img
           className="journal-featured-image"
-          src={journalImage}
-          alt="Open book in warm window light"
+          src={journalImages.featured}
+          alt="Kandy Perahera procession in Sri Lanka"
         />
         <div className="journal-meta">
           <span>Wildlife &amp; Wilderness</span>
@@ -54,7 +60,7 @@ export function TheJournal() {
         <article>
           <img
             className="journal-card-image"
-            src={journalImage}
+            src={journalImages.temple}
             alt="Temple courtyard at dawn"
           />
           <div className="journal-meta">
@@ -76,7 +82,7 @@ export function TheJournal() {
         </article>
 
         <article>
-          <img className="journal-card-image" src={journalImage} alt="Tea picker's hands" />
+          <img className="journal-card-image" src={journalImages.tea} alt="Tea country landscape in Nuwara Eliya" />
           <div className="journal-meta">
             <span>Heritage</span>
             <span className="journal-meta-rule"></span>

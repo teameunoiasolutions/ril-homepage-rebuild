@@ -1,16 +1,22 @@
 import { useState } from 'react'
 import './DiscoveryGuide.css'
-import { experienceImages } from '../ExperiencesPage/images'
+import ahangama from '../../assets/images/Ahangama.jpeg'
+import galle from '../../assets/images/Galle.jpeg'
+import galleFaceBeach from '../../assets/images/Galle face beach.jpeg'
+import kithulgala from '../../assets/images/Kithulgala.jpeg'
+import nuwaraEliya from '../../assets/images/NuwaraEliya .jpg'
+import sigiriya from '../../assets/images/Sigiriya.JPG'
+import theruFestival from '../../assets/images/theru festival.jpg'
 
 const images = {
-  hero: experienceImages.sigiriyaDawn,
-  westCoast: experienceImages.poolVilla,
-  southCoast: experienceImages.mirissaBoats,
-  wildSouth: experienceImages.leopardFeature,
-  eastCoast: experienceImages.blueWhaleSunset,
-  hillCountry: experienceImages.teaEstate,
-  culturalTriangle: experienceImages.sigiriyaDawn,
-  north: experienceImages.brassLamp,
+  hero: sigiriya,
+  westCoast: galleFaceBeach,
+  southCoast: galle,
+  wildSouth: kithulgala,
+  eastCoast: ahangama,
+  hillCountry: nuwaraEliya,
+  culturalTriangle: sigiriya,
+  north: theruFestival,
 } as const
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const

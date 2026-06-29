@@ -1,9 +1,9 @@
 import './TravelPreparationPage.css'
-import { experienceImages } from '../ExperiencesPage/images'
 import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
+import nuwaraEliya from '../../assets/images/NuwaraEliya .jpg'
 
 const images = {
-  hero: experienceImages.teaEstate,
+  hero: nuwaraEliya,
 } as const
 
 const handbookLinks = [
