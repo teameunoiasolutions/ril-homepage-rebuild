@@ -432,9 +432,6 @@ export function Homepage() {
       </section>
 
       <section className="figma-journal" id="journal" data-node-id="103:12936">
-        <span className="figma-journal-mark" aria-hidden="true">
-          Royale Isles Journal
-        </span>
         <div className="figma-container">
           <header className="figma-section-header figma-journal-header">
             <div>
@@ -598,7 +595,7 @@ export function Homepage() {
             <input type="email" aria-label="Your email address" placeholder="Your email address" />
             <button type="submit">Request a Dialogue</button>
           </form>
-          <small>Private, discreet, and without obligation.</small>
+          <small>Held privately, with no obligation.</small>
         </div>
       </section>
 
@@ -625,7 +622,7 @@ export function Homepage() {
               </ol>
             </div>
             <p className="figma-brochure-note">
-              Sent privately. No automated itinerary. No mailing-list noise. Just a polished first
+              Sent privately, without an automated itinerary or mailing-list noise: a polished first
               briefing for travellers who expect careful judgement before any recommendation is made.
             </p>
             <form className="figma-brochure-form">

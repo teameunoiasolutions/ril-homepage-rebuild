@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './DiscoveryGuide.css'
 import { experienceImages } from '../ExperiencesPage/images'
-import { JourneyIncludedPill } from '../../journey/JourneyChrome'
 import { useJourney } from '../../journey/JourneyContext'
 import { getDestinationDiscoveryWorlds, regionThemeFallbacks } from '../../journey/journeyTaxonomy'
 import { sharedHeritageCollections, sharedHeritageWorld } from '../../journey/discoveryWorlds'
@@ -98,7 +97,6 @@ export function DiscoveryGuide() {
     setActiveRegionIndex(index)
 
     if (isIncluded(id)) {
-      requestRemoveItem(id)
       return
     }
 
@@ -239,14 +237,11 @@ export function DiscoveryGuide() {
             <span />
           </div>
           {regions.map((region) => (
-            <button
-              className={`guide-season-row journey-selectable${region.name === activeRegion.name ? ' is-selected' : ''}${isIncluded(toJourneyId('region', region.name)) ? ' is-included' : ''}`}
+            <div
+              className="guide-season-row"
               key={region.name}
-              type="button"
               role="row"
-              onClick={() => rememberRegion(region, regions.indexOf(region))}
             >
-              {isIncluded(toJourneyId('region', region.name)) ? <JourneyIncludedPill /> : null}
               <span className="guide-season-region">
                 <strong>{region.name}</strong>
                 <small>{region.overview}</small>
@@ -259,7 +254,7 @@ export function DiscoveryGuide() {
                 />
               ))}
               <span className="guide-season-best">{region.bestMonths}</span>
-            </button>
+            </div>
           ))}
         </div>
       </section>
@@ -271,18 +266,19 @@ export function DiscoveryGuide() {
               className={`guide-region-card journey-selectable${index === activeRegionIndex ? ' is-active' : ''}${isIncluded(toJourneyId('region', region.name)) ? ' is-included' : ''}`}
               key={region.name}
             >
-              {isIncluded(toJourneyId('region', region.name)) ? <JourneyIncludedPill /> : null}
-              <button type="button" onClick={() => rememberRegion(region, index)}>
+              <button type="button" onClick={() => rememberRegion(region, index)} aria-pressed={isIncluded(toJourneyId('region', region.name))}>
                 <img src={region.image} alt={`${region.name} in Sri Lanka`} />
-                <span>{region.name}</span>
+                <span className="guide-region-title">{region.name}</span>
               </button>
-              {pendingRemovalId === toJourneyId('region', region.name) ? (
+              {isIncluded(toJourneyId('region', region.name)) ? (
                 <button
-                  className="journey-remove-action"
+                  className="guide-region-status"
                   type="button"
+                  aria-label={`Remove ${region.name} from your journey`}
                   onClick={() => confirmRemoveItem(toJourneyId('region', region.name))}
                 >
-                  Remove from Journey
+                  <span aria-hidden="true" />
+                  In Journey
                 </button>
               ) : null}
             </article>

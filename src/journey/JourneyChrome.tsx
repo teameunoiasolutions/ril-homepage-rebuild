@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useJourney, type JourneyItemKind } from './JourneyContext'
+import { useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react'
+import { useJourney, type JourneyItem, type JourneyItemKind } from './JourneyContext'
+import { getJourneyRecommendations, type JourneyRecommendation } from './journeyRecommendations'
 import { inferJourneyRegion, inferJourneyTheme } from './journeyTaxonomy'
 import './JourneyChrome.css'
 
@@ -53,7 +54,9 @@ export function JourneyHelperMessage() {
 }
 
 export function MyJourneyPage() {
-  const { items, count, confirmRemoveItem } = useJourney()
+  const { items, count, confirmRemoveItem, includeItem } = useJourney()
+  const [selectedContextId, setSelectedContextId] = useState<string | null>(null)
+  const selectedContextItem = selectedContextId ? items.find((item) => item.id === selectedContextId) : undefined
 
   const { otherGroupedItems, themeGroups } = useMemo(() => {
     const themeItems = items.filter((item) => item.kind === 'theme')
@@ -138,6 +141,89 @@ export function MyJourneyPage() {
       otherGroupedItems: groupedOthers,
     }
   }, [items])
+  const { contextItem, contextRegion, recommendations } = useMemo(
+    () => getJourneyRecommendations(items, selectedContextItem),
+    [items, selectedContextItem],
+  )
+  const activeContextId = selectedContextItem?.id ?? contextItem?.id
+
+  function toJourneyId(kind: string, value: string) {
+    return `${kind}:${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+  }
+
+  function selectJourneyItem(item: JourneyItem) {
+    setSelectedContextId(item.id)
+  }
+
+  function handleJourneyItemKeyDown(event: KeyboardEvent<HTMLElement>, item: JourneyItem) {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return
+    }
+
+    event.preventDefault()
+    selectJourneyItem(item)
+  }
+
+  function removeJourneyItem(event: MouseEvent<HTMLButtonElement>, id: string) {
+    event.stopPropagation()
+    confirmRemoveItem(id)
+    if (selectedContextId === id) {
+      setSelectedContextId(null)
+    }
+  }
+
+  function includeRecommendation(recommendation: JourneyRecommendation) {
+    includeItem(recommendation.item)
+    setSelectedContextId(recommendation.item.id)
+  }
+
+  function createContextItem(kind: JourneyItemKind, label: string, parentTheme?: string): JourneyItem {
+    return {
+      id: toJourneyId(kind, label),
+      kind,
+      label,
+      parentTheme,
+    }
+  }
+
+  function getJourneyItemClassName(item: JourneyItem, extraClassName = '') {
+    return `my-journey-item${extraClassName ? ` ${extraClassName}` : ''}${activeContextId === item.id ? ' is-selected' : ''}`
+  }
+
+  function renderJourneyItem(
+    item: JourneyItem,
+    {
+      className,
+      meta,
+      removable = true,
+    }: {
+      className?: string
+      meta?: ReactNode
+      removable?: boolean
+    } = {},
+  ) {
+    return (
+      <section
+        className={getJourneyItemClassName(item, className)}
+        role="button"
+        tabIndex={0}
+        aria-pressed={activeContextId === item.id}
+        onClick={() => selectJourneyItem(item)}
+        onKeyDown={(event) => handleJourneyItemKeyDown(event, item)}
+      >
+        <div>
+          <h2>{item.label}</h2>
+          {item.detail ? <p>{item.detail}</p> : null}
+          {meta ?? (item.source ? <small>{item.source}</small> : null)}
+        </div>
+        {removable ? (
+          <button type="button" onClick={(event) => removeJourneyItem(event, item.id)}>
+            Remove
+          </button>
+        ) : null}
+      </section>
+    )
+  }
 
   return (
     <main className="my-journey-page">
@@ -163,15 +249,49 @@ export function MyJourneyPage() {
           <a href="/discover-sri-lanka">Discover Sri Lanka</a>
         </section>
       ) : (
-        <section className="my-journey-groups" aria-label="Included journey details">
+        <div className="my-journey-workspace">
+          <aside className="my-journey-recommendations" aria-label="Recommended places for your journey">
+            <span>Suggested Next</span>
+            <h2>{contextRegion ? `Near ${contextRegion}` : 'Places That May Fit'}</h2>
+            <p>
+              {contextItem
+                ? `Based on ${contextItem.label}, these are the next places and encounters worth considering.`
+                : 'As your journey takes shape, we will suggest places that naturally follow your interests.'}
+            </p>
+            {recommendations.length > 0 ? (
+              <div className="my-journey-recommendation-list">
+                {recommendations.map((recommendation) => (
+                  <button
+                    className="my-journey-recommendation-card"
+                    key={recommendation.id}
+                    type="button"
+                    onClick={() => includeRecommendation(recommendation)}
+                  >
+                    <span>{recommendation.kind === 'destination' ? 'Destination' : 'Experience'}</span>
+                    <h3>{recommendation.label}</h3>
+                    <p>{recommendation.detail}</p>
+                    <small>{recommendation.reason}</small>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="my-journey-recommendation-empty">
+                <p>
+                  Choose a saved region, destination, or experience to unlock more precise recommendations.
+                </p>
+                <a href="/discover-sri-lanka">Discover Sri Lanka</a>
+              </div>
+            )}
+          </aside>
+
+          <section className="my-journey-groups" aria-label="Included journey details">
           {themeGroups.map((group) => (
             <article key={group.themeName}>
               <span>{kindLabels.theme}</span>
               <div>
-                <section>
-                  <div>
-                    <h2>{group.themeName}</h2>
-                    {group.themeItem?.detail ? <p>{group.themeItem.detail}</p> : null}
+                {renderJourneyItem(group.themeItem ?? createContextItem('theme', group.themeName), {
+                  removable: Boolean(group.themeItem),
+                  meta: (
                     <small>
                       {group.regions.length > 0
                         ? `${group.regions.length} region${group.regions.length === 1 ? '' : 's'} held beneath this theme`
@@ -181,86 +301,40 @@ export function MyJourneyPage() {
                           ? `${group.experiences.length} experience${group.experiences.length === 1 ? '' : 's'} held beneath this theme`
                           : 'Theme held for your journey'}
                     </small>
-                  </div>
-                  {group.themeItem ? (
-                    <button type="button" onClick={() => confirmRemoveItem(group.themeItem.id)}>
-                      Remove from Journey
-                    </button>
-                  ) : null}
-                </section>
+                  ),
+                })}
 
                 {group.regions.map((region) => (
                   <div className="my-journey-region-group" key={region.regionName}>
-                    <section className="my-journey-child-item">
-                      <div>
-                        <h2>{region.regionName}</h2>
-                        {region.regionItem?.detail ? <p>{region.regionItem.detail}</p> : null}
-                        {region.experiences.length > 0 ? (
+                    {renderJourneyItem(region.regionItem ?? createContextItem('region', region.regionName, group.themeName), {
+                      className: 'my-journey-child-item',
+                      removable: Boolean(region.regionItem),
+                      meta:
+                        region.destinations.length + region.experiences.length > 0 ? (
                           <small>
-                            {region.experiences.length} experience{region.experiences.length === 1 ? '' : 's'} held beneath
+                            {region.destinations.length + region.experiences.length} place
+                            {region.destinations.length + region.experiences.length === 1 ? '' : 's'} held beneath
                             this region
                           </small>
                         ) : region.regionItem?.source ? (
                           <small>{region.regionItem.source}</small>
-                        ) : null}
-                      </div>
-                      {region.regionItem ? (
-                        <button type="button" onClick={() => confirmRemoveItem(region.regionItem.id)}>
-                          Remove from Journey
-                        </button>
-                      ) : null}
-                    </section>
+                        ) : null,
+                    })}
                     {region.destinations.map((item) => (
-                      <section className="my-journey-child-item" key={item.id}>
-                        <div>
-                          <h2>{item.label}</h2>
-                          {item.detail ? <p>{item.detail}</p> : null}
-                          {item.source ? <small>{item.source}</small> : null}
-                        </div>
-                        <button type="button" onClick={() => confirmRemoveItem(item.id)}>
-                          Remove from Journey
-                        </button>
-                      </section>
+                      <div key={item.id}>{renderJourneyItem(item, { className: 'my-journey-child-item' })}</div>
                     ))}
                     {region.experiences.map((item) => (
-                      <section className="my-journey-child-item" key={item.id}>
-                        <div>
-                          <h2>{item.label}</h2>
-                          {item.detail ? <p>{item.detail}</p> : null}
-                          {item.source ? <small>{item.source}</small> : null}
-                        </div>
-                        <button type="button" onClick={() => confirmRemoveItem(item.id)}>
-                          Remove from Journey
-                        </button>
-                      </section>
+                      <div key={item.id}>{renderJourneyItem(item, { className: 'my-journey-child-item' })}</div>
                     ))}
                   </div>
                 ))}
 
                 {group.destinations.map((item) => (
-                  <section className="my-journey-child-item" key={item.id}>
-                    <div>
-                      <h2>{item.label}</h2>
-                      {item.detail ? <p>{item.detail}</p> : null}
-                      {item.source ? <small>{item.source}</small> : null}
-                    </div>
-                    <button type="button" onClick={() => confirmRemoveItem(item.id)}>
-                      Remove from Journey
-                    </button>
-                  </section>
+                  <div key={item.id}>{renderJourneyItem(item, { className: 'my-journey-child-item' })}</div>
                 ))}
 
                 {group.experiences.map((item) => (
-                  <section className="my-journey-child-item" key={item.id}>
-                    <div>
-                      <h2>{item.label}</h2>
-                      {item.detail ? <p>{item.detail}</p> : null}
-                      {item.source ? <small>{item.source}</small> : null}
-                    </div>
-                    <button type="button" onClick={() => confirmRemoveItem(item.id)}>
-                      Remove from Journey
-                    </button>
-                  </section>
+                  <div key={item.id}>{renderJourneyItem(item, { className: 'my-journey-child-item' })}</div>
                 ))}
               </div>
             </article>
@@ -271,21 +345,13 @@ export function MyJourneyPage() {
               <span>{kindLabels[kind as JourneyItemKind]}</span>
               <div>
                 {groupItems?.map((item) => (
-                  <section key={item.id}>
-                    <div>
-                      <h2>{item.label}</h2>
-                      {item.detail ? <p>{item.detail}</p> : null}
-                      {item.source ? <small>{item.source}</small> : null}
-                    </div>
-                    <button type="button" onClick={() => confirmRemoveItem(item.id)}>
-                      Remove from Journey
-                    </button>
-                  </section>
+                  <div key={item.id}>{renderJourneyItem(item)}</div>
                 ))}
               </div>
             </article>
           ))}
-        </section>
+          </section>
+        </div>
       )}
     </main>
   )

@@ -329,19 +329,6 @@
   z-index: 1;
 }
 
-.figma-journal-mark {
-  position: absolute;
-  top: 92px;
-  right: -42px;
-  color: rgba(13, 31, 23, 0.035);
-  font-family: var(--font-display);
-  font-size: clamp(76px, 10vw, 172px);
-  font-style: italic;
-  line-height: var(--line-height-none);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
 .figma-discovery .figma-container {
   position: relative;
   z-index: 1;
@@ -721,32 +708,63 @@
 }
 
 .figma-theme-thread {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
   margin-top: 64px;
-  border-top: 1px solid rgba(197, 160, 89, 0.18);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.18);
-  background: rgba(251, 249, 245, 0.42);
+  padding: 16px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  background:
+    linear-gradient(135deg, rgba(251, 249, 245, 0.86), rgba(232, 225, 213, 0.24)),
+    rgba(251, 249, 245, 0.5);
+  box-shadow: 0 22px 58px rgba(13, 31, 23, 0.045);
 }
 
 .figma-theme-thread span {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 76px;
-  padding: 18px 16px;
+  flex: 0 1 calc((100% - 30px) / 4);
+  min-height: 74px;
+  padding: 18px 14px 19px;
+  border: 1px solid rgba(197, 160, 89, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(232, 225, 213, 0.16)),
+    rgba(251, 249, 245, 0.68);
   color: var(--color-primary);
   font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 1.4px;
+  font-size: 11px;
+  letter-spacing: 1.55px;
   line-height: var(--line-height-snug);
   text-align: center;
   text-transform: uppercase;
+  box-shadow: inset 0 0 0 1px rgba(251, 249, 245, 0.48);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
-.figma-theme-thread span + span {
-  border-left: 1px solid rgba(197, 160, 89, 0.14);
+.figma-theme-thread span::after {
+  content: '';
+  position: absolute;
+  bottom: 13px;
+  left: 50%;
+  width: 28px;
+  height: 1px;
+  background: rgba(197, 160, 89, 0.54);
+  transform: translateX(-50%);
+}
+
+.figma-theme-thread span:hover {
+  border-color: rgba(197, 160, 89, 0.36);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(197, 160, 89, 0.12)),
+    rgba(251, 249, 245, 0.86);
+  transform: translateY(-2px);
 }
 
 .figma-experience-list {
@@ -3148,15 +3166,12 @@
   }
 
   .figma-theme-thread {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    padding: 14px;
   }
 
-  .figma-theme-thread span:nth-child(4) {
-    border-left: 0;
-  }
-
-  .figma-theme-thread span:nth-child(n + 4) {
-    border-top: 1px solid rgba(197, 160, 89, 0.14);
+  .figma-theme-thread span {
+    flex-basis: calc((100% - 18px) / 3);
   }
 
   .figma-experience:nth-child(even) .figma-experience-media,
@@ -3282,20 +3297,13 @@
   }
 
   .figma-theme-thread {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 44px;
+    padding: 12px;
   }
 
-  .figma-theme-thread span:nth-child(odd) {
-    border-left: 0;
-  }
-
-  .figma-theme-thread span:nth-child(even) {
-    border-left: 1px solid rgba(197, 160, 89, 0.14);
-  }
-
-  .figma-theme-thread span:nth-child(n + 3) {
-    border-top: 1px solid rgba(197, 160, 89, 0.14);
+  .figma-theme-thread span {
+    flex-basis: calc((100% - 12px) / 2);
+    min-height: 68px;
   }
 
   .figma-experience-media {
@@ -3491,10 +3499,11 @@
     display: flex;
     gap: 10px;
     margin: 30px -16px 0;
-    padding: 0 16px 4px;
+    padding: 0 16px 8px;
     overflow-x: auto;
     border: 0;
     background: transparent;
+    box-shadow: none;
     scrollbar-width: none;
   }
 
@@ -3505,16 +3514,19 @@
   .figma-theme-thread span,
   .figma-theme-thread span + span {
     flex: 0 0 auto;
-    min-height: 0;
-    padding: 12px 16px;
-    border: 1px solid rgba(197, 160, 89, 0.18);
-    background: rgba(251, 249, 245, 0.64);
+    min-height: 54px;
+    padding: 13px 18px 15px;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(232, 225, 213, 0.18)),
+      rgba(251, 249, 245, 0.76);
     font-size: 10px;
     letter-spacing: 1.3px;
   }
 
-  .figma-theme-thread span + span {
-    border-top: 1px solid rgba(197, 160, 89, 0.18);
+  .figma-theme-thread span::after {
+    bottom: 9px;
+    width: 22px;
   }
 
   .figma-philosophy-header aside,

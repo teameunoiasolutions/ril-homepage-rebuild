@@ -125,7 +125,7 @@
 
 .my-journey-hero,
 .my-journey-empty,
-.my-journey-groups {
+.my-journey-workspace {
   padding: 112px var(--container-gutter-desktop);
 }
 
@@ -183,10 +183,130 @@
   text-transform: uppercase;
 }
 
+.my-journey-workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+}
+
+.my-journey-recommendations {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(197, 160, 89, 0.16), transparent 32%),
+    rgba(13, 31, 23, 0.96);
+  color: var(--color-text-inverse);
+  box-shadow: 0 24px 70px rgba(13, 31, 23, 0.14);
+}
+
+.my-journey-recommendations > span {
+  color: var(--color-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+
+.my-journey-recommendations h2 {
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.my-journey-recommendations > p,
+.my-journey-recommendation-empty p {
+  color: rgba(251, 249, 245, 0.62);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.my-journey-recommendation-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.my-journey-recommendation-card {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  padding: 18px;
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  background: rgba(251, 249, 245, 0.06);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.my-journey-recommendation-card:hover,
+.my-journey-recommendation-card:focus-visible {
+  border-color: rgba(197, 160, 89, 0.54);
+  background: rgba(251, 249, 245, 0.1);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.my-journey-recommendation-card span,
+.my-journey-recommendation-card small {
+  color: var(--color-accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.my-journey-recommendation-card h3 {
+  color: var(--color-text-inverse);
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.my-journey-recommendation-card p {
+  color: rgba(251, 249, 245, 0.64);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.my-journey-recommendation-empty {
+  display: grid;
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.my-journey-recommendation-empty a {
+  justify-self: start;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 .my-journey-groups {
   display: grid;
   gap: 24px;
-  border-top: 1px solid rgba(26, 26, 26, 0.08);
 }
 
 .my-journey-groups > article {
@@ -212,6 +332,24 @@
   border-bottom: 1px solid rgba(26, 26, 26, 0.08);
 }
 
+.my-journey-groups section.my-journey-item {
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    padding 0.2s ease;
+}
+
+.my-journey-groups section.my-journey-item:hover,
+.my-journey-groups section.my-journey-item:focus-visible,
+.my-journey-groups section.my-journey-item.is-selected {
+  padding-right: 18px;
+  padding-left: 18px;
+  background: rgba(197, 160, 89, 0.08);
+  border-color: rgba(197, 160, 89, 0.34);
+  outline: none;
+}
+
 .my-journey-groups section.my-journey-child-item {
   margin-left: 24px;
   padding-left: 24px;
@@ -224,6 +362,11 @@
 }
 
 .my-journey-region-group section.my-journey-child-item + section.my-journey-child-item {
+  margin-left: 48px;
+  border-left-color: rgba(197, 160, 89, 0.18);
+}
+
+.my-journey-region-group > div .my-journey-child-item {
   margin-left: 48px;
   border-left-color: rgba(197, 160, 89, 0.18);
 }
@@ -280,8 +423,16 @@
 
   .my-journey-hero,
   .my-journey-empty,
-  .my-journey-groups {
+  .my-journey-workspace {
     padding: 88px var(--space-md);
+  }
+
+  .my-journey-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .my-journey-recommendations {
+    position: static;
   }
 
   .my-journey-groups > article,

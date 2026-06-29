@@ -213,20 +213,8 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: transparent;
   color: inherit;
-  cursor: pointer;
   font: inherit;
   text-align: left;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.guide-season-row:hover,
-.guide-season-row:focus-visible,
-.guide-season-row.is-selected {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(197, 160, 89, 0.34);
-  outline: none;
 }
 
 .guide-season-region {
@@ -292,10 +280,14 @@
   background: var(--guide-forest);
   color: var(--color-text-inverse);
   text-align: left;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .guide-region-card > button:first-of-type {
   display: block;
+  position: relative;
   width: 100%;
   min-height: inherit;
   border: 0;
@@ -319,7 +311,7 @@
     transform 1.2s ease;
 }
 
-.guide-region-card span {
+.guide-region-title {
   position: relative;
   z-index: 1;
   display: flex;
@@ -333,11 +325,64 @@
   font-style: italic;
 }
 
+.guide-region-status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid rgba(251, 249, 245, 0.32);
+  border-radius: 999px;
+  background: rgba(13, 31, 23, 0.58);
+  color: rgba(251, 249, 245, 0.88);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  line-height: 1;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.guide-region-status span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--guide-gold);
+  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.16);
+}
+
+.guide-region-status:hover,
+.guide-region-status:focus-visible {
+  border-color: rgba(197, 160, 89, 0.62);
+  background: rgba(197, 160, 89, 0.18);
+  color: var(--color-text-inverse);
+  outline: none;
+}
+
 .guide-region-card:hover img,
 .guide-region-card:focus-visible img,
 .guide-region-card.is-active img {
   opacity: 0.82;
   transform: scale(1.035);
+}
+
+.guide-region-card.is-included {
+  border-color: rgba(197, 160, 89, 0.54);
+  box-shadow:
+    inset 0 0 0 1px rgba(197, 160, 89, 0.18),
+    0 18px 42px rgba(13, 31, 23, 0.12);
+}
+
+.guide-region-card.is-included img {
+  opacity: 0.72;
 }
 
 .guide-region-card:focus-visible {
