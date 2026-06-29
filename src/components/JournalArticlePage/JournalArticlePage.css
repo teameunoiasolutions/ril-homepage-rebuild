@@ -154,7 +154,7 @@
 .article-prose--summit h2 em,
 .article-closing h2 em {
   color: var(--color-primary);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 

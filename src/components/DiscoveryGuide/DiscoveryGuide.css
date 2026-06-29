@@ -59,6 +59,7 @@
 .guide-closing h2 em {
   display: block;
   color: var(--guide-gold);
+  font-style: normal;
   letter-spacing: -0.04em;
 }
 

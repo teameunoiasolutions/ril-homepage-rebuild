@@ -746,6 +746,7 @@
 
 .detail-final-cta h2 em {
   color: var(--color-accent);
+  font-style: normal;
   font-weight: 400;
 }
 
