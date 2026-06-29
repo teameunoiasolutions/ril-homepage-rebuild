@@ -564,7 +564,7 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
 
 export function ExpectationsPage() {
   const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>(readInitialExpectationTheme)
-  const { confirmRemoveItem, includeItem, isIncluded, pendingRemovalId, requestRemoveItem } = useJourney()
+  const { confirmRemoveItem, includeItem, isIncluded } = useJourney()
   const filteredEncounters =
     selectedTheme === 'All Encounters'
       ? encounters
@@ -597,25 +597,30 @@ export function ExpectationsPage() {
     event.preventDefault()
     setSelectedTheme(theme)
 
-    const journeyId = toJourneyId('theme', theme)
-    if (isIncluded(journeyId)) {
-      confirmRemoveItem(journeyId)
-    } else {
-      includeItem({
-        id: journeyId,
-        kind: 'theme',
-        label: theme,
-        detail: 'A preferred way into Sri Lanka from Expectations.',
-        source: 'Expectations',
-      })
-      if (theme === sharedHeritageWorld.name) {
-        includeSharedHeritageRecommendations()
-      }
-    }
-
     window.requestAnimationFrame(() => {
       document.getElementById('encounters')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
+  }
+
+  function toggleThemeJourney(theme: Exclude<ExperienceTheme, 'All Encounters'>) {
+    const journeyId = toJourneyId('theme', theme)
+
+    if (isIncluded(journeyId)) {
+      confirmRemoveItem(journeyId)
+      return
+    }
+
+    includeItem({
+      id: journeyId,
+      kind: 'theme',
+      label: theme,
+      detail: 'A preferred way into Sri Lanka from Expectations.',
+      source: 'Expectations',
+    })
+
+    if (theme === sharedHeritageWorld.name) {
+      includeSharedHeritageRecommendations()
+    }
   }
 
   function handleThemeFilter(theme: ExperienceTheme) {
@@ -729,52 +734,47 @@ export function ExpectationsPage() {
             </aside>
 
             <div className="experience-themes-board">
-              {experienceThemes.map((theme) => (
-                <article
-                  key={theme.title}
-                  className={`theme-chapter-shell journey-selectable${isIncluded(toJourneyId('theme', theme.title)) ? ' is-included' : ''}`}
-                >
-                  {isIncluded(toJourneyId('theme', theme.title)) ? (
+              {experienceThemes.map((theme) => {
+                const themeJourneyId = toJourneyId('theme', theme.title)
+                const isThemeIncluded = isIncluded(themeJourneyId)
+
+                return (
+                  <article
+                    key={theme.title}
+                    className={`theme-chapter-shell journey-selectable${isThemeIncluded ? ' is-included' : ''}`}
+                  >
                     <button
-                      className="journey-included-pill journey-included-pill--button"
+                      className="theme-journey-toggle"
                       type="button"
+                      aria-pressed={isThemeIncluded}
+                      aria-label={`${isThemeIncluded ? 'Remove' : 'Add'} ${theme.title} ${isThemeIncluded ? 'from' : 'to'} your journey`}
                       onClick={(event) => {
                         event.preventDefault()
                         event.stopPropagation()
-                        confirmRemoveItem(toJourneyId('theme', theme.title))
+                        toggleThemeJourney(theme.title)
                       }}
                     >
-                      Included in Your Journey
+                      {isThemeIncluded ? 'Remove from Journey' : 'Add to Journey'}
                     </button>
-                  ) : null}
-                  <a
-                    className="theme-chapter"
-                    href="#encounters"
-                    onClick={(event) => handleThemeExplore(theme.title, event)}
-                    aria-label={`${theme.title}: begin shaping this expectation`}
-                  >
-                    <figure>
-                      <img src={theme.image} alt={theme.imageAlt} />
-                    </figure>
-                    <div className="theme-chapter-copy">
-                      <p>{theme.traveller}</p>
-                      <h3>{theme.title}</h3>
-                      <p>{theme.description}</p>
-                      <small>{theme.encounter}</small>
-                    </div>
-                  </a>
-                  {isIncluded(toJourneyId('theme', theme.title)) ||
-                  pendingRemovalId === toJourneyId('theme', theme.title) ? (
-                    <button
-                      className="journey-remove-action"
-                      type="button"
-                      onClick={() => confirmRemoveItem(toJourneyId('theme', theme.title))}
+                    <a
+                      className="theme-chapter"
+                      href="#encounters"
+                      onClick={(event) => handleThemeExplore(theme.title, event)}
+                      aria-label={`${theme.title}: explore matching expectation paths`}
                     >
-                      Remove from Journey
-                    </button>
-                  ) : null}
-                </article>
-              ))}
+                      <figure>
+                        <img src={theme.image} alt={theme.imageAlt} />
+                      </figure>
+                      <div className="theme-chapter-copy">
+                        <p>{theme.traveller}</p>
+                        <h3>{theme.title}</h3>
+                        <p>{theme.description}</p>
+                        <small>{theme.encounter}</small>
+                      </div>
+                    </a>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </div>
