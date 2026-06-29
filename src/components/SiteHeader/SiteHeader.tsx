@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import './SiteHeader.css'
 
 const navLinks = [
-  { href: '/discover-sri-lanka', label: 'Discover Sri Lanka' },
+  { href: '/', label: 'Home' },
+  { href: '/discover-sri-lanka', label: 'Discover' },
   { href: '/expectations', label: 'Expectations' },
   { href: '/travel-preparation', label: 'Before You Arrive' },
   { href: '/journal', label: 'Journal' },
@@ -89,7 +90,7 @@ export function SiteHeader() {
         </nav>
 
         <a className="site-header-cta" href="/expectations" onClick={closeMenu}>
-          Begin Expectations
+          Begin Journey
         </a>
       </div>
     </header>

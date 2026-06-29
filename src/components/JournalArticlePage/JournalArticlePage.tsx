@@ -273,32 +273,27 @@ export function JournalArticlePage() {
   return (
     <main className="journal-article-page">
       <nav className="article-breadcrumb" aria-label="Breadcrumb">
-        <a href="/journal">The Island Notebook</a>
-        <span>·</span>
-        <a href="/journal">The Ancient North</a>
+        <a href="/journal">Royale Isles Private Journal</a>
         <span>·</span>
         <strong>Entry #055</strong>
       </nav>
 
       <section className="article-hero" aria-labelledby="article-title">
-        <div className="article-watermark" aria-hidden="true">
-          Sigiriya
-        </div>
         <div className="article-container article-hero__inner">
           <header className="article-hero__meta">
             <div>
               <span>Entry No. 055</span>
-              <p>Vol. IV · The Living Archive · 2024</p>
+              <p>Private Cultural Intelligence · Vol. IV</p>
             </div>
             <aside>
               <strong>Lion Rock · Central Province</strong>
-              <p>Sigiriya · 7.9520 N, 80.7602 E</p>
+              <p>Sigiriya · Private dawn access · 05:14 AM</p>
             </aside>
           </header>
 
           <div className="article-title-layout">
             <div className="article-title-block">
-              <p>Private Dawn Access · February 2024</p>
+              <p>For travellers who prefer the first hour</p>
               <h1 id="article-title">
                 The Sigiriya
                 <br />
@@ -307,20 +302,19 @@ export function JournalArticlePage() {
               <div>
                 <span />
                 <p>
-                  Three hundred and seventy metres of ancient granite, entered before the public hour.
-                  The point was not to avoid people. It was to meet the place before it had to perform
-                  for anyone.
+                  Ancient granite, pre-dawn access, and a cultural ascent shaped around privacy,
+                  scholarship, and the quiet discipline of arriving before spectacle.
                 </p>
               </div>
             </div>
 
             <aside className="article-weather-card">
-              <p>Weather Log</p>
+              <p>Access Brief</p>
               <strong>24°C</strong>
-              <span>Light Breeze · 8 km/h</span>
-              <span>Clear · Humidity 62%</span>
+              <span>Private guide · Heritage scholar</span>
+              <span>Pre-public arrival · Summit at first light</span>
               <time>05:14 AM</time>
-              <small>14 February 2024 · Gate Opens</small>
+              <small>14 February 2024 · Gate cleared</small>
             </aside>
           </div>
 

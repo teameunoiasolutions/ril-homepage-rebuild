@@ -601,7 +601,22 @@
   position: relative;
   display: grid;
   grid-column: span 3;
-  min-height: 360px;
+  min-height: 330px;
+}
+
+@media (min-width: 1441px) {
+  .experience-themes-board {
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+
+  .theme-chapter-shell {
+    min-height: 360px;
+  }
+
+  .theme-chapter {
+    grid-template-rows: minmax(170px, 0.74fr) auto;
+  }
 }
 
 .theme-journey-toggle {
@@ -657,7 +672,7 @@
 .theme-chapter {
   position: relative;
   display: grid;
-  grid-template-rows: minmax(150px, 0.72fr) minmax(200px, 1fr);
+  grid-template-rows: minmax(150px, 0.72fr) auto;
   min-height: inherit;
   overflow: hidden;
   border: 1px solid rgba(197, 160, 89, 0.2);
@@ -734,7 +749,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 28px 30px 64px;
+  padding: 24px 28px 58px;
 }
 
 .theme-chapter-copy > p:first-of-type,
@@ -761,7 +776,7 @@
 
 .theme-chapter-shell:nth-child(n + 5) {
   grid-column: span 4;
-  min-height: 400px;
+  min-height: 340px;
 }
 
 .theme-chapter-shell .theme-chapter h3 {
@@ -785,8 +800,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: auto;
-  padding-top: 24px;
+  margin-top: 20px;
+  padding-top: 0;
   color: rgba(251, 249, 245, 0.62);
   letter-spacing: 2.4px;
 }

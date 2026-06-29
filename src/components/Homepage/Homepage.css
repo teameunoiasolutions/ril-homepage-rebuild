@@ -1166,7 +1166,9 @@
 
 .figma-island-stats-media img.figma-island-stats-map {
   object-fit: contain;
-  padding: clamp(28px, 4vw, 56px);
+  padding: clamp(8px, 1.6vw, 24px);
+  transform: scale(1.18);
+  transform-origin: center;
 }
 
 .figma-island-stats-media::after {
