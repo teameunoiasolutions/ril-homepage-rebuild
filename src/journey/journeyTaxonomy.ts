@@ -2,10 +2,13 @@ import type { JourneyItem } from './JourneyContext'
 import { DISCOVERY_WORLD_NAMES, destinationDiscoveryWorlds } from './discoveryWorlds'
 
 export const regionThemeFallbacks: Record<string, string> = {
+  'West Coast & Colombo': DISCOVERY_WORLD_NAMES.sharedHeritage,
   'South Coast': 'Ocean & Discovery',
+  'Wild South': 'Wildlife & Wilderness',
   'East Coast': 'Ocean & Discovery',
   'Hill Country': 'Rail & Landscape',
   'Cultural Triangle': 'Heritage & Memory',
+  'The North': 'Culture & Human Connection',
   'West Coast': DISCOVERY_WORLD_NAMES.sharedHeritage,
 }
 
@@ -57,6 +60,10 @@ const regionSignals: Array<{ region: string; signals: string[] }> = [
     ],
   },
   {
+    region: 'Wild South',
+    signals: ['wild south', 'deep south', 'yala', 'bundala', 'rekawa', 'leopard country', 'dry-zone wilderness'],
+  },
+  {
     region: 'East Coast',
     signals: ['east coast', 'eastern coast', 'trincomalee', 'pasikuda', 'nilaveli', 'arugam bay'],
   },
@@ -83,6 +90,7 @@ const regionSignals: Array<{ region: string; signals: string[] }> = [
   {
     region: 'West Coast',
     signals: [
+      'west coast & colombo',
       'west coast',
       'western coast',
       'colombo',
@@ -93,6 +101,10 @@ const regionSignals: Array<{ region: string; signals: string[] }> = [
       'bentota',
       'sinharaja',
     ],
+  },
+  {
+    region: 'The North',
+    signals: ['the north', 'northern peninsula', 'northern province', 'jaffna', 'nallur', 'delft island', 'point pedro'],
   },
 ]
 

@@ -3,7 +3,7 @@ import './SiteFooter.css'
 const footerNav = {
   explore: [
     { href: '/discover-sri-lanka', label: 'Discover Sri Lanka' },
-    { href: '/experiences', label: 'Experiences' },
+    { href: '/expectations', label: 'Expectations' },
     { href: '/travel-preparation', label: 'Before You Arrive' },
     { href: '/my-journey', label: 'My Journey' },
     { href: '/journal', label: 'Journal' },
@@ -11,7 +11,7 @@ const footerNav = {
   ] as const,
   connect: [
     { href: '/#begin', label: 'Begin a Conversation' },
-    { href: '/#begin', label: 'Discovery Guide' },
+    { href: '/discover-sri-lanka', label: 'Discovery Guide' },
     { href: '/#begin', label: 'Contact' },
   ] as const,
   legal: [

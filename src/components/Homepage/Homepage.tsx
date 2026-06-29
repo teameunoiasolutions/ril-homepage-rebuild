@@ -228,6 +228,10 @@ const questions = [
   },
 ]
 
+function getExpectationsHref(world: string) {
+  return `/expectations?world=${encodeURIComponent(world)}`
+}
+
 export function Homepage() {
   const [activeStoryIndex, setActiveStoryIndex] = useState(0)
   const activeStory = travellerStories[activeStoryIndex]
@@ -267,21 +271,20 @@ export function Homepage() {
         <div className="figma-container">
           <header className="figma-section-header figma-experiences-header">
             <div>
-              <p className="figma-overline">From Discovery To Encounter</p>
+              <p className="figma-overline">Inspiration Before Curation</p>
               <h2>Ways Into The Island</h2>
               <p>
-                As you explore themes, regions, destinations, moods, and encounters, Royale Isles
-                Lanka quietly reads the pattern. Our curators translate those signals into private
-                introductions shaped by timing, trust, and the right local host.
+                These Discovery Worlds are not decisions. They are editorial lenses for understanding
+                Sri Lanka before any journey is saved, scored, or shaped around you.
               </p>
             </div>
             <aside className="figma-experience-brief">
-              <span>Private Collection</span>
+              <span>First Curation Step</span>
               <p>
-                7 pathways. No fixed catalogue. Each introduction is selected only when the access
-                protects the place, the host, and the traveller.
+                When one world begins to feel relevant, continue to Expectations. That is where your
+                preferences first become part of My Journey.
               </p>
-              <a href="/experiences">Explore The Collection</a>
+              <a href="/expectations">Continue To Expectations</a>
             </aside>
           </header>
 
@@ -306,8 +309,8 @@ export function Homepage() {
                   <small>{experience.identity}</small>
                   <h3>{experience.title}</h3>
                   <p>{experience.copy}</p>
-                  <a className="figma-button-secondary" href="/experiences">
-                    Follow This Thread
+                  <a className="figma-button-secondary" href={getExpectationsHref(experience.region)}>
+                    Continue To Expectations
                   </a>
                 </div>
               </article>
@@ -608,7 +611,7 @@ export function Homepage() {
             <p>
               A considered introduction for private families, principals, and discerning travellers
               exploring Sri Lanka at the highest level: quiet residences, trusted hosts, protected
-              timing, and experiences arranged with discretion rather than display.
+              timing, and private moments arranged with discretion rather than display.
             </p>
             <div className="figma-brochure-panel">
               <span>Inside the briefing</span>

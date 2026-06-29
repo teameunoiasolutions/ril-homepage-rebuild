@@ -39,7 +39,7 @@
 
 .site-header-nav a,
 .site-header-cta {
-  font-size: var(--font-size-nav);
+  font-size: 10px;
   line-height: var(--line-height-ui);
   letter-spacing: 0.2em;
   text-transform: uppercase;

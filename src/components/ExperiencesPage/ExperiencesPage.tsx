@@ -239,7 +239,6 @@ const encounters: Encounter[] = [
 
 const experienceThemes = [
   {
-    number: '01',
     title: 'Wildlife & Wilderness',
     description:
       'Leopards, elephants, forests, field researchers, remote ecosystems, and nature without performance.',
@@ -248,10 +247,8 @@ const experienceThemes = [
     imageAlt: 'Leopard resting on ancient rock in the Sri Lankan wilderness',
     href: '#leopard-research-circuit',
     encounter: 'The Leopard Research Circuit',
-    featured: true,
   },
   {
-    number: '02',
     title: 'Ocean & Discovery',
     description:
       'Whale watching, sailing, marine life, lagoons, east coast exploration, and hidden coastlines.',
@@ -260,10 +257,8 @@ const experienceThemes = [
     imageAlt: 'Blue whale surfacing in deep Sri Lankan water',
     href: '#deep-water-hour',
     encounter: 'The Deep-Water Hour',
-    featured: false,
   },
   {
-    number: '03',
     title: 'Heritage & Memory',
     description:
       'Ancient kingdoms, sacred spaces, archaeology, historians, and living traditions carried forward.',
@@ -272,10 +267,8 @@ const experienceThemes = [
     imageAlt: 'Private dawn access to Sigiriya rock fortress',
     href: '#sigiriya-dawn-ascent',
     encounter: 'The Sigiriya Dawn Ascent',
-    featured: false,
   },
   {
-    number: '04',
     title: 'Wellness & Restoration',
     description:
       'Ayurveda, healing traditions, retreats, slow living, and the quiet work of personal renewal.',
@@ -284,10 +277,8 @@ const experienceThemes = [
     imageAlt: 'Open-air Ayurvedic treatment pavilion in a rainforest setting',
     href: '#ancient-grammar-of-healing',
     encounter: 'The Ancient Grammar of Healing',
-    featured: true,
   },
   {
-    number: '05',
     title: 'Rail & Landscape',
     description:
       'Hill country train journeys, tea estates, mountain routes, and scenery that changes by the hour.',
@@ -296,10 +287,8 @@ const experienceThemes = [
     imageAlt: 'Misty tea estate landscape in Sri Lanka hill country',
     href: '#begin',
     encounter: 'Train journeys in development',
-    featured: false,
   },
   {
-    number: '06',
     title: 'Culture & Human Connection',
     description:
       'Artisans, musicians, dancers, family traditions, private introductions, and everyday Sri Lanka.',
@@ -308,10 +297,8 @@ const experienceThemes = [
     imageAlt: 'Kandyan dancer in ceremonial costume',
     href: '#kandyan-dance-rehearsal',
     encounter: 'A Private Kandyan Dance Rehearsal',
-    featured: false,
   },
   {
-    number: sharedHeritageWorld.number,
     title: sharedHeritageWorld.name,
     description: sharedHeritageWorld.description,
     traveller: sharedHeritageWorld.traveller,
@@ -319,7 +306,6 @@ const experienceThemes = [
     imageAlt: sharedHeritageWorld.imageAlt,
     href: '#shared-heritage-quietly-read',
     encounter: 'Shared Heritage, Quietly Read',
-    featured: false,
   },
 ] as const
 
@@ -331,17 +317,17 @@ const curationColumns = [
       {
         title: 'Personal Verification',
         copy:
-          'No experience enters the collection unless a curator has participated in it, not observed it. We do not accept invitations to preview programmes.',
+          'No expectation path is translated into a journey unless a curator understands the access personally. We do not build around borrowed recommendations.',
       },
       {
         title: 'Relationship Primacy',
         copy:
-          "Every practitioner in the collection is known personally to at least one team member. We do not work through intermediaries. We do not list contacts we haven't shared a meal with.",
+          "Every practitioner we may introduce is known personally to at least one team member. We do not work through intermediaries. We do not list contacts we haven't shared a meal with.",
       },
       {
         title: 'Annual Renewal',
         copy:
-          'The collection is reviewed in its entirety every twelve months. Experiences that no longer meet the standard are removed without announcement.',
+          'Our expectation paths are reviewed every twelve months. Anything that no longer meets the standard is removed without announcement.',
       },
       {
         title: 'Capacity Control',
@@ -421,11 +407,20 @@ function toJourneyId(kind: string, value: string) {
   return `${kind}:${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
 }
 
+function readInitialExpectationTheme(): ExperienceTheme {
+  if (typeof window === 'undefined') {
+    return 'All Encounters'
+  }
+
+  const world = new URLSearchParams(window.location.search).get('world')
+  return experienceThemeOptions.includes(world as ExperienceTheme) ? (world as ExperienceTheme) : 'All Encounters'
+}
+
 function EncounterCard({ encounter, index }: { encounter: Encounter; index: number }) {
   const { confirmRemoveItem, includeItem, isIncluded, pendingRemovalId, requestRemoveItem } = useJourney()
   const enquiryHref =
     encounter.title === 'The Sigiriya Dawn Ascent'
-      ? '/experiences/the-sigiriya-dawn-ascent'
+      ? '/expectations/the-sigiriya-dawn-ascent'
       : '#begin'
   const journeyId = toJourneyId('experience', encounter.title)
   const isEncounterIncluded = isIncluded(journeyId)
@@ -454,8 +449,8 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
         id: toJourneyId('theme', encounter.theme),
         kind: 'theme',
         label: encounter.theme,
-        detail: 'A preferred way into Sri Lanka from the experience collection.',
-        source: 'Experiences',
+        detail: 'A preferred way into Sri Lanka from Expectations.',
+        source: 'Expectations',
       })
     }
 
@@ -465,7 +460,7 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
         kind: 'region',
         label: parentRegion,
         detail: `A regional setting naturally aligned with ${encounter.theme}.`,
-        source: 'Experiences',
+        source: 'Expectations',
         parentTheme: encounter.theme,
       })
     }
@@ -567,8 +562,8 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
   )
 }
 
-export function ExperiencesPage() {
-  const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>('All Encounters')
+export function ExpectationsPage() {
+  const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>(readInitialExpectationTheme)
   const { confirmRemoveItem, includeItem, isIncluded, pendingRemovalId, requestRemoveItem } = useJourney()
   const filteredEncounters =
     selectedTheme === 'All Encounters'
@@ -610,8 +605,8 @@ export function ExperiencesPage() {
         id: journeyId,
         kind: 'theme',
         label: theme,
-        detail: 'A preferred way into Sri Lanka from the experience collection.',
-        source: 'Experiences',
+        detail: 'A preferred way into Sri Lanka from Expectations.',
+        source: 'Expectations',
       })
       if (theme === sharedHeritageWorld.name) {
         includeSharedHeritageRecommendations()
@@ -634,8 +629,8 @@ export function ExperiencesPage() {
       id: toJourneyId('theme', theme),
       kind: 'theme',
       label: theme,
-      detail: 'A preferred way into Sri Lanka from the experience collection.',
-      source: 'Experiences',
+      detail: 'A preferred way into Sri Lanka from Expectations.',
+      source: 'Expectations',
     })
 
     if (theme === sharedHeritageWorld.name) {
@@ -648,25 +643,25 @@ export function ExperiencesPage() {
       <section className="experiences-hero experiences-reveal">
         <div className="experiences-container experiences-hero-grid">
           <div className="experiences-hero-copy">
-            <Eyebrow>Private Collection - Sri Lanka</Eyebrow>
+            <Eyebrow>Expectations - Journey Curation Begins</Eyebrow>
             <h1>
-              Rare
+              What
               <br />
-              <em>Access</em>
+              <em>Should</em>
               <br />
-              to Place.
+              Sri Lanka Feel Like?
             </h1>
             <p>
-              Quietly arranged encounters for guests who expect privacy, cultural depth, and flawless
-              discretion. Each experience is personally vetted, host-approved, and released only when
-              the right access can be secured.
+              This is the first moment Royale Isles Lanka asks you to shape the journey. Choose the
+              moods, regions, and styles of access that feel true; only here do those preferences begin
+              forming My Journey.
             </p>
-            <ul className="experiences-hero-proof-list" aria-label="Experience standards">
+            <ul className="experiences-hero-proof-list" aria-label="Expectation standards">
               {heroProofs.map((proof) => (
                 <li key={proof}>{proof}</li>
               ))}
             </ul>
-            <TextLink href="#begin">Begin A Private Briefing</TextLink>
+            <TextLink href="#experience-themes-title">Begin With Expectations</TextLink>
             <aside className="opening-note">
               <p>Curator's Note</p>
               <blockquote>
@@ -710,75 +705,85 @@ export function ExperiencesPage() {
         <div className="experiences-container">
           <header className="experience-themes-header">
             <div>
-              <Eyebrow>Experience Themes</Eyebrow>
+              <Eyebrow>Journey Themes</Eyebrow>
               <h2 id="experience-themes-title">
-                Ways Into
+                The First
                 <br />
-                <em>The Island.</em>
+                <em>Shape Of The Journey.</em>
               </h2>
             </div>
             <p>
-              No two travellers experience Sri Lanka the same way. Some seek wilderness. Some seek
-              restoration. Some seek culture, memory, or stillness. As you explore, these themes
-              quietly reveal the kind of journey that may feel personally true.
+              This is not a catalogue of activities. It is the first quiet reading of what should matter:
+              wilderness, memory, restoration, movement, coast, culture, or histories still held in the landscape.
             </p>
           </header>
 
-          <div className="experience-themes-board">
-            {experienceThemes.map((theme) => (
-              <article
-                key={theme.title}
-                className={`theme-chapter-shell journey-selectable${theme.featured ? ' theme-chapter-shell--featured' : ''}${isIncluded(toJourneyId('theme', theme.title)) ? ' is-included' : ''}`}
-              >
-                {isIncluded(toJourneyId('theme', theme.title)) ? (
-                  <button
-                    className="journey-included-pill journey-included-pill--button"
-                    type="button"
-                    onClick={(event) => {
-                      event.preventDefault()
-                      event.stopPropagation()
-                      confirmRemoveItem(toJourneyId('theme', theme.title))
-                    }}
-                  >
-                    Included in Your Journey
-                  </button>
-                ) : null}
-                <a
-                  className="theme-chapter"
-                  href="#encounters"
-                  onClick={(event) => handleThemeExplore(theme.title, event)}
-                  aria-label={`${theme.title}: explore this theme in the encounter collection`}
+          <div className="experience-themes-salon">
+            <aside className="experience-themes-note">
+              <span>Curatorial Reading</span>
+              <p>
+                Choose only what feels instinctive. A preference here is not a commitment; it is a signal your
+                concierge can read with discretion.
+              </p>
+              <small>Every path remains private, edited, and shaped around timing.</small>
+            </aside>
+
+            <div className="experience-themes-board">
+              {experienceThemes.map((theme) => (
+                <article
+                  key={theme.title}
+                  className={`theme-chapter-shell journey-selectable${isIncluded(toJourneyId('theme', theme.title)) ? ' is-included' : ''}`}
                 >
-                  <figure>
-                    <img src={theme.image} alt={theme.imageAlt} />
-                  </figure>
-                  <div className="theme-chapter-copy">
-                    <span>{theme.number}</span>
-                    <p>{theme.traveller}</p>
-                    <h3>{theme.title}</h3>
-                    <p>{theme.description}</p>
-                    <small>{theme.encounter}</small>
-                  </div>
-                </a>
-                {isIncluded(toJourneyId('theme', theme.title)) || pendingRemovalId === toJourneyId('theme', theme.title) ? (
-                  <button
-                    className="journey-remove-action"
-                    type="button"
-                    onClick={() => confirmRemoveItem(toJourneyId('theme', theme.title))}
+                  {isIncluded(toJourneyId('theme', theme.title)) ? (
+                    <button
+                      className="journey-included-pill journey-included-pill--button"
+                      type="button"
+                      onClick={(event) => {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        confirmRemoveItem(toJourneyId('theme', theme.title))
+                      }}
+                    >
+                      Included in Your Journey
+                    </button>
+                  ) : null}
+                  <a
+                    className="theme-chapter"
+                    href="#encounters"
+                    onClick={(event) => handleThemeExplore(theme.title, event)}
+                    aria-label={`${theme.title}: begin shaping this expectation`}
                   >
-                    Remove from Journey
-                  </button>
-                ) : null}
-              </article>
-            ))}
+                    <figure>
+                      <img src={theme.image} alt={theme.imageAlt} />
+                    </figure>
+                    <div className="theme-chapter-copy">
+                      <p>{theme.traveller}</p>
+                      <h3>{theme.title}</h3>
+                      <p>{theme.description}</p>
+                      <small>{theme.encounter}</small>
+                    </div>
+                  </a>
+                  {isIncluded(toJourneyId('theme', theme.title)) ||
+                  pendingRemovalId === toJourneyId('theme', theme.title) ? (
+                    <button
+                      className="journey-remove-action"
+                      type="button"
+                      onClick={() => confirmRemoveItem(toJourneyId('theme', theme.title))}
+                    >
+                      Remove from Journey
+                    </button>
+                  ) : null}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="region-filter experiences-reveal" aria-label="Explore encounters by theme">
+      <section className="region-filter experiences-reveal" aria-label="Set journey expectations by theme">
         <div className="region-filter-copy">
-          <span>Browse The Collection</span>
-          <label htmlFor="experience-theme">Explore By Theme</label>
+          <span>Set A First Preference</span>
+          <label htmlFor="experience-theme">Preferred Journey Theme</label>
         </div>
         <div className="region-filter-select-wrap">
           <select
@@ -794,7 +799,7 @@ export function ExperiencesPage() {
           </select>
         </div>
         <p>
-          {curatedOpeningsCount} {curatedOpeningsCount === 1 ? 'Curated Opening' : 'Curated Openings'}
+          {curatedOpeningsCount} {curatedOpeningsCount === 1 ? 'Expectation Path' : 'Expectation Paths'}
         </p>
       </section>
 
@@ -803,8 +808,8 @@ export function ExperiencesPage() {
           <header className="encounters-collection-header experiences-reveal">
             <p>Personally Introduced</p>
             <h2>
-              The encounters below are not inventory. They are openings held by trust, timing, and
-              discretion.
+              These are quiet signals that help your concierge understand the kind of journey to begin
+              composing.
             </h2>
           </header>
           {filteredEncounters.length > 0 ? (
@@ -813,7 +818,7 @@ export function ExperiencesPage() {
             ))
           ) : (
             <div className="encounters-empty experiences-reveal">
-              <p>New encounters are being prepared for this chapter of the collection.</p>
+              <p>New encounters are being prepared for this expectation path.</p>
               <span>This pathway is currently available through private consultation.</span>
             </div>
           )}
@@ -830,9 +835,9 @@ export function ExperiencesPage() {
               <em>every introduction we make.</em>
             </h2>
             <p>
-              The encounters above show what can be arranged. The principles below explain how we
+              The signals above show what can be arranged. The principles below explain how we
               decide what should be arranged at all: nature must not be staged, and access must protect
-              dignity. Together, they shape the standard behind the collection.
+              dignity. Together, they shape the standard behind curation.
             </p>
           </div>
         </div>
@@ -905,13 +910,13 @@ export function ExperiencesPage() {
             ))}
           </div>
           <blockquote className="process-quote">
-            The collection does not grow for scale. It <em>deepens for trust.</em>
+            Curation does not grow for scale. It <em>deepens for trust.</em>
             <cite>Arjun Fernando - Co-Founder</cite>
           </blockquote>
         </div>
       </section>
 
-      <section className="photo-strip experiences-reveal" aria-label="Experience photography carousel">
+      <section className="photo-strip experiences-reveal" aria-label="Expectation photography carousel">
         <div className="photo-strip-track">
           <div className="photo-strip-set">
             {photoStrip.map((photo) => (
@@ -931,7 +936,7 @@ export function ExperiencesPage() {
           <div className="experiences-final-cta-mark" aria-hidden="true">
             ✦
           </div>
-          <p>Private Access Briefing</p>
+          <p>Expectation Briefing</p>
           <h2>
             Begin with the question
             <br />
@@ -946,7 +951,7 @@ export function ExperiencesPage() {
             <a href="#begin" className="primary-cta">
               Request A Private Briefing
             </a>
-            <TextLink inverse>Review The Collection</TextLink>
+            <TextLink inverse>Review Expectations</TextLink>
           </div>
           <small>Discreet planning. No packaged itineraries. Introductions only where trust exists.</small>
         </div>

@@ -46,8 +46,7 @@ export function JourneyHelperMessage() {
     <aside className="journey-helper-message" aria-live="polite">
       <span>My Journey</span>
       <p>
-        Everything you explore is quietly included in My Journey, where you can review and refine it whenever you are
-        ready.
+        Journey updated. Your Expectations are now held in My Journey, ready for concierge refinement.
       </p>
     </aside>
   )
@@ -234,19 +233,19 @@ export function MyJourneyPage() {
           <em>taking shape around you.</em>
         </h1>
         <p>
-          As you explore Royale Isles Lanka, the places, themes, and experiences that catch your attention are held here
+          Once you begin setting Expectations, the places, themes, and private moments that feel relevant are held here
           for later conversation with your concierge.
         </p>
       </section>
 
       {count === 0 ? (
         <section className="my-journey-empty">
-          <h2>Nothing has needed remembering yet.</h2>
+          <h2>A remarkable journey is still waiting for its first signal.</h2>
           <p>
-            Begin with Discover Sri Lanka or the experience collection. As something feels right, it will appear here
-            without asking you to organise a thing.
+            Wander through Sri Lanka at your own pace. When an expectation begins to feel personal,
+            Royale Isles Lanka will quietly gather the shape of your journey here.
           </p>
-          <a href="/discover-sri-lanka">Discover Sri Lanka</a>
+          <a href="/expectations">Begin Expectations</a>
         </section>
       ) : (
         <div className="my-journey-workspace">
@@ -279,7 +278,7 @@ export function MyJourneyPage() {
                 <p>
                   Choose a saved region, destination, or experience to unlock more precise recommendations.
                 </p>
-                <a href="/discover-sri-lanka">Discover Sri Lanka</a>
+                <a href="/expectations">Refine Expectations</a>
               </div>
             )}
           </aside>

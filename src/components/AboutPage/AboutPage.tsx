@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import './AboutPage.css'
 import { aboutImages } from './images'
 
@@ -29,32 +30,91 @@ const romanNumerals = ['I', 'II', 'III'] as const
 
 const custodians = [
   {
-    name: 'Anika De Silva',
-    role: 'FOUNDER',
+    name: 'Dr Raghavan',
+    role: 'CEO & FOUNDER',
+    image: aboutImages.portraitDrRaghavan,
+    summary: 'Founder-led discretion for journeys that require judgement before access.',
+    bio: 'Dr Raghavan leads Royale Isles Lanka with a belief that Sri Lanka should be experienced through trust, restraint, and meaningful introductions rather than generic itineraries.',
+    focus: 'Founder vision, private access, guest trust, and the long-term relationships that make rare journeys possible.',
+    offset: false,
+  },
+  {
+    name: 'Team Member',
+    role: 'PROFILE COMING SOON',
     image: aboutImages.portraitAnika,
-    offset: false,
+    summary: 'A trusted specialist profile will be introduced here shortly.',
+    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    focus: 'Guest care, journey support, and discreet coordination.',
+    offset: true,
   },
   {
-    name: 'Roshan Perera',
-    role: 'JOURNEY ARCHITECT',
+    name: 'Team Member',
+    role: 'PROFILE COMING SOON',
     image: aboutImages.portraitRoshan,
-    offset: true,
-  },
-  {
-    name: 'Malini Fernando',
-    role: 'CULTURAL LEAD',
-    image: aboutImages.portraitMalini,
+    summary: 'A trusted specialist profile will be introduced here shortly.',
+    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    focus: 'Private planning, local coordination, and on-island support.',
     offset: false,
   },
   {
-    name: 'Suresh Jayawardena',
-    role: 'HEAD NATURALIST',
-    image: aboutImages.portraitSuresh,
+    name: 'Team Member',
+    role: 'PROFILE COMING SOON',
+    image: aboutImages.portraitMalini,
+    summary: 'A trusted specialist profile will be introduced here shortly.',
+    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    focus: 'Cultural context, trusted introductions, and guest readiness.',
     offset: true,
+  },
+  {
+    name: 'Sakna Perera',
+    role: 'WEBSITE DEVELOPER',
+    image: aboutImages.portraitSakna,
+    summary: 'Digital craft shaped to feel discreet, elegant, and effortless.',
+    bio: 'Sakna helps translate the quiet, considered character of Royale Isles Lanka into a digital experience that feels polished, clear, and easy to move through.',
+    focus: 'Website development, interface detail, responsive presentation, and the technical care behind the online journey.',
+    offset: false,
+  },
+  {
+    name: 'Conella Manuella Belleth',
+    role: 'WEBSITE DEVELOPER',
+    image: aboutImages.portraitConella,
+    summary: 'Design-sensitive development for a refined luxury web presence.',
+    bio: 'Conella works across the website experience, shaping the page details so the brand feels elegant, personal, and aligned with the client-approved direction.',
+    focus: 'Frontend implementation, visual refinement, content presentation, and maintaining the luxury tone of the site.',
+    offset: true,
+  },
+  {
+    name: 'Team Member',
+    role: 'PROFILE COMING SOON',
+    image: aboutImages.portraitSuresh,
+    summary: 'A trusted specialist profile will be introduced here shortly.',
+    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    focus: 'Nature-led experiences, route awareness, and specialist hosting.',
+    offset: false,
   },
 ] as const
 
+type Custodian = (typeof custodians)[number]
+
 export function AboutPage() {
+  const [selectedCustodian, setSelectedCustodian] = useState<Custodian | null>(null)
+
+  useEffect(() => {
+    if (!selectedCustodian) {
+      return undefined
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedCustodian(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedCustodian])
+
   return (
     <main className="about-page">
       {/* Hero */}
@@ -307,45 +367,87 @@ export function AboutPage() {
           <header className="about-custodians-header">
             <div className="about-custodians-labels">
               <span className="about-section-numeral">IV</span>
-              <span className="about-section-sub-label">THE CUSTODIANS</span>
+              <span className="about-section-sub-label">PRIVATE CIRCLE</span>
             </div>
             <div className="about-custodians-intro">
               <h2 className="about-custodians-heading">
-                The People Who
+                The People Trusted
                 <br />
-                Hold This Island&apos;s <em>Secrets.</em>
+                With The <em>Details.</em>
               </h2>
               <p className="about-custodians-description">
-                Behind every carefully realised journey is a small circle of specialists with a
-                singular responsibility: to know when access should be offered, and when it should
-                be protected.
+                VVIP travel depends on more than beautiful places. It depends on people who understand
+                privacy, timing, cultural nuance, and the invisible decisions that keep a journey calm.
               </p>
             </div>
           </header>
 
           <div className="about-custodians-grid">
-            {custodians.map((person) => (
+            {custodians.map((person, index) => (
               <article
-                key={person.name}
+                key={`${person.name}-${index}`}
                 className={`about-custodian-card${person.offset ? ' about-custodian-card--offset' : ''}`}
               >
-                <div className="about-custodian-photo-wrap">
+                <button
+                  className="about-custodian-photo-wrap"
+                  type="button"
+                  onClick={() => setSelectedCustodian(person)}
+                  aria-label={`Read more about ${person.name}`}
+                >
                   <img
                     className="about-custodian-photo"
                     src={person.image}
                     alt={person.name}
                   />
-                </div>
+                  <span className="about-custodian-photo-cta">View profile</span>
+                </button>
                 <div className="about-custodian-info">
                   <h3 className="about-custodian-name">{person.name}</h3>
                   <span className="about-custodian-role">{person.role}</span>
-                  <p>Trusted perspective, discreetly held.</p>
+                  <p>{person.summary}</p>
                 </div>
               </article>
             ))}
           </div>
         </div>
       </section>
+
+      {selectedCustodian ? (
+        <div
+          className="about-custodian-modal"
+          role="presentation"
+          onClick={() => setSelectedCustodian(null)}
+        >
+          <section
+            className="about-custodian-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="about-custodian-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="about-custodian-modal-close"
+              type="button"
+              onClick={() => setSelectedCustodian(null)}
+              aria-label="Close profile"
+            >
+              Close
+            </button>
+            <div className="about-custodian-modal-media">
+              <img src={selectedCustodian.image} alt={selectedCustodian.name} />
+            </div>
+            <div className="about-custodian-modal-copy">
+              <span className="about-custodian-modal-role">{selectedCustodian.role}</span>
+              <h2 id="about-custodian-modal-title">{selectedCustodian.name}</h2>
+              <p>{selectedCustodian.bio}</p>
+              <div>
+                <span>Focus</span>
+                <p>{selectedCustodian.focus}</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      ) : null}
 
       {/* The Breath */}
       <section className="about-section about-breath">

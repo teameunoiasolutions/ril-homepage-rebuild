@@ -3,12 +3,13 @@ import { AboutPage } from './components/AboutPage/AboutPage'
 import { ConciergeDesk } from './components/ConciergeDesk/ConciergeDesk'
 import { DiscoveryGuide } from './components/DiscoveryGuide/DiscoveryGuide'
 import { ExperienceDetailPage } from './components/ExperienceDetailPage/ExperienceDetailPage'
-import { ExperiencesPage } from './components/ExperiencesPage/ExperiencesPage'
+import { ExpectationsPage } from './components/ExperiencesPage/ExperiencesPage'
 import { Homepage } from './components/Homepage/Homepage'
 import { JournalArticlePage } from './components/JournalArticlePage/JournalArticlePage'
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
 import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
+// import { TravelPlanner } from './pages/TravelPlanner'
 import { JourneyProvider } from './journey/JourneyContext'
 import { MyJourneyPage } from './journey/JourneyChrome'
 
@@ -30,11 +31,11 @@ function AppContent() {
     return renderPage(<DiscoveryGuide />)
   }
 
-  if (path === '/experiences') {
-    return renderPage(<ExperiencesPage />)
+  if (path === '/expectations' || path === '/experiences') {
+    return renderPage(<ExpectationsPage />)
   }
 
-  if (path === '/experiences/the-sigiriya-dawn-ascent') {
+  if (path === '/expectations/the-sigiriya-dawn-ascent' || path === '/experiences/the-sigiriya-dawn-ascent') {
     return renderPage(<ExperienceDetailPage />)
   }
 
@@ -53,6 +54,10 @@ function AppContent() {
   if (path === '/travel-preparation') {
     return renderPage(<TravelPreparationPage />)
   }
+
+  // if (path === '/travel-planner') {
+  //   return renderPage(<TravelPlanner />)
+  // }
 
   if (path === '/my-journey') {
     return renderPage(<MyJourneyPage />)
