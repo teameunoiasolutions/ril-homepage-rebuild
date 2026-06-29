@@ -58,10 +58,6 @@ function AppContent() {
     return renderPage(<MyJourneyPage />)
   }
 
-  // if (path === '/traveller-discovery') {
-  //   return renderPage(<TravellerDiscovery />)
-  // }
-
   return renderPage(<Homepage />)
 }
 
