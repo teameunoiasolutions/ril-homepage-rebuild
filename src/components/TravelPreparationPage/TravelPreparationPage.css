@@ -51,7 +51,6 @@
 }
 
 .prep-kicker,
-.prep-section-heading,
 .prep-cta-mark {
   display: flex;
   align-items: center;
@@ -60,7 +59,6 @@
 }
 
 .prep-kicker span,
-.prep-section-heading i,
 .prep-cta-mark i {
   width: 40px;
   height: 1px;
@@ -74,16 +72,8 @@
   text-transform: uppercase;
 }
 
-.prep-hero-numeral {
-  margin-top: 48px;
-  color: rgba(197, 160, 89, 0.18);
-  font-family: var(--font-display);
-  font-size: 128px;
-  line-height: 0.9;
-}
-
 .prep-hero h1 {
-  margin-top: -34px;
+  margin-top: 48px;
   color: var(--prep-green);
   font-family: var(--font-display);
   font-size: clamp(68px, 6.2vw, 104px);
@@ -343,15 +333,16 @@
   padding: 112px 0;
 }
 
-.prep-section-heading span {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 3.6px;
-  line-height: var(--line-height-caption);
+.prep-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .prep-section-heading i {
   width: 32px;
+  height: 1px;
+  background: var(--prep-gold);
 }
 
 .prep-section-heading h2 {
@@ -606,44 +597,7 @@
   grid-column: 2 / span 2;
 }
 
-.prep-payment-icon {
-  display: block;
-  height: 44px;
-  color: var(--prep-gold);
-  font-family: var(--font-display);
-  font-size: 28px;
-  line-height: 1.5;
-}
-
-.prep-payment-icon--hex {
-  font-size: 0;
-}
-
-.prep-payment-icon--hex::before {
-  content: '';
-  display: block;
-  width: 12px;
-  height: 12px;
-  border: 1px solid currentColor;
-  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
-}
-
-.prep-payment-icon--circle {
-  font-size: 0;
-}
-
-.prep-payment-icon--circle::before {
-  content: '';
-  display: block;
-  width: 14px;
-  height: 14px;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 3px var(--prep-ivory), inset 0 0 0 5px currentColor;
-}
-
 .prep-payment-card p {
-  margin-top: 20px;
   color: rgba(26, 26, 26, 0.35);
   font-size: 12px;
   letter-spacing: 2.4px;
@@ -803,28 +757,23 @@
 
 .prep-notes-list article {
   display: grid;
-  grid-template-columns: 66px 1fr 1.7fr;
-  gap: 32px;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.7fr);
+  gap: clamp(32px, 5vw, 72px);
   padding: 44px 0;
   border-bottom: 1px solid rgba(26, 26, 26, 0.08);
 }
 
-.prep-notes-list span {
-  color: var(--prep-gold);
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-style: italic;
-}
-
 .prep-notes-list h3 {
+  max-width: 320px;
   color: var(--prep-green);
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: clamp(24px, 2.4vw, 34px);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.14;
 }
 
 .prep-notes-list p {
+  max-width: 620px;
   color: rgba(26, 26, 26, 0.55);
   font-size: 16px;
   font-weight: 300;
@@ -871,13 +820,6 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 1.56;
-}
-
-.prep-etiquette-grid h3 span {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--prep-gold);
-  font-size: 13px;
 }
 
 .prep-etiquette-grid p {
@@ -1019,7 +961,7 @@
 .prep-faq-list summary {
   position: relative;
   display: grid;
-  grid-template-columns: 56px 1fr 42px;
+  grid-template-columns: 1fr 42px;
   gap: 24px;
   align-items: center;
   padding: 28px 30px;
@@ -1056,14 +998,6 @@
   transform: rotate(180deg);
 }
 
-.prep-faq-list summary > span {
-  color: rgba(197, 160, 89, 0.88);
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-style: italic;
-  line-height: 1;
-}
-
 .prep-faq-list summary small {
   display: block;
   color: rgba(26, 26, 26, 0.36);
@@ -1085,7 +1019,7 @@
 
 .prep-faq-list details > p {
   max-width: 760px;
-  margin-left: 110px;
+  margin-left: 30px;
   padding: 0 32px 30px 0;
   color: rgba(26, 26, 26, 0.58);
   font-size: 15px;
@@ -1424,7 +1358,7 @@
   }
 
   .prep-faq-list summary {
-    grid-template-columns: 38px 1fr 36px;
+    grid-template-columns: 1fr 36px;
     gap: 16px;
     padding: 24px 20px;
   }
@@ -1435,12 +1369,8 @@
     font-size: 20px;
   }
 
-  .prep-faq-list summary > span {
-    font-size: 22px;
-  }
-
   .prep-faq-list details > p {
-    margin-left: 74px;
+    margin-left: 20px;
     padding: 0 20px 26px 0;
   }
 
@@ -1477,10 +1407,6 @@
     width: 100%;
   }
 
-  .prep-hero-numeral {
-    font-size: 88px;
-  }
-
   .prep-hero-protocol {
     margin-top: -72px;
     padding: 22px;
@@ -1504,17 +1430,8 @@
     grid-template-columns: 1fr;
   }
 
-  .prep-section-heading {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   .prep-faq-list summary {
     grid-template-columns: 1fr 34px;
-  }
-
-  .prep-faq-list summary > span {
-    display: none;
   }
 
   .prep-faq-list details > p {

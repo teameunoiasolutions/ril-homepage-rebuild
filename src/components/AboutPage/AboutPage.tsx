@@ -197,7 +197,7 @@ export function AboutPage() {
               entrusted with your time.
             </p>
             <blockquote>
-              <p>We are not here to sell a holiday. We are here to protect the conditions for wonder.</p>
+              <p>We are not here to sell a holiday. We are here to create journeys you will remember for the rest of your life.</p>
             </blockquote>
           </div>
         </div>

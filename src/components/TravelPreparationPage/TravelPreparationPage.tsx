@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './TravelPreparationPage.css'
 import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
 import nuwaraEliya from '../../assets/images/NuwaraEliya .jpg'
@@ -11,21 +12,22 @@ const handbookLinks = [
   { href: '#tea-ritual', label: 'Welcome Tea' },
   { href: '#arranged', label: 'Arranged Details' },
   { href: '#concierge', label: 'Concierge' },
+  { href: '#assurance', label: 'Assurances' },
   { href: '#begin', label: 'Begin' },
 ] as const
 
 const heroProtocols = [
-  'Personal airport welcome',
+  'Airport welcome arranged',
   'Private transfer prepared',
-  'Luggage quietly handled',
-  'Concierge already briefed',
-  'Historical context prepared',
+  'Luggage handling arranged',
+  'Concierge briefing completed',
+  'Context notes prepared',
 ] as const
 
 const assurancePoints = [
   { value: 'Personal', label: 'Arrival host' },
   { value: 'Prepared', label: 'Chauffeur team' },
-  { value: 'Quiet', label: 'Lounge welcome' },
+  { value: 'Calm', label: 'Arrival welcome' },
   { value: 'Always', label: 'Concierge support' },
 ] as const
 
@@ -40,83 +42,75 @@ const welcomeMoments = [
     label: 'After the flight',
     title: 'A pause before the island opens.',
     copy:
-      'Rather than moving immediately into the next transfer, you are invited to settle into one of our carefully selected partner hotels or lounges.',
+      'Rather than moving immediately onward, you are invited to settle into a considered arrival space where the pace of the journey can soften.',
   },
   {
     label: 'Behind the scenes',
-    title: 'The practical details continue without needing your attention.',
+    title: 'The first hour settles without needing your attention.',
     copy:
-      'While you exhale, our team confirms the chauffeur, luggage, accommodation, local support, and the final rhythm of your first day.',
+      'While you exhale, the people receiving you continue their work in the background, leaving you free to feel that the island has already made room for you.',
   },
 ] as const
 
-const quietlyPrepared = [
-  'Your transfer timing is confirmed around the actual moment you arrive.',
-  'Your chauffeur is briefed on pace, privacy, luggage, and first-day preferences.',
-  'Your accommodation team is expecting you, with arrival notes already shared.',
-  'Local connectivity, if required, is handled before it becomes something to think about.',
-  'Dietary requirements, celebrations, and personal preferences are reviewed once more.',
+const preparationInputs = [
+  'Passport and arrival details',
+  'Flight information and landing time',
+  'Dietary preferences and wellbeing notes',
+  'Accessibility or medical considerations',
+  'Emergency contacts and family-office requests',
+  'Special celebrations or privacy requirements',
 ] as const
 
 const arrangedDetails = [
   {
-    icon: 'I',
     label: 'Transfers',
     title: 'Your chauffeur is already waiting.',
     copy:
-      'The first movement through Sri Lanka is prepared before you step outside arrivals, with vehicle, route, and timing handled quietly.',
+      'Airport receiving, private transfer timing, route planning, luggage movement, and chauffeur briefing are prepared before you step outside arrivals.',
   },
   {
-    icon: 'II',
     label: 'Connectivity',
     title: 'Staying reachable is one less consideration.',
     copy:
-      'If local connectivity is helpful for your journey, our team ensures the arrangement is considered before you need it.',
+      'If local connectivity is helpful for your journey, SIM or eSIM support is considered in advance so communication never becomes a task.',
   },
   {
-    icon: 'III',
     label: 'Accommodation',
     title: 'Your hosts are ready before you arrive.',
     copy:
-      'Room readiness, welcome preferences, dietary notes, and arrival pacing are confirmed privately with each property.',
+      'Room readiness, hotel arrival timing, welcome preferences, dietary notes, and first-evening pacing are confirmed privately with each property.',
   },
   {
-    icon: 'IV',
     label: 'Preferences',
     title: 'The small details travel ahead of you.',
     copy:
       'Celebrations, wellness needs, family rhythms, privacy preferences, and personal rituals are woven into the journey in advance.',
   },
   {
-    icon: 'V',
     label: sharedHeritageWorld.name,
     title: 'Context travels with the route.',
     copy:
-      'If your journey includes tea country, railways, old hotels, civic streets, or gardens, your host prepares the shared historical context before you arrive.',
+      'If your journey includes tea country, railways, old hotels, civic streets, or gardens, your host prepares historical context told with care.',
   },
 ] as const
 
 const conciergeNotes = [
   {
-    numeral: 'I',
     title: 'Before departure',
     copy:
       'Your concierge team reviews the journey with the people who will receive you: chauffeurs, hosts, residence teams, guides, and private specialists.',
   },
   {
-    numeral: 'II',
     title: 'On arrival',
     copy:
       'You are personally welcomed, invited to pause, and given the rare luxury of not having to solve the first hour in a new country.',
   },
   {
-    numeral: 'III',
     title: 'Throughout the journey',
     copy:
       'Support remains close without becoming visible. Adjustments, confirmations, and small comforts are handled in the background.',
   },
   {
-    numeral: 'IV',
     title: 'For private households',
     copy:
       'Family offices, principals, multi-generational groups, and discretion-sensitive travellers are briefed through a private channel.',
@@ -142,19 +136,18 @@ const assurances = [
   {
     title: 'The first day is intentionally gentle',
     copy:
-      'Arrival is not treated as a transition to endure. It is composed as the first quiet chapter of your time in Sri Lanka.',
+      'Arrival is not treated as a transition to endure. It is composed as the opening chapter of your time in Sri Lanka.',
   },
   {
-    title: `${sharedHeritageWorld.name} is introduced with balance`,
+    title: `${sharedHeritageWorld.name} is told with care`,
     copy:
-      'Where British and Sri Lankan histories intersect, the framing remains thoughtful: architecture, tea, railways, education, gardens, and engineering are read as living cultural landscapes.',
+      'Where British and Sri Lankan histories intersect, the framing is told with care: architecture, tea, railways, education, gardens, and engineering are read as living cultural landscapes.',
   },
 ] as const
 
-function SectionHeading({ number, title, inverse = false }: { number: string; title: string; inverse?: boolean }) {
+function SectionHeading({ title, inverse = false }: { title: string; inverse?: boolean }) {
   return (
     <div className={`prep-section-heading${inverse ? ' prep-section-heading--inverse' : ''}`}>
-      <span>{number}</span>
       <i />
       <h2>{title}</h2>
     </div>
@@ -162,6 +155,8 @@ function SectionHeading({ number, title, inverse = false }: { number: string; ti
 }
 
 export function TravelPreparationPage() {
+  const [openAssuranceIndex, setOpenAssuranceIndex] = useState<number | null>(null)
+
   return (
     <main className="travel-prep-page">
       <section className="prep-hero">
@@ -170,7 +165,6 @@ export function TravelPreparationPage() {
             <span />
             <p>Before Your Journey Begins</p>
           </div>
-          <p className="prep-hero-numeral">I</p>
           <h1>
             Before
             <br />
@@ -207,7 +201,7 @@ export function TravelPreparationPage() {
         <div className="prep-assurance-copy">
           <span>For Principals, Family Offices & Private Travellers</span>
           <p>
-            Arrival should never feel like a list of tasks. It should feel like being expected, recognised, and quietly
+            Arrival should never feel like a list of tasks. It should feel like being expected, recognised, and gracefully
             looked after from the first minute.
           </p>
         </div>
@@ -223,7 +217,7 @@ export function TravelPreparationPage() {
 
       <section className="prep-section prep-visa" id="welcome">
         <div className="prep-container">
-          <SectionHeading number="01" title="Your Welcome to Sri Lanka" />
+          <SectionHeading title="Your Welcome to Sri Lanka" />
           <div className="prep-visa-grid">
             {welcomeMoments.map((moment, index) => (
               <article
@@ -249,28 +243,24 @@ export function TravelPreparationPage() {
 
       <section className="prep-section prep-notes" id="tea-ritual">
         <div className="prep-container">
-          <SectionHeading number="02" title="The Welcome Tea Experience" />
+          <SectionHeading title="The Welcome Tea Ritual" />
           <div className="prep-notes-list">
             <article>
-              <span>I</span>
               <h3>The first ritual of the journey</h3>
               <p>
-                On arrival, you are invited to pause over a complimentary cup of premium Ceylon tea in one of our
-                selected partner hotels or lounges. It is not simply refreshment after a flight. It is the symbolic
+                On arrival, you are invited to pause over a complimentary cup of Ceylon tea in a setting chosen for
+                calm, privacy, and unhurried welcome. It is not simply refreshment after a flight. It is the symbolic
                 beginning of every Royale Isles Lanka journey.
               </p>
             </article>
             <article>
-              <span>II</span>
-              <h3>While you settle, we prepare</h3>
+              <h3>While you settle, the island begins to open</h3>
               <p>
-                As tea is poured, the practical world continues quietly behind the scenes: transfers reconfirmed,
-                chauffeur prepared, luggage arranged, accommodation alerted, preferences reviewed, and the first day
-                softened around your arrival.
+                As tea is poured, conversations continue softly around you. Introductions are confirmed, the evening
+                finds its shape, and the first day settles into place without asking anything of you.
               </p>
             </article>
             <article>
-              <span>III</span>
               <h3>The journey has already begun</h3>
               <p>
                 There is no rush to solve, organise, or ask what comes next. The welcome tea is a gentle threshold
@@ -283,11 +273,10 @@ export function TravelPreparationPage() {
 
       <section className="prep-section prep-payments" id="arranged">
         <div className="prep-container">
-          <SectionHeading number="03" title="Every Detail Thoughtfully Arranged" />
+          <SectionHeading title="Every Detail Thoughtfully Arranged" />
           <div className="prep-payment-grid">
             {arrangedDetails.map((detail) => (
               <article key={detail.label} className="prep-payment-card">
-                <span className="prep-payment-icon">{detail.icon}</span>
                 <p>{detail.label}</p>
                 <h3>{detail.title}</h3>
                 <small>{detail.copy}</small>
@@ -295,9 +284,9 @@ export function TravelPreparationPage() {
             ))}
           </div>
           <aside className="prep-service-note prep-service-note--stacked">
-            <span>Quietly Prepared</span>
+            <span>What We Need From You</span>
             <ul>
-              {quietlyPrepared.map((item) => (
+              {preparationInputs.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
@@ -307,14 +296,11 @@ export function TravelPreparationPage() {
 
       <section className="prep-section prep-etiquette" id="concierge">
         <div className="prep-container">
-          <SectionHeading number="04" title="Your Personal Concierge" />
+          <SectionHeading title="Your Personal Concierge" />
           <div className="prep-etiquette-grid">
             {conciergeNotes.map((item) => (
               <article key={item.title}>
-                <h3>
-                  <span>{item.numeral}</span>
-                  {item.title}
-                </h3>
+                <h3>{item.title}</h3>
                 <p>{item.copy}</p>
               </article>
             ))}
@@ -326,7 +312,7 @@ export function TravelPreparationPage() {
         <div className="prep-faq-container">
           <div className="prep-faq-header">
             <div>
-              <SectionHeading number="05" title="Quiet Assurances" />
+              <SectionHeading title="Quiet Assurances" />
               <p>
                 The purpose of preparation is not to give you more to remember. It is to remove the need to keep track
                 of what has already been considered.
@@ -346,9 +332,13 @@ export function TravelPreparationPage() {
           <div className="prep-faq-panel">
             <div className="prep-faq-list">
               {assurances.map((item, index) => (
-                <details key={item.title}>
-                  <summary>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
+                <details key={item.title} open={openAssuranceIndex === index}>
+                  <summary
+                    onClick={(event) => {
+                      event.preventDefault()
+                      setOpenAssuranceIndex((currentIndex) => (currentIndex === index ? null : index))
+                    }}
+                  >
                     <div>
                       <small>Prepared Privately</small>
                       <strong>{item.title}</strong>
@@ -374,14 +364,14 @@ export function TravelPreparationPage() {
             <em>already cared for.</em>
           </h2>
           <p>
-            Your welcome, tea, chauffeur, luggage, accommodation, local support, and first quiet hour are prepared before
-            you arrive. All that remains is to enter the journey.
+            By the time you arrive, the practical world has already been softened around you. All that remains is to
+            enter the journey.
           </p>
           <div className="prep-cta-actions">
             <a href="/concierge">Begin A Private Conversation</a>
             <a href="#tea-ritual">The Welcome Tea Ritual</a>
           </div>
-          <small>Personally welcomed. Quietly prepared. Held from the moment you arrive.</small>
+          <small>Personally welcomed. Thoughtfully prepared. Held from the moment you arrive.</small>
         </div>
       </section>
     </main>

@@ -255,6 +255,7 @@ function getExpectationsHref(world: string) {
 
 export function Homepage() {
   const [activeStoryIndex, setActiveStoryIndex] = useState(0)
+  const [openQuestionIndex, setOpenQuestionIndex] = useState<number | null>(null)
   const activeStory = travellerStories[activeStoryIndex]
 
   const showPreviousStory = () => {
@@ -751,9 +752,14 @@ export function Homepage() {
 
           <div className="figma-faq-panel">
             <div className="figma-question-list">
-              {questions.map((question) => (
-                <details key={question.question}>
-                  <summary>
+              {questions.map((question, index) => (
+                <details key={question.question} open={openQuestionIndex === index}>
+                  <summary
+                    onClick={(event) => {
+                      event.preventDefault()
+                      setOpenQuestionIndex((currentIndex) => (currentIndex === index ? null : index))
+                    }}
+                  >
                     <div>
                       <small>{question.category}</small>
                       <strong>{question.question}</strong>

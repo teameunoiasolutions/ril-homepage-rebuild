@@ -3393,7 +3393,7 @@
   }
 
   .figma-question-list summary {
-    grid-template-columns: 38px 1fr 36px;
+    grid-template-columns: 1fr 36px;
     gap: 16px;
     padding: 24px 20px;
   }
@@ -3405,7 +3405,7 @@
   }
 
   .figma-question-list details > p {
-    margin-left: 74px;
+    margin-left: 20px;
     padding: 0 20px 26px 0;
   }
 }
