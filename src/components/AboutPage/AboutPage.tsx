@@ -299,8 +299,8 @@ export function AboutPage() {
               &ldquo;Most platforms want you to book fast. We want you to choose wisely.&rdquo;
             </blockquote>
             <p className="about-different-body">
-              We are not optimized for clicks, urgency, or conversion. We are built for discernment:
-              fewer options, stronger context, and human judgment that understands when the most
+              We are not optimised for clicks, urgency, or conversion. We are built for discernment:
+              fewer options, stronger context, and human judgement that understands when the most
               luxurious answer is restraint.
             </p>
             <div className="about-difference-points">
