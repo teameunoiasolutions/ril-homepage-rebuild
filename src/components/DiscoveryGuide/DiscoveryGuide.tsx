@@ -10,49 +10,59 @@ import theruFestival from '../../assets/images/theru festival.jpg'
 
 const images = {
   hero: sigiriya,
-  westCoast: galleFaceBeach,
-  southCoast: galle,
+  westernGateway: galleFaceBeach,
+  southernArc: galle,
   wildSouth: kithulgala,
   eastCoast: ahangama,
   hillCountry: nuwaraEliya,
-  culturalTriangle: sigiriya,
-  north: theruFestival,
+  ancientKingdoms: sigiriya,
+  northernReaches: theruFestival,
 } as const
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const
 
 const regions = [
   {
-    name: 'West Coast & Colombo',
-    journeyRegion: 'West Coast',
+    name: 'The Western Gateway',
+    journeyRegion: 'The Western Gateway',
     bestMonths: 'November to March, with Colombo rewarding year-round',
     activeMonths: [0, 1, 2, 10, 11],
-    image: images.westCoast,
+    image: images.westernGateway,
     overview:
       "The island's first welcome is rarely just an arrival. Colombo's garden houses, galleries, old clubs, and lagoon light create a soft landing into Sri Lankan life.",
     landscapes: 'Coastal capital, lagoon, garden villas, galleries, old institutions',
-    destinations: ['Colombo', 'Colombo Fort', 'Galle Face Hotel', 'Negombo'],
+    destinations: ['Colombo', 'Negombo', 'Bentota', 'Kalutara'],
     experiences: ['Private city introductions', 'Gallery and garden-house visits', 'Lagoon-side arrivals'],
+    heritageHighlights: {
+      title: 'Heritage Highlights',
+      places: ['Galle Face Hotel', 'Old Parliament Building', 'General Post Office'],
+      note: "These civic and seafront landmarks reveal another chapter of Colombo's story, held quietly within the texture of arrival.",
+    },
     editorialNote:
       'Best for travellers who want the island to begin quietly: a hosted arrival, a first dinner with context, and enough time to settle before moving on.',
   },
   {
-    name: 'South Coast',
-    journeyRegion: 'South Coast',
+    name: 'The Southern Arc',
+    journeyRegion: 'The Southern Arc',
     bestMonths: 'November to April',
     activeMonths: [0, 1, 2, 3, 10, 11],
-    image: images.southCoast,
+    image: images.southernArc,
     overview:
       'The southern coast is Sri Lanka in golden light: fortified towns, quiet coves, sea air, and villas held close to the palms.',
     landscapes: 'Golden beaches, colonial streets, cinnamon gardens, reef-fringed bays',
-    destinations: ['Galle Fort', 'Weligama', 'Tangalle', 'Mirissa'],
+    destinations: ['Galle', 'Weligama', 'Tangalle', 'Mirissa'],
     experiences: ['Private coastal residences', 'Cinnamon estate visits', 'Sunset suppers by the sea'],
+    heritageHighlights: {
+      title: 'Heritage Highlights',
+      places: ['Galle Fort', 'Dutch Reformed Church', 'National Maritime Museum'],
+      note: "The coast carries older layers of trade, architecture, and seafaring memory without needing to become a list of attractions.",
+    },
     editorialNote:
       'Best when the coast is treated as atmosphere rather than beach time: ramparts at golden hour, cinnamon gardens, private residences, and dinners that unfold without spectacle.',
   },
   {
-    name: 'Wild South',
-    journeyRegion: 'South Coast',
+    name: 'The Wild South',
+    journeyRegion: 'The Wild South',
     bestMonths: 'February to September for dry-zone wilderness',
     activeMonths: [1, 2, 3, 4, 5, 6, 7, 8],
     image: images.wildSouth,
@@ -65,8 +75,8 @@ const regions = [
       'Best for travellers who want nature held with patience: fewer promises, better timing, and guides who understand when not to speak.',
   },
   {
-    name: 'East Coast',
-    journeyRegion: 'East Coast',
+    name: 'The East Coast',
+    journeyRegion: 'The East Coast',
     bestMonths: 'April to September',
     activeMonths: [3, 4, 5, 6, 7, 8],
     image: images.eastCoast,
@@ -79,25 +89,30 @@ const regions = [
       'Best for summer journeys, return visitors, and families who want warmth, water, and a less obvious coastal rhythm.',
   },
   {
-    name: 'Hill Country',
-    journeyRegion: 'Hill Country',
+    name: 'The Hill Country',
+    journeyRegion: 'The Hill Country',
     bestMonths: 'Year-round, with cooler mornings from December to February',
     activeMonths: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     image: images.hillCountry,
     overview:
       'The highlands belong to mist, tea, and silence. Days begin cool, the landscape folds in layers, and movement becomes part of the pleasure.',
     landscapes: 'Tea estates, cloud forest, waterfalls, mountain railways',
-    destinations: ['Kandy', 'Nuwara Eliya', 'Ella', 'Hatton', 'Nine Arches Bridge'],
+    destinations: ['Kandy', 'Nuwara Eliya', 'Ella', 'Hatton'],
     experiences: ['Tea estate residences', 'Scenic rail journeys', 'Restorative highland retreats'],
+    heritageHighlights: {
+      title: 'Heritage Highlights',
+      places: ['Nine Arches Bridge', 'Hakgala Botanical Gardens', 'Peradeniya Railway Station'],
+      note: 'Railways, gardens, and tea-country institutions give the region its historical texture without disturbing its quiet.',
+    },
     editorialNote:
       'Best for guests who value stillness: misted verandas, tea country residences, rail journeys, gardens, and a cooler pace between coast and ancient city.',
   },
   {
-    name: 'Cultural Triangle',
-    journeyRegion: 'Cultural Triangle',
+    name: 'The Ancient Kingdoms',
+    journeyRegion: 'The Ancient Kingdoms',
     bestMonths: 'May to October',
     activeMonths: [4, 5, 6, 7, 8, 9],
-    image: images.culturalTriangle,
+    image: images.ancientKingdoms,
     overview:
       'In the island interior, ancient capitals rise from forest and rock. The experience is strongest when entered slowly, with scholarship and careful timing.',
     landscapes: 'Ancient cities, dry plains, jungle, sacred rock, lakes',
@@ -107,15 +122,15 @@ const regions = [
       'Best when approached slowly: early light, resident scholarship, protected timing, and enough silence for ancient places to retain their dignity.',
   },
   {
-    name: 'The North',
-    journeyRegion: 'Cultural Triangle',
+    name: 'The Northern Reaches',
+    journeyRegion: 'The Northern Reaches',
     bestMonths: 'January to September',
     activeMonths: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-    image: images.north,
+    image: images.northernReaches,
     overview:
       'The north is a different register of Sri Lanka: Tamil culture, palmyrah landscapes, temple colour, long causeways, and a luminous sense of distance.',
     landscapes: 'Tamil heritage, palmyrah country, temple towns, causeways, northern light',
-    destinations: ['Jaffna', 'Nallur', 'Delft Island', 'Point Pedro'],
+    destinations: ['Jaffna', 'Delft Island', 'Point Pedro', 'Mannar'],
     experiences: ['Hosted cultural introductions', 'Temple mornings', 'Northern island drives'],
     editorialNote:
       'Best for curious, culturally engaged travellers who do not need the obvious version of Sri Lanka and are willing to be rewarded slowly.',
@@ -151,7 +166,7 @@ export function DiscoveryGuide() {
         <figure className="guide-hero-image">
           <img src={images.hero} alt="Sigiriya at dawn surrounded by forest" />
           <figcaption>
-            <span>Cultural Triangle</span>
+            <span>The Ancient Kingdoms</span>
             <small>Dawn, forest, stone, and the quiet intelligence of timing.</small>
           </figcaption>
         </figure>
@@ -185,7 +200,7 @@ export function DiscoveryGuide() {
 
         <article className="guide-region-panel">
           <div>
-            <span className="guide-eyebrow">Region In View</span>
+            <span className="guide-eyebrow">Region In Focus</span>
             <h2>{activeRegion.name}</h2>
             <p>{activeRegion.overview}</p>
           </div>
@@ -203,11 +218,11 @@ export function DiscoveryGuide() {
 
           <div className="guide-region-editorial">
             <p>{activeRegion.editorialNote}</p>
-            <div className="guide-region-glimpses" aria-label={`${activeRegion.name} journey signals`}>
+            <div className="guide-region-glimpses" aria-label={`${activeRegion.name} highlights`}>
               <section>
                 <h3>Places to begin</h3>
                 <ul>
-                  {activeRegion.destinations.slice(0, 3).map((destination) => (
+                  {activeRegion.destinations.map((destination) => (
                     <li key={destination}>
                       <span>{destination}</span>
                     </li>
@@ -217,7 +232,7 @@ export function DiscoveryGuide() {
               <section>
                 <h3>Private moments</h3>
                 <ul>
-                  {activeRegion.experiences.slice(0, 3).map((experience) => (
+                  {activeRegion.experiences.map((experience) => (
                     <li key={experience}>
                       <span>{experience}</span>
                     </li>
@@ -225,6 +240,17 @@ export function DiscoveryGuide() {
                 </ul>
               </section>
             </div>
+            {'heritageHighlights' in activeRegion && activeRegion.heritageHighlights ? (
+              <section className="guide-region-heritage">
+                <h3>{activeRegion.heritageHighlights.title}</h3>
+                <p>{activeRegion.heritageHighlights.note}</p>
+                <ul>
+                  {activeRegion.heritageHighlights.places.map((place) => (
+                    <li key={place}>{place}</li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
           </div>
         </article>
       </section>
