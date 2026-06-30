@@ -51,6 +51,15 @@ type Encounter = {
   details: Detail[]
 }
 
+const curatorTitles = {
+  arjun: 'Founder & Lead Curator',
+  amara: 'Head of Heritage & Cultural Research',
+  dilini: 'Co-Founder',
+  kavindra: 'Head Naturalist',
+  sahan: 'Coastal Experiences Lead',
+  malini: 'Cultural Lead',
+} as const
+
 const stats = [
   { value: '1:1', label: 'Curator Planning' },
   { value: 'Immediate', label: 'Concierge Attention' },
@@ -78,39 +87,39 @@ const encounters: Encounter[] = [
   {
     id: 'sigiriya-dawn-ascent',
     theme: 'Heritage & Memory',
-    category: 'Heritage - Singular Access',
+    category: 'Heritage — Singular Access',
     title: 'The Sigiriya Dawn Ascent',
     note:
-      'There are two Sigiriyas. The one you visit at 9am with three thousand other people, and the one that exists between 5 and 7am - when the frescoes catch low light no photograph has ever adequately described. We negotiated singular access. It takes eight months of patience per year to maintain.',
-    curator: 'Amara Weerasinghe, Heritage & Research',
+      'There are two Sigiriyas. The one you visit at 9am with three thousand other people, and the one that exists between 5 and 7am — when the frescoes catch low light no photograph has ever adequately described. We negotiated singular access. It takes eight months of patience per year to maintain.',
+    curator: `Amara Weerasinghe, ${curatorTitles.amara}`,
     curatorImage: experienceImages.amara,
     image: localImages.sigiriya,
     imageAlt: 'Sigiriya rock fortress rising above the Sri Lankan landscape',
     badge: "Curator's Choice",
-    caption: 'Cultural Heritage - Central Province',
+    caption: 'Cultural Heritage — Central Province',
     details: [
       { label: 'Duration', value: '3 Hours' },
-      { label: 'Best Season', value: 'Jan - Apr' },
+      { label: 'Best Season', value: 'Jan — Apr' },
       { label: 'Group Size', value: 'Max 4' },
-      { label: 'Key Highlight', value: 'Pre-dawn private access, frescoe viewing' },
+      { label: 'Key Highlight', value: 'Pre-dawn private access, fresco viewing' },
       { label: 'Curator', value: 'Amara W.' },
     ],
   },
   {
     id: 'private-tea-estate',
     theme: 'Rail & Landscape',
-    category: 'Tea Country - Immersive',
+    category: 'Tea Country — Immersive',
     title: 'A Private Tea Estate, Locked Before Dawn',
     note:
       'Tea tourism is everywhere. What is almost nowhere is the thing that precedes it: the stillness of a working estate at 4:45am, before the pickers arrive, when the mist sits exactly at shoulder height and the silence has a particular quality I can only describe as earned. This is the version we offer.',
-    curator: 'Dilini Perera, Co-Founder',
+    curator: `Dilini Perera, ${curatorTitles.dilini}`,
     curatorImage: experienceImages.dilini,
     image: localImages.nuwaraEliya,
     imageAlt: 'Nuwara Eliya hill country in soft morning light',
-    caption: 'Tea Country - Hill Province',
+    caption: 'Tea Country — Hill Province',
     details: [
       { label: 'Duration', value: 'Full Day' },
-      { label: 'Best Season', value: 'Feb - May' },
+      { label: 'Best Season', value: 'Feb — May' },
       { label: 'Group Size', value: 'Max 2' },
       { label: 'Key Highlight', value: 'Private estate access, master blender session' },
       { label: 'Curator', value: 'Dilini P.' },
@@ -119,19 +128,19 @@ const encounters: Encounter[] = [
   {
     id: 'shared-heritage-quietly-read',
     theme: sharedHeritageWorld.name,
-    category: 'Shared History - Editorial Route',
+    category: 'Shared History — Editorial Route',
     title: 'Shared Heritage, Quietly Read',
     note:
       "This is not a tour of colonial relics. It is a considered route through tea country, railway engineering, old gardens, civic streets, and grand hotels where Sri Lankan and British histories still meet in architecture, education, hospitality, and daily ritual.",
-    curator: 'Amara Weerasinghe, Heritage & Research',
+    curator: `Amara Weerasinghe, ${curatorTitles.amara}`,
     curatorImage: experienceImages.amara,
     image: localImages.nuwaraEliya,
     imageAlt: 'Nuwara Eliya hill country shaped by tea estates and colonial memory',
     badge: 'New Discovery World',
-    caption: 'Tea Country - Railways - Colombo',
+    caption: 'Tea Country — Railways — Colombo',
     details: [
-      { label: 'Duration', value: '3-7 Days' },
-      { label: 'Best Season', value: 'Dec - Apr' },
+      { label: 'Duration', value: '3–7 Days' },
+      { label: 'Best Season', value: 'Dec — Apr' },
       { label: 'Group Size', value: 'Private' },
       { label: 'Key Highlight', value: 'Tea, railways, gardens, and civic memory' },
       { label: 'Curator', value: 'Amara W.' },
@@ -140,19 +149,19 @@ const encounters: Encounter[] = [
   {
     id: 'leopard-research-circuit',
     theme: 'Wildlife & Wilderness',
-    category: 'Wildlife - Expert-Led',
+    category: 'Wildlife — Expert-Led',
     title: 'The Leopard Research Circuit',
     note:
-      "I spent seven years in Yala before I joined this team. I know which vehicles to avoid, which blocks to enter at which hour, and - more importantly - when to stop the engine and simply wait. Safari isn't about luck. It's about discipline. I've only ever taken four people into Block 5 at dawn. The fifth will be you.",
-    curator: 'Kavindra Silva, Head of Experiences',
+      "I spent seven years in Yala before I joined this team. I know which vehicles to avoid, which blocks to enter at which hour, and — more importantly — when to stop the engine and simply wait. Safari isn't about luck. It's about discipline. I've only ever taken four people into Block 5 at dawn. The fifth will be you.",
+    curator: `Kavindra Silva, ${curatorTitles.kavindra}`,
     curatorImage: experienceImages.kavindra,
     image: experienceImages.leopardCircuit,
     imageAlt: 'Wild Sri Lankan leopard resting on ancient rock at dusk',
     badge: 'Rare Access',
-    caption: 'Wildlife - Southern Province',
+    caption: 'Wildlife — Southern Province',
     details: [
       { label: 'Duration', value: '3 Days' },
-      { label: 'Best Season', value: 'Jun - Oct' },
+      { label: 'Best Season', value: 'Jun — Oct' },
       { label: 'Group Size', value: 'Max 4' },
       { label: 'Key Highlight', value: 'Block 5 private access, research biologist guide' },
       { label: 'Curator', value: 'Kavindra S.' },
@@ -161,18 +170,18 @@ const encounters: Encounter[] = [
   {
     id: 'mirissa-fishermens-dawn',
     theme: 'Ocean & Discovery',
-    category: 'Southern Coast - Immersive',
+    category: 'Southern Coast — Immersive',
     title: "The Mirissa Fishermen's Dawn",
     note:
-      'The coast, for most visitors, is an amenity. A view. A backdrop. But Mirissa runs on a different clock - one that starts at 3am, when the tuna boats come in and the auction begins. I have spent years building trust with three families on this stretch of water. You are not joining a tour. You are, briefly, joining a life.',
-    curator: 'Sahan Mendis, Coastal Experiences',
+      'The coast, for most visitors, is an amenity. A view. A backdrop. But Mirissa runs on a different clock — one that starts at 3am, when the tuna boats come in and the auction begins. I have spent years building trust with three families on this stretch of water. You are not joining a tour. You are, briefly, joining a life.',
+    curator: `Sahan Mendis, ${curatorTitles.sahan}`,
     curatorImage: experienceImages.sahan,
     image: localImages.ahangama,
     imageAlt: 'Southern Sri Lankan coast at Ahangama',
-    caption: 'Southern Coast - Mirissa',
+    caption: 'Southern Coast — Mirissa',
     details: [
       { label: 'Duration', value: '1 Day' },
-      { label: 'Best Season', value: 'Nov - Apr' },
+      { label: 'Best Season', value: 'Nov — Apr' },
       { label: 'Group Size', value: 'Max 3' },
       { label: 'Key Highlight', value: 'Pre-dawn tuna auction, private boat expedition' },
       { label: 'Curator', value: 'Sahan M.' },
@@ -181,16 +190,16 @@ const encounters: Encounter[] = [
   {
     id: 'kandyan-dance-rehearsal',
     theme: 'Culture & Human Connection',
-    category: 'Cultural - Intimate Access',
+    category: 'Cultural — Intimate Access',
     title: 'A Private Kandyan Dance Rehearsal',
     note:
-      'Performances are for audiences. Rehearsals are where the art lives. We arranged access to a family that has been training in the Kandyan tradition for four generations. You will watch the eldest son correct the youngest daughter. You will understand something about transmission, about inheritance, that no performance could ever convey.',
-    curator: 'Amara Weerasinghe, Cultural Curation Lead',
+      'Performances are for audiences. Rehearsals are where the art lives. We arranged access to a family that has been training in the Kandyan tradition for four generations. You will watch a senior dancer guide a younger student. You will understand something about transmission, about inheritance, that no performance could ever convey.',
+    curator: `Amara Weerasinghe, ${curatorTitles.amara}`,
     curatorImage: experienceImages.amara,
     image: localImages.kandyPerahera,
     imageAlt: 'Kandy Perahera procession with ceremonial performers',
     badge: 'By Arrangement',
-    caption: 'Cultural - Kandy',
+    caption: 'Cultural — Kandy',
     details: [
       { label: 'Duration', value: '2 Hours' },
       { label: 'Best Season', value: 'Year-round' },
@@ -202,18 +211,18 @@ const encounters: Encounter[] = [
   {
     id: 'deep-water-hour',
     theme: 'Ocean & Discovery',
-    category: 'Ocean - Singular Access',
+    category: 'Ocean — Singular Access',
     title: 'The Deep-Water Hour',
     note:
-      'At 5am, a private vessel departs before the tour boats have woken. The blue whale, the largest creature alive, surfaces without warning and without ceremony - merely because it must. The privilege is not proximity alone. It is entering the water on its own terms, without performance.',
-    curator: 'Sahan Mendis, Coastal Experiences',
+      'At 5am, a private vessel departs before the tour boats have woken. The blue whale, the largest creature alive, surfaces without warning and without ceremony — merely because it must. The privilege is not proximity alone. It is entering the water on its own terms, without performance.',
+    curator: `Sahan Mendis, ${curatorTitles.sahan}`,
     curatorImage: experienceImages.sahan,
     image: experienceImages.blueWhaleAerial,
     imageAlt: 'Blue whale surfacing in the Indian Ocean near Mirissa',
-    caption: 'Ocean - Mirissa',
+    caption: 'Ocean — Mirissa',
     details: [
       { label: 'Duration', value: 'Half Day' },
-      { label: 'Best Season', value: 'Nov - Apr' },
+      { label: 'Best Season', value: 'Nov — Apr' },
       { label: 'Group Size', value: 'Max 4' },
       { label: 'Key Highlight', value: 'Private pre-dawn vessel, marine naturalist' },
       { label: 'Curator', value: 'Sahan M.' },
@@ -222,15 +231,15 @@ const encounters: Encounter[] = [
   {
     id: 'sacred-fire-private-vantage',
     theme: 'Culture & Human Connection',
-    category: 'Ceremony - Private Vantage',
+    category: 'Ceremony — Private Vantage',
     title: 'Sacred Fire, Private Vantage',
     note:
-      "Access to the inner sanctum of the Temple of the Tooth is never treated as spectacle. A private audience with the temple's senior custodian begins with context, restraint, and the understanding that the ceremony is not adjusted for visitors - you adjust yourself to the ceremony.",
-    curator: 'Malini Fernando, Cultural Lead',
-    curatorImage: experienceImages.amara,
+      "Access to the inner sanctum of the Temple of the Tooth is never treated as spectacle. A private audience with the temple's senior custodian begins with context, restraint, and the understanding that the ceremony is not adjusted for visitors — you adjust yourself to the ceremony.",
+    curator: `Malini Fernando, ${curatorTitles.malini}`,
+    curatorImage: experienceImages.portraitMalini,
     image: localImages.kandyPerahera,
     imageAlt: 'Kandy Perahera ceremonial procession in Sri Lanka',
-    caption: 'Ceremony - Kandy',
+    caption: 'Ceremony — Kandy',
     details: [
       { label: 'Duration', value: 'Evening' },
       { label: 'Best Season', value: 'Year-round' },
@@ -242,16 +251,16 @@ const encounters: Encounter[] = [
   {
     id: 'ancient-grammar-of-healing',
     theme: 'Wellness & Restoration',
-    category: 'Restoration - Healing Traditions',
+    category: 'Restoration — Healing Traditions',
     title: 'The Ancient Grammar of Healing',
     note:
       'Embedded within a rainforest reserve, this five-day Ayurvedic immersion is guided by a fourth-generation vaidya. It is not a spa and not a retreat in the decorative sense. It is a diagnostic and restorative system refined for two thousand years, entered slowly and with discipline.',
-    curator: 'Dilini Perera, Co-Founder',
+    curator: `Dilini Perera, ${curatorTitles.dilini}`,
     curatorImage: experienceImages.dilini,
     image: localImages.gorakaElla,
     imageAlt: 'Rainforest waterfall landscape in Sri Lanka',
     badge: 'By Consultation',
-    caption: 'Restoration - Sinharaja',
+    caption: 'Restoration — Sinharaja',
     details: [
       { label: 'Duration', value: '5 Days' },
       { label: 'Best Season', value: 'All Year' },
@@ -276,7 +285,7 @@ const experienceThemes = [
   {
     title: 'Ocean & Discovery',
     description:
-      'Whale watching, sailing, marine life, lagoons, east coast exploration, and hidden coastlines.',
+      'For travellers drawn to the sea as a living world: whale paths, quiet lagoons, sailing days, and coastlines that reveal themselves with patience.',
     traveller: 'For the Unhurried Wanderer',
     image: localImages.galleBeach,
     imageAlt: 'Southern Sri Lankan beach and ocean light',
@@ -307,11 +316,11 @@ const experienceThemes = [
     title: 'Rail & Landscape',
     description:
       'Hill country train journeys, tea estates, mountain routes, and scenery that changes by the hour.',
-    traveller: 'For the Story Collector',
+    traveller: 'For the Reflective Wanderer',
     image: localImages.nuwaraEliya,
     imageAlt: 'Nuwara Eliya hill country landscape',
-    href: '#begin',
-    encounter: 'Train journeys in development',
+    href: '#private-tea-estate',
+    encounter: 'A Private Tea Estate, Locked Before Dawn',
   },
   {
     title: 'Culture & Human Connection',
@@ -368,7 +377,7 @@ const curationColumns = [
       {
         title: 'Nothing Pre-packaged',
         copy:
-          'The experience you enquire about will be the same experience our curator had, not a version of it adapted for guests. This is an important distinction.',
+          'The experience you enquire about will be the same experience our curator had, not a version of it adapted for guests.',
       },
       {
         title: 'Trust, Not Transaction',
@@ -426,7 +435,7 @@ function TextLink({
   )
 }
 
-const encounterNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'] as const
+const encounterNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'] as const
 
 function toJourneyId(kind: string, value: string) {
   return `${kind}:${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
@@ -543,7 +552,7 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
           <blockquote>"{encounter.note}"</blockquote>
           <div className="curator-byline">
             <img src={encounter.curatorImage} alt="" />
-            <span>- {encounter.curator}</span>
+            <span>— {encounter.curator}</span>
           </div>
         </div>
         <TextLink href={enquiryHref} onClick={handleEncounterInterest}>
@@ -661,7 +670,7 @@ export function ExpectationsPage() {
       <section className="experiences-hero experiences-reveal">
         <div className="experiences-container experiences-hero-grid">
           <div className="experiences-hero-copy">
-            <Eyebrow>Expectations - Journey Curation Begins</Eyebrow>
+            <Eyebrow>Expectations — Journey Curation Begins</Eyebrow>
             <h1>
               What
               <br />
@@ -670,9 +679,9 @@ export function ExpectationsPage() {
               Sri Lanka Feel Like?
             </h1>
             <p>
-              This is the first moment Royale Isles Lanka asks you to shape the journey. Choose the
-              moods, regions, and styles of access that feel true; only here do those preferences begin
-              forming My Journey.
+              This is where Royale Isles Lanka asks you to shape the journey. Choose the moods,
+              regions, and styles of access that feel true; only here do those preferences begin forming
+              My Journey.
             </p>
             <ul className="experiences-hero-proof-list" aria-label="Expectation standards">
               {heroProofs.map((proof) => (
@@ -690,7 +699,7 @@ export function ExpectationsPage() {
                 <img src={experienceImages.arjun} alt="" />
                 <span>
                   <strong>Arjun Fernando</strong>
-                  <small>Lead Curator</small>
+                  <small>{curatorTitles.arjun}</small>
                 </span>
               </div>
             </aside>
@@ -705,7 +714,7 @@ export function ExpectationsPage() {
             <div className="hero-access-card" aria-label="Arrival protocol">
               <p>Arrival Protocol</p>
               <strong>Pre-dawn ascent, sealed route, curator in attendance.</strong>
-              <span>Sigiriya - Central Province</span>
+              <span>Sigiriya — Central Province</span>
             </div>
             <div className="experiences-stat-strip">
               {stats.map((stat) => (
@@ -725,13 +734,13 @@ export function ExpectationsPage() {
             <div>
               <Eyebrow>Journey Themes</Eyebrow>
               <h2 id="experience-themes-title">
-                The First
+                The Shape
                 <br />
-                <em>Shape Of The Journey.</em>
+                <em>Of The Journey.</em>
               </h2>
             </div>
             <p>
-              This is not a catalogue of activities. It is the first quiet reading of what should matter:
+              This is not a catalogue of activities. It is a quiet reading of what should matter:
               wilderness, memory, restoration, movement, coast, culture, or histories still held in the landscape.
             </p>
           </header>
@@ -795,7 +804,7 @@ export function ExpectationsPage() {
 
       <section className="region-filter experiences-reveal" aria-label="Set journey expectations by theme">
         <div className="region-filter-copy">
-          <span>Set A First Preference</span>
+          <span>Set A Preference</span>
           <label htmlFor="experience-theme">Preferred Journey Theme</label>
         </div>
         <div className="region-filter-select-wrap">
@@ -870,14 +879,14 @@ export function ExpectationsPage() {
             <span />
             <p>
               Yala. Wilpattu. Sinharaja. Three ecosystems, three different grammars of silence. Our
-              head naturalist has spent twenty years learning to read them all. He will teach you how
-              to listen.
+              naturalist team has spent decades learning to read them. They will teach you how to
+              listen.
             </p>
-            <small>Stewardship - Silence - Fieldcraft</small>
+            <small>Stewardship — Silence — Fieldcraft</small>
           </div>
           <figure className="wilderness-image-card">
             <img src={localImages.kithulgala} alt="Forest river landscape in Kithulgala, Sri Lanka" />
-            <figcaption>Rainforest routes - guided by a field naturalist, not a driver.</figcaption>
+            <figcaption>Rainforest routes — guided by a field naturalist, not a driver.</figcaption>
           </figure>
         </div>
       </section>
@@ -886,7 +895,7 @@ export function ExpectationsPage() {
         <div className="experiences-container ceremony-grid">
           <figure>
             <img src={localImages.kelaniTemple} alt="Kelani temple sacred architecture and ritual setting" />
-            <figcaption>Kelani Temple - Western Province</figcaption>
+            <figcaption>Kelani Temple — Western Province</figcaption>
           </figure>
           <blockquote>
             <p>The Ceremony Principle</p>
@@ -896,14 +905,13 @@ export function ExpectationsPage() {
             <span>
               Access is only meaningful when it protects the dignity of the ceremony itself.
             </span>
-            <cite>- Malini Fernando, Cultural Lead</cite>
+            <cite>— Malini Fernando, {curatorTitles.malini}</cite>
           </blockquote>
         </div>
       </section>
 
       <section className="curation-process experiences-reveal">
         <div className="experiences-container">
-          <Eyebrow>Chapter III</Eyebrow>
           <h2>
             The Curation
             <br />
@@ -924,7 +932,7 @@ export function ExpectationsPage() {
           </div>
           <blockquote className="process-quote">
             Curation does not grow for scale. It <em>deepens for trust.</em>
-            <cite>Arjun Fernando - Co-Founder</cite>
+            <cite>Arjun Fernando — {curatorTitles.arjun}</cite>
           </blockquote>
         </div>
       </section>
