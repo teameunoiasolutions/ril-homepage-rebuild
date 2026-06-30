@@ -20,6 +20,7 @@ import oilLamps from '../../assets/experiences/oil-lamps.jpg'
 import blueWhaleSunset from '../../assets/experiences/blue-whale-sunset.jpg'
 import galleFort from '../../assets/experiences/galle-fort.jpg'
 import brassLamp from '../../assets/experiences/brass-lamp.jpg'
+import portraitMalini from '../../assets/about/portrait-malini.jpg'
 
 export const experienceImages = {
   arjun,
@@ -44,4 +45,5 @@ export const experienceImages = {
   blueWhaleSunset,
   galleFort,
   brassLamp,
+  portraitMalini,
 } as const

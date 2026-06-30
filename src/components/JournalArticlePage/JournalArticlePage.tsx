@@ -1,5 +1,16 @@
 import './JournalArticlePage.css'
 import type { CSSProperties, ReactNode } from 'react'
+import galleBeachImage from '../../assets/images/Galle beach.jpeg'
+import gorakaEllaImage from '../../assets/images/Goraka ella.jpg'
+import kelaniTempleDetailImage from '../../assets/images/Kelani temple(1).JPG'
+import kithulgalaImage from '../../assets/images/Kithulgala.jpeg'
+import maduRiverImage from '../../assets/images/Madu River.jpeg'
+import naalandaImage from '../../assets/images/Naalanda gedige Matale.jpg'
+import naalandaDetailImage from '../../assets/images/Naalanda gedige Matale(1).jpg'
+import nuwaraEliyaImage from '../../assets/images/NuwaraEliya .jpg'
+import peradeniyaImage from '../../assets/images/Peradeniya.jpg'
+import sigiriyaImage from '../../assets/images/Sigiriya.JPG'
+import sripadayaSkyImage from '../../assets/images/sripadaya sky.jpeg'
 
 type Note = {
   label: string
@@ -28,38 +39,22 @@ type ArchiveEntry = {
 }
 
 const articleAssets = {
-  hero:
-    'https://www.figma.com/api/mcp/asset/ff9504a2-db7d-494c-a5d3-5bebec7ecdd4',
-  staircase:
-    'https://www.figma.com/api/mcp/asset/f8c7c0bd-13f8-4b81-b7a4-ec718a4cad03',
-  steps:
-    'https://www.figma.com/api/mcp/asset/82cc605c-ed59-4d77-a1b0-2fd5e8c7f727',
-  frescoes:
-    'https://www.figma.com/api/mcp/asset/b23a7f28-75aa-4d84-82a0-b0fe247b3b32',
-  summit:
-    'https://www.figma.com/api/mcp/asset/da1a72f0-6c0a-45cb-95bb-497792946fa8',
-  gardens:
-    'https://www.figma.com/api/mcp/asset/99068626-c80c-42dc-81c1-c66a73e38aa2',
-  langur:
-    'https://www.figma.com/api/mcp/asset/ca5ac5fe-6b7f-483b-9f96-19bc5f7977ce',
-  sunrise:
-    'https://www.figma.com/api/mcp/asset/73d373e3-8598-41d8-a185-3d132f3a3405',
-  cave:
-    'https://www.figma.com/api/mcp/asset/9d6c5855-a12d-44b3-9972-e1f84f7c8dde',
-  paw:
-    'https://www.figma.com/api/mcp/asset/1e82d57b-5ce8-432f-a821-0de2740ba780',
-  panorama:
-    'https://www.figma.com/api/mcp/asset/11934164-1780-4013-a8e9-7508a15a4eb4',
-  spiral:
-    'https://www.figma.com/api/mcp/asset/16b5c618-1d10-4d5f-8b98-219c809b175b',
-  reflection:
-    'https://www.figma.com/api/mcp/asset/cc42379b-6970-4dd2-8ca4-295b5f769b40',
-  tea:
-    'https://www.figma.com/api/mcp/asset/6134612c-fd34-431e-9619-a90b16713e17',
-  galle:
-    'https://www.figma.com/api/mcp/asset/8d8e7f60-47bc-407d-b0fe-4cf7c8b93c79',
-  jaffna:
-    'https://www.figma.com/api/mcp/asset/00b6120e-e014-476e-b615-5c9b4133abe0',
+  hero: sigiriyaImage,
+  staircase: sripadayaSkyImage,
+  steps: sigiriyaImage,
+  frescoes: kelaniTempleDetailImage,
+  summit: sripadayaSkyImage,
+  gardens: peradeniyaImage,
+  langur: kithulgalaImage,
+  sunrise: sripadayaSkyImage,
+  cave: naalandaDetailImage,
+  paw: gorakaEllaImage,
+  panorama: sigiriyaImage,
+  spiral: naalandaImage,
+  reflection: maduRiverImage,
+  tea: nuwaraEliyaImage,
+  galle: galleBeachImage,
+  jaffna: naalandaImage,
 } as const
 
 const tags = ['The Ancient North', 'Dawn Rituals', 'UNESCO Heritage'] as const
@@ -278,32 +273,27 @@ export function JournalArticlePage() {
   return (
     <main className="journal-article-page">
       <nav className="article-breadcrumb" aria-label="Breadcrumb">
-        <a href="/journal">The Island Notebook</a>
-        <span>·</span>
-        <a href="/journal">The Ancient North</a>
+        <a href="/journal">Royale Isles Private Journal</a>
         <span>·</span>
         <strong>Entry #055</strong>
       </nav>
 
       <section className="article-hero" aria-labelledby="article-title">
-        <div className="article-watermark" aria-hidden="true">
-          Sigiriya
-        </div>
         <div className="article-container article-hero__inner">
           <header className="article-hero__meta">
             <div>
               <span>Entry No. 055</span>
-              <p>Vol. IV · The Living Archive · 2024</p>
+              <p>Private Cultural Intelligence · Vol. IV</p>
             </div>
             <aside>
               <strong>Lion Rock · Central Province</strong>
-              <p>Sigiriya · 7.9520 N, 80.7602 E</p>
+              <p>Sigiriya · Private dawn access · 05:14 AM</p>
             </aside>
           </header>
 
           <div className="article-title-layout">
             <div className="article-title-block">
-              <p>Private Dawn Access · February 2024</p>
+              <p>For travellers who prefer the first hour</p>
               <h1 id="article-title">
                 The Sigiriya
                 <br />
@@ -312,20 +302,19 @@ export function JournalArticlePage() {
               <div>
                 <span />
                 <p>
-                  Three hundred and seventy metres of ancient granite, entered before the public hour.
-                  The point was not to avoid people. It was to meet the place before it had to perform
-                  for anyone.
+                  Ancient granite, pre-dawn access, and a cultural ascent shaped around privacy,
+                  scholarship, and the quiet discipline of arriving before spectacle.
                 </p>
               </div>
             </div>
 
             <aside className="article-weather-card">
-              <p>Weather Log</p>
+              <p>Access Brief</p>
               <strong>24°C</strong>
-              <span>Light Breeze · 8 km/h</span>
-              <span>Clear · Humidity 62%</span>
+              <span>Private guide · Heritage scholar</span>
+              <span>Pre-public arrival · Summit at first light</span>
               <time>05:14 AM</time>
-              <small>14 February 2024 · Gate Opens</small>
+              <small>14 February 2024 · Gate cleared</small>
             </aside>
           </div>
 

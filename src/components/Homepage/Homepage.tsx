@@ -1,8 +1,19 @@
 import { useState } from 'react'
 import './Homepage.css'
 import { ArrowIcon } from '../ArrowIcon'
-
-const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const
+import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
+import ahangamaImage from '../../assets/images/Ahangama.jpeg'
+import galleBeachImage from '../../assets/images/Galle beach.jpeg'
+import kelaniTempleImage from '../../assets/images/Kelani temple.jpeg'
+import kithulgalaImage from '../../assets/images/Kithulgala.jpeg'
+import kandyPeraheraImage from '../../assets/images/Kandy Perahera.JPG'
+import maduRiverImage from '../../assets/images/Madu River.jpeg'
+import nuwaraEliyaImage from '../../assets/images/NuwaraEliya .jpg'
+import peradeniyaImage from '../../assets/images/Peradeniya.jpg'
+import royaleIslesMapImage from '../../assets/images/royale-isles-map-transparent-clean.png'
+import sigiriyaImage from '../../assets/images/Sigiriya.JPG'
+import travelOneImage from '../../assets/images/travel1.jpg'
+import travelTwoImage from '../../assets/images/travel2.jpg'
 
 const images = {
   hero: '/figma-homepage/hero.jpg',
@@ -21,54 +32,25 @@ const images = {
   guideCover: '/figma-homepage/guide-cover.jpg',
 }
 
-const identityCards = [
-  {
-    image: images.teaEstate,
-    numeral: 'I',
-    label: 'Previously Discovered',
-    title: 'The Seeker of Silence',
-    signal: 'Revealed through stillness, restraint, and protected mornings.',
-    copy: 'A traveller who arrived asking for beauty, then discovered what they were really seeking was stillness.',
-  },
-  {
-    image: images.artisan,
-    numeral: 'II',
-    label: 'Previously Discovered',
-    title: 'The Curious Witness',
-    signal: 'Revealed through hands, rituals, and lives kept close to place.',
-    copy: 'A guest drawn not to monuments alone, but to the people, rituals, hands, and stories that keep them alive.',
-  },
-  {
-    image: images.beachDinner,
-    numeral: 'III',
-    label: 'Previously Discovered',
-    title: 'The Romantic',
-    signal: 'Revealed through privacy, time together, and beauty without theatre.',
-    copy: 'A traveller who discovered that intimacy, beauty, and time together were the real destination.',
-  },
-  {
-    image: images.journalHours,
-    numeral: 'IV',
-    label: 'Previously Discovered',
-    title: 'The Unhurried Wanderer',
-    signal: 'Revealed through spaciousness, soft timing, and the absence of hurry.',
-    copy: 'Someone who stopped asking what came next, and began noticing what was already unfolding.',
-  },
-  {
-    image: images.journalGuide,
-    numeral: 'V',
-    label: 'Previously Discovered',
-    title: 'The Story Collector',
-    signal: 'Revealed through thresholds, meals, voices, and remembered detail.',
-    copy: 'A traveller who remembered Sri Lanka through voices, meals, thresholds, and conversations.',
-  },
-]
+const localImages = {
+  ahangama: ahangamaImage,
+  galleBeach: galleBeachImage,
+  kelaniTemple: kelaniTempleImage,
+  kithulgala: kithulgalaImage,
+  kandyPerahera: kandyPeraheraImage,
+  maduRiver: maduRiverImage,
+  nuwaraEliya: nuwaraEliyaImage,
+  peradeniya: peradeniyaImage,
+  royaleIslesMap: royaleIslesMapImage,
+  sigiriya: sigiriyaImage,
+  travelOne: travelOneImage,
+  travelTwo: travelTwoImage,
+} as const
 
 const experiences = [
   {
-    image: images.junglePavilion,
-    imageAlt: 'Private jungle pavilion surrounded by Sri Lankan wilderness',
-    numeral: 'I',
+    image: localImages.kithulgala,
+    imageAlt: 'Forest river landscape in Kithulgala, Sri Lanka',
     region: 'Wildlife & Wilderness',
     identity: 'For the Seeker of Silence',
     access: 'Fieldcraft - Private naturalist - Stillness',
@@ -77,9 +59,8 @@ const experiences = [
       'For the traveller who does not want nature performed, wilderness begins with patience: a field naturalist, a protected route, and the discipline to wait until the island reveals itself.',
   },
   {
-    image: images.ancientRuins,
-    imageAlt: 'Ancient Sri Lankan stone ruins surrounded by forest',
-    numeral: 'II',
+    image: localImages.sigiriya,
+    imageAlt: 'Sigiriya rock fortress rising above the Sri Lankan landscape',
     region: 'Heritage & Memory',
     identity: 'For the Heritage Guardian',
     access: 'Scholarship - Protected timing - Living memory',
@@ -88,15 +69,23 @@ const experiences = [
       'Some travellers are drawn to what time has left behind. We shape access around light, silence, scholarship, and the dignity of places that should never feel consumed.',
   },
   {
-    image: images.artisan,
-    imageAlt: 'Sri Lankan artisan working by hand in a private studio',
-    numeral: 'III',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera procession with ceremonial performers in Sri Lanka',
     region: 'Culture & Human Connection',
     identity: 'For the Curious Witness',
     access: 'Private introductions - Family traditions - Human context',
     title: 'The Human Thread Beneath the Journey',
     copy:
-      'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of lives briefly, respectfully shared.',
+      'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of welcomes, briefly and respectfully shared.',
+  },
+  {
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country landscape shaped by tea estates and colonial memory',
+    region: sharedHeritageWorld.name,
+    identity: sharedHeritageWorld.traveller,
+    access: 'Tea country - Railways - Civic memory',
+    title: sharedHeritageWorld.homepageTitle,
+    copy: sharedHeritageWorld.homepageCopy,
   },
 ]
 
@@ -107,6 +96,7 @@ const experienceThreads = [
   'Wellness & Restoration',
   'Rail & Landscape',
   'Culture & Human Connection',
+  sharedHeritageWorld.name,
 ] as const
 
 const philosophyLines = [
@@ -136,28 +126,28 @@ const sriLankaStats = [
 
 const journalItems = [
   {
-    image: images.journalHours,
-    imageAlt: 'Private terrace set for tea during a quiet Sri Lankan afternoon',
+    image: localImages.peradeniya,
+    imageAlt: 'Peradeniya gardens in soft daylight',
     type: 'Field Notes',
-    date: 'May 2025',
+    date: 'Timing & Pace',
     title: 'The Art of Protecting Unscheduled Time',
-    excerpt: 'Why the most memorable VVIP journeys often depend on what we deliberately leave unplanned.',
+    excerpt: 'Why the most memorable journeys at this level often depend on what we deliberately leave unplanned.',
     path: '/journal/protecting-unscheduled-time',
   },
   {
-    image: images.journalGuide,
-    imageAlt: 'Private Sri Lankan guide standing near an ancient temple threshold',
+    image: localImages.kelaniTemple,
+    imageAlt: 'Kelani temple architecture and sacred details in Sri Lanka',
     type: 'Private Interview',
-    date: 'April 2025',
+    date: 'Sacred Access',
     title: 'The Temple Keeper Who Knows When Not to Speak',
     excerpt: 'A conversation on timing, restraint, and giving sacred places the privacy they deserve.',
     path: '/journal/the-temple-keeper',
   },
   {
-    image: images.highlandGolden,
-    imageAlt: 'Golden light over Sri Lankan highland tea country',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya highland landscape and tea country',
     type: 'Seasonal Briefing',
-    date: 'March 2025',
+    date: 'Highland Residences',
     title: 'When Tea Country Feels Entirely Yours',
     excerpt: "A curator's note on private residences, cloud forest mornings, and highland routes away from spectacle.",
     path: '/journal/private-tea-country',
@@ -166,20 +156,20 @@ const journalItems = [
 
 const travellerStories = [
   {
-    image: images.travellerOutcrop,
+    image: localImages.travelTwo,
     format: 'Private Film',
-    duration: 'II:XLVIII',
+    duration: 'II:2026',
     title: 'An anniversary carried by the island',
     quote:
       'We expected a beautiful trip. What we received felt like a private film of our own life, composed in tea country, temples, and candlelit coves.',
     name: 'Isabella & Laurent',
     location: 'Monaco',
     detail: 'Southern coast villas, cinnamon estates, and a dusk sail captured by our discreet host.',
-    photoCaption: 'A private coastal anniversary journey, held between cinnamon estates and candlelit coves.',
+    photoCaption: 'A coastal anniversary, traced between cinnamon estates and candlelit coves.',
     videoCaption: 'A discreet film of the moments between the formal itinerary: arrival, laughter, silence, sea air.',
   },
   {
-    image: images.hiroko,
+    image: localImages.travelOne,
     format: 'Photo Journal',
     duration: 'I:LVI',
     title: 'A quiet return to wonder',
@@ -191,7 +181,7 @@ const travellerStories = [
     videoCaption: 'A soft visual record of rituals, thresholds, hands at work, and highland mornings.',
   },
   {
-    image: images.beachDinner,
+    image: localImages.galleBeach,
     format: 'Hosted Story',
     duration: 'III:XII',
     title: 'A family gathered without agenda',
@@ -217,13 +207,6 @@ const heroScenes = [
   },
 ]
 
-const discoveryPrinciples = [
-  'Examples, not categories',
-  'No selections to make',
-  'A conversation, not a test',
-  'Yours has not been written yet',
-]
-
 const brochureHighlights = [
   'Private residences, villas, and estate houses',
   'Discreet wildlife, heritage, and coastal access',
@@ -244,7 +227,7 @@ const questions = [
     category: 'Planning Window',
     question: 'How far in advance should we begin planning?',
     answer:
-      'For the most considered VVIP arrangements, VI to XII weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
+      'For the most considered arrangements at this level, VI to XII weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
   },
   {
     category: 'Private Curation',
@@ -266,22 +249,14 @@ const questions = [
   },
 ]
 
+function getExpectationsHref(world: string) {
+  return `/expectations?world=${encodeURIComponent(world)}`
+}
+
 export function Homepage() {
-  const [activeIdentityIndex, setActiveIdentityIndex] = useState(0)
   const [activeStoryIndex, setActiveStoryIndex] = useState(0)
-  const visibleIdentityCards = [...identityCards, ...identityCards].slice(
-    activeIdentityIndex,
-    activeIdentityIndex + 3,
-  )
+  const [openQuestionIndex, setOpenQuestionIndex] = useState<number | null>(null)
   const activeStory = travellerStories[activeStoryIndex]
-
-  const showPreviousIdentity = () => {
-    setActiveIdentityIndex((currentIndex) => (currentIndex === 0 ? identityCards.length - 1 : currentIndex - 1))
-  }
-
-  const showNextIdentity = () => {
-    setActiveIdentityIndex((currentIndex) => (currentIndex + 1) % identityCards.length)
-  }
 
   const showPreviousStory = () => {
     setActiveStoryIndex((currentIndex) => (currentIndex === 0 ? travellerStories.length - 1 : currentIndex - 1))
@@ -311,111 +286,27 @@ export function Homepage() {
             <a href="#begin">Begin a Private Conversation</a>
           </div>
         </div>
-        <p className="figma-hero-caption">Bespoke journeys for private families, principals, and discerning travellers.</p>
-      </section>
-
-      <section className="figma-discovery" id="about" data-node-id="103:12717">
-        <div className="figma-container">
-          <div className="figma-identities">
-            <p className="figma-overline">Traveller Discovery</p>
-            <header>
-              <div>
-                <h3>Identities We Have Discovered</h3>
-                <p>
-                  A few travellers. A few different ways of moving through the world. Yours has not
-                  been written yet.
-                </p>
-              </div>
-              <div className="figma-carousel-buttons" aria-label="Browse discovered traveller identities">
-                <button
-                  type="button"
-                  onClick={showPreviousIdentity}
-                  aria-label="Show previous traveller identity"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={showNextIdentity}
-                  aria-label="Show next traveller identity"
-                >
-                  ›
-                </button>
-              </div>
-            </header>
-            <div className="figma-card-row">
-              {visibleIdentityCards.map((card, index) => (
-                <article className="figma-identity-card" key={`${card.title}-${activeIdentityIndex}-${index}`}>
-                  <figure>
-                    <img src={card.image} alt="" />
-                  </figure>
-                  <div>
-                    <p>{card.label}</p>
-                    <h4>{card.title}</h4>
-                    <small>{card.signal}</small>
-                    <span>{card.copy}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-          <div className="figma-discovery-grid">
-            <div className="figma-copy-stack">
-              <p className="figma-overline">Traveller Identities · Part II</p>
-              <h3 className="figma-discovery-heading">
-                What would yours be?
-              </h3>
-              <p>
-                The identities above are real examples from travellers we have come to understand:
-                a hidden need, a forgotten curiosity, a preferred rhythm, or a way of moving through
-                the world that only becomes clear with the right prompts.
-              </p>
-              <blockquote>Your own traveller identity may begin with a question, a reflection, or a guided path.</blockquote>
-              <p>
-                On the Traveller Identity page, you can begin privately in the way that feels most
-                natural: an AI-assisted self-discovery guide for deeper reflection, or a short
-                II-minute guided journey for a more immediate first reading.
-              </p>
-              <a className="figma-text-link" href="/traveller-discovery">
-                Find Your Traveller Identity
-              </a>
-              <aside className="figma-discovery-brief">
-                <span>Your Discovery Path</span>
-                <p>
-                  Choose between an AI-assisted self-discovery guide or a concise guided quiz. Either
-                  path helps us understand the kind of Sri Lanka journey that may feel personally true
-                  before any route, residence, host, or encounter is proposed.
-                </p>
-              </aside>
-            </div>
-          </div>
-          <div className="figma-private-standards" aria-label="Traveller Discovery principles">
-            {discoveryPrinciples.map((principle) => (
-              <span key={principle}>{principle}</span>
-            ))}
-          </div>
-        </div>
+        <p className="figma-hero-caption">Bespoke journeys for private families, principals, and those who travel rarely, and only well.</p>
       </section>
 
       <section className="figma-experiences" id="experiences" data-node-id="103:12794">
         <div className="figma-container">
           <header className="figma-section-header figma-experiences-header">
             <div>
-              <p className="figma-overline">From Discovery To Encounter</p>
+              <p className="figma-overline">Inspiration Before Curation</p>
               <h2>Ways Into The Island</h2>
               <p>
-                Traveller Discovery reveals what kind of journey may feel true. From there, our
-                curators translate identity into experience themes, and themes into private
-                encounters shaped by timing, trust, and the right local host.
+                These Discovery Worlds are not decisions. They are editorial lenses for understanding
+                Sri Lanka before any journey is saved, scored, or shaped around you.
               </p>
             </div>
             <aside className="figma-experience-brief">
-              <span>Private Collection</span>
+              <span>First Curation Step</span>
               <p>
-                6 pathways. No fixed catalogue. Each introduction is selected only when the access
-                protects the place, the host, and the traveller.
+                When one world feels like yours, continue to Expectations. That is where your
+                preferences begin shaping My Journey.
               </p>
-              <a href="/experiences">Explore The Collection</a>
+              <a href="/expectations">Continue To Expectations</a>
             </aside>
           </header>
 
@@ -431,7 +322,6 @@ export function Homepage() {
                 <figure className="figma-experience-media">
                   <img src={experience.image} alt={experience.imageAlt} />
                   <figcaption>
-                    <span>{experience.numeral}</span>
                     <small>{experience.access}</small>
                   </figcaption>
                 </figure>
@@ -440,8 +330,8 @@ export function Homepage() {
                   <small>{experience.identity}</small>
                   <h3>{experience.title}</h3>
                   <p>{experience.copy}</p>
-                  <a className="figma-button-secondary" href="/experiences">
-                    Follow This Thread
+                  <a className="figma-button-secondary" href={getExpectationsHref(experience.region)}>
+                    Continue To Expectations
                   </a>
                 </div>
               </article>
@@ -469,9 +359,8 @@ export function Homepage() {
             R
           </span>
           <div className="figma-philosophy-lines">
-            {philosophyLines.map((line, index) => (
+            {philosophyLines.map((line) => (
               <article key={line.title}>
-                <span className="figma-line-number">{romanNumerals[index]}</span>
                 <span className="figma-roman">{line.numeral}</span>
                 <div>
                   <h3>{line.title}</h3>
@@ -503,10 +392,14 @@ export function Homepage() {
 
       <section className="figma-island-stats" id="destinations" data-node-id="103:12887">
         <figure className="figma-island-stats-media">
-          <img src={images.highlandGolden} alt="Sri Lanka highland landscape at golden hour" />
+          <img
+            className="figma-island-stats-map"
+            src={localImages.royaleIslesMap}
+            alt="Illustrated map of Sri Lanka for Royale Isles Lanka"
+          />
           <figcaption>
-            <span>Central Highlands</span>
-            <small>Tea country, cloud forest, private residences, and routes held away from the obvious path.</small>
+            <span>Royale Isles Map</span>
+            <small>Regions, coastlines, highlands, and cultural routes arranged as one private island journey.</small>
           </figcaption>
         </figure>
         <div className="figma-island-stats-copy">
@@ -516,7 +409,7 @@ export function Homepage() {
               A small island with <em>private worlds</em> within it.
             </h2>
             <p>
-              For VVIP travel, scale matters. Sri Lanka is compact enough to move through with ease,
+              At this level of travel, scale matters. Sri Lanka is compact enough to move through with ease,
               yet layered enough to hold wilderness, sacred cities, coastal privacy, wellness, and
               family celebration in one carefully protected journey.
             </p>
@@ -542,7 +435,7 @@ export function Homepage() {
               should open, which hour should be protected, and which silence should remain untouched.
             </blockquote>
             <p className="figma-destination-intro">
-              Sri Lanka is compact enough for a seamless private journey and layered enough for a
+              Sri Lanka is compact enough for an unhurried private journey and layered enough for a
               lifetime of discovery: tea country residences, ancient cities, leopard country, ocean
               villas, wellness sanctuaries, and colonial fort towns.
             </p>
@@ -556,7 +449,7 @@ export function Homepage() {
             </a>
           </div>
           <figure className="figma-bordered-image">
-            <img src={images.coastJungle} alt="Aerial view of Sri Lankan coastline and jungle" />
+            <img src={localImages.maduRiver} alt="Madu River winding through coastal wetland and jungle" />
             <figcaption>
               <span>Coast & Jungle</span>
               <small>Private villas, hidden coves, rainforest edges, and coastal routes shaped by discretion.</small>
@@ -566,9 +459,6 @@ export function Homepage() {
       </section>
 
       <section className="figma-journal" id="journal" data-node-id="103:12936">
-        <span className="figma-journal-mark" aria-hidden="true">
-          Royale Isles Journal
-        </span>
         <div className="figma-container">
           <header className="figma-section-header figma-journal-header">
             <div>
@@ -596,7 +486,7 @@ export function Homepage() {
             <article className="figma-feature-story">
               <div className="figma-feature-story-copy">
                 <p>
-                  VVIP Field Letter <span>June 2025</span>
+                  Private Field Letter <span>Protected Access</span>
                 </p>
                 <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
                 <span>
@@ -613,7 +503,7 @@ export function Homepage() {
                 </a>
               </div>
               <figure className="figma-feature-story-stamp">
-                <img src={images.travellerOutcrop} alt="Traveller in thought on a rocky outcrop" />
+                <img src={localImages.sigiriya} alt="Sigiriya rock fortress before the public ascent" />
                 <figcaption>
                   <span>Private Access</span>
                   <small>Sigiriya before the first public ascent</small>
@@ -621,9 +511,8 @@ export function Homepage() {
               </figure>
             </article>
             <div className="figma-journal-list">
-              {journalItems.map((item, index) => (
+              {journalItems.map((item) => (
                 <article key={item.title}>
-                  <span className="figma-journal-index">{romanNumerals[index]}</span>
                   <div>
                     <p>
                       {item.type} <span>{item.date}</span>
@@ -730,9 +619,9 @@ export function Homepage() {
           </p>
           <form className="figma-email-form">
             <input type="email" aria-label="Your email address" placeholder="Your email address" />
-            <button type="submit">Request a Dialogue</button>
+            <button type="submit">Begin the Conversation</button>
           </form>
-          <small>Private, discreet, and without obligation.</small>
+          <small>Held privately, with no obligation.</small>
         </div>
       </section>
 
@@ -743,23 +632,20 @@ export function Homepage() {
             <h2>Request the Private Brochure</h2>
             <span className="figma-copper-rule" />
             <p>
-              A considered introduction for private families, principals, and discerning travellers
+              A considered introduction for private families, principals, and thoughtful travellers
               exploring Sri Lanka at the highest level: quiet residences, trusted hosts, protected
-              timing, and experiences arranged with discretion rather than display.
+              timing, and private moments arranged with discretion rather than display.
             </p>
             <div className="figma-brochure-panel">
               <span>Inside the briefing</span>
               <ol className="figma-brochure-list">
-                {brochureHighlights.map((item, index) => (
-                  <li key={item}>
-                    <small>{romanNumerals[index]}</small>
-                    {item}
-                  </li>
+                {brochureHighlights.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ol>
             </div>
             <p className="figma-brochure-note">
-              Sent privately. No automated itinerary. No mailing-list noise. Just a polished first
+              Sent privately, without an automated itinerary or mailing-list noise: a polished first
               briefing for travellers who expect careful judgement before any recommendation is made.
             </p>
             <form className="figma-brochure-form">
@@ -782,7 +668,7 @@ export function Homepage() {
             </figure>
             <div>
               <p>Royale Isles Lanka</p>
-              <h3>Sri Lanka, held privately for the discerning traveller.</h3>
+              <h3>Sri Lanka, held privately for the thoughtful traveller.</h3>
               <span>
                 A confidential prelude to the conversation: residences, access, family movement,
                 wellness, wildlife, and the moments best kept away from the obvious path.
@@ -867,9 +753,13 @@ export function Homepage() {
           <div className="figma-faq-panel">
             <div className="figma-question-list">
               {questions.map((question, index) => (
-                <details key={question.question}>
-                  <summary>
-                    <span>{romanNumerals[index]}</span>
+                <details key={question.question} open={openQuestionIndex === index}>
+                  <summary
+                    onClick={(event) => {
+                      event.preventDefault()
+                      setOpenQuestionIndex((currentIndex) => (currentIndex === index ? null : index))
+                    }}
+                  >
                     <div>
                       <small>{question.category}</small>
                       <strong>{question.question}</strong>

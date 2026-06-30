@@ -60,7 +60,6 @@
 .ds-pullquote {
   font-family: var(--font-display);
   font-size: var(--font-size-pullquote);
-  font-style: italic;
   font-weight: 600;
   line-height: var(--line-height-caption);
 }

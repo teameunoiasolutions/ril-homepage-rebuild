@@ -70,7 +70,6 @@
   border-left: 1px solid var(--color-accent-mid);
   color: var(--color-text-muted);
   font-family: var(--font-display);
-  font-style: italic;
   line-height: var(--line-height-body);
 }
 
