@@ -1111,6 +1111,115 @@
   outline: none;
 }
 
+/* Digital Experience */
+.about-digital-experience {
+  background:
+    radial-gradient(circle at 84% 14%, rgba(197, 160, 89, 0.12) 0, transparent 30%),
+    var(--color-surface-secondary-soft);
+  padding: 80px 0;
+}
+
+.about-digital-experience-inner {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
+}
+
+.about-digital-experience h2 {
+  margin-top: 28px;
+  color: var(--color-surface-atmospheric);
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.6vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: var(--line-height-display);
+}
+
+.about-digital-credit-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.about-digital-credit {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+}
+
+.about-digital-credit > img {
+  width: 112px;
+  height: 132px;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.04);
+}
+
+.about-digital-credit--studio {
+  grid-template-columns: minmax(180px, 0.36fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 48px);
+  padding: clamp(28px, 4vw, 42px);
+}
+
+.about-digital-credit-images {
+  position: relative;
+  min-height: 220px;
+}
+
+.about-digital-credit-images img {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 58%;
+  height: 190px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  filter: grayscale(100%) contrast(1.04);
+}
+
+.about-digital-credit-images img.is-secondary {
+  inset: auto 0 0 auto;
+}
+
+.about-digital-credit h3 {
+  color: var(--color-primary);
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: var(--line-height-ui);
+}
+
+.about-digital-credit span {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-accent);
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+}
+
+.about-digital-credit p {
+  margin-top: 14px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: var(--line-height-expanded);
+}
+
+.about-digital-credit small {
+  display: block;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-faint);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: var(--line-height-expanded);
+}
+
 /* The Breath */
 .about-breath {
   background: var(--color-surface-atmospheric);
@@ -1387,7 +1496,8 @@
   .about-dual-images-inner,
   .about-what-we-do-inner,
   .about-different-inner,
-  .about-methodology-inner {
+  .about-methodology-inner,
+  .about-digital-experience-inner {
     grid-template-columns: 1fr;
     gap: 48px;
   }
@@ -1450,6 +1560,7 @@
   .about-why-exist,
   .about-methodology,
   .about-custodians,
+  .about-digital-experience,
   .about-breath,
   .about-expected,
   .about-invitation {
@@ -1585,6 +1696,19 @@
   .about-custodian-modal-media {
     min-height: 360px;
     max-height: 420px;
+  }
+
+  .about-digital-credit {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .about-digital-credit > img {
+    width: 88px;
+    height: 108px;
+  }
+
+  .about-digital-credit--studio {
+    grid-template-columns: minmax(150px, 0.36fr) minmax(0, 1fr);
   }
 
   .about-breath-inner {
@@ -1727,6 +1851,27 @@
 
   .about-custodian-modal-copy {
     padding: 32px 24px;
+  }
+
+  .about-digital-credit {
+    grid-template-columns: 1fr;
+  }
+
+  .about-digital-credit > img {
+    width: 100%;
+    height: 260px;
+  }
+
+  .about-digital-credit--studio {
+    grid-template-columns: 1fr;
+  }
+
+  .about-digital-credit-images {
+    min-height: 280px;
+  }
+
+  .about-digital-credit-images img {
+    height: 220px;
   }
 
   .about-invitation::before {

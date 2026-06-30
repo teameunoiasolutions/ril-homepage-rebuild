@@ -16,9 +16,9 @@ const localImages = {
 } as const
 
 const stats = [
-  { value: '2,400+', label: 'Journeys Privately Guided' },
-  { value: '150+', label: 'Experiences Personally Vetted' },
-  { value: '45+', label: 'Trusted Local Custodians' },
+  { value: 'Private', label: 'Discovery by conversation' },
+  { value: 'Vetted', label: 'Access shaped through trust' },
+  { value: 'Human', label: 'Journeys held by people' },
 ] as const
 
 const methodologySteps = [
@@ -43,69 +43,53 @@ const romanNumerals = ['I', 'II', 'III'] as const
 
 const custodians = [
   {
-    name: 'Dr Raghavan',
-    role: 'CEO & FOUNDER',
+    name: 'Dr. Suren Raghavan',
+    role: 'FOUNDER',
     image: aboutImages.portraitDrRaghavan,
     summary: 'Founder-led discretion for journeys that require judgement before access.',
-    bio: 'Dr Raghavan leads Royale Isles Lanka with a belief that Sri Lanka should be experienced through trust, restraint, and meaningful introductions rather than generic itineraries.',
+    bio: 'Dr. Suren Raghavan leads Royale Isles Lanka with a belief that Sri Lanka should be experienced through trust, restraint, and meaningful introductions rather than generic itineraries.',
     focus: 'Founder vision, private access, guest trust, and the long-term relationships that make rare journeys possible.',
     offset: false,
   },
   {
-    name: 'Team Member',
-    role: 'PROFILE COMING SOON',
+    name: 'Guest Experience Lead',
+    role: 'REPRESENTATIVE PROFILE',
     image: aboutImages.portraitAnika,
-    summary: 'A trusted specialist profile will be introduced here shortly.',
-    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    summary: 'A discreet guest-care role at the centre of each arrival.',
+    bio: 'This role represents the people responsible for arrival, care, and continuity: the calm presence that allows a private journey to feel already held.',
     focus: 'Guest care, journey support, and discreet coordination.',
     offset: true,
   },
   {
-    name: 'Team Member',
-    role: 'PROFILE COMING SOON',
+    name: 'Private Planning Lead',
+    role: 'REPRESENTATIVE PROFILE',
     image: aboutImages.portraitRoshan,
-    summary: 'A trusted specialist profile will be introduced here shortly.',
-    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    summary: 'A planning role for journeys that require calm orchestration.',
+    bio: 'This role represents the planning specialists who translate preference, privacy, timing, and access into a journey that feels composed rather than assembled.',
     focus: 'Private planning, local coordination, and on-island support.',
     offset: false,
   },
   {
-    name: 'Team Member',
-    role: 'PROFILE COMING SOON',
+    name: 'Cultural Access Lead',
+    role: 'REPRESENTATIVE PROFILE',
     image: aboutImages.portraitMalini,
-    summary: 'A trusted specialist profile will be introduced here shortly.',
-    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
+    summary: 'A cultural role for introductions that require care and context.',
+    bio: 'This role represents the cultural specialists and trusted hosts who make access feel respectful, prepared, and alive to the dignity of place.',
     focus: 'Cultural context, trusted introductions, and guest readiness.',
     offset: true,
   },
-  {
-    name: 'Sakna Perera',
-    role: 'WEBSITE DEVELOPER',
-    image: aboutImages.portraitSakna,
-    summary: 'Digital craft shaped to feel discreet, elegant, and effortless.',
-    bio: 'Sakna helps translate the quiet, considered character of Royale Isles Lanka into a digital experience that feels polished, clear, and easy to move through.',
-    focus: 'Website development, interface detail, responsive presentation, and the technical care behind the online journey.',
-    offset: false,
-  },
-  {
-    name: 'Conella Manuella Belleth',
-    role: 'WEBSITE DEVELOPER',
-    image: aboutImages.portraitConella,
-    summary: 'Design-sensitive development for a refined luxury web presence.',
-    bio: 'Conella works across the website experience, shaping the page details so the brand feels elegant, personal, and aligned with the client-approved direction.',
-    focus: 'Frontend implementation, visual refinement, content presentation, and maintaining the luxury tone of the site.',
-    offset: true,
-  },
-  {
-    name: 'Team Member',
-    role: 'PROFILE COMING SOON',
-    image: aboutImages.portraitSuresh,
-    summary: 'A trusted specialist profile will be introduced here shortly.',
-    bio: 'Profile details will be added as the wider Royale Isles Lanka team is finalised.',
-    focus: 'Nature-led experiences, route awareness, and specialist hosting.',
-    offset: false,
-  },
 ] as const
+
+const digitalStudio = {
+  name: 'Eunoia Solutions Pvt Ltd',
+  founders: 'Conella Belleth & Sakna Perera',
+  role: 'Founders',
+  images: [aboutImages.portraitConella, aboutImages.portraitSakna],
+  copy:
+    "Eunoia Solutions is an independent digital product studio specialising in research, design, software engineering, and emerging technologies. Every product is shaped through thoughtful strategy, human-centred design, and robust technical implementation to create experiences that feel intuitive, accessible, and effortless.",
+  focus:
+    'From strategy and design to engineering, AI, security, and deployment, every layer of the experience is considered with equal care.',
+} as const
 
 type Custodian = (typeof custodians)[number]
 
@@ -143,10 +127,10 @@ export function AboutPage() {
               for those who know what access means.
             </h1>
             <p className="about-hero-body">
-              Since 2019, we have guided discerning travellers through Sri Lanka by relationship,
-              discretion, and deep local knowledge. No instant bookings. No generic itineraries.
-              Only considered introductions to places, people, and moments that cannot be found on
-              a public menu.
+              Royale Isles Lanka is shaped around travellers who want Sri Lanka opened through
+              relationship, discretion, and deep local knowledge. No instant bookings. No generic
+              itineraries. Only considered introductions to places, people, and moments that cannot be
+              found on a public menu.
             </p>
             <div className="about-stats">
               {stats.map((stat) => (
@@ -165,7 +149,7 @@ export function AboutPage() {
             />
             <figcaption>
               <span>Private Access</span>
-              <span>Hill Country - Sri Lanka</span>
+              <span>Hill Country — Sri Lanka</span>
             </figcaption>
           </figure>
         </div>
@@ -421,6 +405,32 @@ export function AboutPage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="about-section about-digital-experience">
+        <div className="about-container about-digital-experience-inner">
+          <div>
+            <p className="about-eyebrow about-eyebrow--green">DIGITAL EXPERIENCE</p>
+            <h2>Crafted with intention. Built with care.</h2>
+          </div>
+          <div className="about-digital-credit-grid">
+            <article className="about-digital-credit about-digital-credit--studio">
+              <div className="about-digital-credit-images" aria-hidden="true">
+                {digitalStudio.images.map((image, index) => (
+                  <img key={image} src={image} alt="" className={index === 1 ? 'is-secondary' : undefined} />
+                ))}
+              </div>
+              <div>
+                <h3>{digitalStudio.name}</h3>
+                <span>
+                  {digitalStudio.founders} — {digitalStudio.role}
+                </span>
+                <p>{digitalStudio.copy}</p>
+                <small>{digitalStudio.focus}</small>
+              </div>
+            </article>
           </div>
         </div>
       </section>
