@@ -15,8 +15,6 @@ import sigiriyaImage from '../../assets/images/Sigiriya.JPG'
 import travelOneImage from '../../assets/images/travel1.jpg'
 import travelTwoImage from '../../assets/images/travel2.jpg'
 
-const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'] as const
-
 const images = {
   hero: '/figma-homepage/hero.jpg',
   consultation: '/figma-homepage/consultation.jpg',
@@ -53,7 +51,6 @@ const experiences = [
   {
     image: localImages.kithulgala,
     imageAlt: 'Forest river landscape in Kithulgala, Sri Lanka',
-    numeral: 'I',
     region: 'Wildlife & Wilderness',
     identity: 'For the Seeker of Silence',
     access: 'Fieldcraft - Private naturalist - Stillness',
@@ -64,7 +61,6 @@ const experiences = [
   {
     image: localImages.sigiriya,
     imageAlt: 'Sigiriya rock fortress rising above the Sri Lankan landscape',
-    numeral: 'II',
     region: 'Heritage & Memory',
     identity: 'For the Heritage Guardian',
     access: 'Scholarship - Protected timing - Living memory',
@@ -75,18 +71,16 @@ const experiences = [
   {
     image: localImages.kandyPerahera,
     imageAlt: 'Kandy Perahera procession with ceremonial performers in Sri Lanka',
-    numeral: 'III',
     region: 'Culture & Human Connection',
     identity: 'For the Curious Witness',
     access: 'Private introductions - Family traditions - Human context',
     title: 'The Human Thread Beneath the Journey',
     copy:
-      'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of lives briefly, respectfully shared.',
+      'Private introductions to artisans, dancers, custodians, and families turn a route through Sri Lanka into something more personal: a sequence of welcomes, briefly and respectfully shared.',
   },
   {
     image: localImages.nuwaraEliya,
     imageAlt: 'Nuwara Eliya hill country landscape shaped by tea estates and colonial memory',
-    numeral: 'VII',
     region: sharedHeritageWorld.name,
     identity: sharedHeritageWorld.traveller,
     access: 'Tea country - Railways - Civic memory',
@@ -135,16 +129,16 @@ const journalItems = [
     image: localImages.peradeniya,
     imageAlt: 'Peradeniya gardens in soft daylight',
     type: 'Field Notes',
-    date: 'May 2025',
+    date: 'Timing & Pace',
     title: 'The Art of Protecting Unscheduled Time',
-    excerpt: 'Why the most memorable VVIP journeys often depend on what we deliberately leave unplanned.',
+    excerpt: 'Why the most memorable journeys at this level often depend on what we deliberately leave unplanned.',
     path: '/journal/protecting-unscheduled-time',
   },
   {
     image: localImages.kelaniTemple,
     imageAlt: 'Kelani temple architecture and sacred details in Sri Lanka',
     type: 'Private Interview',
-    date: 'April 2025',
+    date: 'Sacred Access',
     title: 'The Temple Keeper Who Knows When Not to Speak',
     excerpt: 'A conversation on timing, restraint, and giving sacred places the privacy they deserve.',
     path: '/journal/the-temple-keeper',
@@ -153,7 +147,7 @@ const journalItems = [
     image: localImages.nuwaraEliya,
     imageAlt: 'Nuwara Eliya highland landscape and tea country',
     type: 'Seasonal Briefing',
-    date: 'March 2025',
+    date: 'Highland Residences',
     title: 'When Tea Country Feels Entirely Yours',
     excerpt: "A curator's note on private residences, cloud forest mornings, and highland routes away from spectacle.",
     path: '/journal/private-tea-country',
@@ -164,14 +158,14 @@ const travellerStories = [
   {
     image: localImages.travelTwo,
     format: 'Private Film',
-    duration: 'II:XLVIII',
+    duration: 'II:2026',
     title: 'An anniversary carried by the island',
     quote:
       'We expected a beautiful trip. What we received felt like a private film of our own life, composed in tea country, temples, and candlelit coves.',
     name: 'Isabella & Laurent',
     location: 'Monaco',
     detail: 'Southern coast villas, cinnamon estates, and a dusk sail captured by our discreet host.',
-    photoCaption: 'A private coastal anniversary journey, held between cinnamon estates and candlelit coves.',
+    photoCaption: 'A coastal anniversary, traced between cinnamon estates and candlelit coves.',
     videoCaption: 'A discreet film of the moments between the formal itinerary: arrival, laughter, silence, sea air.',
   },
   {
@@ -233,7 +227,7 @@ const questions = [
     category: 'Planning Window',
     question: 'How far in advance should we begin planning?',
     answer:
-      'For the most considered VVIP arrangements, VI to XII weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
+      'For the most considered arrangements at this level, VI to XII weeks is ideal. Shorter timelines can be accommodated when availability, access, and private hosting align.',
   },
   {
     category: 'Private Curation',
@@ -291,7 +285,7 @@ export function Homepage() {
             <a href="#begin">Begin a Private Conversation</a>
           </div>
         </div>
-        <p className="figma-hero-caption">Bespoke journeys for private families, principals, and discerning travellers.</p>
+        <p className="figma-hero-caption">Bespoke journeys for private families, principals, and those who travel rarely, and only well.</p>
       </section>
 
       <section className="figma-experiences" id="experiences" data-node-id="103:12794">
@@ -308,8 +302,8 @@ export function Homepage() {
             <aside className="figma-experience-brief">
               <span>First Curation Step</span>
               <p>
-                When one world begins to feel relevant, continue to Expectations. That is where your
-                preferences first become part of My Journey.
+                When one world feels like yours, continue to Expectations. That is where your
+                preferences begin shaping My Journey.
               </p>
               <a href="/expectations">Continue To Expectations</a>
             </aside>
@@ -327,7 +321,6 @@ export function Homepage() {
                 <figure className="figma-experience-media">
                   <img src={experience.image} alt={experience.imageAlt} />
                   <figcaption>
-                    <span>{experience.numeral}</span>
                     <small>{experience.access}</small>
                   </figcaption>
                 </figure>
@@ -365,9 +358,8 @@ export function Homepage() {
             R
           </span>
           <div className="figma-philosophy-lines">
-            {philosophyLines.map((line, index) => (
+            {philosophyLines.map((line) => (
               <article key={line.title}>
-                <span className="figma-line-number">{romanNumerals[index]}</span>
                 <span className="figma-roman">{line.numeral}</span>
                 <div>
                   <h3>{line.title}</h3>
@@ -416,7 +408,7 @@ export function Homepage() {
               A small island with <em>private worlds</em> within it.
             </h2>
             <p>
-              For VVIP travel, scale matters. Sri Lanka is compact enough to move through with ease,
+              At this level of travel, scale matters. Sri Lanka is compact enough to move through with ease,
               yet layered enough to hold wilderness, sacred cities, coastal privacy, wellness, and
               family celebration in one carefully protected journey.
             </p>
@@ -442,7 +434,7 @@ export function Homepage() {
               should open, which hour should be protected, and which silence should remain untouched.
             </blockquote>
             <p className="figma-destination-intro">
-              Sri Lanka is compact enough for a seamless private journey and layered enough for a
+              Sri Lanka is compact enough for an unhurried private journey and layered enough for a
               lifetime of discovery: tea country residences, ancient cities, leopard country, ocean
               villas, wellness sanctuaries, and colonial fort towns.
             </p>
@@ -493,7 +485,7 @@ export function Homepage() {
             <article className="figma-feature-story">
               <div className="figma-feature-story-copy">
                 <p>
-                  VVIP Field Letter <span>June 2025</span>
+                  Private Field Letter <span>Protected Access</span>
                 </p>
                 <h3>&quot;The best moment was the one nobody else knew had been arranged.&quot;</h3>
                 <span>
@@ -518,9 +510,8 @@ export function Homepage() {
               </figure>
             </article>
             <div className="figma-journal-list">
-              {journalItems.map((item, index) => (
+              {journalItems.map((item) => (
                 <article key={item.title}>
-                  <span className="figma-journal-index">{romanNumerals[index]}</span>
                   <div>
                     <p>
                       {item.type} <span>{item.date}</span>
@@ -627,7 +618,7 @@ export function Homepage() {
           </p>
           <form className="figma-email-form">
             <input type="email" aria-label="Your email address" placeholder="Your email address" />
-            <button type="submit">Request a Dialogue</button>
+            <button type="submit">Begin the Conversation</button>
           </form>
           <small>Held privately, with no obligation.</small>
         </div>
@@ -640,18 +631,15 @@ export function Homepage() {
             <h2>Request the Private Brochure</h2>
             <span className="figma-copper-rule" />
             <p>
-              A considered introduction for private families, principals, and discerning travellers
+              A considered introduction for private families, principals, and thoughtful travellers
               exploring Sri Lanka at the highest level: quiet residences, trusted hosts, protected
               timing, and private moments arranged with discretion rather than display.
             </p>
             <div className="figma-brochure-panel">
               <span>Inside the briefing</span>
               <ol className="figma-brochure-list">
-                {brochureHighlights.map((item, index) => (
-                  <li key={item}>
-                    <small>{romanNumerals[index]}</small>
-                    {item}
-                  </li>
+                {brochureHighlights.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ol>
             </div>
@@ -679,7 +667,7 @@ export function Homepage() {
             </figure>
             <div>
               <p>Royale Isles Lanka</p>
-              <h3>Sri Lanka, held privately for the discerning traveller.</h3>
+              <h3>Sri Lanka, held privately for the thoughtful traveller.</h3>
               <span>
                 A confidential prelude to the conversation: residences, access, family movement,
                 wellness, wildlife, and the moments best kept away from the obvious path.
@@ -763,10 +751,9 @@ export function Homepage() {
 
           <div className="figma-faq-panel">
             <div className="figma-question-list">
-              {questions.map((question, index) => (
+              {questions.map((question) => (
                 <details key={question.question}>
                   <summary>
-                    <span>{romanNumerals[index]}</span>
                     <div>
                       <small>{question.category}</small>
                       <strong>{question.question}</strong>
