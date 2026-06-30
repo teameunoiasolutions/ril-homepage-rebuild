@@ -33,7 +33,7 @@ export function SiteFooter() {
           </p>
           <div className="footer-est">
             <span className="footer-est-rule"></span>
-            <span>Est. 2020</span>
+            <span>Est. 2026</span>
           </div>
         </div>
 
