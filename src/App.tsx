@@ -9,9 +9,8 @@ import { JournalArticlePage } from './components/JournalArticlePage/JournalArtic
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
 import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
-import { TravelPlanner } from './pages/TravelPlanner'
+import { MyJourneyPage } from './pages/MyJourneyPage/MyJourneyPage'
 import { JourneyProvider } from './journey/JourneyContext'
-import { MyJourneyPage } from './journey/JourneyChrome'
 
 function AppContent() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
@@ -56,7 +55,7 @@ function AppContent() {
   }
 
   if (path === '/travel-planner') {
-    return renderPage(<TravelPlanner />)
+    return renderPage(<MyJourneyPage defaultView="explore" />)
   }
 
   if (path === '/my-journey') {
