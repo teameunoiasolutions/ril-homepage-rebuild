@@ -2,15 +2,16 @@ import './SiteFooter.css'
 
 const footerNav = {
   explore: [
-    { href: '/#destinations', label: 'Discover Sri Lanka' },
-    { href: '/experiences', label: 'Experiences' },
-    { href: '/travel-preparation', label: 'Travel Preparation' },
+    { href: '/discover-sri-lanka', label: 'Discover Sri Lanka' },
+    { href: '/expectations', label: 'Expectations' },
+    { href: '/travel-preparation', label: 'Before You Arrive' },
+    { href: '/my-journey', label: 'My Journey' },
     { href: '/journal', label: 'Journal' },
     { href: '/about', label: 'About' },
   ] as const,
   connect: [
     { href: '/#begin', label: 'Begin a Conversation' },
-    { href: '/#begin', label: 'Discovery Guide' },
+    { href: '/discover-sri-lanka', label: 'Discovery Guide' },
     { href: '/#begin', label: 'Contact' },
   ] as const,
   legal: [
@@ -32,7 +33,7 @@ export function SiteFooter() {
           </p>
           <div className="footer-est">
             <span className="footer-est-rule"></span>
-            <span>Est. 2020</span>
+            <span>Est. 2026</span>
           </div>
         </div>
 

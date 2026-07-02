@@ -1,16 +1,19 @@
 import type { ReactNode } from 'react'
 import { AboutPage } from './components/AboutPage/AboutPage'
 import { ConciergeDesk } from './components/ConciergeDesk/ConciergeDesk'
+import { DiscoveryGuide } from './components/DiscoveryGuide/DiscoveryGuide'
 import { ExperienceDetailPage } from './components/ExperienceDetailPage/ExperienceDetailPage'
-import { ExperiencesPage } from './components/ExperiencesPage/ExperiencesPage'
+import { ExpectationsPage } from './components/ExperiencesPage/ExperiencesPage'
 import { Homepage } from './components/Homepage/Homepage'
 import { JournalArticlePage } from './components/JournalArticlePage/JournalArticlePage'
 import { JournalLandingPage } from './components/JournalLandingPage/JournalLandingPage'
 import { PageLayout } from './components/PageLayout/PageLayout'
 import { TravelPreparationPage } from './components/TravelPreparationPage/TravelPreparationPage'
 import { TravelPlanner } from './pages/TravelPlanner'
+import { JourneyProvider } from './journey/JourneyContext'
+import { MyJourneyPage } from './journey/JourneyChrome'
 
-function App() {
+function AppContent() {
   const rawPath = window.location.pathname.replace(/\/$/, '')
   const path = rawPath === '' ? '/' : rawPath
 
@@ -24,11 +27,15 @@ function App() {
     return <ConciergeDesk />
   }
 
-  if (path === '/experiences') {
-    return renderPage(<ExperiencesPage />)
+  if (path === '/discover-sri-lanka') {
+    return renderPage(<DiscoveryGuide />)
   }
 
-  if (path === '/experiences/the-sigiriya-dawn-ascent') {
+  if (path === '/expectations' || path === '/experiences') {
+    return renderPage(<ExpectationsPage />)
+  }
+
+  if (path === '/expectations/the-sigiriya-dawn-ascent' || path === '/experiences/the-sigiriya-dawn-ascent') {
     return renderPage(<ExperienceDetailPage />)
   }
 
@@ -52,11 +59,19 @@ function App() {
     return renderPage(<TravelPlanner />)
   }
 
-  // if (path === '/traveller-discovery') {
-  //   return renderPage(<TravellerDiscovery />)
-  // }
+  if (path === '/my-journey') {
+    return renderPage(<MyJourneyPage />)
+  }
 
   return renderPage(<Homepage />)
+}
+
+function App() {
+  return (
+    <JourneyProvider>
+      <AppContent />
+    </JourneyProvider>
+  )
 }
 
 export default App

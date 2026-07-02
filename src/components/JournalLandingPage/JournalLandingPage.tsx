@@ -1,5 +1,23 @@
 import './JournalLandingPage.css'
 import type { CSSProperties } from 'react'
+import ahangamaImage from '../../assets/images/Ahangama.jpeg'
+import bopathEllaImage from '../../assets/images/Bopath Ella.jpeg'
+import galleImage from '../../assets/images/Galle.jpeg'
+import galleBeachImage from '../../assets/images/Galle beach.jpeg'
+import galleFaceBeachImage from '../../assets/images/Galle face beach.jpeg'
+import geogaryLakeImage from '../../assets/images/geogary lake nuwra eliya .jpg'
+import gorakaEllaImage from '../../assets/images/Goraka ella.jpg'
+import kandyPeraheraImage from '../../assets/images/Kandy Perahera.JPG'
+import kelaniTempleImage from '../../assets/images/Kelani temple.jpeg'
+import kelaniTempleDetailImage from '../../assets/images/Kelani temple(1).JPG'
+import maduRiverImage from '../../assets/images/Madu River.jpeg'
+import naalandaImage from '../../assets/images/Naalanda gedige Matale.jpg'
+import naalandaDetailImage from '../../assets/images/Naalanda gedige Matale(1).jpg'
+import nuwaraEliyaImage from '../../assets/images/NuwaraEliya .jpg'
+import peradeniyaImage from '../../assets/images/Peradeniya.jpg'
+import sigiriyaImage from '../../assets/images/Sigiriya.JPG'
+import sripadayaSkyImage from '../../assets/images/sripadaya sky.jpeg'
+import theruFestivalImage from '../../assets/images/theru festival.jpg'
 import { ArrowIcon } from '../ArrowIcon'
 
 type Texture = {
@@ -31,46 +49,26 @@ type Vignette = {
 }
 
 const journalAssets = {
-  coast:
-    'https://www.figma.com/api/mcp/asset/78fd77c8-1142-46d9-a1f1-cafd412a8360',
-  teaMist:
-    'https://www.figma.com/api/mcp/asset/25ff5076-0dea-422d-9182-a7935403cf21',
-  galleFort:
-    'https://www.figma.com/api/mcp/asset/10ba5524-d583-43c0-8096-460026369dcd',
-  monk:
-    'https://www.figma.com/api/mcp/asset/e78dca37-837b-4d9b-8376-f6aa5e03ca6c',
-  spices:
-    'https://www.figma.com/api/mcp/asset/26b3ed3e-46b7-4468-96aa-9a2662113c2a',
-  cinnamon:
-    'https://www.figma.com/api/mcp/asset/6457db74-d8d1-4518-af4d-ca3f2837f4ca',
-  silk:
-    'https://www.figma.com/api/mcp/asset/f483f101-ca17-4c8e-aab9-16ae08149394',
-  glass:
-    'https://www.figma.com/api/mcp/asset/bea29247-023c-48f3-98f5-795df49ec2c7',
-  boatPaint:
-    'https://www.figma.com/api/mcp/asset/a17f38cc-15df-42e8-b442-baf79625f314',
-  lotus:
-    'https://www.figma.com/api/mcp/asset/dcda4c4c-673a-4fe5-a68b-55e36cfcd8fe',
-  monsoonStone:
-    'https://www.figma.com/api/mcp/asset/9fcf2e2d-2e7c-423f-a724-0778c17120ea',
-  cardamom:
-    'https://www.figma.com/api/mcp/asset/63fe2ccd-c68d-4c38-b379-bf6a801572e0',
-  galleAlley:
-    'https://www.figma.com/api/mcp/asset/2dfd191b-1515-45db-8464-a546a361f772',
-  lighthouse:
-    'https://www.figma.com/api/mcp/asset/41fb6b61-d551-4fac-8a54-ee76aca29036',
-  nilaveli:
-    'https://www.figma.com/api/mcp/asset/a60c3e37-224b-474b-8ae6-8e38ad9e8496',
-  dancer:
-    'https://www.figma.com/api/mcp/asset/93fe07f8-7670-49eb-8b2d-1005c365d031',
-  jaffnaFort:
-    'https://www.figma.com/api/mcp/asset/45c177bb-0797-4ea3-bc11-745117c5ba01',
-  hillRain:
-    'https://www.figma.com/api/mcp/asset/d6790f23-ee59-4d40-aba9-291948c91f4c',
-  teaCup:
-    'https://www.figma.com/api/mcp/asset/037ca5cf-421f-4403-988a-779eb3e10ccd',
-  sigiriyaPanorama:
-    'https://www.figma.com/api/mcp/asset/2976b6a1-cf38-4fa8-9392-54d96490f7f2',
+  coast: ahangamaImage,
+  teaMist: nuwaraEliyaImage,
+  galleFort: galleImage,
+  monk: kelaniTempleImage,
+  spices: peradeniyaImage,
+  cinnamon: naalandaDetailImage,
+  silk: kandyPeraheraImage,
+  glass: maduRiverImage,
+  boatPaint: galleBeachImage,
+  lotus: kelaniTempleDetailImage,
+  monsoonStone: gorakaEllaImage,
+  cardamom: bopathEllaImage,
+  galleAlley: galleImage,
+  lighthouse: galleFaceBeachImage,
+  nilaveli: ahangamaImage,
+  dancer: theruFestivalImage,
+  jaffnaFort: naalandaImage,
+  hillRain: sripadayaSkyImage,
+  teaCup: geogaryLakeImage,
+  sigiriyaPanorama: sigiriyaImage,
 } as const
 
 const textures: Texture[] = [
@@ -307,24 +305,28 @@ export function JournalLandingPage() {
         <p className="journal-watermark" aria-hidden="true">Lanka</p>
         <div className="journal-container journal-hero-inner">
           <div className="journal-title-block">
-            <p>Private Field Notes · Volume IV</p>
+            <p>Royale Isles Private Journal · Volume IV</p>
             <h1 id="journal-title">
-              The Island
+              A Private Atlas
               <br />
-              <em>Notebook</em>
+              <em>of Sri Lanka</em>
             </h1>
             <div>
               <span />
               <p>
-                A quieter record of Sri Lanka for travellers who prefer meaning over itinerary: field
-                notes, cultural observations, and private moments gathered by our curators.
+                Cultural intelligence, private addresses, and carefully observed moments for guests
+                who expect Sri Lanka to be interpreted with discretion, taste, and rare access.
               </p>
             </div>
             <ul className="journal-hero-signals" aria-label="Journal standards">
-              <li>Curator-written</li>
-              <li>No paid placements</li>
-              <li>Observed in person</li>
+              <li>Curator-led</li>
+              <li>Privately vetted</li>
+              <li>Access-minded</li>
             </ul>
+            <div className="journal-hero-actions" aria-label="Journal actions">
+              <a href="#journal-archive">Explore the Archive</a>
+              <a href="/concierge">Ask the Concierge</a>
+            </div>
           </div>
 
           <div className="journal-scattered-layout">
@@ -360,30 +362,30 @@ export function JournalLandingPage() {
             />
 
             <aside className="journal-pinned-note">
-              <p>Opening Note</p>
+              <p>Editor&apos;s Note</p>
               <blockquote>
-                "The island rarely reveals itself to travellers in a hurry. The journal is where we
-                keep the slower evidence."
+                "The island rewards travellers who arrive with patience, privacy, and the right
+                introductions."
               </blockquote>
               <cite>— Arjun Fernando · Editor-at-large</cite>
             </aside>
 
             <aside className="journal-weather-note">
-              <p>Current Dispatch</p>
+              <p>Current Intelligence</p>
               <strong>Galle · Kandy · Jaffna</strong>
-              <span>Filed across 4 regions</span>
+              <span>Private access notes across 4 regions</span>
             </aside>
 
-            <span className="journal-handwritten journal-handwritten--hero">for slow arrivals</span>
+            <span className="journal-handwritten journal-handwritten--hero">for exceptional arrivals</span>
           </div>
         </div>
       </section>
 
       <section className="journal-texture-rail" aria-label="Sensory archive">
         <div className="journal-rail-heading">
-          <p>Sensory Prelude · Micro-textures of Ceylon</p>
+          <p>Sensory Index · Privately Observed</p>
           <span />
-          <p>Collected Before The Story</p>
+          <p>Details Before Itinerary</p>
         </div>
         <div className="journal-rail-carousel">
           <div className="journal-rail-track">
@@ -413,22 +415,21 @@ export function JournalLandingPage() {
 
       <section className="journal-flow-intro" aria-labelledby="journal-flow-title">
         <div className="journal-container journal-flow-intro-grid">
-          <p>How To Read This Page</p>
+          <p>Private Editorial Standard</p>
           <h2 id="journal-flow-title">
-            Begin with texture. Stay for the entries. Leave with a sense of where the island asks you
-            to slow down.
+            Written for travellers who value cultural fluency as much as flawless logistics.
           </h2>
           <p>
-            The Journal is not a brochure. It is a set of observations our team returns to when shaping
-            private journeys: a street after rain, a family rehearsal before performance, a coastline
-            before the boats arrive.
+            The Journal is our quieter layer of expertise: the table worth reserving before it is
+            known, the temple hour without crowds, the villa host who remembers how you take tea, and
+            the seasonal nuance that turns a good itinerary into an exceptional one.
           </p>
         </div>
       </section>
 
       <section className="journal-stories">
         <div className="journal-container">
-          <SectionRuleHeader title="The Field Notes" meta="Two long-form entries · Read before you travel" />
+          <SectionRuleHeader title="Private Dispatches" meta="Two long-form entries · Read before you travel" />
 
           <article className="journal-story-entry journal-story-entry--galle">
             <p className="journal-side-note">Galle · 6.053° N</p>
@@ -496,8 +497,8 @@ export function JournalLandingPage() {
         <div className="journal-container">
           <div className="journal-region-guide-card">
             <div>
-              <p>Filed By Region</p>
-              <h2 id="journal-region-guide-title">Choose the chapter that matches your curiosity.</h2>
+              <p>Regional Intelligence</p>
+              <h2 id="journal-region-guide-title">Choose the chapter that matches your private journey.</h2>
             </div>
             <nav aria-label="Journal regions">
               {archiveRegions.map((region) => (
@@ -513,7 +514,7 @@ export function JournalLandingPage() {
 
       <section className="journal-archive" id="journal-archive">
         <div className="journal-container">
-          <SectionRuleHeader title="The Archive" meta="55 entries · 4 volumes · Ongoing" />
+          <SectionRuleHeader title="The Private Archive" meta="55 entries · 4 volumes · Ongoing" />
           <div className="journal-archive-grid">
             {archiveRegions.map((region) => (
               <ArchiveCard key={region.title} region={region} />
@@ -527,15 +528,15 @@ export function JournalLandingPage() {
           <div className="journal-dispatch-mark" aria-hidden="true">
             ✦
           </div>
-          <p>Private Monthly Dispatch</p>
+          <p>Members&apos; Monthly Dispatch</p>
           <h2>
-            Receive the island
+            Receive Sri Lanka
             <br />
-            <em>as it is observed.</em>
+            <em>before it becomes obvious.</em>
           </h2>
           <p>
-            One quiet letter each month: a new field note, a single photograph, and the weather as it
-            was. No campaigns, no urgency, no generic inspiration.
+            One discreet letter each month: a new private address, a cultural note from our team, and
+            a single seasonal recommendation worth planning around.
           </p>
           <form className="journal-newsletter" action="#" onSubmit={(event) => event.preventDefault()}>
             <input type="email" aria-label="Email address for the monthly dispatch" placeholder="Your email address" />

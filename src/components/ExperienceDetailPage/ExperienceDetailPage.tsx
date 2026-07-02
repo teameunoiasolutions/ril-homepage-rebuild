@@ -274,7 +274,7 @@ export function ExperienceDetailPage() {
               <p className="detail-eyebrow">Continue Your Journey</p>
               <h2>Related Encounters</h2>
             </div>
-            <a href="/experiences">View All Encounters <span /></a>
+            <a href="/expectations">View Expectations <span /></a>
           </header>
           <div className="detail-related-grid">
             {relatedEncounters.map((encounter) => (
@@ -283,7 +283,7 @@ export function ExperienceDetailPage() {
                 <p>{encounter.province}</p>
                 <h3>{encounter.title}</h3>
                 <p>{encounter.copy}</p>
-                <a href="/experiences">Explore <span /></a>
+                <a href="/expectations">Explore <span /></a>
               </article>
             ))}
           </div>

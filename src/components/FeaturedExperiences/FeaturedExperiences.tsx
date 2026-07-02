@@ -2,8 +2,8 @@ import './FeaturedExperiences.css'
 
 function ExperienceCta() {
   return (
-    <a href="#" className="experience-cta">
-      <span className="experience-cta-text">Begin a Conversation About This</span>
+    <a href="/expectations" className="experience-cta">
+      <span className="experience-cta-text">Begin Expectations Around This</span>
       <span className="experience-cta-underline"></span>
     </a>
   )
@@ -129,7 +129,7 @@ export function FeaturedExperiences() {
         <div className="footer-lines">
           <span className="footer-line"></span>
           <div className="footer-center">
-            <a href="#" className="footer-continue-link">
+            <a href="/discover-sri-lanka" className="footer-continue-link">
               <span className="footer-link-text">Continue Exploring</span>
               <span className="footer-link-underline"></span>
             </a>
@@ -155,8 +155,8 @@ export function FeaturedExperiences() {
                 </defs>
               </svg>
             </span>
-            <a href="#" className="footer-all-link">
-              <span className="footer-link-text">All Experiences</span>
+            <a href="/expectations" className="footer-all-link">
+              <span className="footer-link-text">Expectations</span>
               <span className="footer-link-underline"></span>
             </a>
           </div>

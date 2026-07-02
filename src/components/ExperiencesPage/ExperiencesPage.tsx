@@ -1,7 +1,22 @@
 import './ExperiencesPage.css'
-import { useState, type MouseEvent, type ReactNode } from 'react'
+import { useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react'
 import { ArrowIcon } from '../ArrowIcon'
 import { experienceImages } from './images'
+import { JourneyIncludedPill } from '../../journey/JourneyChrome'
+import { useJourney } from '../../journey/JourneyContext'
+import { inferJourneyRegion } from '../../journey/journeyTaxonomy'
+import { sharedHeritageRecommendations, sharedHeritageWorld } from '../../journey/discoveryWorlds'
+import ahangama from '../../assets/images/Ahangama.jpeg'
+import galle from '../../assets/images/Galle.jpeg'
+import galleBeach from '../../assets/images/Galle beach.jpeg'
+import gorakaElla from '../../assets/images/Goraka ella.jpg'
+import kandyPerahera from '../../assets/images/Kandy Perahera.JPG'
+import kelaniTemple from '../../assets/images/Kelani temple.jpeg'
+import kithulgala from '../../assets/images/Kithulgala.jpeg'
+import maduRiver from '../../assets/images/Madu River.jpeg'
+import nuwaraEliya from '../../assets/images/NuwaraEliya .jpg'
+import peradeniya from '../../assets/images/Peradeniya.jpg'
+import sigiriya from '../../assets/images/Sigiriya.JPG'
 
 type Detail = {
   label: string
@@ -16,6 +31,7 @@ const experienceThemeOptions = [
   'Wellness & Restoration',
   'Rail & Landscape',
   'Culture & Human Connection',
+  sharedHeritageWorld.name,
 ] as const
 
 type ExperienceTheme = (typeof experienceThemeOptions)[number]
@@ -35,72 +51,117 @@ type Encounter = {
   details: Detail[]
 }
 
+const curatorTitles = {
+  arjun: 'Founder & Lead Curator',
+  amara: 'Head of Heritage & Cultural Research',
+  dilini: 'Co-Founder',
+  kavindra: 'Head Naturalist',
+  sahan: 'Coastal Experiences Lead',
+  malini: 'Cultural Lead',
+} as const
+
 const stats = [
   { value: '1:1', label: 'Curator Planning' },
-  { value: '48h', label: 'Access Review' },
-  { value: 'Max 4', label: 'Private Circles' },
-  { value: 'No Menu', label: 'Bespoke Only' },
+  { value: 'Immediate', label: 'Concierge Attention' },
+  { value: 'Private', label: 'Closed-Circle Access' },
+  { value: 'Bespoke', label: 'Designed Around You' },
 ] as const
 
 const heroProofs = ['Private routing', 'Discreet hosts', 'Closed-door access'] as const
+
+const localImages = {
+  ahangama,
+  galle,
+  galleBeach,
+  gorakaElla,
+  kandyPerahera,
+  kelaniTemple,
+  kithulgala,
+  maduRiver,
+  nuwaraEliya,
+  peradeniya,
+  sigiriya,
+} as const
 
 const encounters: Encounter[] = [
   {
     id: 'sigiriya-dawn-ascent',
     theme: 'Heritage & Memory',
-    category: 'Heritage - Singular Access',
+    category: 'Heritage — Singular Access',
     title: 'The Sigiriya Dawn Ascent',
     note:
-      'There are two Sigiriyas. The one you visit at 9am with three thousand other people, and the one that exists between 5 and 7am - when the frescoes catch low light no photograph has ever adequately described. We negotiated singular access. It takes eight months of patience per year to maintain.',
-    curator: 'Amara Weerasinghe, Heritage & Research',
+      'There are two Sigiriyas. The one you visit at 9am with three thousand other people, and the one that exists between 5 and 7am — when the frescoes catch low light no photograph has ever adequately described. We negotiated singular access. It takes eight months of patience per year to maintain.',
+    curator: `Amara Weerasinghe, ${curatorTitles.amara}`,
     curatorImage: experienceImages.amara,
-    image: experienceImages.sigiriyaDawn,
-    imageAlt: 'Traveller at private dawn access to Sigiriya rock fortress',
+    image: localImages.sigiriya,
+    imageAlt: 'Sigiriya rock fortress rising above the Sri Lankan landscape',
     badge: "Curator's Choice",
-    caption: 'Cultural Heritage - Central Province',
+    caption: 'Cultural Heritage — Central Province',
     details: [
       { label: 'Duration', value: '3 Hours' },
-      { label: 'Best Season', value: 'Jan - Apr' },
+      { label: 'Best Season', value: 'Jan — Apr' },
       { label: 'Group Size', value: 'Max 4' },
-      { label: 'Key Highlight', value: 'Pre-dawn private access, frescoe viewing' },
+      { label: 'Key Highlight', value: 'Pre-dawn private access, fresco viewing' },
       { label: 'Curator', value: 'Amara W.' },
     ],
   },
   {
     id: 'private-tea-estate',
-    category: 'Tea Country - Immersive',
+    theme: 'Rail & Landscape',
+    category: 'Tea Country — Immersive',
     title: 'A Private Tea Estate, Locked Before Dawn',
     note:
       'Tea tourism is everywhere. What is almost nowhere is the thing that precedes it: the stillness of a working estate at 4:45am, before the pickers arrive, when the mist sits exactly at shoulder height and the silence has a particular quality I can only describe as earned. This is the version we offer.',
-    curator: 'Dilini Perera, Co-Founder',
+    curator: `Dilini Perera, ${curatorTitles.dilini}`,
     curatorImage: experienceImages.dilini,
-    image: experienceImages.teaEstate,
-    imageAlt: 'Misty dawn over terraced tea estate in Nuwara Eliya',
-    caption: 'Tea Country - Hill Province',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country in soft morning light',
+    caption: 'Tea Country — Hill Province',
     details: [
       { label: 'Duration', value: 'Full Day' },
-      { label: 'Best Season', value: 'Feb - May' },
+      { label: 'Best Season', value: 'Feb — May' },
       { label: 'Group Size', value: 'Max 2' },
       { label: 'Key Highlight', value: 'Private estate access, master blender session' },
       { label: 'Curator', value: 'Dilini P.' },
     ],
   },
   {
+    id: 'shared-heritage-quietly-read',
+    theme: sharedHeritageWorld.name,
+    category: 'Shared History — Editorial Route',
+    title: 'Shared Heritage, Quietly Read',
+    note:
+      "This is not a tour of colonial relics. It is a considered route through tea country, railway engineering, old gardens, civic streets, and grand hotels where Sri Lankan and British histories still meet in architecture, education, hospitality, and daily ritual.",
+    curator: `Amara Weerasinghe, ${curatorTitles.amara}`,
+    curatorImage: experienceImages.amara,
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country shaped by tea estates and colonial memory',
+    badge: 'New Discovery World',
+    caption: 'Tea Country — Railways — Colombo',
+    details: [
+      { label: 'Duration', value: '3–7 Days' },
+      { label: 'Best Season', value: 'Dec — Apr' },
+      { label: 'Group Size', value: 'Private' },
+      { label: 'Key Highlight', value: 'Tea, railways, gardens, and civic memory' },
+      { label: 'Curator', value: 'Amara W.' },
+    ],
+  },
+  {
     id: 'leopard-research-circuit',
     theme: 'Wildlife & Wilderness',
-    category: 'Wildlife - Expert-Led',
+    category: 'Wildlife — Expert-Led',
     title: 'The Leopard Research Circuit',
     note:
-      "I spent seven years in Yala before I joined this team. I know which vehicles to avoid, which blocks to enter at which hour, and - more importantly - when to stop the engine and simply wait. Safari isn't about luck. It's about discipline. I've only ever taken four people into Block 5 at dawn. The fifth will be you.",
-    curator: 'Kavindra Silva, Head of Experiences',
+      "I spent seven years in Yala before I joined this team. I know which vehicles to avoid, which blocks to enter at which hour, and — more importantly — when to stop the engine and simply wait. Safari isn't about luck. It's about discipline. I've only ever taken four people into Block 5 at dawn. The fifth will be you.",
+    curator: `Kavindra Silva, ${curatorTitles.kavindra}`,
     curatorImage: experienceImages.kavindra,
     image: experienceImages.leopardCircuit,
     imageAlt: 'Wild Sri Lankan leopard resting on ancient rock at dusk',
     badge: 'Rare Access',
-    caption: 'Wildlife - Southern Province',
+    caption: 'Wildlife — Southern Province',
     details: [
       { label: 'Duration', value: '3 Days' },
-      { label: 'Best Season', value: 'Jun - Oct' },
+      { label: 'Best Season', value: 'Jun — Oct' },
       { label: 'Group Size', value: 'Max 4' },
       { label: 'Key Highlight', value: 'Block 5 private access, research biologist guide' },
       { label: 'Curator', value: 'Kavindra S.' },
@@ -109,18 +170,18 @@ const encounters: Encounter[] = [
   {
     id: 'mirissa-fishermens-dawn',
     theme: 'Ocean & Discovery',
-    category: 'Southern Coast - Immersive',
+    category: 'Southern Coast — Immersive',
     title: "The Mirissa Fishermen's Dawn",
     note:
-      'The coast, for most visitors, is an amenity. A view. A backdrop. But Mirissa runs on a different clock - one that starts at 3am, when the tuna boats come in and the auction begins. I have spent years building trust with three families on this stretch of water. You are not joining a tour. You are, briefly, joining a life.',
-    curator: 'Sahan Mendis, Coastal Experiences',
+      'The coast, for most visitors, is an amenity. A view. A backdrop. But Mirissa runs on a different clock — one that starts at 3am, when the tuna boats come in and the auction begins. I have spent years building trust with three families on this stretch of water. You are not joining a tour. You are, briefly, joining a life.',
+    curator: `Sahan Mendis, ${curatorTitles.sahan}`,
     curatorImage: experienceImages.sahan,
-    image: experienceImages.mirissaBoats,
-    imageAlt: 'Traditional Sri Lankan outrigger fishing boats at dawn in Mirissa harbour',
-    caption: 'Southern Coast - Mirissa',
+    image: localImages.ahangama,
+    imageAlt: 'Southern Sri Lankan coast at Ahangama',
+    caption: 'Southern Coast — Mirissa',
     details: [
       { label: 'Duration', value: '1 Day' },
-      { label: 'Best Season', value: 'Nov - Apr' },
+      { label: 'Best Season', value: 'Nov — Apr' },
       { label: 'Group Size', value: 'Max 3' },
       { label: 'Key Highlight', value: 'Pre-dawn tuna auction, private boat expedition' },
       { label: 'Curator', value: 'Sahan M.' },
@@ -129,16 +190,16 @@ const encounters: Encounter[] = [
   {
     id: 'kandyan-dance-rehearsal',
     theme: 'Culture & Human Connection',
-    category: 'Cultural - Intimate Access',
+    category: 'Cultural — Intimate Access',
     title: 'A Private Kandyan Dance Rehearsal',
     note:
-      'Performances are for audiences. Rehearsals are where the art lives. We arranged access to a family that has been training in the Kandyan tradition for four generations. You will watch the eldest son correct the youngest daughter. You will understand something about transmission, about inheritance, that no performance could ever convey.',
-    curator: 'Amara Weerasinghe, Cultural Curation Lead',
+      'Performances are for audiences. Rehearsals are where the art lives. We arranged access to a family that has been training in the Kandyan tradition for four generations. You will watch a senior dancer guide a younger student. You will understand something about transmission, about inheritance, that no performance could ever convey.',
+    curator: `Amara Weerasinghe, ${curatorTitles.amara}`,
     curatorImage: experienceImages.amara,
-    image: experienceImages.kandyanDancer,
-    imageAlt: 'Sri Lankan Kandyan dancer in ceremonial costume',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera procession with ceremonial performers',
     badge: 'By Arrangement',
-    caption: 'Cultural - Kandy',
+    caption: 'Cultural — Kandy',
     details: [
       { label: 'Duration', value: '2 Hours' },
       { label: 'Best Season', value: 'Year-round' },
@@ -150,18 +211,18 @@ const encounters: Encounter[] = [
   {
     id: 'deep-water-hour',
     theme: 'Ocean & Discovery',
-    category: 'Ocean - Singular Access',
+    category: 'Ocean — Singular Access',
     title: 'The Deep-Water Hour',
     note:
-      'At 5am, a private vessel departs before the tour boats have woken. The blue whale, the largest creature alive, surfaces without warning and without ceremony - merely because it must. The privilege is not proximity alone. It is entering the water on its own terms, without performance.',
-    curator: 'Sahan Mendis, Coastal Experiences',
+      'At 5am, a private vessel departs before the tour boats have woken. The blue whale, the largest creature alive, surfaces without warning and without ceremony — merely because it must. The privilege is not proximity alone. It is entering the water on its own terms, without performance.',
+    curator: `Sahan Mendis, ${curatorTitles.sahan}`,
     curatorImage: experienceImages.sahan,
     image: experienceImages.blueWhaleAerial,
     imageAlt: 'Blue whale surfacing in the Indian Ocean near Mirissa',
-    caption: 'Ocean - Mirissa',
+    caption: 'Ocean — Mirissa',
     details: [
       { label: 'Duration', value: 'Half Day' },
-      { label: 'Best Season', value: 'Nov - Apr' },
+      { label: 'Best Season', value: 'Nov — Apr' },
       { label: 'Group Size', value: 'Max 4' },
       { label: 'Key Highlight', value: 'Private pre-dawn vessel, marine naturalist' },
       { label: 'Curator', value: 'Sahan M.' },
@@ -170,15 +231,15 @@ const encounters: Encounter[] = [
   {
     id: 'sacred-fire-private-vantage',
     theme: 'Culture & Human Connection',
-    category: 'Ceremony - Private Vantage',
+    category: 'Ceremony — Private Vantage',
     title: 'Sacred Fire, Private Vantage',
     note:
-      "Access to the inner sanctum of the Temple of the Tooth is never treated as spectacle. A private audience with the temple's senior custodian begins with context, restraint, and the understanding that the ceremony is not adjusted for visitors - you adjust yourself to the ceremony.",
-    curator: 'Malini Fernando, Cultural Lead',
-    curatorImage: experienceImages.amara,
-    image: experienceImages.perahera,
-    imageAlt: 'Kandy Esala Perahera festival procession at night',
-    caption: 'Ceremony - Kandy',
+      "Access to the inner sanctum of the Temple of the Tooth is never treated as spectacle. A private audience with the temple's senior custodian begins with context, restraint, and the understanding that the ceremony is not adjusted for visitors — you adjust yourself to the ceremony.",
+    curator: `Malini Fernando, ${curatorTitles.malini}`,
+    curatorImage: experienceImages.portraitMalini,
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera ceremonial procession in Sri Lanka',
+    caption: 'Ceremony — Kandy',
     details: [
       { label: 'Duration', value: 'Evening' },
       { label: 'Best Season', value: 'Year-round' },
@@ -190,16 +251,16 @@ const encounters: Encounter[] = [
   {
     id: 'ancient-grammar-of-healing',
     theme: 'Wellness & Restoration',
-    category: 'Restoration - Healing Traditions',
+    category: 'Restoration — Healing Traditions',
     title: 'The Ancient Grammar of Healing',
     note:
       'Embedded within a rainforest reserve, this five-day Ayurvedic immersion is guided by a fourth-generation vaidya. It is not a spa and not a retreat in the decorative sense. It is a diagnostic and restorative system refined for two thousand years, entered slowly and with discipline.',
-    curator: 'Dilini Perera, Co-Founder',
+    curator: `Dilini Perera, ${curatorTitles.dilini}`,
     curatorImage: experienceImages.dilini,
-    image: experienceImages.ayurveda,
-    imageAlt: 'Open-air Ayurvedic treatment pavilion in Sri Lanka jungle',
+    image: localImages.gorakaElla,
+    imageAlt: 'Rainforest waterfall landscape in Sri Lanka',
     badge: 'By Consultation',
-    caption: 'Restoration - Sinharaja',
+    caption: 'Restoration — Sinharaja',
     details: [
       { label: 'Duration', value: '5 Days' },
       { label: 'Best Season', value: 'All Year' },
@@ -212,76 +273,73 @@ const encounters: Encounter[] = [
 
 const experienceThemes = [
   {
-    number: '01',
     title: 'Wildlife & Wilderness',
     description:
       'Leopards, elephants, forests, field researchers, remote ecosystems, and nature without performance.',
     traveller: 'For the Seeker of Silence',
-    image: experienceImages.leopardFeature,
-    imageAlt: 'Leopard resting on ancient rock in the Sri Lankan wilderness',
+    image: localImages.kithulgala,
+    imageAlt: 'Forest river landscape in Kithulgala, Sri Lanka',
     href: '#leopard-research-circuit',
     encounter: 'The Leopard Research Circuit',
-    featured: true,
   },
   {
-    number: '02',
     title: 'Ocean & Discovery',
     description:
-      'Whale watching, sailing, marine life, lagoons, east coast exploration, and hidden coastlines.',
+      'For travellers drawn to the sea as a living world: whale paths, quiet lagoons, sailing days, and coastlines that reveal themselves with patience.',
     traveller: 'For the Unhurried Wanderer',
-    image: experienceImages.blueWhaleAerial,
-    imageAlt: 'Blue whale surfacing in deep Sri Lankan water',
+    image: localImages.galleBeach,
+    imageAlt: 'Southern Sri Lankan beach and ocean light',
     href: '#deep-water-hour',
     encounter: 'The Deep-Water Hour',
-    featured: false,
   },
   {
-    number: '03',
     title: 'Heritage & Memory',
     description:
       'Ancient kingdoms, sacred spaces, archaeology, historians, and living traditions carried forward.',
     traveller: 'For the Heritage Guardian',
-    image: experienceImages.sigiriyaDawn,
-    imageAlt: 'Private dawn access to Sigiriya rock fortress',
+    image: localImages.sigiriya,
+    imageAlt: 'Sigiriya rock fortress in Sri Lanka',
     href: '#sigiriya-dawn-ascent',
     encounter: 'The Sigiriya Dawn Ascent',
-    featured: false,
   },
   {
-    number: '04',
     title: 'Wellness & Restoration',
     description:
       'Ayurveda, healing traditions, retreats, slow living, and the quiet work of personal renewal.',
     traveller: 'For the Restorer',
-    image: experienceImages.ayurveda,
-    imageAlt: 'Open-air Ayurvedic treatment pavilion in a rainforest setting',
+    image: localImages.gorakaElla,
+    imageAlt: 'Rainforest waterfall landscape in Sri Lanka',
     href: '#ancient-grammar-of-healing',
     encounter: 'The Ancient Grammar of Healing',
-    featured: true,
   },
   {
-    number: '05',
     title: 'Rail & Landscape',
     description:
       'Hill country train journeys, tea estates, mountain routes, and scenery that changes by the hour.',
-    traveller: 'For the Story Collector',
-    image: experienceImages.teaEstate,
-    imageAlt: 'Misty tea estate landscape in Sri Lanka hill country',
-    href: '#begin',
-    encounter: 'Train journeys in development',
-    featured: false,
+    traveller: 'For the Reflective Wanderer',
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country landscape',
+    href: '#private-tea-estate',
+    encounter: 'A Private Tea Estate, Locked Before Dawn',
   },
   {
-    number: '06',
     title: 'Culture & Human Connection',
     description:
       'Artisans, musicians, dancers, family traditions, private introductions, and everyday Sri Lanka.',
     traveller: 'For the Curious Witness',
-    image: experienceImages.kandyanDancer,
-    imageAlt: 'Kandyan dancer in ceremonial costume',
+    image: localImages.kandyPerahera,
+    imageAlt: 'Kandy Perahera cultural procession in Sri Lanka',
     href: '#kandyan-dance-rehearsal',
     encounter: 'A Private Kandyan Dance Rehearsal',
-    featured: false,
+  },
+  {
+    title: sharedHeritageWorld.name,
+    description: sharedHeritageWorld.description,
+    traveller: sharedHeritageWorld.traveller,
+    image: localImages.nuwaraEliya,
+    imageAlt: 'Nuwara Eliya hill country shaped by tea estates and colonial memory',
+    href: '#shared-heritage-quietly-read',
+    encounter: 'Shared Heritage, Quietly Read',
   },
 ] as const
 
@@ -293,17 +351,17 @@ const curationColumns = [
       {
         title: 'Personal Verification',
         copy:
-          'No experience enters the collection unless a curator has participated in it, not observed it. We do not accept invitations to preview programmes.',
+          'No expectation path is translated into a journey unless a curator understands the access personally. We do not build around borrowed recommendations.',
       },
       {
         title: 'Relationship Primacy',
         copy:
-          "Every practitioner in the collection is known personally to at least one team member. We do not work through intermediaries. We do not list contacts we haven't shared a meal with.",
+          "Every practitioner we may introduce is known personally to at least one team member. We do not work through intermediaries. We do not list contacts we haven't shared a meal with.",
       },
       {
         title: 'Annual Renewal',
         copy:
-          'The collection is reviewed in its entirety every twelve months. Experiences that no longer meet the standard are removed without announcement.',
+          'Our expectation paths are reviewed every twelve months. Anything that no longer meets the standard is removed without announcement.',
       },
       {
         title: 'Capacity Control',
@@ -319,7 +377,7 @@ const curationColumns = [
       {
         title: 'Nothing Pre-packaged',
         copy:
-          'The experience you enquire about will be the same experience our curator had, not a version of it adapted for guests. This is an important distinction.',
+          'The experience you enquire about will be the same experience our curator had, not a version of it adapted for guests.',
       },
       {
         title: 'Trust, Not Transaction',
@@ -341,12 +399,12 @@ const curationColumns = [
 ] as const
 
 const photoStrip = [
-  { src: experienceImages.spices, alt: 'Hands sorting cardamom pods', wide: false },
-  { src: experienceImages.poolVilla, alt: 'Private pool villa overlooking misty mountains', wide: true },
-  { src: experienceImages.oilLamps, alt: 'Ancient Buddhist temple oil lamps at dawn', wide: false },
-  { src: experienceImages.blueWhaleSunset, alt: 'Blue whale surfacing at sunset', wide: true },
-  { src: experienceImages.galleFort, alt: 'Overhead aerial view of Galle Fort', wide: false },
-  { src: experienceImages.brassLamp, alt: 'Traditional Sri Lankan brass oil lamp detail', wide: false },
+  { src: localImages.peradeniya, alt: 'Peradeniya gardens in soft daylight', wide: false },
+  { src: localImages.nuwaraEliya, alt: 'Nuwara Eliya hill country landscape', wide: true },
+  { src: localImages.kelaniTemple, alt: 'Kelani temple sacred architecture and ritual setting', wide: false },
+  { src: localImages.maduRiver, alt: 'Madu River winding through coastal wetland and jungle', wide: true },
+  { src: localImages.galle, alt: 'Galle coastal heritage landscape', wide: false },
+  { src: localImages.kandyPerahera, alt: 'Kandy Perahera ceremonial procession', wide: false },
 ] as const
 
 function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
@@ -362,29 +420,117 @@ function TextLink({
   children,
   href = '#begin',
   inverse = false,
+  onClick,
 }: {
   children: ReactNode
   href?: string
   inverse?: boolean
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void
 }) {
   return (
-    <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href={href}>
+    <a className={`experiences-text-link${inverse ? ' experiences-text-link--inverse' : ''}`} href={href} onClick={onClick}>
       {children}
       <ArrowIcon />
     </a>
   )
 }
 
-const encounterNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'] as const
+const encounterNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'] as const
+
+function toJourneyId(kind: string, value: string) {
+  return `${kind}:${value.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+}
+
+function readInitialExpectationTheme(): ExperienceTheme {
+  if (typeof window === 'undefined') {
+    return 'All Encounters'
+  }
+
+  const world = new URLSearchParams(window.location.search).get('world')
+  return experienceThemeOptions.includes(world as ExperienceTheme) ? (world as ExperienceTheme) : 'All Encounters'
+}
 
 function EncounterCard({ encounter, index }: { encounter: Encounter; index: number }) {
+  const { confirmRemoveItem, includeItem, isIncluded, pendingRemovalId, requestRemoveItem } = useJourney()
   const enquiryHref =
     encounter.title === 'The Sigiriya Dawn Ascent'
-      ? '/experiences/the-sigiriya-dawn-ascent'
+      ? '/expectations/the-sigiriya-dawn-ascent'
       : '#begin'
+  const journeyId = toJourneyId('experience', encounter.title)
+  const isEncounterIncluded = isIncluded(journeyId)
+
+  function handleEncounterInterest(event?: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) {
+    event?.stopPropagation()
+    const parentRegion = inferJourneyRegion({
+      kind: 'experience',
+      label: encounter.title,
+      detail: encounter.note,
+      source: `${encounter.category} ${encounter.caption}`,
+    })
+
+    if (isEncounterIncluded) {
+      event?.preventDefault()
+      if (pendingRemovalId === journeyId) {
+        confirmRemoveItem(journeyId)
+      } else {
+        requestRemoveItem(journeyId)
+      }
+      return
+    }
+
+    if (encounter.theme) {
+      includeItem({
+        id: toJourneyId('theme', encounter.theme),
+        kind: 'theme',
+        label: encounter.theme,
+        detail: 'A preferred way into Sri Lanka from Expectations.',
+        source: 'Expectations',
+      })
+    }
+
+    if (encounter.theme && parentRegion && !isIncluded(toJourneyId('region', parentRegion))) {
+      includeItem({
+        id: toJourneyId('region', parentRegion),
+        kind: 'region',
+        label: parentRegion,
+        detail: `A regional setting naturally aligned with ${encounter.theme}.`,
+        source: 'Expectations',
+        parentTheme: encounter.theme,
+      })
+    }
+
+    includeItem({
+      id: journeyId,
+      kind: 'experience',
+      label: encounter.title,
+      detail: encounter.note,
+      source: encounter.category,
+      parentTheme: encounter.theme,
+      parentRegion,
+    })
+  }
+
+  function handleEncounterKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return
+    }
+
+    event.preventDefault()
+    handleEncounterInterest(event)
+  }
 
   return (
-    <article id={encounter.id} className="encounter-row experiences-reveal">
+    <article
+      id={encounter.id}
+      className={`encounter-row experiences-reveal journey-selectable${isEncounterIncluded ? ' is-included' : ''}`}
+      role="button"
+      tabIndex={0}
+      onClick={handleEncounterInterest}
+      onKeyDown={handleEncounterKeyDown}
+      aria-pressed={isEncounterIncluded}
+      aria-label={`${encounter.title}: include in your journey`}
+    >
+      {isEncounterIncluded ? <JourneyIncludedPill /> : null}
       <div className="encounter-index">
         <span>{encounterNumerals[index] ?? String(index + 1)}</span>
         <i />
@@ -406,10 +552,24 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
           <blockquote>"{encounter.note}"</blockquote>
           <div className="curator-byline">
             <img src={encounter.curatorImage} alt="" />
-            <span>- {encounter.curator}</span>
+            <span>— {encounter.curator}</span>
           </div>
         </div>
-        <TextLink href={enquiryHref}>Enquire About This Encounter</TextLink>
+        <TextLink href={enquiryHref} onClick={handleEncounterInterest}>
+          Enquire About This Encounter
+        </TextLink>
+        {isEncounterIncluded ? (
+          <button
+            className="encounter-remove-button"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation()
+              confirmRemoveItem(journeyId)
+            }}
+          >
+            Remove from Journey
+          </button>
+        ) : null}
       </div>
 
       <dl className="encounter-details">
@@ -424,13 +584,33 @@ function EncounterCard({ encounter, index }: { encounter: Encounter; index: numb
   )
 }
 
-export function ExperiencesPage() {
-  const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>('All Encounters')
+export function ExpectationsPage() {
+  const [selectedTheme, setSelectedTheme] = useState<ExperienceTheme>(readInitialExpectationTheme)
+  const { confirmRemoveItem, includeItem, isIncluded } = useJourney()
   const filteredEncounters =
     selectedTheme === 'All Encounters'
       ? encounters
       : encounters.filter((encounter) => encounter.theme === selectedTheme)
   const curatedOpeningsCount = filteredEncounters.length
+
+  function includeSharedHeritageRecommendations() {
+    sharedHeritageRecommendations.slice(1, 5).forEach(({ destination }) => {
+      includeItem({
+        id: toJourneyId('destination', destination),
+        kind: 'destination',
+        label: destination,
+        detail: `A high-relevance recommendation for ${sharedHeritageWorld.name}.`,
+        source: 'Recommendation Engine',
+        parentTheme: sharedHeritageWorld.name,
+        parentRegion: inferJourneyRegion({
+          kind: 'destination',
+          label: destination,
+          detail: sharedHeritageWorld.description,
+          source: 'Shared Heritage recommendations',
+        }),
+      })
+    })
+  }
 
   function handleThemeExplore(
     theme: Exclude<ExperienceTheme, 'All Encounters'>,
@@ -438,9 +618,51 @@ export function ExperiencesPage() {
   ) {
     event.preventDefault()
     setSelectedTheme(theme)
+
     window.requestAnimationFrame(() => {
       document.getElementById('encounters')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
+  }
+
+  function toggleThemeJourney(theme: Exclude<ExperienceTheme, 'All Encounters'>) {
+    const journeyId = toJourneyId('theme', theme)
+
+    if (isIncluded(journeyId)) {
+      confirmRemoveItem(journeyId)
+      return
+    }
+
+    includeItem({
+      id: journeyId,
+      kind: 'theme',
+      label: theme,
+      detail: 'A preferred way into Sri Lanka from Expectations.',
+      source: 'Expectations',
+    })
+
+    if (theme === sharedHeritageWorld.name) {
+      includeSharedHeritageRecommendations()
+    }
+  }
+
+  function handleThemeFilter(theme: ExperienceTheme) {
+    setSelectedTheme(theme)
+
+    if (theme === 'All Encounters') {
+      return
+    }
+
+    includeItem({
+      id: toJourneyId('theme', theme),
+      kind: 'theme',
+      label: theme,
+      detail: 'A preferred way into Sri Lanka from Expectations.',
+      source: 'Expectations',
+    })
+
+    if (theme === sharedHeritageWorld.name) {
+      includeSharedHeritageRecommendations()
+    }
   }
 
   return (
@@ -448,25 +670,25 @@ export function ExperiencesPage() {
       <section className="experiences-hero experiences-reveal">
         <div className="experiences-container experiences-hero-grid">
           <div className="experiences-hero-copy">
-            <Eyebrow>Private Collection - Sri Lanka</Eyebrow>
+            <Eyebrow>Expectations — Journey Curation Begins</Eyebrow>
             <h1>
-              Rare
+              What
               <br />
-              <em>Access</em>
+              <em>Should</em>
               <br />
-              to Place.
+              Sri Lanka Feel Like?
             </h1>
             <p>
-              Quietly arranged encounters for guests who expect privacy, cultural depth, and flawless
-              discretion. Each experience is personally vetted, host-approved, and released only when
-              the right access can be secured.
+              This is where Royale Isles Lanka asks you to shape the journey. Choose the moods,
+              regions, and styles of access that feel true; only here do those preferences begin forming
+              My Journey.
             </p>
-            <ul className="experiences-hero-proof-list" aria-label="Experience standards">
+            <ul className="experiences-hero-proof-list" aria-label="Expectation standards">
               {heroProofs.map((proof) => (
                 <li key={proof}>{proof}</li>
               ))}
             </ul>
-            <TextLink href="#begin">Begin A Private Briefing</TextLink>
+            <TextLink href="#experience-themes-title">Begin With Expectations</TextLink>
             <aside className="opening-note">
               <p>Curator's Note</p>
               <blockquote>
@@ -477,7 +699,7 @@ export function ExperiencesPage() {
                 <img src={experienceImages.arjun} alt="" />
                 <span>
                   <strong>Arjun Fernando</strong>
-                  <small>Lead Curator</small>
+                  <small>{curatorTitles.arjun}</small>
                 </span>
               </div>
             </aside>
@@ -485,14 +707,14 @@ export function ExperiencesPage() {
 
           <div className="experiences-hero-image">
             <div className="hero-image-frame">
-              <img src={experienceImages.heroSigiriya} alt="Lone traveller at dawn on Sigiriya steps" />
+              <img src={localImages.sigiriya} alt="Sigiriya rock fortress in Sri Lanka" />
             </div>
             <span className="hero-feature-label">Featured Private Access</span>
             <span className="hero-choice">By Introduction Only</span>
             <div className="hero-access-card" aria-label="Arrival protocol">
               <p>Arrival Protocol</p>
               <strong>Pre-dawn ascent, sealed route, curator in attendance.</strong>
-              <span>Sigiriya - Central Province</span>
+              <span>Sigiriya — Central Province</span>
             </div>
             <div className="experiences-stat-strip">
               {stats.map((stat) => (
@@ -510,55 +732,86 @@ export function ExperiencesPage() {
         <div className="experiences-container">
           <header className="experience-themes-header">
             <div>
-              <Eyebrow>Traveller Discovery - Experience Themes</Eyebrow>
+              <Eyebrow>Journey Themes</Eyebrow>
               <h2 id="experience-themes-title">
-                Ways Into
+                The Shape
                 <br />
-                <em>The Island.</em>
+                <em>Of The Journey.</em>
               </h2>
             </div>
             <p>
-              No two travellers experience Sri Lanka the same way. Some seek wilderness. Some seek
-              restoration. Some seek culture, memory, or stillness. The encounters below emerge from
-              these different motivations, shaped by who the traveller is before any itinerary is drawn.
+              This is not a catalogue of activities. It is a quiet reading of what should matter:
+              wilderness, memory, restoration, movement, coast, culture, or histories still held in the landscape.
             </p>
           </header>
 
-          <div className="experience-themes-board">
-            {experienceThemes.map((theme) => (
-              <a
-                key={theme.title}
-                className={theme.featured ? 'theme-chapter theme-chapter--featured' : 'theme-chapter'}
-                href="#encounters"
-                onClick={(event) => handleThemeExplore(theme.title, event)}
-                aria-label={`${theme.title}: explore this theme in the encounter collection`}
-              >
-                <figure>
-                  <img src={theme.image} alt={theme.imageAlt} />
-                </figure>
-                <div className="theme-chapter-copy">
-                  <span>{theme.number}</span>
-                  <p>{theme.traveller}</p>
-                  <h3>{theme.title}</h3>
-                  <p>{theme.description}</p>
-                  <small>{theme.encounter}</small>
-                </div>
-              </a>
-            ))}
+          <div className="experience-themes-salon">
+            <aside className="experience-themes-note">
+              <span>Curatorial Reading</span>
+              <p>
+                Choose only what feels instinctive. A preference here is not a commitment; it is a signal your
+                concierge can read with discretion.
+              </p>
+              <small>Every path remains private, edited, and shaped around timing.</small>
+            </aside>
+
+            <div className="experience-themes-board">
+              {experienceThemes.map((theme) => {
+                const themeJourneyId = toJourneyId('theme', theme.title)
+                const isThemeIncluded = isIncluded(themeJourneyId)
+
+                return (
+                  <article
+                    key={theme.title}
+                    className={`theme-chapter-shell journey-selectable${isThemeIncluded ? ' is-included' : ''}`}
+                  >
+                    <button
+                      className="theme-journey-toggle"
+                      type="button"
+                      aria-pressed={isThemeIncluded}
+                      aria-label={`${isThemeIncluded ? 'Remove' : 'Add'} ${theme.title} ${isThemeIncluded ? 'from' : 'to'} your journey`}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        toggleThemeJourney(theme.title)
+                      }}
+                    >
+                      {isThemeIncluded ? 'Remove from Journey' : 'Add to Journey'}
+                    </button>
+                    <a
+                      className="theme-chapter"
+                      href="#encounters"
+                      onClick={(event) => handleThemeExplore(theme.title, event)}
+                      aria-label={`${theme.title}: explore matching expectation paths`}
+                    >
+                      <figure>
+                        <img src={theme.image} alt={theme.imageAlt} />
+                      </figure>
+                      <div className="theme-chapter-copy">
+                        <p>{theme.traveller}</p>
+                        <h3>{theme.title}</h3>
+                        <p>{theme.description}</p>
+                        <small>{theme.encounter}</small>
+                      </div>
+                    </a>
+                  </article>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="region-filter experiences-reveal" aria-label="Explore encounters by theme">
+      <section className="region-filter experiences-reveal" aria-label="Set journey expectations by theme">
         <div className="region-filter-copy">
-          <span>Browse The Collection</span>
-          <label htmlFor="experience-theme">Explore By Theme</label>
+          <span>Set A Preference</span>
+          <label htmlFor="experience-theme">Preferred Journey Theme</label>
         </div>
         <div className="region-filter-select-wrap">
           <select
             id="experience-theme"
             value={selectedTheme}
-            onChange={(event) => setSelectedTheme(event.target.value as ExperienceTheme)}
+            onChange={(event) => handleThemeFilter(event.target.value as ExperienceTheme)}
           >
             {experienceThemeOptions.map((theme) => (
               <option key={theme} value={theme}>
@@ -568,7 +821,7 @@ export function ExperiencesPage() {
           </select>
         </div>
         <p>
-          {curatedOpeningsCount} {curatedOpeningsCount === 1 ? 'Curated Opening' : 'Curated Openings'}
+          {curatedOpeningsCount} {curatedOpeningsCount === 1 ? 'Expectation Path' : 'Expectation Paths'}
         </p>
       </section>
 
@@ -577,8 +830,8 @@ export function ExperiencesPage() {
           <header className="encounters-collection-header experiences-reveal">
             <p>Personally Introduced</p>
             <h2>
-              The encounters below are not inventory. They are openings held by trust, timing, and
-              discretion.
+              These are quiet signals that help your concierge understand the kind of journey to begin
+              composing.
             </h2>
           </header>
           {filteredEncounters.length > 0 ? (
@@ -587,7 +840,7 @@ export function ExperiencesPage() {
             ))
           ) : (
             <div className="encounters-empty experiences-reveal">
-              <p>New encounters are being prepared for this chapter of the collection.</p>
+              <p>New encounters are being prepared for this expectation path.</p>
               <span>This pathway is currently available through private consultation.</span>
             </div>
           )}
@@ -604,9 +857,9 @@ export function ExperiencesPage() {
               <em>every introduction we make.</em>
             </h2>
             <p>
-              The encounters above show what can be arranged. The principles below explain how we
+              The signals above show what can be arranged. The principles below explain how we
               decide what should be arranged at all: nature must not be staged, and access must protect
-              dignity. Together, they shape the standard behind the collection.
+              dignity. Together, they shape the standard behind curation.
             </p>
           </div>
         </div>
@@ -626,14 +879,14 @@ export function ExperiencesPage() {
             <span />
             <p>
               Yala. Wilpattu. Sinharaja. Three ecosystems, three different grammars of silence. Our
-              head naturalist has spent twenty years learning to read them all. He will teach you how
-              to listen.
+              naturalist team has spent decades learning to read them. They will teach you how to
+              listen.
             </p>
-            <small>Stewardship - Silence - Fieldcraft</small>
+            <small>Stewardship — Silence — Fieldcraft</small>
           </div>
           <figure className="wilderness-image-card">
-            <img src={experienceImages.leopardFeature} alt="Leopard resting on ancient rock in Yala" />
-            <figcaption>Yala Block V - guided by a field naturalist, not a driver.</figcaption>
+            <img src={localImages.kithulgala} alt="Forest river landscape in Kithulgala, Sri Lanka" />
+            <figcaption>Rainforest routes — guided by a field naturalist, not a driver.</figcaption>
           </figure>
         </div>
       </section>
@@ -641,8 +894,8 @@ export function ExperiencesPage() {
       <section className="ceremony-quote experiences-reveal">
         <div className="experiences-container ceremony-grid">
           <figure>
-            <img src={experienceImages.monks} alt="Buddhist monks walking through temple ruins" />
-            <figcaption>Polonnaruwa - North Central Province</figcaption>
+            <img src={localImages.kelaniTemple} alt="Kelani temple sacred architecture and ritual setting" />
+            <figcaption>Kelani Temple — Western Province</figcaption>
           </figure>
           <blockquote>
             <p>The Ceremony Principle</p>
@@ -652,14 +905,13 @@ export function ExperiencesPage() {
             <span>
               Access is only meaningful when it protects the dignity of the ceremony itself.
             </span>
-            <cite>- Malini Fernando, Cultural Lead</cite>
+            <cite>— Malini Fernando, {curatorTitles.malini}</cite>
           </blockquote>
         </div>
       </section>
 
       <section className="curation-process experiences-reveal">
         <div className="experiences-container">
-          <Eyebrow>Chapter III</Eyebrow>
           <h2>
             The Curation
             <br />
@@ -679,13 +931,13 @@ export function ExperiencesPage() {
             ))}
           </div>
           <blockquote className="process-quote">
-            The collection does not grow for scale. It <em>deepens for trust.</em>
-            <cite>Arjun Fernando - Co-Founder</cite>
+            Curation does not grow for scale. It <em>deepens for trust.</em>
+            <cite>Arjun Fernando — {curatorTitles.arjun}</cite>
           </blockquote>
         </div>
       </section>
 
-      <section className="photo-strip experiences-reveal" aria-label="Experience photography carousel">
+      <section className="photo-strip experiences-reveal" aria-label="Expectation photography carousel">
         <div className="photo-strip-track">
           <div className="photo-strip-set">
             {photoStrip.map((photo) => (
@@ -705,7 +957,7 @@ export function ExperiencesPage() {
           <div className="experiences-final-cta-mark" aria-hidden="true">
             ✦
           </div>
-          <p>Private Access Briefing</p>
+          <p>Expectation Briefing</p>
           <h2>
             Begin with the question
             <br />
@@ -720,7 +972,7 @@ export function ExperiencesPage() {
             <a href="#begin" className="primary-cta">
               Request A Private Briefing
             </a>
-            <TextLink inverse>Review The Collection</TextLink>
+            <TextLink inverse>Review Expectations</TextLink>
           </div>
           <small>Discreet planning. No packaged itineraries. Introductions only where trust exists.</small>
         </div>
