@@ -27,7 +27,7 @@ const excludeSriLankaFilter = [
     ['==', ['get', 'iso_3166_1_alpha_2'], 'LK'],
     ['==', ['get', 'iso_3166_1_alpha_3'], 'LKA'],
   ],
-] as const
+]
 
 function isWaterLayer(layer: { id: string }) {
   return layer.id.toLowerCase().includes('water')

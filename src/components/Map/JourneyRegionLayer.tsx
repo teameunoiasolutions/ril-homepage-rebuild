@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import type { Map } from 'mapbox-gl'
+import type { Map, MapLayerMouseEvent } from 'mapbox-gl'
 import type { JourneyRegion } from '../../data/journeyRegions'
 
 type JourneyRegionLayerProps = {
@@ -90,7 +90,7 @@ function setSourceData(map: Map, sourceId: string, data: unknown) {
   source?.setData?.(data)
 }
 
-function getRegionOpacityExpression(selectedRegionId?: string, recommendedRegionIds: string[] = []) {
+function getRegionOpacityExpression(selectedRegionId?: string, recommendedRegionIds: string[] = []): any {
   const hasRecommendations = recommendedRegionIds.length > 0
 
   if (!selectedRegionId) {
@@ -120,7 +120,7 @@ function getRegionOpacityExpression(selectedRegionId?: string, recommendedRegion
   ]
 }
 
-function getLabelOpacityExpression(selectedRegionId?: string, recommendedRegionIds: string[] = []) {
+function getLabelOpacityExpression(selectedRegionId?: string, recommendedRegionIds: string[] = []): any {
   const hasRecommendations = recommendedRegionIds.length > 0
 
   if (!selectedRegionId) {
@@ -234,8 +234,9 @@ export function JourneyRegionLayer({
       })
     }
 
-    const handleClick = (event: { features?: Array<{ properties?: { id?: string } }> }) => {
-      const regionId = event.features?.[0]?.properties?.id
+    const handleClick = (event: MapLayerMouseEvent) => {
+      const feature = event.features?.[0] as { properties?: { id?: string } } | undefined
+      const regionId = feature?.properties?.id
       const region = regions.find((item) => item.id === regionId)
 
       if (region) {
@@ -245,11 +246,10 @@ export function JourneyRegionLayer({
 
     let hoveredRegionId: string | number | undefined
 
-    const handleMouseMove = (
-      event: { features?: Array<{ id?: string | number; properties?: { id?: string } }> },
-    ) => {
+    const handleMouseMove = (event: MapLayerMouseEvent) => {
       map.getCanvas().style.cursor = 'pointer'
-      const nextRegionId = event.features?.[0]?.id ?? event.features?.[0]?.properties?.id
+      const feature = event.features?.[0] as { id?: string | number; properties?: { id?: string } } | undefined
+      const nextRegionId = feature?.id ?? feature?.properties?.id
 
       if (hoveredRegionId === nextRegionId) {
         return
