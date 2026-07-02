@@ -481,6 +481,47 @@
   color: var(--color-text-muted);
 }
 
+.guided-discovery-tab__rhythm-suggestion {
+  margin: 24px 0;
+  padding: 22px 24px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.guided-discovery-tab__rhythm-suggestion h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.guided-discovery-tab__rhythm-suggestion p {
+  margin: 0 0 14px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.guided-discovery-tab__rhythm-suggestion button {
+  padding: 10px 18px;
+  border: 1px solid rgba(0, 66, 37, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.guided-discovery-tab__rhythm-suggestion button:hover,
+.guided-discovery-tab__rhythm-suggestion button:focus-visible {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
 .guided-discovery-tab__result-list {
   margin: 0;
   padding: 0;
@@ -641,6 +682,136 @@
 .saved-journey-tab__empty a {
   color: var(--color-primary);
   font-weight: 600;
+}
+
+.saved-journey-tab__rhythm-note,
+.saved-journey-tab__connections-note {
+  margin: 12px 0 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.saved-journey-tab__connections {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: rgba(251, 249, 245, 0.92);
+  border: 1px solid rgba(197, 160, 89, 0.16);
+}
+
+.saved-journey-tab__connections-label {
+  margin: 0 0 10px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.saved-journey-tab__connections ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.saved-journey-tab__connections li {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(232, 225, 213, 0.7);
+  font-size: 14px;
+}
+
+.saved-journey-tab__connections li:last-child {
+  border-bottom: 0;
+}
+
+.saved-journey-tab__connections small {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.saved-journey-tab__handoff-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.saved-journey-tab__cta-secondary {
+  display: inline-flex;
+  padding: 14px 24px;
+  border: 1px solid rgba(0, 66, 37, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.illustrative-itinerary {
+  margin: 40px 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(232, 225, 213, 0.95);
+}
+
+.illustrative-itinerary h2 {
+  margin: 0 0 20px;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 500;
+}
+
+.illustrative-itinerary__segments {
+  display: grid;
+  gap: 16px;
+}
+
+.illustrative-itinerary__segment {
+  padding: 20px 22px;
+  border: 1px solid rgba(197, 160, 89, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.illustrative-itinerary__days {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-gold, #c5a059);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.illustrative-itinerary__segment h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.illustrative-itinerary__segment p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.illustrative-itinerary__note {
+  margin: 18px 0 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.55;
 }
 
 @media (min-width: 768px) {

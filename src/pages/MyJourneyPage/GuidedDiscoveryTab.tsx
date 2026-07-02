@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { JourneyRegionLayer } from '../../components/Map/JourneyRegionLayer'
 import { TravelMap } from '../../components/Map/TravelMap'
 import {
@@ -13,6 +13,7 @@ import { experiencesById } from '../../data/experiences'
 import { journeyRegions } from '../../data/journeyRegions'
 import { sharedHeritageWorld } from '../../journey/discoveryWorlds'
 import {
+  createJourneyItemFromDestination,
   createJourneyItemFromExperience,
   createJourneyItemFromMood,
   createJourneyItemFromRegion,
@@ -21,6 +22,8 @@ import {
 } from '../../journey/journeyItemHelpers'
 import { getRegionEditorialName } from '../../journey/journeyRegionCatalog'
 import { useJourney } from '../../journey/JourneyContext'
+import type { SuggestedJourneyRhythm } from '../../data/journey/types'
+import { journeyRepository } from '../../services/journeyRepository'
 import { getTabPanelId, getTabId } from './JourneyTabs'
 
 const guidedThemes = [
@@ -39,6 +42,11 @@ export function GuidedDiscoveryTab() {
   const [selectedMood, setSelectedMood] = useState<string | undefined>()
   const [selectedSeasonId, setSelectedSeasonId] = useState<string | undefined>()
   const [showResult, setShowResult] = useState(false)
+  const [journeyRhythms, setJourneyRhythms] = useState<SuggestedJourneyRhythm[]>([])
+
+  useEffect(() => {
+    void journeyRepository.getJourneyRhythms().then(setJourneyRhythms)
+  }, [])
 
   const consultationSelection: JourneyConsultationSelection = useMemo(
     () => ({
@@ -95,9 +103,33 @@ export function GuidedDiscoveryTab() {
     }
   }
 
+  function handleAddRhythmToJourney(rhythm: SuggestedJourneyRhythm) {
+    rhythm.destinationIds.forEach((destinationId) => {
+      const region = journeyRegions.find((entry) =>
+        entry.destinations.some((destination) => destination.id === destinationId),
+      )
+      const destination = region?.destinations.find((entry) => entry.id === destinationId)
+      if (destination && region) {
+        includeItem(createJourneyItemFromDestination(destination, region))
+      }
+    })
+  }
+
   const rhythmSummary = recommendedRegions.length
     ? recommendedRegions.map((region) => getRegionEditorialName(region.id)).join(' → ')
     : ''
+
+  const matchingRhythm = useMemo(() => {
+    if (!showResult || recommendedRegions.length === 0) {
+      return undefined
+    }
+    const regionDestinationIds = recommendedRegions.flatMap((region) =>
+      region.destinations.map((destination) => destination.id),
+    )
+    return journeyRhythms.find((rhythm) =>
+      rhythm.destinationIds.some((id) => regionDestinationIds.includes(id)),
+    )
+  }, [journeyRhythms, recommendedRegions, showResult])
 
   return (
     <section
@@ -209,6 +241,20 @@ export function GuidedDiscoveryTab() {
 
           {journeyRecommendation ? (
             <p className="guided-discovery-tab__summary">{journeyRecommendation.whyWeChoseThis}</p>
+          ) : null}
+
+          <p className="guided-discovery-tab__result-note">
+            A considered beginning, ready to be refined privately.
+          </p>
+
+          {matchingRhythm ? (
+            <div className="guided-discovery-tab__rhythm-suggestion">
+              <h3>{matchingRhythm.title}</h3>
+              <p>{matchingRhythm.summary}</p>
+              <button type="button" onClick={() => handleAddRhythmToJourney(matchingRhythm)}>
+                Add this rhythm to My Journey
+              </button>
+            </div>
           ) : null}
 
           <div className="guided-discovery-tab__result-map">
